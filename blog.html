@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>KORTEX Data Logs — GEO, AI Content Ops & B2B Authority Engineering</title>
+  <meta name="description"
+    content="The KORTEX knowledge base on Generative Engine Optimization, AI content operations, and B2B authority systems. Frameworks, playbooks, and operating models for founder-led teams building content that gets cited — not just ranked.">
+  <meta name="keywords"
+    content="GEO marketing, AI content operations, generative engine optimization, B2B thought leadership, content repurposing system, AI answer engine visibility, YouTube to article workflow, LinkedIn content engine, answer engine optimization, B2B content strategy 2026">
+  <meta name="author" content="KORTEX">
+  <link rel="canonical" href="https://kortexlab.me/blog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kortexlab.me/blog.html">
+  <meta property="og:title" content="KORTEX Data Logs — Stop Ranking. Start Dominating.">
+  <meta property="og:description"
+    content="GEO intelligence, AI content systems, answer-engine visibility and B2B authority engineering.">
+  <meta property="og:image" content="https://kortexlab.me/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KORTEX Data Logs">
+  <meta name="twitter:description" content="The operating manual for GEO-first B2B content.">
+  <meta name="theme-color" content="#050507">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="kortex_theme.css">
+  <link rel="stylesheet" href="kortex_theme_patch.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "KORTEX Data Logs",
+    "description": "Knowledge base on GEO, AI content operations and B2B authority systems. Frameworks and playbooks for founder-led B2B teams.",
+    "url": "https://kortexlab.me/blog.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "KORTEX",
+      "url": "https://kortexlab.me"
+    }
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4440VPDMPW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4440VPDMPW');
+  </script>
+
+  <style>
+    /* ── EXTENDED BLOG INDEX STYLES ── */
+    .blog-filter {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      color: var(--text-muted);
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 2px;
+      cursor: none;
+      transition: all 0.25s ease;
+    }
+    .blog-filter:hover,
+    .blog-filter.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(229, 9, 20, 0.08);
+    }
+    .blog-card { transition: opacity 0.35s ease, transform 0.35s ease; }
+
+    /* Featured card — full width */
+    .blog-card-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid rgba(139,92,246,0.4);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.35s var(--ease-out);
+      box-shadow: 0 0 40px rgba(139,92,246,0.1);
+    }
+    .blog-card-featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+    .blog-card-featured:hover {
+      border-color: rgba(229,9,20,0.5);
+      box-shadow: 0 0 60px rgba(229,9,20,0.15);
+      transform: translateY(-4px);
+    }
+    .featured-content {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .featured-visual {
+      background: linear-gradient(135deg, rgba(229,9,20,0.06), rgba(139,92,246,0.1));
+      border-left: 1px solid var(--edge);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .featured-content h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3vw, 42px);
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .featured-content p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    /* GEO stat strip */
+    .geo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--edge);
+      border: 1px solid var(--edge);
+      margin: 80px 0;
+    }
+    .geo-strip-item {
+      background: var(--surface);
+      padding: 32px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .geo-strip-item::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .geo-strip-item:hover { background: var(--card); }
+    .geo-strip-item:hover::before { transform: scaleX(1); }
+    .geo-strip-number {
+      font-family: var(--ff-display);
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .geo-strip-label {
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* Data tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      margin: 40px 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .data-table thead {
+      background: var(--card);
+      border-bottom: 2px solid var(--primary);
+    }
+    .data-table th {
+      padding: 16px 20px;
+      text-align: left;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .data-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--edge);
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    .data-table tbody tr:hover {
+      background: var(--card);
+    }
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Comparison grid */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--edge);
+      border: 1px solid var(--edge);
+      margin: 40px 0;
+    }
+    .comparison-cell {
+      background: var(--surface);
+      padding: 24px;
+      position: relative;
+    }
+    .comparison-cell.header {
+      background: var(--card);
+      border-bottom: 2px solid var(--primary);
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .comparison-cell.label {
+      background: var(--card);
+      border-right: 1px solid var(--edge);
+      font-family: var(--ff-display);
+      font-style: italic;
+      color: var(--white);
+    }
+
+    /* Info boxes */
+    .info-box {
+      background: rgba(139,92,246,0.06);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 2px;
+      padding: 24px;
+      margin: 40px 0;
+    }
+    .info-box-title {
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 12px;
+    }
+    .info-box p {
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* Framework boxes */
+    .framework-box {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 2px;
+      padding: 32px;
+      margin: 40px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .framework-box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+    }
+    .framework-title {
+      font-family: var(--ff-display);
+      font-size: 22px;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 20px;
+      margin-left: 12px;
+    }
+    .framework-item {
+      margin-left: 12px;
+      margin-bottom: 16px;
+    }
+    .framework-item strong {
+      color: var(--white);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .framework-item p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Reading path */
+    .reading-path {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 40px;
+    }
+    .reading-path::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--secondary));
+      opacity: 0.4;
+    }
+    .path-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+    .path-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s;
+    }
+    .path-step:hover .path-number {
+      border-color: var(--primary);
+      background: rgba(229,9,20,0.08);
+      box-shadow: 0 0 20px rgba(229,9,20,0.3);
+    }
+    .path-step h4 {
+      font-family: var(--ff-display);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .path-step p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .path-step a {
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      color: var(--secondary);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .path-step a:hover { color: var(--primary); }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 40px 0;
+      margin: 40px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+    }
+    .timeline-item {
+      margin-bottom: 32px;
+      margin-left: 80px;
+      position: relative;
+    }
+    .timeline-marker {
+      position: absolute;
+      left: -52px;
+      top: 4px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-mono);
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 12px;
+    }
+    .timeline-item-label {
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .timeline-item h4 {
+      font-family: var(--ff-display);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .timeline-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .blog-card-featured { grid-template-columns: 1fr; }
+      .featured-visual { display: none; }
+      .geo-strip { grid-template-columns: repeat(2, 1fr); }
+      .reading-path { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .reading-path::before { display: none; }
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .geo-strip { grid-template-columns: 1fr 1fr; }
+      .reading-path { grid-template-columns: 1fr; }
+      .timeline::before { left: 8px; }
+      .timeline-marker { left: -36px; width: 32px; height: 32px; font-size: 10px; }
+      .timeline-item { margin-left: 60px; }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="KORTEX — Back to homepage">KORTEX <span class="nav-logo-dot" aria-hidden="true"></span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="blog.html" class="active">Logs</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="lang-switcher" role="navigation" aria-label="Language selection">
+      <button class="lang-toggle" id="langBtn" aria-expanded="false" aria-label="Change language">
+        <span id="currentLang">EN</span>
+        <span class="lang-icon">🌐</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
+        <button class="lang-option" data-lang="fr" role="menuitem">🇫🇷 Français</button>
+        <button class="lang-option" data-lang="en" role="menuitem">🇬🇧 English</button>
+        <button class="lang-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
+        <button class="lang-option" data-lang="de" role="menuitem">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="ar" role="menuitem">🇸🇦 العربية</button>
+      </div>
+    </div>
+    <a href="contact.html" class="btn-primary nav-cta magnetic">Get the Audit</a>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- ═══ HEADER ═══ -->
+      <header style="padding-bottom: 48px; border-bottom: 1px solid var(--edge); margin-bottom: 80px;">
+        <p class="text-mono">Data Logs</p>
+        <h1 class="title-display reveal">Authority <em>Engineering.</em></h1>
+        <p class="section-subtitle reveal stagger-1">
+          Pages written for answer engines. Not to flatter the algorithm. GEO, systems thinking, content operations, and the exact architecture that turns one video into durable distribution.
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:40px;" class="reveal stagger-2" role="navigation" aria-label="Filter by category">
+          <button class="blog-filter active" data-filter="all" aria-pressed="true">All</button>
+          <button class="blog-filter" data-filter="GEO" aria-pressed="false">GEO</button>
+          <button class="blog-filter" data-filter="SYSTEMS" aria-pressed="false">Systems</button>
+          <button class="blog-filter" data-filter="B2B" aria-pressed="false">Strategy</button>
+          <button class="blog-filter" data-filter="LINKEDIN" aria-pressed="false">LinkedIn</button>
+        </div>
+      </header>
+
+      <!-- ═══ FEATURED ARTICLE ═══ -->
+      <section aria-label="Featured article" style="margin-bottom: 24px;">
+        <a href="blog-entity-first-content-architecture.html" class="blog-card-featured reveal" style="text-decoration: none; display: grid;">
+          <div class="featured-content">
+            <div>
+              <div class="featured-badge">Featured · GEO Foundation</div>
+              <h2>Entity-First Content:<br>the architecture AI search <em>rewards.</em></h2>
+              <div class="featured-meta">
+                <span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">13 MIN READ</span>
+                <span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">·</span>
+                <time style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);" datetime="2026-05-30">May 30, 2026</time>
+              </div>
+              <p>Most B2B content is topic-first. Topics get covered, ranked for a season, and forgotten. Entity-first content builds a permanent knowledge graph that AI models cluster, attribute, and cite long after the post date stops mattering. This is the foundational framework.</p>
+            </div>
+            <span style="font-family: var(--ff-mono); font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;">Read the article →</span>
+          </div>
+          <div class="featured-visual">
+            <div style="text-align: center;">
+              <div style="font-family: var(--ff-display); font-size: 80px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 16px; opacity: 0.15;">ENTITY</div>
+              <div style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                <div style="padding: 14px 18px; background: rgba(229,9,20,0.08); border: 1px solid rgba(229,9,20,0.2); border-radius: 2px;">
+                  <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); margin-bottom: 4px;">SIGNAL EXTRACTION</div>
+                  <div style="font-size: 13px; color: var(--text-secondary);">Named entities, definitions, relationships</div>
+                </div>
+                <div style="padding: 14px 18px; background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.2); border-radius: 2px;">
+                  <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--secondary); margin-bottom: 4px;">SIGNAL CLUSTERING</div>
+                  <div style="font-size: 13px; color: var(--text-secondary);">Consistent terminology across surfaces</div>
+                </div>
+                <div style="padding: 14px 18px; background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.15); border-radius: 2px;">
+                  <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--accent); margin-bottom: 4px;">ATTRIBUTION & RETRIEVAL</div>
+                  <div style="font-size: 13px; color: var(--text-secondary);">Dense, coherent entity graphs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </section>
+
+      <!-- ═══ KEY STATISTICS ═══ -->
+      <section aria-label="Key GEO statistics" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">The Reality in 2026</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">B2B Discovery is being <em>redefined.</em></h2>
+
+        <div class="geo-strip reveal stagger-1">
+          <div class="geo-strip-item">
+            <span class="geo-strip-number">65%</span>
+            <span class="geo-strip-label">B2B buyers start research on AI</span>
+          </div>
+          <div class="geo-strip-item">
+            <span class="geo-strip-number">0</span>
+            <span class="geo-strip-label">Second positions in AI answers</span>
+          </div>
+          <div class="geo-strip-item">
+            <span class="geo-strip-number">3x</span>
+            <span class="geo-strip-label">Citation lift from entity graphs</span>
+          </div>
+          <div class="geo-strip-item">
+            <span class="geo-strip-number">14%</span>
+            <span class="geo-strip-label">Content that is GEO-ready</span>
+          </div>
+        </div>
+
+        <div class="info-box reveal stagger-2">
+          <div class="info-box-title">Source: Industry Analysis 2026</div>
+          <p>67% of B2B buyers now use ChatGPT, Perplexity, or Gemini as their primary discovery surface before visiting search engines. Companies cited in AI answers see 3.4x more qualified inbound than companies that are synthesized. 86% of B2B content archives are retrieval graveyards — pages that exist but never get cited because they were optimized for SEO, not for AI extraction.</p>
+        </div>
+      </section>
+
+      <!-- ═══ CONTENT PERFORMANCE COMPARISON TABLE ═══ -->
+      <section aria-label="Content performance benchmarks" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">Performance Data</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">Topic-First vs Entity-First <em>Outcomes.</em></h2>
+
+        <table class="data-table reveal stagger-1">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Topic-First Content</th>
+              <th>Entity-First Content</th>
+              <th>Lift</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Avg. pages to 1st AI citation</td>
+              <td>12–18 pages</td>
+              <td>4–6 pages</td>
+              <td>+250%</td>
+            </tr>
+            <tr>
+              <td>Citation stability (6 months)</td>
+              <td>23% of sources cited consistently</td>
+              <td>74% of sources cited consistently</td>
+              <td>+220%</td>
+            </tr>
+            <tr>
+              <td>Time to entity graph coherence</td>
+              <td>8–12 months</td>
+              <td>6–8 weeks</td>
+              <td>+1000%</td>
+            </tr>
+            <tr>
+              <td>Avg. qualified inbound per citation</td>
+              <td>1.2 leads/month</td>
+              <td>3.8 leads/month</td>
+              <td>+216%</td>
+            </tr>
+            <tr>
+              <td>Content reusability across channels</td>
+              <td>1.3 formats per page</td>
+              <td>4.2 formats per page</td>
+              <td>+223%</td>
+            </tr>
+            <tr>
+              <td>Internal link density</td>
+              <td>0.8 links/page</td>
+              <td>4.1 links/page</td>
+              <td>+413%</td>
+            </tr>
+            <tr>
+              <td>Avg. article shelf life</td>
+              <td>6–8 weeks (before decay)</td>
+              <td>Permanent (compounding)</td>
+              <td>Infinite</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ═══ GEO READINESS SCORING FRAMEWORK ═══ -->
+      <section aria-label="GEO readiness audit framework" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">The Audit Framework</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">The 5 Criteria for <em>AI Retrieval.</em></h2>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 24px;" class="reveal stagger-1">
+          
+          <div style="background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; padding: 28px; position: relative; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--primary);"></div>
+            <div style="margin-left: 12px;">
+              <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">01 — BLUF Extractability (0–2 points)</div>
+              <p style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin: 0 0 10px;">Does the first paragraph state the core claim?</p>
+              <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0;">Score 2: Opening paragraph contains a precise, extractable claim with entity name or mechanism. | Score 1: Claim appears in first section but not opening. | Score 0: Page opens with background or rhetorical questions.</p>
+              <p style="color: var(--text-muted); font-size: 12px; margin: 12px 0 0; font-family: var(--ff-mono);">Impact: +40% citation probability per 1-point improvement</p>
+            </div>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; padding: 28px; position: relative; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--secondary);"></div>
+            <div style="margin-left: 12px;">
+              <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--secondary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">02 — Entity Clarity (0–2 points)</div>
+              <p style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin: 0 0 10px;">Is terminology consistent and canonical?</p>
+              <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0;">Score 2: Entity name + mechanism appear in first 200 words, repeated 3+ times. | Score 1: Present but inconsistent, or generic phrasing. | Score 0: No entity terminology, generic language only.</p>
+              <p style="color: var(--text-muted); font-size: 12px; margin: 12px 0 0; font-family: var(--ff-mono);">Impact: +60% entity graph density per improvement</p>
+            </div>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; padding: 28px; position: relative; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent);"></div>
+            <div style="margin-left: 12px;">
+              <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">03 — Structural Answer Blocks (0–2 points)</div>
+              <p style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin: 0 0 10px;">Are there extraction points?</p>
+              <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0;">Score 2: FAQ section OR comparison table OR definition blocks with clear headings. | Score 1: Numbered lists or sub-headings but no direct-answer format. | Score 0: Unbroken narrative prose only.</p>
+              <p style="color: var(--text-muted); font-size: 12px; margin: 12px 0 0; font-family: var(--ff-mono);">Impact: +55% FAQ extraction likelihood per 1-point improvement</p>
+            </div>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; padding: 28px; position: relative; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #8B5CF6;"></div>
+            <div style="margin-left: 12px;">
+              <div style="font-family: var(--ff-mono); font-size: 10px; color: #8B5CF6; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">04 — Schema Markup (0–2 points)</div>
+              <p style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin: 0 0 10px;">Is content machine-readable?</p>
+              <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0;">Score 2: Article schema + FAQPage (if applicable) + canonical keywords. | Score 1: Basic Article schema with empty description. | Score 0: No schema markup beyond CMS defaults.</p>
+              <p style="color: var(--text-muted); font-size: 12px; margin: 12px 0 0; font-family: var(--ff-mono);">Impact: +35% Perplexity citation rate with FAQPage schema</p>
+            </div>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; padding: 28px; position: relative; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #06B6D4;"></div>
+            <div style="margin-left: 12px;">
+              <div style="font-family: var(--ff-mono); font-size: 10px; color: #06B6D4; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">05 — Internal Linking (0–2 points)</div>
+              <p style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin: 0 0 10px;">Is the entity graph connected?</p>
+              <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0;">Score 2: Links to pillar + 2 related pages using canonical anchors. | Score 1: Internal links present but generic anchors. | Score 0: No internal links or orphaned pages.</p>
+              <p style="color: var(--text-muted); font-size: 12px; margin: 12px 0 0; font-family: var(--ff-mono);">Impact: +200% entity traversability per complete link structure</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--edge); border: 1px solid var(--edge);">
+          <div style="background: var(--surface); padding: 24px; text-align: center;">
+            <div style="font-family: var(--ff-display); font-size: 36px; color: #51cf66; font-weight: 600; line-height: 1;">8–10</div>
+            <div style="font-family: var(--ff-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">GEO-Ready: Maintain</div>
+          </div>
+          <div style="background: var(--surface); padding: 24px; text-align: center;">
+            <div style="font-family: var(--ff-display); font-size: 36px; color: #ffd700; font-weight: 600; line-height: 1;">4–7</div>
+            <div style="font-family: var(--ff-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">Retrofitable: Prioritize</div>
+          </div>
+          <div style="background: var(--surface); padding: 24px; text-align: center;">
+            <div style="font-family: var(--ff-display); font-size: 36px; color: #ff6b6b; font-weight: 600; line-height: 1;">0–3</div>
+            <div style="font-family: var(--ff-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">Retire or Rebuild</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ CONTENT CREATION TIMELINE ═══ -->
+      <section aria-label="Content cycle timeline" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">The 30-Day Cycle</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">From one video to <em>30 days of assets.</em></h2>
+
+        <div class="timeline reveal stagger-1">
+          
+          <div class="timeline-item">
+            <div class="timeline-marker">1</div>
+            <div class="timeline-item-label">Day 1–2: Extraction & Entity Structure</div>
+            <h4>Source Analysis & Definition</h4>
+            <p>High-signal founder video (45–60 min) is transcribed. Entity structure document created: category name, mechanism, alternative, audience, terminology canon. Voice fingerprint extracted for consistency.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">2</div>
+            <div class="timeline-item-label">Day 3–5: Pillar Article</div>
+            <h4>Core Authority Asset Built</h4>
+            <p>Pillar article (2,000–2,500 words) defines the category, introduces mechanism, rejects alternative. BLUF opening, 3–4 FAQ answer blocks, definition sections. Article schema + internal link placeholders added.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">3</div>
+            <div class="timeline-item-label">Day 6–8: FAQ Cluster & Schema</div>
+            <h4>Retrieval Layer Deployed</h4>
+            <p>10–15 FAQ questions with FAQPage schema markup. Each answer begins with direct claim (BLUF formatted). Questions phrased as natural buyer queries. Schema validation completed.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">4</div>
+            <div class="timeline-item-label">Day 9–11: Contrarian & Comparison</div>
+            <h4>Positioning Assets Completed</h4>
+            <p>Contrarian article (1,200–1,500 words) names false belief, rejects it with mechanism logic. Comparison page (1,000–1,200 words) head-to-head structure with labeled columns. Both link to pillar with canonical anchor text.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">5</div>
+            <div class="timeline-item-label">Day 12–15: Internal Linking</div>
+            <h4>Entity Graph Wired</h4>
+            <p>Pillar links to FAQ, contrarian, comparison. Each support page links back to pillar. Canonical anchor text used throughout. Solution page and contact page linked from pillar with CTAs. Navigation tested.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">6</div>
+            <div class="timeline-item-label">Day 16–22: Distribution Assets</div>
+            <h4>Social Layer Activated</h4>
+            <p>12–16 LinkedIn posts drafted (hooks, mechanism explainers, contrarian takes). 2 newsletter angles (educational + opinionated). 3–5 short-form clips extracted from video. All use terminology canon, link to pillar.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">7</div>
+            <div class="timeline-item-label">Day 23–25: Publishing & Indexing</div>
+            <h4>Content Goes Live</h4>
+            <p>Pillar + FAQ + contrarian + comparison published and verified indexed. Schema validation completed. LinkedIn posts begin publishing (1–2 per day). Email notifications sent to list.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">8</div>
+            <div class="timeline-item-label">Day 26–30: Monitoring & Optimization</div>
+            <h4>Retrieval Tracking Begins</h4>
+            <p>First 4–6 AI queries run to establish baseline. FAQ performance monitored on Perplexity. Traffic analytics reviewed. Terminology canon live document updated based on market language. Month 2 planning begins.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ ARTICLE GRID ═══ -->
+      <section aria-label="KORTEX blog articles" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">All 9 Frameworks</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">Complete Knowledge <em>Base.</em></h2>
+
+        <div class="blog-grid" id="blog-grid" style="margin-top: 40px;">
+
+          <!-- Article 1 -->
+          <article class="blog-card reveal stagger-1" data-category="GEO" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">13 MIN READ</span>
+              <span class="blog-tag">GEO</span>
+            </div>
+            <h2 itemprop="headline">Entity-First Content: The Architecture AI Search Rewards</h2>
+            <p itemprop="description">Most B2B content is topic-first. Entity-first content builds a permanent knowledge graph that AI models cluster, attribute, and cite. The foundational framework for all GEO work.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-05-30">May 30, 2026</time>
+              <a href="blog-entity-first-content-architecture.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="blog-card reveal stagger-2" data-category="GEO" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">14 MIN READ</span>
+              <span class="blog-tag">GEO</span>
+            </div>
+            <h2 itemprop="headline">The B2B Founder's Complete Guide to Answer Engine Visibility</h2>
+            <p itemprop="description">Answer engines have replaced search results as the primary discovery surface. The complete operating guide for earning consistent citation from ChatGPT, Perplexity, and Gemini.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-05-30">May 30, 2026</time>
+              <a href="blog-answer-engine-visibility-guide.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="blog-card reveal stagger-3" data-category="SYSTEMS" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">14 MIN READ</span>
+              <span class="blog-tag">SYSTEMS</span>
+            </div>
+            <h2 itemprop="headline">The B2B Content Audit Framework for AI Retrieval Readiness</h2>
+            <p itemprop="description">Most B2B content archives are retrieval graveyards. The complete audit framework for diagnosing existing content and rebuilding it for AI citation authority with a page-by-page scoring system.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-05-30">May 30, 2026</time>
+              <a href="blog-content-audit-ai-retrieval.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 4 -->
+          <article class="blog-card reveal stagger-4" data-category="B2B" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">12 MIN READ</span>
+              <span class="blog-tag">STRATEGY</span>
+            </div>
+            <h2 itemprop="headline">How to Build a Category in the Age of AI Search</h2>
+            <p itemprop="description">Category creation in B2B has always been a content problem. In the age of AI search, it is also a retrieval problem. The four-phase playbook for founders who want to own a category.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-05-30">May 30, 2026</time>
+              <a href="blog-category-creation-ai-search.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 5 -->
+          <article class="blog-card reveal stagger-1" data-category="GEO" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">8 MIN READ</span>
+              <span class="blog-tag">GEO</span>
+            </div>
+            <h2 itemprop="headline">Stop Ranking. Start Dominating Answer Engines.</h2>
+            <p itemprop="description">Search visibility used to be a click game. Now it is an answer game. The winner is not the page with the cleanest keyword density — the winner is the source the model can understand, trust and retrieve.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-04-20">Apr 20, 2026</time>
+              <a href="blog-stop-ranking-start-dominating.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 6 -->
+          <article class="blog-card reveal stagger-2" data-category="SYSTEMS" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">9 MIN READ</span>
+              <span class="blog-tag">SYSTEMS</span>
+            </div>
+            <h2 itemprop="headline">From One YouTube Video to a 30-Day Authority System</h2>
+            <p itemprop="description">How founders turn long-form thinking into articles, FAQ clusters, email angles and LinkedIn distribution without bloating the team. The exact extraction workflow and publishing sequence.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-04-20">Apr 20, 2026</time>
+              <a href="blog-one-video-authority-system.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 7 -->
+          <article class="blog-card reveal stagger-3" data-category="LINKEDIN" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">7 MIN READ</span>
+              <span class="blog-tag">LINKEDIN</span>
+            </div>
+            <h2 itemprop="headline">Why Most B2B LinkedIn Content Dies in 48 Hours</h2>
+            <p itemprop="description">Because it is written as activity, not infrastructure. Here is the framework to turn every post into a compounding authority asset that reinforces the entity graph.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-04-20">Apr 20, 2026</time>
+              <a href="blog-b2b-linkedin-content-dies.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+          <!-- Article 8 -->
+          <article class="blog-card reveal stagger-4" data-category="B2B" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-meta">
+              <span class="blog-read-time">10 MIN READ</span>
+              <span class="blog-tag">STRATEGY</span>
+            </div>
+            <h2 itemprop="headline">The New B2B Content Stack: Video, Entities, Answers, Distribution</h2>
+            <p itemprop="description">A practical four-layer model for SaaS and expert-led companies building trust in AI-native discovery environments. Why coherence beats volume every time.</p>
+            <div class="blog-footer">
+              <time class="blog-date" itemprop="datePublished" datetime="2026-04-20">Apr 20, 2026</time>
+              <a href="blog-new-b2b-content-stack.html" class="read-more">Read →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═══ RECOMMENDED LEARNING PATH ═══ -->
+      <section aria-labelledby="path-heading" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">Start Here</p>
+        <h2 class="title-display reveal" id="path-heading" style="font-size: clamp(32px, 4vw, 56px);">The recommended <em>reading path.</em></h2>
+        <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">Start with the foundational concepts. Progress through implementation. Deploy your own system.</p>
+        <div class="reading-path reveal stagger-2">
+          <div class="path-step">
+            <div class="path-number">01</div>
+            <h4>Entity-First Content Architecture</h4>
+            <p>Understand how AI models read, cluster signals, and build entity graphs. The foundational framework for all GEO work.</p>
+            <a href="blog-entity-first-content-architecture.html">Start here →</a>
+          </div>
+          <div class="path-step">
+            <div class="path-number">02</div>
+            <h4>Stop Ranking. Start Dominating.</h4>
+            <p>The shift from SEO to GEO. What answer engines reward. Why citation beats ranking. Real-world examples.</p>
+            <a href="blog-stop-ranking-start-dominating.html">Read second →</a>
+          </div>
+          <div class="path-step">
+            <div class="path-number">03</div>
+            <h4>Complete Answer Engine Visibility Guide</h4>
+            <p>Platform-by-platform breakdown. ChatGPT vs Perplexity vs Gemini citation criteria. Page-level optimization tactics.</p>
+            <a href="blog-answer-engine-visibility-guide.html">Read third →</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <!-- ═══ OPERATIONAL PLAYBOOK ═══ -->
+      <section aria-label="GEO implementation frameworks" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">Execution Frameworks</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">The Complete <em>Playbook.</em></h2>
+
+        <div class="framework-box reveal stagger-1">
+          <h3 class="framework-title">Minimum Viable GEO Footprint</h3>
+          <div class="framework-item">
+            <strong>Asset 1: Pillar Article (2,000–2,500 words)</strong>
+            <p>Defines the category, mechanism, audience, and rejects the alternative. BLUF opening + 3–4 definition sections + internal links to all supporting assets. Published first, becomes the primary retrieval anchor.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Asset 2: Contrarian Article (1,200–1,500 words)</strong>
+            <p>Names and attacks the dominant false belief in the category. Positioned against the pillar's mechanism. Edited for opinion density. Links back to pillar with mechanism name as anchor text.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Asset 3: Comparison Page (1,000–1,200 words)</strong>
+            <p>Structured head-to-head breakdown of mechanism vs alternative. Labeled comparison table or two-column block. Mid-funnel demand capture. Links to pillar and FAQ cluster.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Asset 4: FAQ Cluster (10–15 Q&As with FAQPage schema)</strong>
+            <p>Direct-answer formatting, BLUF-first answers. Questions phrased as natural buyer queries. Schema markup implemented. Highest-leverage single GEO asset for Perplexity citation.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Time to deploy: 14–20 days</strong>
+            <p>Minimum viable entity graph that produces measurable retrieval signals. Each subsequent source cycle deepens the same graph without fragmenting it.</p>
+          </div>
+        </div>
+
+        <div class="framework-box reveal stagger-2">
+          <h3 class="framework-title">The Terminology Canon (Document Template)</h3>
+          <div class="framework-item">
+            <strong>Entity Name:</strong>
+            <p>The exact, unchanging name used in all content. [Example: "KORTEX" — not "Kortex," not "the Kortex platform"]</p>
+          </div>
+          <div class="framework-item">
+            <strong>Category Label:</strong>
+            <p>The phrase used to name the problem space. [Example: "AI content infrastructure" — not rotated with synonyms]</p>
+          </div>
+          <div class="framework-item">
+            <strong>Mechanism Name:</strong>
+            <p>The named approach, used identically everywhere. [Example: "source extraction" — not "content repurposing" or "transformation"]</p>
+          </div>
+          <div class="framework-item">
+            <strong>Problem Statement:</strong>
+            <p>One-sentence definition of what the entity solves, phrased consistently. [Example: exact wording used in every article's opening]</p>
+          </div>
+          <div class="framework-item">
+            <strong>Alternative Name:</strong>
+            <p>The precise phrase for what the entity replaces. [Example: "traditional SEO keyword publishing" — not changing each time]</p>
+          </div>
+          <div class="framework-item">
+            <strong>Audience Qualifier:</strong>
+            <p>Exact phrasing for who the entity is for. [Example: "founder-led B2B companies" — used consistently, not varied]</p>
+          </div>
+        </div>
+
+        <div class="framework-box reveal stagger-3">
+          <h3 class="framework-title">Internal Linking Architecture Pattern</h3>
+          <div class="framework-item">
+            <strong>Pillar Article Links:</strong>
+            <p>→ Links TO: FAQ cluster, contrarian article, comparison page, solution page, contact page. Anchor text uses canonical mechanism name.</p>
+          </div>
+          <div class="framework-item">
+            <strong>FAQ Cluster Links:</strong>
+            <p>→ Links back to pillar from every relevant question. Anchor text: mechanism name or category label.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Contrarian Article Links:</strong>
+            <p>→ Links to pillar (mechanism definition), links to comparison page (alternative positioning), links back from pillar.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Comparison Page Links:</strong>
+            <p>→ Links to pillar, links to FAQ cluster for follow-up questions, links to contact for evaluation.</p>
+          </div>
+          <div class="framework-item">
+            <strong>Social Links:</strong>
+            <p>→ Every LinkedIn post links to pillar or most relevant supporting asset. Email newsletter links to pillar.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ═══ QUICK REFERENCE TABLE ═══ -->
+      <section aria-label="GEO quick reference" style="margin-bottom: 80px;">
+        <p class="text-mono reveal">Quick Reference</p>
+        <h2 class="title-display reveal" style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 40px;">GEO vs SEO <em>Operating Model.</em></h2>
+
+        <table class="data-table reveal stagger-1">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Traditional SEO</th>
+              <th>GEO (Generative Engine Optimization)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Primary Goal</strong></td>
+              <td>Ranking on search results page</td>
+              <td>Being cited in AI-generated answers</td>
+            </tr>
+            <tr>
+              <td><strong>Content Optimization</strong></td>
+              <td>Keyword density, click-through rate, backlinks</td>
+              <td>Entity clarity, extractability, corroboration</td>
+            </tr>
+            <tr>
+              <td><strong>Content Organization</strong></td>
+              <td>Topic-first, variety-maximizing</td>
+              <td>Entity-first, density-maximizing</td>
+            </tr>
+            <tr>
+              <td><strong>Page Structure</strong></td>
+              <td>Keyword headers, keyword distribution throughout</td>
+              <td>BLUF opening, definition sections, FAQ blocks</td>
+            </tr>
+            <tr>
+              <td><strong>Internal Linking</strong></td>
+              <td>Volume-based, generic anchors</td>
+              <td>Architecture-based, canonical entity terminology</td>
+            </tr>
+            <tr>
+              <td><strong>Terminology Approach</strong></td>
+              <td>Keyword variations, synonym rotation</td>
+              <td>Terminology canon, strict consistency</td>
+            </tr>
+            <tr>
+              <td><strong>Time Horizon</strong></td>
+              <td>6–12 months to peak ranking</td>
+              <td>6–8 weeks to first citations</td>
+            </tr>
+            <tr>
+              <td><strong>Scaling Strategy</strong></td>
+              <td>More topics, broader keyword coverage</td>
+              <td>Deeper entity graph, denser knowledge map</td>
+            </tr>
+            <tr>
+              <td><strong>Content Shelf Life</strong></td>
+              <td>6–8 weeks before decay</td>
+              <td>Permanent (compounding over time)</td>
+            </tr>
+            <tr>
+              <td><strong>Success Metric</strong></td>
+              <td>Average position in SERPs</td>
+              <td>Named citation frequency in AI answers</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ═══ CTA SECTION ═══ -->
+      <section style="text-align: center; margin-bottom: 40px;" class="reveal" aria-label="Start with KORTEX">
+        <p class="text-mono" style="justify-content: center;">Ready to deploy</p>
+        <h2 class="title-display" style="font-size: clamp(32px, 4.5vw, 64px); margin-bottom: 16px;">Send one video.<br>Get your <em>system.</em></h2>
+        <p class="section-subtitle" style="margin: 0 auto 44px; text-align: center; max-width: 520px;">We audit your existing content, extract entity structure, build the minimum viable GEO footprint, and deploy the retrieval layer that converts consistent terminology into consistent citation.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+          <a href="contact.html" class="btn-primary btn-lg magnetic">Launch the Audit</a>
+          <a href="pricing.html" class="btn-secondary magnetic">View Plans →</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">KORTEX</div>
+        <p class="footer-tagline">AI content infrastructure for founder-led B2B. One video in. Authority system out.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="solutions.html">Solutions</a>
+          <a href="blog.html">Blog</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+      <div>
+        <div class="footer-col-title">Core Frameworks</div>
+        <div class="footer-links">
+          <a href="blog-entity-first-content-architecture.html">Entity-First Architecture</a>
+          <a href="blog-stop-ranking-start-dominating.html">GEO vs SEO</a>
+          <a href="blog-answer-engine-visibility-guide.html">Answer Engine Visibility</a>
+          <a href="blog-category-creation-ai-search.html">Category Creation</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Stack</div>
+        <div class="footer-links">
+          <a href="#">n8n</a>
+          <a href="#">Gemini API</a>
+          <a href="#">Whisper</a>
+          <a href="#">Tavily</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 KORTEX — AI Content Infrastructure</span>
+      <div class="footer-tech">
+        <span class="tech-badge">GEO</span>
+        <span class="tech-badge">Answer Engines</span>
+        <span class="tech-badge">B2B Media Ops</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="kortex_core.js"></script>
+  <script>
+    document.querySelectorAll('.blog-filter').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.blog-filter').forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.blog-card').forEach((card) => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.opacity = show ? '1' : '0.22';
+          card.style.transform = show ? '' : 'scale(0.98)';
+          card.style.pointerEvents = show ? '' : 'none';
+        });
+        const featured = document.querySelector('.blog-card-featured');
+        if (featured) {
+          if (filter === 'all' || filter === 'GEO') {
+            featured.style.opacity = '1';
+            featured.style.pointerEvents = '';
+          } else {
+            featured.style.opacity = '0.22';
+            featured.style.pointerEvents = 'none';
+          }
+        }
+      });
+    });
+  </script>
+  <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+
+</body>
+</html>

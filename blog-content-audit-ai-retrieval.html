@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>The B2B Content Audit Framework for AI Retrieval Readiness | KORTEX</title>
+  <meta name="description"
+    content="Most B2B content archives are retrieval graveyards — hundreds of posts that AI models bypass entirely because they were built for a different era. This is the complete audit framework for diagnosing your existing content, identifying what can be retrofitted for GEO, and rebuilding what cannot. Includes a page-by-page scoring system and prioritized action sequence.">
+  <meta name="keywords"
+    content="B2B content audit GEO, content audit AI retrieval, GEO content audit framework, audit content for ChatGPT, retrofit content for AI search, content inventory AI readiness, B2B content quality audit 2026, how to audit content for answer engines, GEO readiness score, content retrofit strategy">
+  <meta name="author" content="KORTEX">
+  <link rel="canonical" href="https://kortexlab.me/blog-content-audit-ai-retrieval.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://kortexlab.me/blog-content-audit-ai-retrieval.html">
+  <meta property="og:title" content="The B2B Content Audit Framework for AI Retrieval Readiness | KORTEX">
+  <meta property="og:description" content="Most B2B content archives are retrieval graveyards. This is the complete audit framework for diagnosing existing content and rebuilding it for AI citation authority.">
+  <meta property="og:image" content="https://kortexlab.me/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The B2B Content Audit Framework for AI Retrieval Readiness | KORTEX">
+  <meta name="twitter:description" content="Most B2B content archives are retrieval graveyards. The complete audit framework for GEO readiness.">
+  <meta name="theme-color" content="#050507">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kortex_theme.css">
+  <link rel="stylesheet" href="kortex_theme_patch.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The B2B Content Audit Framework for AI Retrieval Readiness",
+    "description": "Most B2B content archives are retrieval graveyards. This is the complete audit framework for diagnosing existing content and rebuilding it for AI citation authority.",
+    "datePublished": "2026-05-30",
+    "dateModified": "2026-05-30",
+    "author": { "@type": "Organization", "name": "KORTEX", "url": "https://kortexlab.me" },
+    "publisher": { "@type": "Organization", "name": "KORTEX", "url": "https://kortexlab.me" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kortexlab.me/blog-content-audit-ai-retrieval.html" },
+    "keywords": ["content audit GEO", "AI retrieval readiness", "GEO content audit", "retrofit content AI search", "B2B content quality", "content inventory AI"],
+    "articleSection": "SYSTEMS",
+    "wordCount": "3600",
+    "timeRequired": "PT14M"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a content audit for AI retrieval readiness?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A content audit for AI retrieval readiness is a systematic evaluation of every existing content page against the criteria AI answer engines use to select and cite sources. It assesses each page for extractability (does it state its core claim in the opening paragraph), entity clarity (does it use consistent mechanism names and company terminology), structural formatting (does it contain FAQ blocks, comparison tables, or definition sections), schema markup (does it have Article, FAQPage, or Organization schema), and internal linking (is it connected to related pages using canonical anchor text). Pages are scored and sorted into three groups: ready, retrofitable, and retire."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many existing content pages are typically GEO-ready without changes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In typical B2B content archives, fewer than 15% of existing pages are GEO-ready without modification. Most pages were created for traditional SEO or social distribution purposes — optimized for keyword density, engagement, or platform algorithms rather than AI extraction and attribution. The majority of pages fail on at least two of the five GEO readiness criteria, most commonly extractability (no BLUF opening) and entity clarity (inconsistent terminology). This means most content archives have significant retrofit potential but require systematic intervention before they contribute meaningfully to AI citation authority."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the first step in a GEO content audit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The first step is an inventory: list every content page with its URL, title, publication date, organic traffic (30-day average), and current word count. This inventory becomes the working document for the entire audit. Once the inventory is complete, prioritize pages by organic traffic — the pages already receiving the most visitors have the most to gain from GEO retrofitting, because improving their citation signals amplifies existing performance rather than requiring new audience acquisition."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a retire and a retrofit decision in content audit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A retrofit decision applies to pages that cover a topic relevant to the entity's knowledge graph but were structured for a different era — good information, wrong format. These pages can be improved by rewriting the opening paragraph with a BLUF statement, adding a FAQ section, standardizing terminology to the entity canon, adding internal links with canonical anchor text, and implementing Article or FAQPage schema. A retire decision applies to pages that are either off-topic for the entity's knowledge graph, factually outdated, or so thin that retrofitting would produce a worse outcome than removing the content and redirecting the URL to a more authoritative page. Retiring content reduces the entity graph noise that can suppress citation authority on stronger pages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a B2B content audit for GEO readiness take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a typical B2B content archive of 50–100 pages, a systematic GEO readiness audit takes 8–12 hours of focused review: 2–3 hours for inventory and traffic data collection, 4–6 hours for page-by-page scoring against the five GEO criteria, and 2–3 hours for prioritization and action planning. Audit time scales roughly linearly with content volume. Archives of 200+ pages may benefit from sampling the top 50 pages by traffic first, completing the full retrofit on those, then applying the same process to lower-traffic pages in subsequent phases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should low-traffic pages be deleted to improve GEO authority?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Low traffic alone is not sufficient reason to delete a content page. The decision should be based on entity graph relevance and retrofit potential, not traffic volume. A low-traffic FAQ page that covers a question relevant to the entity's knowledge graph and is well-formatted with FAQPage schema may be receiving zero clicks but contributing significantly to entity corroboration signals that improve citation authority on higher-traffic pages. Delete pages that are off-topic, factually incorrect, or so thin that they create entity graph noise. Retain and retrofit pages that cover relevant questions, even if they currently receive little traffic."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4440VPDMPW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4440VPDMPW');
+  </script>
+</head>
+
+<body>
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="KORTEX — Back to homepage">KORTEX <span class="nav-logo-dot" aria-hidden="true"></span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="blog.html">Logs</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="lang-switcher" role="navigation" aria-label="Language selection">
+      <button class="lang-toggle" id="langBtn" aria-expanded="false" aria-label="Change language">
+        <span id="currentLang">EN</span>
+        <span class="lang-icon">🌐</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
+        <button class="lang-option" data-lang="fr" role="menuitem">🇫🇷 Français</button>
+        <button class="lang-option" data-lang="en" role="menuitem">🇬🇧 English</button>
+        <button class="lang-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
+        <button class="lang-option" data-lang="de" role="menuitem">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="ar" role="menuitem">🇸🇦 العربية</button>
+      </div>
+    </div>
+    <a href="contact.html" class="btn-primary nav-cta magnetic">Get the Audit</a>
+  </nav>
+
+  <main>
+    <div class="article-shell">
+
+      <header class="article-header reveal">
+        <div class="article-meta">
+          <span class="article-kicker">SYSTEMS</span>
+          <span class="article-time">14 min read</span>
+          <span class="article-pill">By KORTEX</span>
+        </div>
+        <h1>The B2B content audit framework<br>for <em>AI retrieval readiness.</em></h1>
+        <p class="article-lead">Most B2B content archives are retrieval graveyards. Hundreds of posts that AI models bypass entirely — not because the content is bad, but because it was built for an era when search engines read keywords, not entity graphs. This is the complete diagnostic and rebuild framework.</p>
+      </header>
+
+      <div class="article-grid">
+        <article class="article-content reveal stagger-1">
+
+          <section id="the-graveyard">
+            <p>Every B2B company with more than two years of content production has the same problem. They have an archive. Articles from 2021 on "top content marketing trends." Long-form guides on "how to build a B2B content strategy." Case studies written for a sales cycle that has since changed. Product posts for features that were rebranded. All of it indexed, all of it costing crawl budget, all of it contributing noise to the entity graph that is being assessed by the AI models their buyers now use to discover solutions.</p>
+
+            <p>The traditional content audit response is to update the ones with traffic and delete the ones without. That approach optimizes for the wrong metric. In AI retrieval, the question is not whether a page has traffic — it is whether the page contributes to or degrades the entity graph that determines citation authority. A low-traffic FAQ page with strong FAQPage schema and consistent entity terminology can be doing significant work for AI citation while appearing irrelevant in a traffic-based audit. A high-traffic "ultimate guide" with no structured answer blocks, no entity declarations, and generic terminology can be actively suppressing citation authority for the pages around it.</p>
+
+            <div class="callout" style="margin-top: 28px;">
+              <p style="margin: 0; color: var(--text-primary);">The diagnostic question for every content page is not "does this page get traffic?" It is "does this page strengthen or weaken the entity graph that determines whether AI models cite us?" Those are different questions, and they produce different audit decisions.</p>
+            </div>
+          </section>
+
+          <section id="five-criteria">
+            <h2>The five GEO readiness criteria</h2>
+
+            <p>Before scoring any individual page, establish the five criteria against which every page will be evaluated. These criteria correspond directly to the citation decision factors that AI answer engines use — extractability, entity clarity, structural formatting, schema declaration, and internal linking architecture.</p>
+
+            <h3>Criterion 1: BLUF extractability (0–2 points)</h3>
+            <p>Does the page state its core claim in the first 100–150 words, as a complete sentence that could be quoted with attribution? Score 2 if the opening paragraph contains a precise, extractable claim that includes an entity name or mechanism name. Score 1 if the claim appears somewhere in the first section but not in the opening paragraph. Score 0 if the page opens with background context, rhetorical questions, or scene-setting prose before stating any claim.</p>
+
+            <p>This is the criterion that most existing B2B content fails on, and the one with the highest retrofit leverage. A single paragraph rewrite — replacing the scene-setting opening with a direct claim statement — moves a page from a 0 to a 2 on this criterion without changing anything else about the page. The rewrite takes ten minutes. The citation impact can be substantial.</p>
+
+            <h3>Criterion 2: Entity clarity and terminology consistency (0–2 points)</h3>
+            <p>Does the page use the entity's canonical terminology — company name, category label, mechanism name, audience qualifier — consistently and correctly? Score 2 if the entity name and mechanism name appear in their canonical forms in the first 200 words and at least three additional times throughout. Score 1 if the terminology is present but inconsistent — synonyms used interchangeably with canonical terms, or the mechanism name absent from the opening. Score 0 if the page could have been written by any company in the space — no entity-specific terminology, no mechanism name, no category label.</p>
+
+            <h3>Criterion 3: Structural answer blocks (0–2 points)</h3>
+            <p>Does the page contain structured extraction points — FAQ sections, comparison tables, definition blocks, numbered steps with clear headings — that give AI models clean answer units without requiring prose parsing? Score 2 if the page contains at least one FAQ section with direct-answer formatting, or a comparison table with labeled headers, or a definition block that states "X is Y" explicitly. Score 1 if the page has some structural elements (numbered lists, sub-headings) but no direct-answer blocks. Score 0 if the page is unbroken narrative prose with no structural extraction points.</p>
+
+            <h3>Criterion 4: Schema markup implementation (0–2 points)</h3>
+            <p>Does the page have appropriate machine-readable schema that declares its content type and entity to AI crawlers? Score 2 if the page has Article or BlogPosting schema with a BLUF description and canonical keywords, plus FAQPage schema if the page contains FAQ content. Score 1 if the page has basic Article schema but the description field is empty or keyword-stuffed rather than a coherent claim statement. Score 0 if the page has no schema markup beyond whatever the CMS inserts by default.</p>
+
+            <h3>Criterion 5: Internal link architecture (0–2 points)</h3>
+            <p>Does the page have at least three to five internal links using canonical anchor text that reflects entity terminology, and does it link to and from the relevant pillar pages in the entity graph? Score 2 if the page links to the primary pillar article using the mechanism name as anchor text, and links to at least two other related pages with canonical anchors, and is itself linked from the pillar. Score 1 if internal links exist but use generic anchors ("read more," "click here") rather than entity terminology. Score 0 if the page has no internal links or is not linked from any other entity-related page.</p>
+
+            <div class="metric-strip" style="margin-top: 28px;">
+              <div class="metric"><strong>8–10</strong><span>GEO-ready: maintain</span></div>
+              <div class="metric"><strong>4–7</strong><span>Retrofitable: prioritize</span></div>
+              <div class="metric"><strong>0–3</strong><span>Retire or rebuild</span></div>
+            </div>
+          </section>
+
+          <section id="audit-process">
+            <h2>Running the audit: a step-by-step process</h2>
+
+            <h3>Step 1: Build the content inventory</h3>
+            <p>Export a complete list of every indexed content page from your CMS or Google Search Console. For each page, collect: the full URL, the page title, the publication date, the 30-day organic traffic (sessions), the 30-day average position in Google Search Console, and the current word count. Create a spreadsheet with these six columns as the foundation of the audit document. If the archive is larger than 200 pages, begin with the top 50 by traffic — these pages have the most to gain from immediate retrofit and the most to lose from continued underperformance.</p>
+
+            <h3>Step 2: Score each page against the five criteria</h3>
+            <p>For each page in the inventory, open the page, read the first 200 words, and score it against each of the five criteria. Add five columns to the spreadsheet — one per criterion — and enter the score (0, 1, or 2) for each. Calculate a total GEO readiness score out of 10. The scoring should take no more than three to four minutes per page once the criteria are internalized. At this pace, a 50-page audit takes approximately three to four hours of focused work.</p>
+
+            <p>During scoring, also add a brief "failure note" for any score below 2 — a one-sentence description of what is missing. "Opening paragraph is scene-setting, no claim stated" or "mechanism name absent from first 200 words" or "no internal links to pillar article." These failure notes become the retrofit instructions for each page in the next phase.</p>
+
+            <h3>Step 3: Categorize pages into three groups</h3>
+            <p>Sort the scored pages into three groups based on their total GEO readiness score:</p>
+
+            <ul>
+              <li><strong>GEO-ready (8–10):</strong> pages that are already performing well on GEO criteria. Add these to a maintenance schedule — quarterly review to ensure the FAQ cluster stays current, the schema is still implemented correctly, and the internal links are still pointing to the current version of related pages. No immediate action required beyond monitoring.</li>
+              <li><strong>Retrofitable (4–7):</strong> pages with solid information and relevant entity territory but structural deficiencies that can be corrected without a full rewrite. These are the highest-priority pages in the audit — they have existing content value and clear, specific improvement paths identified by the failure notes. Prioritize by traffic within this group: highest-traffic retrofitable pages first.</li>
+              <li><strong>Retire or rebuild (0–3):</strong> pages that either cover off-topic territory, are factually outdated, or are so structurally deficient that retrofitting would require a complete rewrite — at which point rebuilding from the current entity structure document is more efficient than editing the existing content. For retire decisions, implement 301 redirects to the most relevant remaining page rather than leaving dead URLs.</li>
+            </ul>
+
+            <h3>Step 4: Execute retrofits in priority order</h3>
+            <p>Work through the retrofitable pages in descending traffic order. For each page, the retrofit process follows the failure notes from step 2. Common retrofits and their time estimates:</p>
+
+            <ul>
+              <li><strong>BLUF opening rewrite:</strong> 10–20 minutes. Replace the opening paragraph with a direct claim statement that includes the entity name, mechanism name, and core assertion. This single change addresses criterion 1 and often criterion 2 simultaneously.</li>
+              <li><strong>FAQ section addition:</strong> 30–60 minutes. Identify the three to five questions the page's content implicitly answers and add an explicit FAQ section with FAQPage schema. Place the FAQ section after the main content — this preserves the existing page structure while adding the highest-leverage retrieval element.</li>
+              <li><strong>Terminology standardization:</strong> 20–40 minutes. Search the page for synonym variations of mechanism names and category labels and replace them with canonical terminology. Check for places where generic phrases ("our approach," "this method") can be replaced with named mechanism references.</li>
+              <li><strong>Schema implementation:</strong> 15–30 minutes. Add or update Article schema with a BLUF description field and canonical keywords. Add FAQPage schema if the page now has an FAQ section. Verify Organization schema is present at the site level.</li>
+              <li><strong>Internal link architecture:</strong> 15–30 minutes. Add links to the pillar article using the mechanism name as anchor text. Add links to two to three related pages. Verify the pillar article links back to this page from a relevant section.</li>
+            </ul>
+
+            <p>A complete retrofit of a single page typically takes 90 minutes to two hours when all five elements need attention. Pages with only one or two failure notes take significantly less. A team working systematically through a prioritized retrofit list can complete eight to twelve page retrofits per day of focused work.</p>
+          </section>
+
+          <section id="pillar-gaps">
+            <h2>Identifying pillar gaps and missing entity assets</h2>
+
+            <p>The content audit is not only about improving existing pages — it is also about identifying structural gaps in the entity graph that no existing page covers. These gaps are often more valuable to address than any individual retrofit, because they represent the questions AI models are currently answering with a competitor's content or a generic synthesized response.</p>
+
+            <h3>The four gap types</h3>
+
+            <p><strong>Missing pillar gap:</strong> the entity has supporting content (FAQ clusters, comparison posts, use-case descriptions) but no primary pillar article that defines the core thesis, mechanism, and category with precision. This is the most common structural gap in B2B content archives. Teams produce supporting content before establishing the foundational retrieval anchor. The fix is building the pillar article first and retrofitting all supporting content to link back to it.</p>
+
+            <p><strong>Missing contrarian gap:</strong> the entity has a pillar and supporting content but no piece that explicitly names and rejects the dominant false belief in the category. Without the contrarian piece, the entity's position is defined only by what it claims, not by what it rejects — which produces weaker differentiation and weaker citation for comparison queries. Comparison queries are among the highest-volume B2B AI search query types ("what is better than X," "why is X failing for us") and the contrarian piece is the primary asset that captures them.</p>
+
+            <p><strong>Missing FAQ gap:</strong> the entity has pillar-level content but no structured FAQ cluster with FAQPage schema. This is the gap with the most direct impact on Perplexity citation frequency, since Perplexity pulls FAQ schema answers directly into responses. A FAQ cluster that maps the 10–15 follow-up questions generated by the pillar article can produce more citation volume than any other single new asset, particularly in the first 30–60 days after publication.</p>
+
+            <p><strong>Missing comparison gap:</strong> the entity has pillar and FAQ content but no structured comparison page that positions its mechanism against the standard alternative. Comparison queries from buyers in evaluation mode are the queries where citation converts most directly to pipeline — a buyer who just read an AI answer that cited your comparison page as the source of a head-to-head breakdown arrives to the first conversation pre-educated on your positioning. The comparison gap is the mid-funnel acquisition gap.</p>
+
+            <h3>Prioritizing new content vs retrofits</h3>
+            <p>When both retrofits and new gap-filling content are needed, the general rule is: fill pillar gaps first, then execute high-traffic retrofits, then fill FAQ and comparison gaps, then execute lower-traffic retrofits. The pillar gap takes priority because without the foundational retrieval anchor, neither the retrofitted supporting content nor the new FAQ cluster has an entity home to link back to. The pillar is the root of the entity graph — every other decision flows from it.</p>
+          </section>
+
+          <section id="archive-cleanup">
+            <h2>The archive cleanup decision: what to retire and why</h2>
+
+            <p>One of the most counterintuitive conclusions of a GEO-focused content audit is that some content should be removed entirely — not because it is bad, but because it is actively diluting entity graph coherence. Understanding the retire decision prevents the common mistake of preserving every piece of content on the principle that "more is better."</p>
+
+            <h3>When to retire content</h3>
+            <p>Retire content when it meets any of three conditions: the content is factually outdated to the point where it creates false impressions of the entity's capabilities or claims; the content covers territory entirely outside the entity's knowledge graph and creates category confusion; or the content is so thin — under 300 words with no structured elements, no internal links, and no entity terminology — that it contributes more entity graph noise than signal.</p>
+
+            <p>The noise concern is real and underappreciated. A model encountering fifty thin, generic posts alongside five well-structured entity-specific pieces will cluster the generic content as part of the entity's signal set. Generic content dilutes the entity's precision. A smaller, denser, more coherent entity graph outperforms a large, diffuse one for citation purposes. Sometimes the right move is to consolidate — merge two or three thin posts on related topics into one substantive page that covers the territory properly — rather than retiring content that has some relevance but insufficient depth to stand alone.</p>
+
+            <h3>The consolidation decision</h3>
+            <p>Consolidation is the preferred approach for pages with partial retrofit potential that individually score 2–3 on the GEO readiness criteria. Two posts that each cover half of a question can be merged into one page that answers the full question — with a BLUF opening, FAQ section, entity terminology, schema markup, and internal links. The merged page is then the canonical URL; the two originals are 301-redirected to it. The result is a denser, more authoritative page than either original, without losing the historical content's informational value.</p>
+
+            <p>Consolidation is particularly valuable for "series" content — post 1 of 3, part A of a multi-part guide — that was published in installments and never consolidated into a single authoritative page. These series are almost always weak citation candidates individually and strong candidates once merged, because the combined depth addresses criterion 3 (structured blocks) and increases the probability of covering enough FAQ territory to warrant FAQPage schema.</p>
+          </section>
+
+          <section id="maintenance">
+            <h2>Maintaining GEO readiness after the initial audit</h2>
+
+            <p>A content audit is not a one-time event. The entity graph requires ongoing maintenance as the category evolves, new questions emerge, and AI platform citation criteria shift. The following maintenance cadence keeps the entity graph current without requiring a full audit cycle every quarter.</p>
+
+            <h3>Monthly: FAQ cluster freshness check</h3>
+            <p>Run the 20–30 query monitoring set across ChatGPT, Perplexity, and Gemini. Identify any questions appearing in AI responses about your category that are not covered by your FAQ clusters. Add those questions to the appropriate FAQ cluster, with direct-answer formatting and FAQPage schema. This monthly refresh ensures the FAQ retrieval layer stays current with evolving buyer query patterns.</p>
+
+            <h3>Quarterly: New content GEO readiness verification</h3>
+            <p>Every piece of content published in the previous quarter should be scored against the five GEO criteria within 30 days of publication. Any new page scoring below 6 should be flagged for immediate retrofit before it accumulates traffic and becomes harder to change without affecting existing performance. Building the scoring into the publication workflow — treating it as a publication checklist rather than an after-the-fact audit — prevents the accumulation of new low-readiness content that future audits will have to address.</p>
+
+            <h3>Semi-annually: Full entity graph review</h3>
+            <p>Every six months, conduct a full entity graph review: map all content pages against their entity relationships, identify new pillar gaps created by category evolution or new competitor positioning, verify that the terminology canon is still current (mechanism names, category labels, audience qualifiers), and review the internal link architecture for broken links, redirects, and updated anchor text requirements. This review typically takes a full day for a content archive of 50–100 pages and surfaces the strategic content priorities for the following two quarters.</p>
+          </section>
+
+          <section id="faq">
+            <h2>Common questions about B2B content audits for GEO readiness</h2>
+
+            <div class="faq-grid" style="margin-top: 24px; grid-template-columns: 1fr;">
+
+              <div class="faq-item">
+                <h3>Can the GEO readiness audit be run on a single afternoon?</h3>
+                <p>For a content archive of 20–30 pages, yes. Score each page against the five criteria in three to four minutes each, calculate totals, sort into groups, and identify the top five retrofit priorities. The initial scoring can be completed in two to three hours. The retrofit work itself takes longer — plan for one to two hours per page when all five criteria need attention — but the audit phase that produces the prioritized action list is genuinely a half-day exercise for smaller archives. Larger archives of 100+ pages benefit from sampling: score the top 30 pages by traffic first, complete those retrofits, then audit the remaining pages in subsequent batches.</p>
+              </div>
+
+              <div class="faq-item">
+                <h3>Should we do the audit before or after building new content?</h3>
+                <p>Audit first, always. Building new content before auditing the existing archive risks creating new entity graph additions that are inconsistent with existing pages — because the entity structure document has not been reviewed against what already exists. The audit reveals the current state of the entity graph, identifies gaps that new content should fill, and establishes the terminology canon that new content must use. New content built before the audit often needs to be retrofitted again once the audit reveals inconsistencies. The two-to-three days spent on the audit before any new production begins prevents weeks of rework later.</p>
+              </div>
+
+              <div class="faq-item">
+                <h3>What tools are needed to run a GEO content audit?</h3>
+                <p>The core tools are a spreadsheet (Google Sheets or Excel), Google Search Console for traffic and position data, and a schema validation tool (Google's Rich Results Test or Schema.org validator) for checking existing schema implementation. No proprietary tools are required. The audit is fundamentally a judgment-based process — reading each page against the five criteria — rather than a data-extraction process. The spreadsheet organizes the judgments; the tools provide the traffic data that determines prioritization. Automated GEO audit tools exist but none currently apply the full five-criterion framework with the accuracy that manual review produces.</p>
+              </div>
+
+              <div class="faq-item">
+                <h3>How does the GEO content audit differ from a traditional SEO content audit?</h3>
+                <p>A traditional SEO content audit evaluates pages primarily on traffic performance, keyword coverage, backlink profile, and technical health. A GEO content audit evaluates pages on extractability, entity clarity, structural formatting, schema declaration, and internal link architecture. The two audits share some overlap — technical health and internal linking appear in both — but the primary evaluative criteria are different. A page can pass a traditional SEO audit with high marks on keyword density and backlink count while scoring 2 out of 10 on GEO readiness, because it was optimized for a different retrieval system. Running both audits and comparing the results reveals the gap between current performance and GEO citation potential.</p>
+              </div>
+
+              <div class="faq-item">
+                <h3>What is the most important single change to make during a GEO retrofit?</h3>
+                <p>Rewrite the opening paragraph of every retrofitable page with a BLUF statement that includes the entity name, the mechanism name, and a direct claim. This single change addresses the highest-failure criterion — extractability — across the most pages in the shortest time. A model that finds a precise, attributable claim in the first paragraph of a page is significantly more likely to cite it than a model that has to extract the claim from the middle of a 1,500-word article. The BLUF rewrite is the highest-leverage, lowest-effort change in any GEO retrofit program and should be the first action taken for every retrofitable page in the prioritized list.</p>
+              </div>
+
+            </div>
+          </section>
+
+          <div class="inline-cta">
+            <p class="text-mono">Deploy</p>
+            <h3 style="font-family: var(--ff-display); font-size: 30px; font-style: italic; color: var(--white); margin-bottom: 12px;">Want a professional GEO audit of your content archive?</h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.8; margin-bottom: 20px;">Send us one video and your site URL. We audit the existing entity graph, identify the pillar gaps, and build the retrofit plan alongside the first new source cycle — so the system starts compounding from day one.</p>
+            <a href="contact.html" class="btn-primary magnetic">Launch the Audit</a>
+          </div>
+
+          <section id="related" style="margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--edge);">
+            <p class="text-mono">Read next</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+              <a href="blog-entity-first-content-architecture.html" style="display: block; padding: 24px; background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; text-decoration: none; transition: border-color 0.25s ease;">
+                <span style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;">GEO</span>
+                <h4 style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin-top: 8px; line-height: 1.3;">Entity-First Content: The Architecture AI Search Rewards</h4>
+              </a>
+              <a href="blog-answer-engine-visibility-guide.html" style="display: block; padding: 24px; background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; text-decoration: none; transition: border-color 0.25s ease;">
+                <span style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;">GEO</span>
+                <h4 style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin-top: 8px; line-height: 1.3;">The B2B Founder's Complete Guide to Answer Engine Visibility</h4>
+              </a>
+              <a href="blog-stop-ranking-start-dominating.html" style="display: block; padding: 24px; background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; text-decoration: none; transition: border-color 0.25s ease;">
+                <span style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;">GEO</span>
+                <h4 style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin-top: 8px; line-height: 1.3;">Stop Ranking. Start Dominating Answer Engines.</h4>
+              </a>
+              <a href="blog-one-video-authority-system.html" style="display: block; padding: 24px; background: var(--surface); border: 1px solid var(--edge); border-radius: 2px; text-decoration: none; transition: border-color 0.25s ease;">
+                <span style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;">SYSTEMS</span>
+                <h4 style="font-family: var(--ff-display); font-size: 18px; font-style: italic; color: var(--white); margin-top: 8px; line-height: 1.3;">From One Video to a 30-Day Authority System</h4>
+              </a>
+            </div>
+          </section>
+
+        </article>
+
+        <aside class="article-aside reveal stagger-2">
+          <div class="toc">
+            <h4>On this page</h4>
+            <ul>
+              <li><a href="#the-graveyard">The retrieval graveyard problem</a></li>
+              <li><a href="#five-criteria">The five GEO readiness criteria</a></li>
+              <li><a href="#audit-process">Running the audit step-by-step</a></li>
+              <li><a href="#pillar-gaps">Identifying pillar gaps</a></li>
+              <li><a href="#archive-cleanup">What to retire and why</a></li>
+              <li><a href="#maintenance">Ongoing maintenance cadence</a></li>
+              <li><a href="#faq">Common questions</a></li>
+            </ul>
+          </div>
+
+          <div style="margin-top: 24px; padding: 24px; background: rgba(229,9,20,0.05); border: 1px solid rgba(229,9,20,0.18); border-radius: 2px;">
+            <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;">GEO scoring criteria</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="font-size: 13px; color: var(--text-secondary);">01 — BLUF extractability (0–2)</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">02 — Entity clarity (0–2)</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">03 — Structured blocks (0–2)</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">04 — Schema markup (0–2)</div>
+              <div style="font-size: 13px; color: var(--text-secondary);">05 — Internal linking (0–2)</div>
+              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--edge); font-size: 13px; color: var(--text-muted); font-family: var(--ff-mono);">Total: 10 points</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; padding: 24px; background: rgba(229,9,20,0.05); border: 1px solid rgba(229,9,20,0.18); border-radius: 2px;">
+            <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--primary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;">Core principle</p>
+            <p style="font-family: var(--ff-display); font-size: 16px; font-style: italic; color: var(--white); line-height: 1.6; margin: 0;">A smaller, denser, coherent entity graph outperforms a large, diffuse one for citation purposes every time.</p>
+          </div>
+
+          <div style="margin-top: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--edge); border-radius: 2px;">
+            <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--secondary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;">Related pages</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <a href="solutions.html" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">→ The KORTEX content system</a>
+              <a href="blog-entity-first-content-architecture.html" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">→ Entity-first architecture</a>
+              <a href="blog-answer-engine-visibility-guide.html" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">→ Answer engine visibility guide</a>
+              <a href="pricing.html" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">→ Plans and pricing</a>
+              <a href="contact.html" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">→ Launch the audit</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">KORTEX</div>
+        <p class="footer-tagline">AI content infrastructure for founder-led B2B. One video in. Authority system out.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="solutions.html">Solutions</a>
+          <a href="blog.html">Blog</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+      <div>
+        <div class="footer-col-title">Read next</div>
+        <div class="footer-links">
+          <a href="blog-entity-first-content-architecture.html">Entity-First Architecture</a>
+          <a href="blog-answer-engine-visibility-guide.html">Answer Engine Visibility</a>
+          <a href="blog-stop-ranking-start-dominating.html">Stop Ranking. Start Dominating.</a>
+          <a href="blog-one-video-authority-system.html">One Video Authority System</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Stack</div>
+        <div class="footer-links">
+          <a href="#">n8n</a>
+          <a href="#">Gemini API</a>
+          <a href="#">Whisper</a>
+          <a href="#">Tavily</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 KORTEX — AI Content Infrastructure</span>
+      <div class="footer-tech">
+        <span class="tech-badge">GEO</span>
+        <span class="tech-badge">Answer Engines</span>
+        <span class="tech-badge">B2B Media Ops</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="kortex_core.js"></script>
+</body>
+</html>

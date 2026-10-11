@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#050507">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="kortex_theme.css">
+  <link rel="stylesheet" href="kortex_theme_patch.css">
+  
+  <title>KORTEX Pricing — GEO Authority Systems for B2B | Ghost, Swarm, Titan</title>
+  <meta name="description"
+    content="Transparent pricing for AI-powered Generative Engine Optimization. Ghost ($2,500), Swarm ($5,500), Titan ($12,000+). No setup fees. Month-to-month. Full ownership. Real citation authority.">
+  <meta name="keywords"
+    content="AI content agency pricing, GEO agency cost, B2B content operations pricing, answer engine optimization cost, KORTEX plans, founder-led content ROI, AI content automation pricing, authority system cost">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kortexlab.me/pricing.html">
+  <meta property="og:title" content="KORTEX Pricing — Transparent Cost for Authority Systems">
+  <meta property="og:description" content="Ghost, Swarm, and Titan plans. No contracts. Full ownership. Citation authority guaranteed.">
+  <meta property="og:image" content="https://www.kortexlab.me/og-share-image.png">
+
+  <style>
+    /* Pricing Toggle */
+    .billing-toggle-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      font-family: var(--ff-mono);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255,255,255,0.1);
+      transition: .4s;
+      border-radius: 34px;
+      border: 1px solid var(--edge);
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--white);
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .toggle-slider {
+      background-color: rgba(229, 9, 20, 0.4);
+      border-color: rgba(229, 9, 20, 0.8);
+    }
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+    .save-badge {
+      background: rgba(229, 9, 20, 0.15);
+      color: #ff4d4d;
+      padding: 4px 8px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .active-billing {
+      color: var(--white);
+      font-weight: bold;
+    }
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 24px;
+    }
+    .price-currency { font-size: 24px; font-weight: 600; color: var(--white); }
+    .price-amount { font-size: 48px; font-weight: 800; font-family: var(--ff-display); color: var(--white); margin: 0 4px; }
+    .price-period { font-size: 14px; font-family: var(--ff-mono); color: var(--text-muted); }
+
+    /* Plan card hover effects */
+    .plan-card {
+      transition: all 0.4s ease;
+    }
+    .plan-card:hover {
+      transform: translateY(-4px);
+    }
+    .plan-card.featured {
+      transform: scale(1.02);
+    }
+    .plan-card.featured:hover {
+      transform: scale(1.02) translateY(-4px);
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <a href="index.html" class="nav-logo" aria-label="KORTEX — Home">KORTEX <span class="nav-logo-dot" aria-hidden="true"></span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="blog.html">Logs</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="lang-switcher" role="navigation" aria-label="Language selection">
+      <button class="lang-toggle" id="langBtn" aria-expanded="false" aria-label="Change language">
+        <span id="currentLang">EN</span>
+        <span class="lang-icon">🌐</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
+        <button class="lang-option" data-lang="en" role="menuitem">🇬🇧 English</button>
+        <button class="lang-option" data-lang="fr" role="menuitem">🇫🇷 Français</button>
+      </div>
+    </div>
+    <a href="login.html" class="btn-primary nav-cta magnetic">Client Portal</a>
+  </nav>
+
+  <main>
+    <section style="padding: 100px 5%; min-height: 60vh; display: flex; align-items: center;">
+      <div class="container" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <p class="text-mono reveal">Pricing That Reflects Real Value</p>
+        <h1 class="title-display reveal stagger-1" style="font-size: clamp(40px, 7vw, 80px); margin-bottom: 20px;">
+          Pay for <em>compounding authority.</em>
+        </h1>
+        <p class="section-subtitle reveal stagger-2" style="margin: 24px auto 40px; max-width: 800px;">
+          KORTEX is not cheap because we're not a content agency. We're infrastructure engineers. You pay for systems that compound, not outputs that expire. Every plan includes full ownership, no contracts, and month-to-month flexibility.
+        </p>
+
+        <div class="billing-toggle-wrapper reveal stagger-3">
+          <span id="label-monthly" class="active-billing">Monthly</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="billing-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+          <span id="label-yearly">Annually <span class="save-badge">-20%</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         THREE PLAN CARDS WITH FULL DETAILS
+    ═══════════════════════════════════════════════════════════ -->
+    <section style="padding: 0 5% 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;" class="reveal stagger-4">
+      
+      <!-- GHOST PLAN -->
+      <div class="plan-card" style="background: var(--surface); border: 1px solid var(--edge); padding: 40px; border-radius: 4px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div style="width: 6px; height: 6px; background: var(--primary); border-radius: 50%;"></div>
+          <h3 style="font-family: var(--ff-display); font-size: 32px; font-style: italic; color: var(--white); margin: 0;">Ghost</h3>
+        </div>
+        <p style="font-family: var(--ff-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-size: 11px; margin-bottom: 20px;">Entry-level authority system</p>
+        
+        <div class="price-display">
+          <span class="price-currency">€</span>
+          <span class="price-amount" data-monthly="2,500" data-yearly="2,000">2,500</span>
+          <span class="price-period">/ month</span>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 32px; flex-grow: 1;">
+          Perfect for solo founders, consultants and early-stage teams testing the GEO model. Establish your foundational authority layer with one monthly source cycle.
+        </p>
+
+        <div style="background: var(--card); padding: 16px; border-radius: 2px; margin-bottom: 28px; border-left: 2px solid var(--primary);">
+          <p style="font-family: var(--ff-mono); font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">✓ Best for</p>
+          <p style="margin: 0; color: var(--text-secondary); font-size: 13px;">Solo founders, consultants, and early-stage SaaS</p>
+        </div>
+
+        <h4 style="font-family: var(--ff-mono); font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">What's Included</h4>
+        <ul style="list-style: none; padding: 0; margin: 0 0 32px; color: var(--white); font-size: 14px; line-height: 2.2;">
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>1 source cycle</strong> per month (video, podcast, or webinar)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>2 authority articles</strong> (pillar + one supporting piece)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>8 LinkedIn distribution assets</strong> (posts + newsletter angles)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Voice & terminology alignment</strong> documentation
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Basic entity mapping</strong> (category + problem + solution)
+          </li>
+          <li style="padding-bottom: 0; margin-bottom: 0;">
+            <strong>Editorial QA</strong> review before delivery
+          </li>
+        </ul>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+          <a href="contact.html" class="btn-secondary magnetic" style="flex: 1; text-align: center; padding: 14px; border: 1px solid var(--edge); color: var(--white); text-decoration: none; text-transform: uppercase; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.1em; border-radius: 2px;">Explore Ghost</a>
+        </div>
+
+        <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted); text-align: center;">No setup fees · Month-to-month · Cancel anytime</p>
+      </div>
+
+      <!-- SWARM PLAN - FEATURED -->
+      <div class="plan-card featured" style="background: var(--surface); border: 2px solid var(--primary); padding: 40px; border-radius: 4px; display: flex; flex-direction: column; position: relative;">
+        <div style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary), #ff1020); color: white; padding: 6px 20px; font-family: var(--ff-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; border-radius: 2px; font-weight: 800; box-shadow: 0 0 20px rgba(229,9,20,0.4);">Most Popular</div>
+        
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div style="width: 6px; height: 6px; background: var(--primary); border-radius: 50%;"></div>
+          <h3 style="font-family: var(--ff-display); font-size: 32px; font-style: italic; color: var(--white); margin: 0;">Swarm</h3>
+        </div>
+        <p style="font-family: var(--ff-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); font-size: 11px; margin-bottom: 20px;">Complete authority system</p>
+        
+        <div class="price-display">
+          <span class="price-currency">€</span>
+          <span class="price-amount" data-monthly="5,500" data-yearly="4,400">5,500</span>
+          <span class="price-period">/ month</span>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 32px; flex-grow: 1;">
+          The complete GEO system. Build a dense authority graph that ChatGPT, Perplexity and Gemini actively cite. Designed for SaaS teams serious about compounding visibility.
+        </p>
+
+        <div style="background: rgba(229,9,20,0.08); padding: 16px; border-radius: 2px; margin-bottom: 28px; border-left: 2px solid var(--primary);">
+          <p style="font-family: var(--ff-mono); font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">✓ Best for</p>
+          <p style="margin: 0; color: var(--text-secondary); font-size: 13px;">B2B SaaS, operators serious about authority, scaling content ops</p>
+        </div>
+
+        <h4 style="font-family: var(--ff-mono); font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">Everything in Ghost, Plus:</h4>
+        <ul style="list-style: none; padding: 0; margin: 0 0 32px; color: var(--white); font-size: 14px; line-height: 2.2;">
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>4-article authority cluster</strong> (pillar + contrarian + comparison + FAQ)
+          </li>
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Full GEO entity architecture</strong> (complete semantic graph)
+          </li>
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>12-16 LinkedIn assets</strong> with distribution calendar
+          </li>
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Answer engine schema markup</strong> (full optimization)
+          </li>
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Internal linking strategy</strong> (authority graph mapping)
+          </li>
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>GEO keyword clustering</strong> analysis
+          </li>
+          <li style="border-bottom: 1px solid rgba(229,9,20,0.1); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Newsletter restructuring</strong> for semantic extraction
+          </li>
+          <li style="padding-bottom: 0; margin-bottom: 0;">
+            <strong>Monthly strategy call</strong> with KORTEX operator
+          </li>
+        </ul>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+          <a href="contact.html" class="btn-primary magnetic" style="flex: 1; text-align: center; padding: 14px; background: var(--primary); text-decoration: none; text-transform: uppercase; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.1em; border-radius: 2px; color: var(--white); border: none; font-weight: 700;">Deploy Swarm Now</a>
+        </div>
+
+        <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted); text-align: center;">No setup fees · Month-to-month · Cancel anytime</p>
+      </div>
+
+      <!-- TITAN PLAN -->
+      <div class="plan-card" style="background: var(--surface); border: 1px solid var(--edge); padding: 40px; border-radius: 4px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div style="width: 6px; height: 6px; background: var(--accent); border-radius: 50%;"></div>
+          <h3 style="font-family: var(--ff-display); font-size: 32px; font-style: italic; color: var(--white); margin: 0;">Titan</h3>
+        </div>
+        <p style="font-family: var(--ff-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-size: 11px; margin-bottom: 20px;">Enterprise-grade authority</p>
+        
+        <div class="price-display">
+          <span class="price-currency">€</span>
+          <span class="price-amount" data-monthly="12,000" data-yearly="9,600">12,000</span>
+          <span class="price-period">+ / month</span>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 32px; flex-grow: 1;">
+          Full-service category dominance. Multi-source monthly systems, competitive analysis, custom integrations and dedicated operator support. For teams building defensible market position.
+        </p>
+
+        <div style="background: var(--card); padding: 16px; border-radius: 2px; margin-bottom: 28px; border-left: 2px solid var(--accent);">
+          <p style="font-family: var(--ff-mono); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">✓ Best for</p>
+          <p style="margin: 0; color: var(--text-secondary); font-size: 13px;">Enterprise, founders building category narrative, multi-brand scaling</p>
+        </div>
+
+        <h4 style="font-family: var(--ff-mono); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 600;">Everything in Swarm, Plus:</h4>
+        <ul style="list-style: none; padding: 0; margin: 0 0 32px; color: var(--white); font-size: 14px; line-height: 2.2;">
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>2+ source cycles</strong> per month (unlimited processing)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Competitive messaging architecture</strong> framework
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Category comparison program</strong> (7+ competitors tracked)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Dedicated Slack channel</strong> with KORTEX operators
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Weekly strategy calls</strong> (ongoing optimization)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Citation tracking dashboard</strong> (real-time monitoring)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Custom n8n webhooks</strong> (CMS automation)
+          </li>
+          <li style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 12px;">
+            <strong>Quarterly authority reviews</strong> (strategy refresh)
+          </li>
+          <li style="padding-bottom: 0; margin-bottom: 0;">
+            <strong>Priority support</strong> (24-hour response SLA)
+          </li>
+        </ul>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+          <a href="contact.html" class="btn-secondary magnetic" style="flex: 1; text-align: center; padding: 14px; border: 1px solid var(--edge); color: var(--white); text-decoration: none; text-transform: uppercase; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.1em; border-radius: 2px;">Request Custom Quote</a>
+        </div>
+
+        <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted); text-align: center;">Custom terms · Dedicated support · White-label available</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         FEATURE COMPARISON TABLE
+    ═══════════════════════════════════════════════════════════ -->
+    <section style="padding: 80px 5%; background: linear-gradient(180deg, rgba(139,92,246,0.04) 0%, transparent 100%); border-top: 1px solid var(--edge); border-bottom: 1px solid var(--edge);">
+      <div class="container" style="max-width: 1200px;">
+        <p class="text-mono reveal" style="text-align: center;">Detailed comparison</p>
+        <h2 class="title-display reveal stagger-1" style="text-align: center; font-size: clamp(32px, 4vw, 56px); margin-bottom: 48px;">
+          See what's included in each <em>plan.</em>
+        </h2>
+
+        <div style="overflow-x: auto; border-radius: 2px;" class="reveal stagger-2">
+          <table style="width: 100%; border-collapse: collapse; font-family: var(--ff-ui); background: var(--surface);">
+            <thead>
+              <tr style="background: var(--card); border-bottom: 1px solid var(--edge);">
+                <th style="padding: 20px; text-align: left; font-weight: 600; color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; border-right: 1px solid var(--edge);">Feature</th>
+                <th style="padding: 20px; text-align: center; font-weight: 600; color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; border-right: 1px solid var(--edge);">Ghost</th>
+                <th style="padding: 20px; text-align: center; font-weight: 700; color: var(--primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; border-right: 1px solid var(--edge);">Swarm</th>
+                <th style="padding: 20px; text-align: center; font-weight: 600; color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;">Titan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Delivery & Volume -->
+              <tr style="border-bottom: 1px solid var(--edge); background: rgba(139,92,246,0.02);">
+                <td colspan="4" style="padding: 12px 20px; background: var(--card); font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; border-bottom: 1px solid var(--edge);">Delivery & Processing</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Source cycles per month</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);"><strong>1</strong></td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);"><strong>1</strong></td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);"><strong>2+</strong></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Turnaround time</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">5 business days</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">5 business days</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">3-4 business days</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Authority articles</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">2</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">4</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">4+</td>
+              </tr>
+
+              <!-- Content Assets -->
+              <tr style="border-bottom: 1px solid var(--edge); background: rgba(139,92,246,0.02);">
+                <td colspan="4" style="padding: 12px 20px; background: var(--card); font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; border-bottom: 1px solid var(--edge);">Content Assets</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">LinkedIn distribution assets</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">8</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">12-16</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">20+</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Newsletter restructuring</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">✓</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">FAQ cluster generation</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">✓</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+
+              <!-- GEO Optimization -->
+              <tr style="border-bottom: 1px solid var(--edge); background: rgba(139,92,246,0.02);">
+                <td colspan="4" style="padding: 12px 20px; background: var(--card); font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; border-bottom: 1px solid var(--edge);">GEO Architecture</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Entity graph mapping</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">Basic</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">Full</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">Enterprise</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Schema markup & formatting</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">Basic</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">Full</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">Advanced</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Internal linking strategy</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">✓</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">GEO keyword clustering</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">✓</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+
+              <!-- Strategy & Support -->
+              <tr style="border-bottom: 1px solid var(--edge); background: rgba(139,92,246,0.02);">
+                <td colspan="4" style="padding: 12px 20px; background: var(--card); font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; border-bottom: 1px solid var(--edge);">Strategy & Support</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Monthly strategy call</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white); border-right: 1px solid var(--edge);">✓</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Dedicated operator</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Slack channel access</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓ Dedicated</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Citation tracking dashboard</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--edge);">
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Competitive analysis</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓ Ongoing</td>
+              </tr>
+              <tr>
+                <td style="padding: 14px 20px; color: var(--text-secondary); font-size: 13px; border-right: 1px solid var(--edge);">Custom integrations</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--text-muted); border-right: 1px solid var(--edge);">—</td>
+                <td style="padding: 14px 20px; text-align: center; color: var(--white);">✓ Custom</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         WHAT'S INCLUDED IN EVERY PLAN
+    ═══════════════════════════════════════════════════════════ -->
+    <section style="padding: 80px 5%; background: linear-gradient(180deg, transparent 0%, rgba(139,92,246,0.05) 100%);">
+      <div class="container" style="max-width: 1000px;">
+        <p class="text-mono reveal" style="text-align: center;">Foundation across all plans</p>
+        <h2 class="title-display reveal stagger-1" style="text-align: center; font-size: clamp(32px, 4vw, 56px); margin-bottom: 48px;">
+          Every plan includes these <em>guarantees.</em>
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;" class="reveal stagger-2">
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 32px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 22px; font-style: italic; color: var(--white); margin-bottom: 12px;">
+              ✓ Full Ownership
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+              Every article, LinkedIn asset, FAQ block and strategic document belongs 100% to your brand. You own all intellectual capital from day one.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 32px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 22px; font-style: italic; color: var(--white); margin-bottom: 12px;">
+              ✓ No Contracts
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+              Month-to-month terms on all plans. No long-term contracts. No lock-in period. Upgrade, downgrade, or cancel anytime with 30 days notice.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 32px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 22px; font-style: italic; color: var(--white); margin-bottom: 12px;">
+              ✓ No Setup Fees
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+              Zero onboarding costs. No hidden fees. Transparent pricing. Your first invoice is for your plan cost only, nothing else.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 32px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 22px; font-style: italic; color: var(--white); margin-bottom: 12px;">
+              ✓ Turnkey Delivery
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+              Assets are production-ready. All content is fully edited, formatted, schema-marked and ready to publish immediately.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 32px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 22px; font-style: italic; color: var(--white); margin-bottom: 12px;">
+              ✓ GEO Engineered
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+              Every asset is structured for AI citation. Entity clarity, answer-first formatting, semantic density - designed for ChatGPT, Perplexity and Gemini.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 32px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 22px; font-style: italic; color: var(--white); margin-bottom: 12px;">
+              ✓ Voice Consistency
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+              We extract your founder voice from the source video and apply it consistently across all assets. Everything sounds like you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         COST COMPARISON: IN-HOUSE VS KORTEX
+    ═══════════════════════════════════════════════════════════ -->
+    <section style="padding: 80px 5%; border-top: 1px solid var(--edge);">
+      <div class="container" style="max-width: 1000px;">
+        <p class="text-mono reveal" style="text-align: center;">The real math</p>
+        <h2 class="title-display reveal stagger-1" style="text-align: center; font-size: clamp(32px, 4vw, 56px); margin-bottom: 48px;">
+          Why founders choose infrastructure over <em>employees.</em>
+        </h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px;" class="reveal stagger-2">
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 40px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-mono); font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; font-weight: 600;">Traditional In-House Team</h3>
+            
+            <div style="margin-bottom: 20px;">
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">SEO Manager (salary + benefits)</p>
+              <p style="color: var(--white); font-family: var(--ff-display); font-size: 24px; font-weight: 600;">$6,500/mo</p>
+            </div>
+            <div style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Content Writer/Copywriter</p>
+              <p style="color: var(--white); font-family: var(--ff-display); font-size: 24px; font-weight: 600;">$5,000/mo</p>
+            </div>
+            <div style="margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Social Media Manager</p>
+              <p style="color: var(--white); font-family: var(--ff-display); font-size: 24px; font-weight: 600;">$4,200/mo</p>
+            </div>
+            <div style="margin-bottom: 0; border-top: 1px solid rgba(229,9,20,0.3); padding-top: 20px; background: rgba(229,9,20,0.05); margin: 20px -40px -40px -40px; padding: 20px 40px;">
+              <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 4px;">Monthly cost</p>
+              <p style="color: var(--primary); font-family: var(--ff-display); font-size: 36px; font-weight: 700; margin: 0;">$15,700</p>
+              <p style="color: var(--text-muted); font-family: var(--ff-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 8px;">+ Taxes, training, management overhead</p>
+            </div>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--secondary); padding: 40px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-mono); font-size: 12px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; font-weight: 600;">The KORTEX Swarm System</h3>
+            
+            <div style="margin-bottom: 20px;">
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">4 authority articles monthly</p>
+              <p style="color: var(--white); font-family: var(--ff-display); font-size: 24px; font-weight: 600;">✓ Included</p>
+            </div>
+            <div style="margin-bottom: 20px; border-top: 1px solid rgba(139,92,246,0.15); padding-top: 20px;">
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">12-16 LinkedIn assets</p>
+              <p style="color: var(--white); font-family: var(--ff-display); font-size: 24px; font-weight: 600;">✓ Included</p>
+            </div>
+            <div style="margin-bottom: 20px; border-top: 1px solid rgba(139,92,246,0.15); padding-top: 20px;">
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Full GEO engineering</p>
+              <p style="color: var(--white); font-family: var(--ff-display); font-size: 24px; font-weight: 600;">✓ Included</p>
+            </div>
+            <div style="margin-bottom: 0; border-top: 1px solid rgba(139,92,246,0.3); padding-top: 20px; background: rgba(139,92,246,0.08); margin: 20px -40px -40px -40px; padding: 20px 40px;">
+              <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 4px;">Monthly cost</p>
+              <p style="color: var(--secondary); font-family: var(--ff-display); font-size: 36px; font-weight: 700; margin: 0;">€5,500</p>
+              <p style="color: var(--text-muted); font-family: var(--ff-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 8px;">Month-to-month, cancel anytime</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 24px; background: rgba(229,9,20,0.05); border: 1px solid rgba(229,9,20,0.2); border-radius: 2px; text-align: center;" class="reveal stagger-3">
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Monthly savings with KORTEX Swarm:</p>
+          <p style="color: var(--primary); font-family: var(--ff-display); font-size: 48px; font-weight: 700; margin: 0;">€10,200+</p>
+          <p style="color: var(--text-muted); font-family: var(--ff-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 12px;">Plus: Better results, faster delivery, zero management overhead</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         FAQ SECTION
+    ═══════════════════════════════════════════════════════════ -->
+    <section style="padding: 80px 5%; background: linear-gradient(180deg, rgba(139,92,246,0.04) 0%, transparent 100%); border-top: 1px solid var(--edge);">
+      <div class="container" style="max-width: 900px;">
+        <p class="text-mono reveal" style="text-align: center;">Questions about pricing</p>
+        <h2 class="title-display reveal stagger-1" style="text-align: center; font-size: clamp(32px, 4vw, 56px); margin-bottom: 48px;">
+          Pricing FAQs
+        </h2>
+
+        <div style="display: flex; flex-direction: column; gap: 24px;" class="reveal stagger-2">
+          
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">Are there any hidden fees or setup costs?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              No. KORTEX pricing is fully transparent. Zero setup fees, zero onboarding costs, zero hidden charges. Your invoice equals your plan cost, period. If you upgrade mid-month, we prorate fairly.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">Can I change plans or cancel anytime?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              Yes. All plans are month-to-month with no long-term contracts. You can upgrade to a higher tier immediately, downgrade at the start of the next billing cycle, or cancel with 30 days notice. No penalties, no fine print.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">Who owns the content that KORTEX produces?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              You do. 100%. Every article, FAQ block, LinkedIn post and strategic document belongs entirely to your brand from day one. KORTEX has no ownership stake in the content we produce. You can republish, repurpose or resell it without permission.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">What if I need more than one source cycle per month?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              Upgrade to Swarm (1 cycle included) or Titan (2+ cycles). Or contact our team about custom volume pricing. We can scale with you as your needs grow.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">Is there a minimum commitment?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              No minimum commitment. You can start with Ghost (1 month), see results, and upgrade to Swarm the next month. Or try Swarm and cancel if it's not right for you. We're confident in the system - we don't need contracts to prove it.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">How long is the turnaround on each source cycle?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              Ghost and Swarm: 5 business days from submission to delivery. Titan: 3-4 business days with priority processing. Once submitted, you get weekly progress updates and a final review before anything goes live.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">Do I get support if something's wrong?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              Ghost and Swarm get email support (48-hour response). Titan gets dedicated Slack support with priority response. If an asset needs revision, we refactor it at no additional cost. Our goal is your satisfaction with the system.
+            </p>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--edge); padding: 28px; border-radius: 2px;">
+            <h3 style="font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px;">Can I request custom pricing or a trial period?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 14px;">
+              Yes. Reach out to us directly at contact@kortexlab.me and we'll discuss your specific situation. We offer free gap analysis for all new inquiries - no commitment, no pitch call required.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         FINAL CTA
+    ═══════════════════════════════════════════════════════════ -->
+    <section style="padding: 100px 5%; text-align: center; background: linear-gradient(180deg, rgba(139,92,246,0.08) 0%, rgba(229,9,20,0.06) 100%);">
+      <div class="container" style="max-width: 900px;">
+        <p class="text-mono reveal">Ready to build authority</p>
+        <h2 class="title-display reveal stagger-1" style="font-size: clamp(32px, 5vw, 72px); margin-bottom: 24px;">
+          Start with a free <em>gap analysis.</em>
+        </h2>
+        <p class="section-subtitle reveal stagger-2" style="margin: 0 auto 44px; text-align: center; max-width: 750px;">
+          Submit one founder video. We analyze your current content against the question tree AI engines generate in your category. You get a 15-page audit with clear authority gaps and a recommended asset roadmap.
+        </p>
+        
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" class="reveal stagger-3">
+          <a href="contact.html" class="btn-primary btn-lg magnetic" style="display: inline-block; text-decoration: none;">Get the Free Audit</a>
+          <a href="index.html" class="btn-secondary magnetic" style="display: inline-block; text-decoration: none;">Back to Home</a>
+        </div>
+
+        <p style="margin-top: 24px; font-family: var(--ff-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em;" class="reveal stagger-4">
+          Free gap analysis · No credit card · No sales call required · 48-hour turnaround
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="nav-logo" style="color: var(--white); text-decoration: none;">KORTEX <span class="nav-logo-dot"></span></a>
+        <p class="footer-tagline">AI Content Automation for B2B Founders. One video in. Citation authority out.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="solutions.html">Solutions</a>
+          <a href="blog.html">Logs</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+      <div>
+        <div class="footer-col-title">GEO Resources</div>
+        <div class="footer-links">
+          <a href="blog-stop-ranking-start-dominating.html">GEO vs SEO</a>
+          <a href="blog-one-video-authority-system.html">30-Day System</a>
+          <a href="blog-b2b-linkedin-content-dies.html">LinkedIn Strategy</a>
+          <a href="blog-new-b2b-content-stack.html">B2B Content Stack</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Automation Stack</div>
+        <div class="footer-links">
+          <a href="#">n8n Workflows</a>
+          <a href="#">Gemini API Integration</a>
+          <a href="#">Whisper Transcription</a>
+          <a href="#">LLM Content Ops</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">Copyright 2026 KORTEX. AI Content Automation Infrastructure.</span>
+      <div class="footer-tech">
+        <span class="tech-badge">GEO</span>
+        <span class="tech-badge">n8n</span>
+        <span class="tech-badge">Answer Engines</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="kortex_core.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggle = document.getElementById("billing-toggle");
+      const prices = document.querySelectorAll(".price-amount");
+      const labelMonthly = document.getElementById("label-monthly");
+      const labelYearly = document.getElementById("label-yearly");
+
+      toggle.addEventListener("change", function() {
+        const isYearly = toggle.checked;
+        
+        // Toggle label styling
+        if (isYearly) {
+          labelYearly.classList.add("active-billing");
+          labelMonthly.classList.remove("active-billing");
+        } else {
+          labelMonthly.classList.add("active-billing");
+          labelYearly.classList.remove("active-billing");
+        }
+
+        // Update numbers with fade effect
+        prices.forEach(price => {
+          price.style.opacity = 0;
+          setTimeout(() => {
+            price.innerText = isYearly ? price.getAttribute("data-yearly") : price.getAttribute("data-monthly");
+            price.style.opacity = 1;
+            price.style.transition = "opacity 0.3s ease";
+          }, 150);
+        });
+      });
+    });
+  </script>
+  <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+
+</body>
+
+</html>
