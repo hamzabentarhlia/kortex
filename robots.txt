@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /en/login.html
+Disallow: /portal/
+
+# AI crawlers are welcome: KORTEX wants to be cited.
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.kortexlab.me/sitemap.xml

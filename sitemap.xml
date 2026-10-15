@@ -1,55 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.kortexlab.me/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/"/>
   </url>
   <url>
     <loc>https://www.kortexlab.me/solutions.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/solutions.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/solutions.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/solutions.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/solutions.html"/>
   </url>
   <url>
     <loc>https://www.kortexlab.me/blog.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/pricing.html</loc>
+    <loc>https://www.kortexlab.me/en/blog.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/tarifs.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/tarifs.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/pricing.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/tarifs.html"/>
   </url>
   <url>
     <loc>https://www.kortexlab.me/contact.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/contact.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-stop-ranking-start-dominating.html</loc>
-    <priority>0.7</priority>
+    <loc>https://www.kortexlab.me/en/contact.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/contact.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-one-video-authority-system.html</loc>
+    <loc>https://www.kortexlab.me/blog-arretez-de-ranker-soyez-cite.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-arretez-de-ranker-soyez-cite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-stop-ranking-start-dominating.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-arretez-de-ranker-soyez-cite.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-b2b-linkedin-content-dies.html</loc>
+    <loc>https://www.kortexlab.me/en/blog-stop-ranking-start-dominating.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-arretez-de-ranker-soyez-cite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-stop-ranking-start-dominating.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-arretez-de-ranker-soyez-cite.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-new-b2b-content-stack.html</loc>
+    <loc>https://www.kortexlab.me/blog-une-video-systeme-autorite.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-une-video-systeme-autorite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-one-video-authority-system.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-une-video-systeme-autorite.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-answer-engine-visibility-guide.html</loc>
+    <loc>https://www.kortexlab.me/en/blog-one-video-authority-system.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-une-video-systeme-autorite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-one-video-authority-system.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-une-video-systeme-autorite.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-category-creation-ai-search.html</loc>
+    <loc>https://www.kortexlab.me/blog-nouvelle-stack-contenu-b2b.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-nouvelle-stack-contenu-b2b.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-new-b2b-content-stack.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-nouvelle-stack-contenu-b2b.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-content-audit-ai-retrieval.html</loc>
+    <loc>https://www.kortexlab.me/en/blog-new-b2b-content-stack.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-nouvelle-stack-contenu-b2b.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-new-b2b-content-stack.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-nouvelle-stack-contenu-b2b.html"/>
   </url>
   <url>
-    <loc>https://www.kortexlab.me/blog-entity-first-content-architecture.html</loc>
+    <loc>https://www.kortexlab.me/blog-pourquoi-contenu-linkedin-b2b-meurt.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-pourquoi-contenu-linkedin-b2b-meurt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-b2b-linkedin-content-dies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-pourquoi-contenu-linkedin-b2b-meurt.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/blog-b2b-linkedin-content-dies.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-pourquoi-contenu-linkedin-b2b-meurt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-b2b-linkedin-content-dies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-pourquoi-contenu-linkedin-b2b-meurt.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/blog-guide-visibilite-moteurs-de-reponse.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-guide-visibilite-moteurs-de-reponse.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-answer-engine-visibility-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-guide-visibilite-moteurs-de-reponse.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/blog-answer-engine-visibility-guide.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-guide-visibilite-moteurs-de-reponse.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-answer-engine-visibility-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-guide-visibilite-moteurs-de-reponse.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/blog-creation-de-categorie-recherche-ia.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-creation-de-categorie-recherche-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-category-creation-ai-search.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-creation-de-categorie-recherche-ia.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/blog-category-creation-ai-search.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-creation-de-categorie-recherche-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-category-creation-ai-search.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-creation-de-categorie-recherche-ia.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/blog-audit-contenu-recuperation-ia.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-audit-contenu-recuperation-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-content-audit-ai-retrieval.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-audit-contenu-recuperation-ia.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/blog-content-audit-ai-retrieval.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-audit-contenu-recuperation-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-content-audit-ai-retrieval.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-audit-contenu-recuperation-ia.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/blog-architecture-contenu-entite-first.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-architecture-contenu-entite-first.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-entity-first-content-architecture.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-architecture-contenu-entite-first.html"/>
+  </url>
+  <url>
+    <loc>https://www.kortexlab.me/en/blog-entity-first-content-architecture.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/blog-architecture-contenu-entite-first.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/blog-entity-first-content-architecture.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/blog-architecture-contenu-entite-first.html"/>
   </url>
 </urlset>

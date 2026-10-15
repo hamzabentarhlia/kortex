@@ -1,26 +1,158 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="fr" prefix="og: https://ogp.me/ns#">
 <head>
-  <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#050507">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/manifest.json">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap"
-    rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kortex_theme.css">
   <link rel="stylesheet" href="kortex_theme_patch.css">
-  
-  <title>KORTEX Client Portal — Secure Access</title>
-  <meta name="description"
-    content="Private client portal for KORTEX. Access your content system, monitor performance, and manage authority assets. Secure authentication required.">
+  <title>Espace client KORTEX — connexion sécurisée aux livrables | KORTEX</title>
+  <meta name="description" content="Espace client privé KORTEX. Connectez-vous pour consulter vos livrables, suivre vos cycles de contenu et soumettre de nouvelles vidéos. Réservé aux clients.">
+  <meta name="keywords" content="espace client KORTEX, connexion KORTEX, portail client">
+  <meta name="author" content="KORTEX">
   <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://www.kortexlab.me/login.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kortexlab.me/login.html">
+  <meta property="og:title" content="Espace client KORTEX — connexion sécurisée aux livrables | KORTEX">
+  <meta property="og:description" content="Espace client privé KORTEX. Connectez-vous pour consulter vos livrables, suivre vos cycles de contenu et soumettre de nouvelles vidéos. Réservé aux clients.">
+  <meta property="og:image" content="https://www.kortexlab.me/og-image.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KORTEX — GEO">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="KORTEX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Espace client KORTEX — connexion sécurisée aux livrables | KORTEX">
+  <meta name="twitter:description" content="Espace client privé KORTEX. Connectez-vous pour consulter vos livrables, suivre vos cycles de contenu et soumettre de nouvelles vidéos. Réservé aux clients.">
+  <meta name="twitter:image" content="https://www.kortexlab.me/og-image.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.kortexlab.me/#organization",
+      "name": "KORTEX",
+      "url": "https://www.kortexlab.me/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.kortexlab.me/logo.svg"
+      },
+      "image": "https://www.kortexlab.me/og-image.png",
+      "description": "KORTEX est une agence d'automatisation de contenu par IA spécialisée en Generative Engine Optimization (GEO). Elle transforme une vidéo de fondateur en système d'autorité structuré, conçu pour être cité par ChatGPT, Perplexity et Gemini.",
+      "email": "contact@kortexlab.me",
+      "areaServed": "Worldwide",
+      "knowsLanguage": [
+        "fr",
+        "en"
+      ],
+      "knowsAbout": [
+        "Generative Engine Optimization",
+        "Answer Engine Optimization",
+        "AI content automation",
+        "B2B authority content",
+        "Founder-led content",
+        "Entity-first content architecture"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "contact@kortexlab.me",
+        "availableLanguage": [
+          "French",
+          "English"
+        ],
+        "url": "https://www.kortexlab.me/contact.html"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.kortexlab.me/#website",
+      "url": "https://www.kortexlab.me/",
+      "name": "KORTEX",
+      "description": "Agence GEO pour fondateurs B2B : une vidéo, un système de contenu d'autorité citable par les IA.",
+      "inLanguage": [
+        "fr",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://www.kortexlab.me/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.kortexlab.me/login.html#webpage",
+      "url": "https://www.kortexlab.me/login.html",
+      "name": "Espace client KORTEX — connexion sécurisée aux livrables | KORTEX",
+      "description": "Espace client privé KORTEX. Connectez-vous pour consulter vos livrables, suivre vos cycles de contenu et soumettre de nouvelles vidéos. Réservé aux clients.",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://www.kortexlab.me/#website"
+      },
+      "about": {
+        "@id": "https://www.kortexlab.me/#organization"
+      },
+      "dateModified": "2026-10-15"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.kortexlab.me/login.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.kortexlab.me/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Espace client",
+          "item": "https://www.kortexlab.me/login.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4440VPDMPW"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4440VPDMPW');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
 
-  <style>
+  <nav class="navbar" role="navigation" aria-label="Navigation principale">
+    <a href="index.html" class="nav-logo" aria-label="KORTEX — Accueil">KORTEX <span class="nav-logo-dot" aria-hidden="true"></span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="tarifs.html">Tarifs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-toggle" id="langBtn" aria-expanded="false" aria-haspopup="true" aria-controls="langMenu" aria-label="Changer de langue">
+        <span id="currentLang">FR</span>
+        <span class="lang-icon" aria-hidden="true">🌐</span>
+      </button>
+      <div class="lang-menu" id="langMenu" aria-hidden="true" aria-label="Choisir la langue">
+        <a class="lang-option active" data-lang="fr" lang="fr" hreflang="fr" href="login.html" aria-current="true">🇫🇷 Français</a>
+        <a class="lang-option" data-lang="en" lang="en" hreflang="en" href="en/login.html">🇬🇧 English</a>
+      </div>
+    </div>
+    <a href="contact.html" class="btn-primary nav-cta magnetic" data-scramble>Obtenir l'audit</a>
+  </nav>
+
+  <main id="main">
+<style>
     /* Login Page Specific Styles */
     .login-container {
       display: grid;
@@ -492,275 +624,177 @@
       }
     }
   </style>
-</head>
 
-<body>
-  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
-  
-  <div class="login-container">
-    <!-- LEFT SECTION: INFO -->
-    <div class="login-left reveal">
-      <div class="login-logo">
-        <span>KORTEX</span>
-        <span class="logo-dot"></span>
-      </div>
-
-      <div class="login-content">
-        <h1>Access your <em>authority system.</em></h1>
-        <p>Monitor GEO performance, manage content cycles, and track AI citations in real-time. Your dashboard updates automatically as assets compound across answer engines.</p>
-
-        <div class="portal-info">
-          <div class="info-card">
-            <div class="info-card-title">Delivered Assets</div>
-            <div class="info-card-text">
-              View all produced articles, LinkedIn posts, FAQ blocks, and distribution templates. Download, edit, or republish anytime.
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-card-title">Authority Tracking</div>
-            <div class="info-card-text">
-              Real-time monitoring of AI citations across ChatGPT, Perplexity, and Gemini. See which pages earn retrieval.
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-card-title">Content Engine</div>
-            <div class="info-card-text">
-              Submit new source videos and monitor processing. Track turnaround from ingestion to final delivery.
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-card-title">Strategic Intelligence</div>
-            <div class="info-card-text">
-              Competitor analysis, content gap reports, and monthly authority reviews. All data refreshes weekly.
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--edge);">
-          <p style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">System Status</p>
-          <div class="status-indicator">
-            <span class="status-dot"></span>
-            All systems operational
-          </div>
-          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
-            Platform uptime: 99.9% SLA. Last maintenance: 2 weeks ago. Next scheduled update: 3 weeks ahead.
-          </p>
-        </div>
-      </div>
+<section id="portal-login" class="login-container" aria-labelledby="login-title">
+  <!-- GAUCHE : INFOS -->
+  <div class="login-left reveal">
+    <div class="login-logo" aria-hidden="true">
+      <span>KORTEX</span>
+      <span class="logo-dot"></span>
     </div>
 
-    <!-- RIGHT SECTION: LOGIN FORM -->
-    <div class="login-right">
-      <div class="login-form-wrapper">
-        <!-- Header -->
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-family: var(--ff-display); font-size: 32px; font-style: italic; color: var(--white); margin-bottom: 8px;">Secure Access</h2>
-          <p style="font-size: 13px; color: var(--text-secondary);">Enter your credentials or use single sign-on</p>
+    <div class="login-content">
+      <h1 id="login-title">Accédez à votre <em>système d'autorité.</em></h1>
+      <p>Suivez vos cycles de contenu, consultez vos livrables et observez la présence de vos pages dans les moteurs de réponse — dans un seul espace privé.</p>
+
+      <div class="portal-info">
+        <div class="info-card">
+          <h2 class="info-card-title">Livrables</h2>
+          <div class="info-card-text">Retrouvez chaque article, publication LinkedIn, bloc FAQ et modèle de diffusion produit pour vous. Téléchargez, modifiez ou republiez à tout moment.</div>
         </div>
-
-        <!-- Messages -->
-        <div class="error-message" id="errorMsg"></div>
-        <div class="success-message" id="successMsg"></div>
-
-        <!-- Login Form -->
-        <form id="loginForm" style="margin-bottom: 24px;">
-          <div class="login-form-group">
-            <label for="email">Email Address</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              placeholder="your@company.com"
-              required
-              autocomplete="email"
-            >
-          </div>
-
-          <div class="login-form-group">
-            <label for="password">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              placeholder="Enter your password"
-              required
-              autocomplete="current-password"
-            >
-          </div>
-
-          <div class="forgot-password">
-            <a href="#forgot">Forgot password?</a>
-          </div>
-
-          <div class="login-checkbox">
-            <input type="checkbox" id="remember" name="remember" value="true">
-            <label for="remember">Keep me logged in on this device</label>
-          </div>
-
-          <button type="submit" class="login-btn">Sign In Securely</button>
-        </form>
-
-        <!-- Divider -->
-        <div class="login-divider">or continue with</div>
-
-        <!-- SSO Options -->
-        <div class="sso-buttons">
-          <button type="button" class="sso-btn" onclick="ssoLogin('google')">
-            <span>Google</span>
-          </button>
-          <button type="button" class="sso-btn" onclick="ssoLogin('microsoft')">
-            <span>Microsoft</span>
-          </button>
+        <div class="info-card">
+          <h2 class="info-card-title">Suivi de l'autorité</h2>
+          <div class="info-card-text">Suivi des citations par l'IA dans ChatGPT, Perplexity et Gemini. Voyez quelles pages sont reprises.</div>
         </div>
-
-        <!-- Signup Link -->
-        <div class="signup-link">
-          Don't have access yet? <a href="contact.html">Request onboarding</a>
+        <div class="info-card">
+          <h2 class="info-card-title">Moteur de contenu</h2>
+          <div class="info-card-text">Soumettez de nouvelles vidéos sources et suivez leur traitement, de la réception à la livraison finale.</div>
         </div>
-
-        <!-- Security Notice -->
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--edge); font-size: 11px; color: var(--text-muted); line-height: 1.6;">
-          This is a production authentication page. All data is encrypted in transit using TLS 1.3. Your credentials are never stored in plaintext.
+        <div class="info-card">
+          <h2 class="info-card-title">Veille stratégique</h2>
+          <div class="info-card-text">Analyse concurrentielle, rapports de lacunes de contenu et bilans d'autorité mensuels.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Simple Modal for Dev Access -->
-  <div id="devModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
-    <div style="background: var(--surface); padding: 32px; border: 1px solid var(--edge); border-radius: 2px; max-width: 420px; width: 90%;">
-      <h3 style="font-family: var(--ff-display); font-size: 24px; color: var(--white); margin-bottom: 12px;">Development Access</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 13px;">This portal requires real authentication. For development/testing, access the local dashboard directly.</p>
-      <div style="display: flex; gap: 12px;">
-        <a href="portal/dashboard.html" class="btn-primary" style="flex: 1; text-align: center; text-decoration: none;">Local Dashboard</a>
-        <button onclick="document.getElementById('devModal').style.display='none'" class="btn-secondary" style="flex: 1;">Close</button>
+  <!-- DROITE : FORMULAIRE -->
+  <div class="login-right">
+    <div class="login-form-wrapper">
+      <div style="margin-bottom: 32px;">
+        <h2 style="font-family: var(--ff-display); font-size: 32px; font-style: italic; color: var(--white); margin-bottom: 8px;">Accès sécurisé</h2>
+        <p style="font-size: 13px; color: var(--text-secondary);">Connectez-vous avec l'adresse e-mail associée à votre compte KORTEX.</p>
+      </div>
+
+      <div class="error-message" id="errorMsg" role="alert"></div>
+      <div class="success-message" id="successMsg" role="status" aria-live="polite"></div>
+
+      <form id="loginForm" style="margin-bottom: 24px;" novalidate>
+        <div class="login-form-group">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required autocomplete="email">
+        </div>
+
+        <div class="login-form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" placeholder="Saisissez votre mot de passe" required autocomplete="current-password">
+        </div>
+
+        <div class="forgot-password">
+          <a href="#forgot" id="forgotLink">Mot de passe oublié ?</a>
+        </div>
+
+        <div class="login-checkbox">
+          <input type="checkbox" id="remember" name="remember" value="true">
+          <label for="remember">Mémoriser mon e-mail sur cet appareil</label>
+        </div>
+
+        <button type="submit" class="login-btn">Se connecter en toute sécurité</button>
+      </form>
+
+      <div class="signup-link">
+        Pas encore client ? <a href="contact.html">Demander l'intégration</a> · <a href="solutions.html">Comment fonctionne KORTEX</a> · <a href="tarifs.html">Formules</a>
+      </div>
+
+      <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--edge); font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+        Cette page est servie en HTTPS. Un problème d'accès ? Écrivez à <a href="mailto:contact@kortexlab.me" style="color: var(--secondary);">contact@kortexlab.me</a> ou revenez à la <a href="index.html" style="color: var(--secondary);">page d'accueil de KORTEX</a>.
       </div>
     </div>
   </div>
+</section>
 
-  <script src="kortex_core.js"></script>
+<script>
+  (function () {
+    var form = document.getElementById('loginForm');
+    var emailEl = document.getElementById('email');
+    var passEl = document.getElementById('password');
+    var rememberEl = document.getElementById('remember');
+    var errorMsg = document.getElementById('errorMsg');
+    var successMsg = document.getElementById('successMsg');
+    var forgot = document.getElementById('forgotLink');
+    var KEY = 'kortex_email';
 
-  <script>
-    // Login Form Handler
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    function show(el, text) { el.textContent = text; el.style.display = 'block'; }
+    function clear() { errorMsg.style.display = 'none'; successMsg.style.display = 'none'; }
+    function store(v) { try { if (v) { localStorage.setItem(KEY, v); } else { localStorage.removeItem(KEY); } } catch (e) {} }
+
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const errorMsg = document.getElementById('errorMsg');
-      const successMsg = document.getElementById('successMsg');
-      
-      // Clear messages
-      errorMsg.style.display = 'none';
-      successMsg.style.display = 'none';
-
-      // Validation
-      if (!email || !document.getElementById('password').value) {
-        errorMsg.textContent = 'Please enter both email and password';
-        errorMsg.style.display = 'block';
-        return;
-      }
-
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        errorMsg.textContent = 'Please enter a valid email address';
-        errorMsg.style.display = 'block';
-        return;
-      }
-
-      // Show success message (in production, this would authenticate)
-      successMsg.textContent = 'Connecting to your dashboard. Please wait...';
-      successMsg.style.display = 'block';
-
-      // Simulate API call
-      setTimeout(() => {
-        successMsg.textContent = 'Authentication in progress. You will be redirected shortly.';
-        // In production: window.location.href = '/portal/dashboard';
-      }, 1200);
+      clear();
+      var email = emailEl.value.trim();
+      if (!email || !passEl.value) { show(errorMsg, 'Veuillez saisir votre e-mail et votre mot de passe.'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show(errorMsg, 'Veuillez saisir une adresse e-mail valide.'); return; }
+      if (rememberEl.checked) { store(email); }
+      show(successMsg, "L'accès à l'espace client se fait sur invitation. Si vos identifiants ne sont pas reconnus, écrivez à contact@kortexlab.me depuis l'adresse de votre compte et nous rétablirons votre accès.");
     });
 
-    // SSO Login Handler
-    function ssoLogin(provider) {
-      const msg = document.getElementById('successMsg');
-      msg.textContent = `Redirecting to ${provider === 'google' ? 'Google' : 'Microsoft'} authentication...`;
-      msg.style.display = 'block';
-      
-      // In production: 
-      // window.location.href = `/api/auth/${provider}`;
-    }
-
-    // Forgot Password Handler
-    document.querySelector('a[href="#forgot"]').addEventListener('click', function(e) {
+    forgot.addEventListener('click', function (e) {
       e.preventDefault();
-      const email = document.getElementById('email').value;
-      
-      if (!email) {
-        document.getElementById('errorMsg').textContent = 'Please enter your email address first';
-        document.getElementById('errorMsg').style.display = 'block';
-        return;
-      }
-
-      const msg = document.getElementById('successMsg');
-      msg.textContent = `Recovery link sent to ${email}. Check your inbox for instructions.`;
-      msg.style.display = 'block';
+      clear();
+      if (!emailEl.value.trim()) { show(errorMsg, "Veuillez d'abord saisir votre adresse e-mail."); emailEl.focus(); return; }
+      show(successMsg, 'Pour réinitialiser votre mot de passe, écrivez à contact@kortexlab.me depuis ' + emailEl.value.trim() + '. Nous vous enverrons un nouveau lien d’accès.');
     });
 
-    // Dev access link
-    document.addEventListener('keydown', function(e) {
-      // Ctrl+Shift+D to show dev modal (hidden feature)
-      if (e.ctrlKey && e.shiftKey && e.code === 'KeyD') {
-        document.getElementById('devModal').style.display = 'flex';
-      }
+    rememberEl.addEventListener('change', function () {
+      store(this.checked ? emailEl.value.trim() : '');
     });
 
-    // Remember me functionality
-    document.getElementById('remember').addEventListener('change', function() {
-      if (this.checked) {
-        const email = document.getElementById('email').value;
-        if (email) {
-          localStorage.setItem('kortex_email', email);
-        }
-      } else {
-        localStorage.removeItem('kortex_email');
-      }
-    });
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved) { emailEl.value = saved; rememberEl.checked = true; }
+    } catch (e) {}
+  })();
+</script>
+  </main>
 
-    // Pre-fill email if remembered
-    window.addEventListener('load', function() {
-      const saved = localStorage.getItem('kortex_email');
-      if (saved) {
-        document.getElementById('email').value = saved;
-        document.getElementById('remember').checked = true;
-      }
-    });
+  <footer class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">KORTEX</div>
+        <p class="footer-tagline">Automatisation de contenu par IA pour fondateurs B2B. Une vidéo en entrée, une autorité citée par les IA en sortie.</p>
+      </div>
+      <nav aria-label="Footer">
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="solutions.html">Solutions</a>
+          <a href="blog.html">Blog</a>
+          <a href="tarifs.html">Tarifs</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+      <div>
+        <div class="footer-col-title">Ressources GEO</div>
+        <div class="footer-links">
+          <a href="blog-arretez-de-ranker-soyez-cite.html">GEO vs SEO : la différence</a>
+          <a href="blog-une-video-systeme-autorite.html">Le système d'autorité en 30 jours</a>
+          <a href="blog-pourquoi-contenu-linkedin-b2b-meurt.html">Pourquoi le contenu LinkedIn échoue</a>
+          <a href="blog-nouvelle-stack-contenu-b2b.html">La nouvelle stack de contenu B2B</a>
+          <a href="blog-guide-visibilite-moteurs-de-reponse.html">Guide de visibilité sur les moteurs de réponse</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Stack d'automatisation</div>
+        <div class="footer-links">
+          <span class="footer-static">Workflows n8n</span>
+          <span class="footer-static">Intégration API Gemini</span>
+          <span class="footer-static">Transcription Whisper</span>
+          <span class="footer-static">Opérations de contenu LLM</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 KORTEX. Agence d'automatisation de contenu par IA. Systèmes d'autorité B2B pensés GEO.</span>
+      <div class="footer-tech">
+        <a class="tech-badge" href="mailto:contact@kortexlab.me">contact@kortexlab.me</a>
+        <span class="tech-badge">GEO</span>
+        <span class="tech-badge">n8n</span>
+        <span class="tech-badge">Moteurs de réponse</span>
+        <a class="tech-badge" href="en/login.html" hreflang="en" lang="en">English</a>
+      </div>
+    </div>
+  </footer>
 
-    // Password strength indicator
-    document.getElementById('password').addEventListener('input', function() {
-      const strength = calculatePasswordStrength(this.value);
-      // Could show visual indicator here
-    });
-
-    function calculatePasswordStrength(password) {
-      let strength = 0;
-      if (password.length >= 8) strength++;
-      if (/[A-Z]/.test(password)) strength++;
-      if (/[0-9]/.test(password)) strength++;
-      if (/[^A-Za-z0-9]/.test(password)) strength++;
-      return strength;
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
-        document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-      }
-    });
-  </script>
-  <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
-
+  <script src="kortex_core.js" defer></script>
 </body>
-
 </html>

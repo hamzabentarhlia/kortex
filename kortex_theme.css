@@ -52,82 +52,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  cursor: auto;
-}
-
-body.has-custom-cursor {
-  cursor: none;
-}
-
-@media (prefers-reduced-motion: reduce), (pointer: coarse) {
-  body.has-custom-cursor {
-    cursor: auto;
-  }
-}
-
-/* ─── CUSTOM MAGNETIC CURSOR ─── */
-/* ═══ REPLACE CURSOR SECTION ═══ */
-
-/* Magnetic Cursor - Fast & Snappy */
-@keyframes cursorGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(229, 9, 20, 0.3), 0 0 30px rgba(139, 92, 246, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(229, 9, 20, 0.5), 0 0 45px rgba(139, 92, 246, 0.35);
-  }
-}
-
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 14px;
-  height: 14px;
-  background: var(--primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: screen;
-  will-change: transform;
-  transition: width 0.12s, height 0.12s, background 0.12s;
-  animation: cursorGlow 2s ease-in-out infinite;
-  box-shadow: 0 0 15px rgba(229, 9, 20, 0.3), 0 0 30px rgba(139, 92, 246, 0.2);
-}
-
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  border: 2px solid rgba(139, 92, 246, 0.8);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-  transition: width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    border-color 0.2s;
-}
-
-.cursor-dot.hovered {
-  width: 20px;
-  height: 20px;
-  background: var(--secondary);
-}
-
-.cursor-ring.hovered {
-  width: 50px;
-  height: 50px;
-  border-color: var(--primary);
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
-}
-
-.cursor-dot.clicking {
-  transform: translate(-50%, -50%) scale(0.6);
 }
 
 /* ═══ TEXT CONTRAST & READABILITY ═══ */
@@ -390,7 +314,6 @@ body::before {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  cursor: pointer;
   text-decoration: none;
   transition: all 0.3s var(--ease-out);
   box-shadow: 0 0 24px rgba(229, 9, 20, 0.25);
@@ -433,7 +356,6 @@ body::before {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  cursor: pointer;
   text-decoration: none;
   transition: all 0.3s ease;
   display: inline-block;
@@ -1358,7 +1280,6 @@ main {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  cursor: pointer;
   transition: all 0.3s var(--ease-out);
   margin-top: 8px;
   position: relative;
@@ -1617,10 +1538,6 @@ main {
     padding-top: 90px;
   }
 
-  body {
-    cursor: auto;
-  }
-
   .cursor-dot,
   .cursor-ring {
     display: none;
@@ -1644,7 +1561,6 @@ main {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
@@ -1693,7 +1609,6 @@ main {
   text-align: left;
   font-family: var(--ff-mono);
   font-size: 11px;
-  cursor: pointer;
   transition: all 0.15s;
   border-bottom: 1px solid rgba(42, 42, 56, 0.6);
   display: flex;

@@ -1,10 +1,21 @@
-
-// ═══════════════════════════════════════════════════
-// KORTEX — CORE INTERACTION ENGINE v3.0
-// Cleaned: reduced duplication, safer interactions,
-// accessible motion toggles, active nav, language switcher
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+// KORTEX — CORE INTERACTION ENGINE v5.0  (drop-in replacement)
+//
+// • Native system cursor (no custom cursor, no cursor:none).
+// • NEURON SWARM: thousands-of-tiny-dots feeling, built from ~80-190 tiny
+//   neurons resting at home positions all over the viewport. When the
+//   cursor moves, nearby neurons wake up, leave home on unpredictable
+//   (multi-sine) paths, orbit/follow the cursor, link to each other with
+//   synapse lines, then spring back home (or fade to rest) once the
+//   cursor moves elsewhere or stops. Works over blocks, tables, cards.
+// • Card spotlight, button ripple, smoother tilt, hero-blob mouse parallax.
+// • Everything from v3/v4 preserved (reveal, magnetic, counters, nav...).
+//
+// ZERO HTML changes required.
+// ═══════════════════════════════════════════════════════════════════
 (function () {
+  'use strict';
+
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -19,75 +30,387 @@
     initParallax();
     initTextScramble();
     initLanguageSwitcher();
-
-    if (!isTouchDevice() && !prefersReducedMotion) {
-      initCursor();
-      initCanvasParticles();
-    }
-
     initSmoothAnchors();
+
+    initCardGlow();
+    initButtonRipple();
+    initBlobMouseParallax();
+    initNeuronField();
   });
 
   function isTouchDevice() {
     return window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
   }
 
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
   function initPageLoad() {
     document.body.classList.add('is-ready');
   }
 
-  function initCursor() {
-    document.body.classList.add('has-custom-cursor');
-    const dot = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.className = 'cursor-dot';
-    ring.className = 'cursor-ring';
-    document.body.append(dot, ring);
+  // ═══════════════════════════════════════════════════════════════
+  // NEURON FIELD
+  // ═══════════════════════════════════════════════════════════════
+  function initNeuronField() {
+    if (prefersReducedMotion) return;
 
-    let mx = -999, my = -999;
-    let rx = -999, ry = -999;
+    const coarse = isTouchDevice();
+    const TAU = Math.PI * 2;
 
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top = my + 'px';
+    // ── Tunables ─────────────────────────────────────────────────
+    const REST_ALPHA   = 0.14;   // brightness of sleeping neurons (set 0 to make them vanish at rest)
+    const RECRUIT_R    = coarse ? 150 : 235;  // distance (from a neuron's home) at which the cursor wakes it
+    const LINK_DIST    = coarse ? 62 : 86;    // max synapse length
+    const IDLE_RELEASE = 3500;   // ms without movement before the swarm settles back home
+    const HOT_SELECTOR = 'a,button,input,textarea,select,.feature-card,.pricing-card,.blog-card,.pipeline-step,' +
+                         '.faq-item,.stat-card,.contact-method-card,.toc,.geo-visual-card,table,.data-table,.deliverables-table';
+
+    // Brand colours (RGB)
+    const VIOLET  = [139, 92, 246];
+    const CRIMSON = [229, 9, 20];
+    const CYAN    = [6, 182, 212];
+
+    // ── Canvas ───────────────────────────────────────────────────
+    const canvas = document.createElement('canvas');
+    canvas.id = 'kx-neuron-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9000;';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let W = 0, H = 0, dpr = 1, builtW = 0, builtH = 0;
+    let neurons = [];
+
+    // Pre-rendered glow sprites (cheap additive-looking halos)
+    function makeSprite(rgb) {
+      const s = document.createElement('canvas');
+      s.width = s.height = 64;
+      const c = s.getContext('2d');
+      const g = c.createRadialGradient(32, 32, 0, 32, 32, 32);
+      g.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.9)`);
+      g.addColorStop(0.35, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.25)`);
+      g.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
+      c.fillStyle = g;
+      c.fillRect(0, 0, 64, 64);
+      return s;
+    }
+    const SPR_VIOLET = makeSprite(VIOLET);
+    const SPR_CYAN = makeSprite(CYAN);
+    const SPR_CRIMSON = makeSprite(CRIMSON);
+
+    // ── Pointer state ────────────────────────────────────────────
+    let mx = -9999, my = -9999;
+    let lastMove = -1e9;
+    let hot = false;
+    let boost = 0;
+
+    function setPointer(x, y, target) {
+      mx = x; my = y;
+      lastMove = performance.now();
+      hot = !!(target && target.closest && target.closest(HOT_SELECTOR));
+    }
+    function release() { mx = -9999; my = -9999; hot = false; }
+
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      setPointer(e.clientX, e.clientY, e.target);
     }, { passive: true });
 
-    function animateRing() {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(animateRing);
+    window.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      if (t) setPointer(t.clientX, t.clientY, e.target);
+    }, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      if (t) setPointer(t.clientX, t.clientY, e.target);
+    }, { passive: true });
+    window.addEventListener('touchend', () => { lastMove = performance.now() - (IDLE_RELEASE - 600); }, { passive: true });
+
+    document.documentElement.addEventListener('mouseleave', release);
+    window.addEventListener('blur', release);
+
+    // Click = shockwave: neurons burst outward, then spring back
+    window.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') return;
+      const R = 270;
+      for (let i = 0; i < neurons.length; i++) {
+        const n = neurons[i];
+        const dx = n.x - e.clientX, dy = n.y - e.clientY;
+        const d = Math.hypot(dx, dy) || 1;
+        if (d < R) {
+          const imp = (1 - d / R) * 560;
+          n.vx += (dx / d) * imp;
+          n.vy += (dy / d) * imp;
+          n.s = Math.max(n.s, 0.6);
+        }
+      }
+    }, { passive: true });
+
+    // ── Build neurons ────────────────────────────────────────────
+    function build() {
+      builtW = W; builtH = H;
+      neurons = [];
+      const count = coarse
+        ? clamp(Math.round((W * H) / 16000), 40, 80)
+        : clamp(Math.round((W * H) / 10500), 80, 190);
+      const cell = Math.sqrt((W * H) / count);
+      const cols = Math.ceil(W / cell), rows = Math.ceil(H / cell);
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const hx = (c + 0.5 + (Math.random() - 0.5) * 0.92) * cell;
+          const hy = (r + 0.5 + (Math.random() - 0.5) * 0.92) * cell;
+          if (hx < -8 || hx > W + 8 || hy < -8 || hy > H + 8) continue;
+          neurons.push({
+            hx, hy, x: hx, y: hy, vx: 0, vy: 0,
+            s: 0,                                   // activation 0..1
+            h: 0,                                   // heat (closeness to cursor) 0..1
+            size: 0.8 + Math.random() * 0.95,       // tiny
+            tint: Math.random() < 0.14 ? 1 : 0,     // 14% cyan accents
+            // unpredictable orbit parameters (incommensurate frequencies)
+            a0: Math.random() * TAU,
+            r0: 10 + Math.pow(Math.random(), 0.8) * (coarse ? 62 : 108),
+            ra: 8 + Math.random() * 28,
+            f1: 0.35 + Math.random() * 0.55, f2: 0.21 + Math.random() * 0.42, f3: 0.6 + Math.random() * 0.75,
+            p1: Math.random() * TAU, p2: Math.random() * TAU, p3: Math.random() * TAU,
+            k: 0.75 + Math.random() * 0.7,          // personal stiffness / reaction speed
+            driftA: 2 + Math.random() * 5,          // idle float amplitude at home
+            dp: Math.random() * TAU, df: 0.15 + Math.random() * 0.25,
+            tw: Math.random() * TAU                 // twinkle phase
+          });
+        }
+      }
     }
-    animateRing();
 
-    const hoverTargets = 'a, button, .pricing-card, .feature-card, .blog-card, .pipeline-step, .faq-item, .stat-card, .form-input, select, textarea';
-    document.querySelectorAll(hoverTargets).forEach((el) => {
-      el.addEventListener('mouseenter', () => {
-        dot.classList.add('hovered');
-        ring.classList.add('hovered');
-      });
-      el.addEventListener('mouseleave', () => {
-        dot.classList.remove('hovered');
-        ring.classList.remove('hovered');
-      });
+    function resize() {
+      W = window.innerWidth; H = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Avoid rebuilding on mobile URL-bar height jitter
+      if (!neurons.length || Math.abs(W - builtW) > 1 || Math.abs(H - builtH) > 140) build();
+    }
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 120);
+    }, { passive: true });
+    resize();
+
+    // ── Frame loop ───────────────────────────────────────────────
+    let last = performance.now(), t = 0;
+
+    function mixRGB(a, b, m) {
+      return [
+        (a[0] + (b[0] - a[0]) * m) | 0,
+        (a[1] + (b[1] - a[1]) * m) | 0,
+        (a[2] + (b[2] - a[2]) * m) | 0
+      ];
+    }
+
+    function frame(now) {
+      requestAnimationFrame(frame);
+      const dt = Math.min((now - last) / 1000, 0.04);
+      last = now;
+      t += dt;
+
+      const idle = (now - lastMove) > IDLE_RELEASE;
+      const have = mx > -1000 && !idle;
+      boost += ((hot && have ? 1 : 0) - boost) * Math.min(1, dt * 6);
+
+      const R = RECRUIT_R * (1 + 0.4 * boost);
+      const LEASH = R * 1.5;
+      const LINK = LINK_DIST * (1 + 0.18 * boost);
+      const LINK2 = LINK * LINK;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // ── Update ──
+      for (let i = 0; i < neurons.length; i++) {
+        const n = neurons[i];
+
+        const dh = have ? Math.hypot(n.hx - mx, n.hy - my) : Infinity;
+        const dc = have ? Math.hypot(n.x - mx, n.y - my) : Infinity;
+        // hysteresis: woken neurons keep chasing while inside the leash,
+        // so the swarm trails the cursor and sheds neurons behind it.
+        const want = (dh < R || (n.s > 0.25 && dc < LEASH)) ? 1 : 0;
+        const rate = want ? 4.2 * n.k : 1.5;
+        n.s += (want - n.s) * Math.min(1, rate * dt);
+        const e = n.s * n.s * (3 - 2 * n.s);
+
+        // resting target: gentle float around home
+        const ix = n.hx + Math.sin(t * n.df + n.dp) * n.driftA;
+        const iy = n.hy + Math.cos(t * n.df * 1.13 + n.dp * 1.7) * n.driftA;
+        let tx = ix, ty = iy;
+
+        if (e > 0.001 && have) {
+          // unpredictable wander around the cursor (sum of incommensurate sines)
+          const ang = n.a0 + Math.sin(t * n.f1 + n.p1) * 1.9 + Math.sin(t * n.f3 + n.p3) * 1.1;
+          const rad = n.r0 + Math.sin(t * n.f2 + n.p2) * n.ra + Math.sin(t * n.f3 * 1.7 + n.p1) * n.ra * 0.5;
+          const cx = mx + Math.cos(ang) * rad;
+          const cy = my + Math.sin(ang) * rad * 0.85;
+          tx = ix + (cx - ix) * e;
+          ty = iy + (cy - iy) * e;
+        }
+
+        // spring (stiffer while following, softer on the way home)
+        const k = (16 + 44 * e) * n.k;
+        const c = 2 * Math.sqrt(k) * (0.62 + 0.25 * (1 - e));
+        n.vx += ((tx - n.x) * k - n.vx * c) * dt;
+        n.vy += ((ty - n.y) * k - n.vy * c) * dt;
+        n.x += n.vx * dt;
+        n.y += n.vy * dt;
+
+        n.h = have ? clamp(1 - Math.hypot(n.x - mx, n.y - my) / (R * 0.75), 0, 1) * e : 0;
+      }
+
+      // ── Synapses ──
+      ctx.lineWidth = 0.7;
+      for (let i = 0; i < neurons.length; i++) {
+        const a = neurons[i];
+        if (a.s < 0.06) continue;
+        for (let j = i + 1; j < neurons.length; j++) {
+          const b = neurons[j];
+          if (b.s < 0.06) continue;
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 > LINK2) continue;
+          const d = Math.sqrt(d2);
+          const al = (1 - d / LINK) * Math.sqrt(a.s * b.s) * 0.34;
+          if (al < 0.01) continue;
+          const heat = clamp((a.h + b.h) * 0.5 + boost * 0.25, 0, 1);
+          const col = mixRGB(VIOLET, CRIMSON, heat);
+          ctx.strokeStyle = `rgba(${col[0]},${col[1]},${col[2]},${al.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+
+      // cursor → nearest woken neurons (the cursor is the "source" synapse)
+      if (have) {
+        const hubD = LINK * 1.35;
+        for (let i = 0; i < neurons.length; i++) {
+          const n = neurons[i];
+          if (n.s < 0.1) continue;
+          const d = Math.hypot(n.x - mx, n.y - my);
+          if (d > hubD) continue;
+          const al = (1 - d / hubD) * n.s * 0.22;
+          ctx.strokeStyle = `rgba(${CRIMSON[0]},${CRIMSON[1]},${CRIMSON[2]},${al.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.moveTo(mx, my);
+          ctx.lineTo(n.x, n.y);
+          ctx.stroke();
+        }
+      }
+
+      // ── Neurons ──
+      for (let i = 0; i < neurons.length; i++) {
+        const n = neurons[i];
+        const e = n.s * n.s * (3 - 2 * n.s);
+        const twinkle = 0.85 + 0.15 * Math.sin(t * 1.6 + n.tw);
+        const a = (REST_ALPHA + (0.95 - REST_ALPHA) * e) * twinkle;
+        if (a < 0.01) continue;
+        const size = n.size * (1 + 0.9 * e);
+        const heat = clamp(n.h + boost * 0.3 * e, 0, 1);
+        const base = n.tint ? CYAN : VIOLET;
+        const col = mixRGB(base, CRIMSON, heat);
+
+        if (e > 0.08) {
+          const g = size * 6;
+          ctx.globalAlpha = Math.min(1, a * 0.6 * e);
+          ctx.drawImage(heat > 0.5 ? SPR_CRIMSON : (n.tint ? SPR_CYAN : SPR_VIOLET), n.x - g, n.y - g, g * 2, g * 2);
+          ctx.globalAlpha = 1;
+        }
+        ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${a.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, size, 0, TAU);
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // CARD SPOTLIGHT — soft glow that follows the cursor inside blocks
+  // ═══════════════════════════════════════════════════════════════
+  function initCardGlow() {
+    if (isTouchDevice()) return;
+    const sel = '.feature-card,.pricing-card,.blog-card,.pipeline-step,.faq-item,.stat-card,.contact-method-card,' +
+                '.toc,.callout,.authority-box,.geo-visual-card,.metric,.portal-card,.intel-card,.deliverable-card';
+    document.querySelectorAll(sel).forEach((el) => {
+      if (el.querySelector(':scope > .kx-glow')) return;
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      const g = document.createElement('span');
+      g.className = 'kx-glow';
+      g.setAttribute('aria-hidden', 'true');
+      el.appendChild(g);
+      el.classList.add('kx-spot');
     });
 
-    document.addEventListener('mousedown', () => dot.classList.add('clicking'));
-    document.addEventListener('mouseup', () => dot.classList.remove('clicking'));
+    let raf = 0, ev = null;
+    document.addEventListener('pointermove', (e) => {
+      ev = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = ev.target.closest && ev.target.closest('.kx-spot');
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--cx', (ev.clientX - r.left) + 'px');
+        el.style.setProperty('--cy', (ev.clientY - r.top) + 'px');
+      });
+    }, { passive: true });
+  }
 
-    document.addEventListener('mouseleave', () => {
-      dot.style.opacity = '0';
-      ring.style.opacity = '0';
-    });
-    document.addEventListener('mouseenter', () => {
-      dot.style.opacity = '1';
-      ring.style.opacity = '1';
+  // ═══════════════════════════════════════════════════════════════
+  // BUTTON RIPPLE
+  // ═══════════════════════════════════════════════════════════════
+  function initButtonRipple() {
+    if (prefersReducedMotion) return;
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest && e.target.closest('.btn-primary,.btn-secondary,.form-submit');
+      if (!b) return;
+      const r = b.getBoundingClientRect();
+      const size = Math.max(r.width, r.height) * 1.6;
+      if (getComputedStyle(b).position === 'static') b.style.position = 'relative';
+      const s = document.createElement('span');
+      s.className = 'kx-ripple';
+      s.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px`;
+      b.appendChild(s);
+      setTimeout(() => s.remove(), 700);
     });
   }
 
+  // ═══════════════════════════════════════════════════════════════
+  // HERO BLOBS — drift opposite to the mouse (depth)
+  // ═══════════════════════════════════════════════════════════════
+  function initBlobMouseParallax() {
+    if (prefersReducedMotion || isTouchDevice()) return;
+    const blobs = document.querySelectorAll('.hero-blob');
+    if (!blobs.length) return;
+    let raf = 0, ex = 0, ey = 0;
+    window.addEventListener('pointermove', (e) => {
+      ex = e.clientX; ey = e.clientY;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const px = (ex / window.innerWidth - 0.5) * 2;
+        const py = (ey / window.innerHeight - 0.5) * 2;
+        blobs.forEach((b) => {
+          b.style.setProperty('--px', px.toFixed(3));
+          b.style.setProperty('--py', py.toFixed(3));
+        });
+      });
+    }, { passive: true });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // PRESERVED CORE INTERACTIONS
+  // ═══════════════════════════════════════════════════════════════
   function initProgressBar() {
     const bar = document.createElement('div');
     bar.className = 'progress-bar';
@@ -104,245 +427,6 @@
     window.addEventListener('resize', update, { passive: true });
   }
 
-  function initCanvasParticles() {
-
-  if (prefersReducedMotion) return;
-
-  const canvas =
-    document.getElementById('webgl-canvas');
-
-  if (!canvas) return;
-
-  const ctx =
-    canvas.getContext('2d');
-
-  if (!ctx) return;
-
-  let width;
-  let height;
-
-  const mouse = {
-    x: -9999,
-    y: -9999
-  };
-
-  const nodes = [];
-
-  const spacing = 42;
-  const influenceRadius = 180;
-
-  function resize() {
-
-    width =
-      canvas.width =
-      window.innerWidth *
-      window.devicePixelRatio;
-
-    height =
-      canvas.height =
-      window.innerHeight *
-      window.devicePixelRatio;
-
-    canvas.style.width =
-      window.innerWidth + 'px';
-
-    canvas.style.height =
-      window.innerHeight + 'px';
-
-    ctx.setTransform(
-      window.devicePixelRatio,
-      0,
-      0,
-      window.devicePixelRatio,
-      0,
-      0
-    );
-
-    buildGrid();
-  }
-
-  function buildGrid() {
-
-    nodes.length = 0;
-
-    const cols =
-      Math.ceil(
-        window.innerWidth / spacing
-      );
-
-    const rows =
-      Math.ceil(
-        window.innerHeight / spacing
-      );
-
-    for (let y = 0; y < rows; y++) {
-
-      for (let x = 0; x < cols; x++) {
-
-        nodes.push({
-
-          baseX:
-            x * spacing,
-
-          baseY:
-            y * spacing,
-
-          x:
-            x * spacing,
-
-          y:
-            y * spacing
-        });
-      }
-    }
-  }
-
-  function render() {
-
-    ctx.clearRect(
-      0,
-      0,
-      window.innerWidth,
-      window.innerHeight
-    );
-
-    nodes.forEach(node => {
-
-      const dx =
-        mouse.x -
-        node.baseX;
-
-      const dy =
-        mouse.y -
-        node.baseY;
-
-      const distance =
-        Math.hypot(dx, dy);
-
-      let intensity =
-        Math.max(
-          0,
-          1 -
-          (
-            distance /
-            influenceRadius
-          )
-        );
-
-      let targetX =
-        node.baseX;
-
-      let targetY =
-        node.baseY;
-
-      if (intensity > 0) {
-
-        targetX -=
-          dx *
-          intensity *
-          0.20;
-
-        targetY -=
-          dy *
-          intensity *
-          0.20;
-      }
-
-      node.x +=
-        (
-          targetX -
-          node.x
-        ) *
-        0.12;
-
-      node.y +=
-        (
-          targetY -
-          node.y
-        ) *
-        0.12;
-
-      const size =
-        1.4 +
-        intensity * 2.8;
-
-      const alpha =
-        0.12 +
-        intensity * 0.88;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        node.x,
-        node.y,
-        size,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.fillStyle =
-        `rgba(139,92,246,${alpha})`;
-
-      ctx.fill();
-    });
-
-    requestAnimationFrame(
-      render
-    );
-  }
-
-  document.addEventListener(
-    'mousemove',
-    e => {
-
-      mouse.x =
-        e.clientX;
-
-      mouse.y =
-        e.clientY;
-
-      document.documentElement
-        .style
-        .setProperty(
-          '--mx',
-          `${e.clientX}px`
-        );
-
-      document.documentElement
-        .style
-        .setProperty(
-          '--my',
-          `${e.clientY}px`
-        );
-
-    },
-    {
-      passive: true
-    }
-  );
-
-  window.addEventListener(
-    'mouseleave',
-    () => {
-
-      mouse.x = -9999;
-      mouse.y = -9999;
-
-    }
-  );
-
-  window.addEventListener(
-    'resize',
-    resize,
-    {
-      passive: true
-    }
-  );
-
-  resize();
-  render();
-}
-
   function initNavbarScroll() {
     const nav = document.querySelector('.navbar');
     if (!nav) return;
@@ -352,12 +436,16 @@
   }
 
   function initActiveNav() {
-    const page = window.location.pathname.split('/').pop() || 'index.html';
+    const path = window.location.pathname.replace(/index\.html$/, '');
     document.querySelectorAll('.nav-links a').forEach((a) => {
-      const href = a.getAttribute('href');
-      if (href === page) a.classList.add('active');
+      const href = (a.getAttribute('href') || '').replace(/index\.html$/, '');
+      if (href === path || (href !== '/' && href !== '/en/' && path.indexOf(href.replace(/\.html$/, '')) === 0 && href.length > 4)) {
+        a.classList.add('active');
+        a.setAttribute('aria-current', 'page');
+      }
     });
   }
+
 
   function initScrollReveal() {
     const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-scale');
@@ -399,6 +487,7 @@
     if (prefersReducedMotion || isTouchDevice()) return;
     const TILT = 6;
     document.querySelectorAll('.pricing-card, .feature-card, .blog-card, .faq-item, .pipeline-step').forEach((card) => {
+      card.addEventListener('mouseenter', () => card.classList.add('is-tilting'));
       card.addEventListener('mousemove', (e) => {
         const r = card.getBoundingClientRect();
         const cx = r.left + r.width / 2;
@@ -408,6 +497,7 @@
         card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
       });
       card.addEventListener('mouseleave', () => {
+        card.classList.remove('is-tilting');
         card.style.transform = '';
       });
     });
@@ -487,7 +577,9 @@
   function initSmoothAnchors() {
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener('click', (e) => {
-        const target = document.querySelector(a.getAttribute('href'));
+        const href = a.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -499,43 +591,25 @@
   function initLanguageSwitcher() {
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
-    const currentLangSpan = document.getElementById('currentLang');
-    const langOptions = document.querySelectorAll('.lang-option');
-    if (!langBtn || !langMenu || !currentLangSpan || !langOptions.length) return;
-
-    const savedLang = localStorage.getItem('kortex_lang') || document.documentElement.lang || 'fr';
-    setLanguage(savedLang, false);
-
+    if (!langBtn || !langMenu) return;
+    const close = () => {
+      langMenu.classList.remove('active');
+      langBtn.setAttribute('aria-expanded', 'false');
+      langMenu.setAttribute('aria-hidden', 'true');
+    };
     langBtn.addEventListener('click', () => {
       const isOpen = langMenu.classList.toggle('active');
       langBtn.setAttribute('aria-expanded', String(isOpen));
       langMenu.setAttribute('aria-hidden', String(!isOpen));
     });
-
-    langOptions.forEach((option) => {
-      option.addEventListener('click', () => {
-        const lang = option.dataset.lang || 'fr';
-        setLanguage(lang, true);
-        langMenu.classList.remove('active');
-        langBtn.setAttribute('aria-expanded', 'false');
-        langMenu.setAttribute('aria-hidden', 'true');
+    // Options are real <a hreflang> links to the translated page (crawlable). Remember the choice.
+    langMenu.querySelectorAll('a[data-lang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        try { localStorage.setItem('kortex_lang', a.dataset.lang); } catch (e) {}
       });
     });
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.lang-switcher')) {
-        langMenu.classList.remove('active');
-        langBtn.setAttribute('aria-expanded', 'false');
-        langMenu.setAttribute('aria-hidden', 'true');
-      }
-    });
-
-    function setLanguage(lang, persist) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-      currentLangSpan.textContent = lang.toUpperCase();
-      langOptions.forEach((option) => option.classList.toggle('active', option.dataset.lang === lang));
-      if (persist) localStorage.setItem('kortex_lang', lang);
-    }
+    document.addEventListener('click', (e) => { if (!e.target.closest('.lang-switcher')) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
   }
+
 })();

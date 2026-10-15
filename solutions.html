@@ -1,943 +1,741 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
-
+<html lang="fr" prefix="og: https://ogp.me/ns#">
 <head>
-  <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#050507">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/manifest.json">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap"
-    rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kortex_theme.css">
   <link rel="stylesheet" href="kortex_theme_patch.css">
-
-  <title>KORTEX Solutions — The GEO-First Content Infrastructure</title>
-  <meta name="description"
-    content="The 4-layer KORTEX architecture: Source Signal Extraction, Entity Structuring, Answer Asset Production, and Multi-Surface Distribution. One founder video becomes a compounding authority system cited by ChatGPT, Perplexity, and Gemini.">
-  <meta name="keywords"
-    content="Generative Engine Optimization, GEO content system, AI content architecture, video to article workflow, answer engine visibility, B2B content operations, ChatGPT SEO, Perplexity optimization, founder content system, AI citation strategy">
+  <title>Agence GEO : le pipeline de contenu cité par l&#x27;IA | KORTEX</title>
+  <meta name="description" content="Le système GEO de KORTEX transforme une vidéo de fondateur en système d&#x27;autorité sur 30 jours, conçu pour être cité par ChatGPT, Perplexity et Gemini.">
+  <meta name="keywords" content="agence GEO, Generative Engine Optimization, référencement IA, être cité par ChatGPT, visibilité dans les moteurs de réponse IA, stratégie de contenu B2B, automatisation de contenu, transformer une vidéo en articles, contenu de fondateur B2B, workflow n8n contenu, transcription Whisper, système d&#x27;autorité">
   <meta name="author" content="KORTEX">
-
-  <link rel="canonical" href="https://kortexlab.me/solutions.html">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.kortexlab.me/solutions.html">
+  <link rel="alternate" hreflang="fr" href="https://www.kortexlab.me/solutions.html">
+  <link rel="alternate" hreflang="en" href="https://www.kortexlab.me/en/solutions.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.kortexlab.me/solutions.html">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kortexlab.me/solutions.html">
-  <meta property="og:title" content="KORTEX Solutions — The GEO-First Content System">
-  <meta property="og:description" content="We engineer AI retrieval systems. Turn one founder-led video into a month of compounding authority assets cited by AI answer engines.">
-  <meta property="og:image" content="https://kortexlab.me/og-share-image.png">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://www.kortexlab.me/solutions.html">
+  <meta property="og:title" content="Le pipeline GEO de KORTEX — une vidéo, quatre couches, cité par l&#x27;IA">
+  <meta property="og:description" content="Comment KORTEX transforme une vidéo de fondateur en système d&#x27;autorité citable par les IA en 30 jours : extraction, structuration, réponses, diffusion.">
+  <meta property="og:image" content="https://www.kortexlab.me/og-image.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KORTEX — GEO">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="KORTEX">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KORTEX Solutions — The GEO-First Content System">
-  <meta name="twitter:description" content="We engineer AI retrieval systems. Turn one founder-led video into a month of compounding authority assets.">
-
+  <meta name="twitter:title" content="Le pipeline GEO de KORTEX — une vidéo, quatre couches, cité par l&#x27;IA">
+  <meta name="twitter:description" content="Comment KORTEX transforme une vidéo de fondateur en système d&#x27;autorité citable par les IA en 30 jours : extraction, structuration, réponses, diffusion.">
+  <meta name="twitter:image" content="https://www.kortexlab.me/og-image.png">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "KORTEX GEO Content System",
-    "description": "A 4-layer Generative Engine Optimization system that converts one founder video into a compounding authority footprint. Includes source signal extraction, entity structuring, answer asset production, and multi-surface distribution.",
-    "provider": {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
       "@type": "Organization",
+      "@id": "https://www.kortexlab.me/#organization",
       "name": "KORTEX",
-      "url": "https://kortexlab.me"
-    },
-    "serviceType": "AI Content Infrastructure",
-    "areaServed": "Worldwide",
-    "audience": {
-      "@type": "Audience",
-      "audienceType": "Founder-led B2B companies, SaaS teams, expert consultants"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is Generative Engine Optimization (GEO)?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "GEO is the process of structuring website content so that AI-driven answer engines — ChatGPT, Perplexity, Gemini, and Google AI Overviews — retrieve and cite your brand as the authoritative source for a specific category or question. Unlike traditional SEO which targets search result page rankings, GEO targets citation authority: being the source a model names when a relevant question is asked."
-        }
+      "url": "https://www.kortexlab.me/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.kortexlab.me/logo.svg"
       },
-      {
-        "@type": "Question",
-        "name": "How much time does a KORTEX engagement require from the founder?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Founders provide the raw signal only: a recorded video, podcast, webinar, or Loom. No writing, no briefs, no back-and-forth. The KORTEX architecture handles extraction, entity structuring, asset production, and distribution setup. Average time commitment per source cycle is under 60 minutes for the founder."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the difference between GEO and SEO?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "SEO optimizes for search result page rankings using keyword density, backlink volume, and click-through rates. GEO optimizes for AI retrieval and citation using entity clarity, answer-first formatting, consistent terminology, and internal source reinforcement. SEO measures success by traffic. GEO measures success by whether your company is named as a source in AI-generated answers."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What deliverables does KORTEX produce per source cycle?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Per source cycle, KORTEX produces: one pillar article, one contrarian article, one comparison piece, one FAQ cluster (10–15 questions), 8–12 LinkedIn posts, 2 newsletter angles, CTA blocks, landing-page proof points, and outreach lines. All outputs share the same entity structure, terminology, and internal linking architecture."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long does it take to see results from GEO?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Initial entity signals appear in AI answers within 4–8 weeks of deploying a complete answer asset layer. Full citation authority — consistent appearance as a named source for category-relevant queries — builds over 3–6 months of coherent source cycles. Unlike SEO, GEO progress is non-linear: one well-structured source cycle can generate citation signals significantly faster than months of thin content."
-        }
+      "image": "https://www.kortexlab.me/og-image.png",
+      "description": "KORTEX est une agence d'automatisation de contenu par IA spécialisée en Generative Engine Optimization (GEO). Elle transforme une vidéo de fondateur en système d'autorité structuré, conçu pour être cité par ChatGPT, Perplexity et Gemini.",
+      "email": "contact@kortexlab.me",
+      "areaServed": "Worldwide",
+      "knowsLanguage": [
+        "fr",
+        "en"
+      ],
+      "knowsAbout": [
+        "Generative Engine Optimization",
+        "Answer Engine Optimization",
+        "AI content automation",
+        "B2B authority content",
+        "Founder-led content",
+        "Entity-first content architecture"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "contact@kortexlab.me",
+        "availableLanguage": [
+          "French",
+          "English"
+        ],
+        "url": "https://www.kortexlab.me/contact.html"
       }
-    ]
-  }
-  </script>
-
-  <!-- Google tag (gtag.js) -->
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.kortexlab.me/#website",
+      "url": "https://www.kortexlab.me/",
+      "name": "KORTEX",
+      "description": "Agence GEO pour fondateurs B2B : une vidéo, un système de contenu d'autorité citable par les IA.",
+      "inLanguage": [
+        "fr",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://www.kortexlab.me/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.kortexlab.me/solutions.html#webpage",
+      "url": "https://www.kortexlab.me/solutions.html",
+      "name": "Agence GEO : le pipeline de contenu cité par l'IA | KORTEX",
+      "description": "Le système GEO de KORTEX transforme une vidéo de fondateur en système d'autorité sur 30 jours, conçu pour être cité par ChatGPT, Perplexity et Gemini.",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://www.kortexlab.me/#website"
+      },
+      "about": {
+        "@id": "https://www.kortexlab.me/#organization"
+      },
+      "dateModified": "2026-10-15"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.kortexlab.me/solutions.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.kortexlab.me/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Solutions",
+          "item": "https://www.kortexlab.me/solutions.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4440VPDMPW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4440VPDMPW');
-  </script>
-
-  <style>
-    /* ── SOLUTIONS PAGE EXTRAS ── */
-
-    /* Old vs New comparison */
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--edge);
-      border: 1px solid var(--edge);
-      margin-top: 60px;
-      position: relative;
-    }
-    .compare-col {
-      background: var(--surface);
-      padding: 44px 40px;
-    }
-    .compare-col-new {
-      background: var(--card);
-      position: relative;
-      overflow: hidden;
-    }
-    .compare-col-new::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-    }
-    .compare-label {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .compare-label-old { color: var(--text-muted); }
-    .compare-label-new { color: var(--primary); }
-    .compare-label::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 1px;
-      background: currentColor;
-    }
-    .compare-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
-      border-top: 1px solid rgba(42,42,56,0.6);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .compare-item:first-of-type { border-top: none; }
-    .compare-marker {
-      font-family: var(--ff-mono);
-      font-size: 11px;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .compare-marker-old { color: var(--text-muted); }
-    .compare-marker-new { color: var(--primary); }
-    .compare-item-old { color: var(--text-muted); }
-    .compare-item-new { color: var(--text-primary); }
-
-    /* Pipeline steps — enhanced */
-    .pipeline-grid-solutions {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      background: var(--edge);
-      border: 1px solid var(--edge);
-    }
-    .pipeline-step-solution {
-      background: var(--surface);
-      padding: 52px 44px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.4s var(--ease-out);
-    }
-    .pipeline-step-solution::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0% 100%, rgba(229,9,20,0.04), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .pipeline-step-solution:hover { background: var(--card); }
-    .pipeline-step-solution:hover::after { opacity: 1; }
-    .step-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 28px;
-    }
-    .step-num {
-      font-family: var(--ff-mono);
-      font-size: 11px;
-      color: var(--primary);
-      letter-spacing: 0.2em;
-      padding: 6px 12px;
-      border: 1px solid rgba(229,9,20,0.25);
-      background: rgba(229,9,20,0.06);
-    }
-    .step-tag {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .pipeline-step-solution h2 {
-      font-family: var(--ff-display);
-      font-size: clamp(22px, 2.5vw, 30px);
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 16px;
-      line-height: 1.15;
-    }
-    .pipeline-step-solution p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.8;
-      margin-bottom: 0;
-    }
-    .step-output {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid var(--edge);
-    }
-    .step-output-label {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      color: var(--secondary);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .step-output-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .output-tag {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      padding: 5px 12px;
-      border-radius: 2px;
-      background: rgba(139,92,246,0.08);
-      border: 1px solid rgba(139,92,246,0.2);
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-    }
-
-    /* Technical proof section */
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--edge);
-      border: 1px solid var(--edge);
-      margin-top: 40px;
-    }
-    .proof-item {
-      background: var(--surface);
-      padding: 36px 32px;
-      transition: background 0.3s;
-      position: relative;
-    }
-    .proof-item::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--secondary), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .proof-item:hover { background: var(--card); }
-    .proof-item:hover::before { opacity: 1; }
-    .proof-icon-line {
-      width: 32px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      margin-bottom: 20px;
-    }
-    .proof-item h3 {
-      font-family: var(--ff-display);
-      font-size: 20px;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-    .proof-item p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin: 0;
-    }
-
-    /* Deliverables table */
-    .deliverables-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 40px;
-      font-size: 13px;
-    }
-    .deliverables-table th {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      padding: 14px 20px;
-      text-align: left;
-      border-bottom: 1px solid var(--edge);
-      background: var(--surface);
-    }
-    .deliverables-table td {
-      padding: 16px 20px;
-      border-bottom: 1px solid rgba(42,42,56,0.5);
-      vertical-align: top;
-      color: var(--text-secondary);
-    }
-    .deliverables-table tr:hover td { background: rgba(255,255,255,0.01); }
-    .deliverables-table tr:last-child td { border-bottom: none; }
-    .dt-asset {
-      font-family: var(--ff-display);
-      font-size: 16px;
-      font-style: italic;
-      color: var(--white);
-    }
-    .dt-purpose { color: var(--text-secondary); line-height: 1.6; }
-    .dt-geo {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .dt-geo-yes { color: var(--secondary); }
-    .dt-geo-partial { color: var(--text-muted); }
-
-    /* Timeline / process flow */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 40px;
-      position: relative;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent));
-      opacity: 0.3;
-    }
-    .timeline-item {
-      display: flex;
-      gap: 32px;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(42,42,56,0.4);
-      position: relative;
-    }
-    .timeline-item:last-child { border-bottom: none; }
-    .timeline-dot {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--surface);
-      border: 1px solid var(--edge);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--ff-mono);
-      font-size: 11px;
-      color: var(--primary);
-      flex-shrink: 0;
-      position: relative;
-      z-index: 2;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .timeline-item:hover .timeline-dot {
-      border-color: var(--primary);
-      box-shadow: 0 0 16px rgba(229,9,20,0.3);
-    }
-    .timeline-content { flex: 1; }
-    .timeline-day {
-      font-family: var(--ff-mono);
-      font-size: 10px;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 6px;
-    }
-    .timeline-content h4 {
-      font-family: var(--ff-display);
-      font-size: 20px;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .timeline-content p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    /* FAQ items */
-    .faq-solutions {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      background: var(--edge);
-      border: 1px solid var(--edge);
-      margin-top: 40px;
-    }
-    .faq-sol-item {
-      background: var(--surface);
-      padding: 32px 36px;
-      transition: background 0.3s;
-    }
-    .faq-sol-item:hover { background: var(--card); }
-    .faq-sol-item h3 {
-      font-family: var(--ff-display);
-      font-size: 20px;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 14px;
-    }
-    .faq-sol-item p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin: 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .compare-grid { grid-template-columns: 1fr; }
-      .pipeline-grid-solutions { grid-template-columns: 1fr; }
-      .proof-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 640px) {
-      .proof-grid { grid-template-columns: 1fr; }
-      .deliverables-table { font-size: 12px; }
-      .deliverables-table th,
-      .deliverables-table td { padding: 12px 14px; }
-    }
-  </style>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4440VPDMPW');</script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
   <canvas id="webgl-canvas" aria-hidden="true"></canvas>
 
-  <nav class="navbar" role="navigation" aria-label="Main Navigation">
-    <a href="/" class="nav-logo" aria-label="KORTEX — Home">KORTEX <span class="nav-logo-dot" aria-hidden="true"></span></a>
+  <nav class="navbar" role="navigation" aria-label="Navigation principale">
+    <a href="index.html" class="nav-logo" aria-label="KORTEX — Accueil">KORTEX <span class="nav-logo-dot" aria-hidden="true"></span></a>
     <ul class="nav-links" role="list">
-      <li><a href="/solutions" class="active">Solutions</a></li>
-      <li><a href="/blog">Logs</a></li>
-      <li><a href="/pricing">Pricing</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="tarifs.html">Tarifs</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
-    <div class="lang-switcher" role="navigation" aria-label="Language selection">
-      <button class="lang-toggle" id="langBtn" aria-expanded="false" aria-label="Change language">
-        <span id="currentLang">EN</span>
-        <span class="lang-icon">🌐</span>
+    <div class="lang-switcher">
+      <button class="lang-toggle" id="langBtn" aria-expanded="false" aria-haspopup="true" aria-controls="langMenu" aria-label="Changer de langue">
+        <span id="currentLang">FR</span>
+        <span class="lang-icon" aria-hidden="true">🌐</span>
       </button>
-      <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
-        <button class="lang-option" data-lang="en" role="menuitem">🇬🇧 English</button>
-        <button class="lang-option" data-lang="fr" role="menuitem">🇫🇷 Français</button>
-        <button class="lang-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
-        <button class="lang-option" data-lang="de" role="menuitem">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="ar" role="menuitem">🇸🇦 العربية</button>
+      <div class="lang-menu" id="langMenu" aria-hidden="true" aria-label="Choisir la langue">
+        <a class="lang-option active" data-lang="fr" lang="fr" hreflang="fr" href="solutions.html" aria-current="true">🇫🇷 Français</a>
+        <a class="lang-option" data-lang="en" lang="en" hreflang="en" href="en/solutions.html">🇬🇧 English</a>
       </div>
     </div>
-    <a href="contact.html" class="btn-primary nav-cta magnetic">Get the Audit</a>
+    <a href="contact.html" class="btn-primary nav-cta magnetic" data-scramble>Obtenir l'audit</a>
   </nav>
 
-  <main>
-    <div class="container">
+  <main id="main">
+<style>
+  /* ── SOLUTIONS PAGE EXTRAS ── */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--edge); border: 1px solid var(--edge); margin-top: 60px; position: relative; }
+  .compare-col { background: var(--surface); padding: 44px 40px; }
+  .compare-col-new { background: var(--card); position: relative; overflow: hidden; }
+  .compare-col-new::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+  .compare-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+  .compare-label-old { color: var(--text-muted); }
+  .compare-label-new { color: var(--primary); }
+  .compare-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: currentColor; }
+  .compare-list { list-style: none; margin: 0; padding: 0; }
+  .compare-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-top: 1px solid rgba(42,42,56,0.6); font-size: 14px; line-height: 1.6; }
+  .compare-item:first-of-type { border-top: none; }
+  .compare-marker { font-family: var(--ff-mono); font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .compare-marker-old { color: var(--text-muted); }
+  .compare-marker-new { color: var(--primary); }
+  .compare-item-old { color: var(--text-muted); }
+  .compare-item-new { color: var(--text-primary); }
 
-      <!-- ═══ HEADER ═══ -->
-      <header style="padding-bottom: 48px; border-bottom: 1px solid var(--edge); margin-top: 40px; margin-bottom: 0;">
-        <p class="text-mono">The Architecture</p>
-        <h1 class="title-display reveal">The GEO <em>pipeline.</em></h1>
-        <p class="section-subtitle reveal stagger-1" style="max-width: 680px;">We do not sell blog posts. We engineer a 4-layer <a href="blog-stop-ranking-start-dominating.html" style="color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.2); text-decoration: none;">Generative Engine Optimization</a> system. One high-signal founder video goes in. A compounding authority footprint — cited natively by ChatGPT, Perplexity, and Gemini — comes out.</p>
-        <div style="display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap;" class="reveal stagger-2">
-          <a href="contact.html" class="btn-primary magnetic">Launch the Audit</a>
-          <a href="pricing.html" class="btn-secondary magnetic">View Plans</a>
+  .pipeline-grid-solutions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--edge); border: 1px solid var(--edge); }
+  .pipeline-step-solution { background: var(--surface); padding: 52px 44px; position: relative; overflow: hidden; transition: background 0.4s var(--ease-out); }
+  .pipeline-step-solution::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 0% 100%, rgba(229,9,20,0.04), transparent 60%); opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+  .pipeline-step-solution:hover { background: var(--card); }
+  .pipeline-step-solution:hover::after { opacity: 1; }
+  .step-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+  .step-num { font-family: var(--ff-mono); font-size: 11px; color: var(--primary); letter-spacing: 0.2em; padding: 6px 12px; border: 1px solid rgba(229,9,20,0.25); background: rgba(229,9,20,0.06); }
+  .step-tag { font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .pipeline-step-solution h3 { font-family: var(--ff-display); font-size: clamp(22px, 2.5vw, 30px); font-style: italic; color: var(--white); margin-bottom: 16px; line-height: 1.15; }
+  .pipeline-step-solution p { color: var(--text-secondary); font-size: 14px; line-height: 1.8; margin-bottom: 0; }
+  .pipeline-step-solution p + p { margin-top: 14px; }
+  .layer-spec { margin: 24px 0 0; display: grid; gap: 14px; }
+  .layer-spec div { border-left: 2px solid rgba(139,92,246,0.35); padding-left: 14px; }
+  .layer-spec dt { font-family: var(--ff-mono); font-size: 10px; color: var(--secondary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .layer-spec dd { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+  .step-output { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--edge); }
+  .step-output-label { font-family: var(--ff-mono); font-size: 10px; color: var(--secondary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+  .step-output-tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .output-tag { font-family: var(--ff-mono); font-size: 10px; padding: 5px 12px; border-radius: 2px; background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.2); color: var(--text-muted); letter-spacing: 0.06em; }
+
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--edge); border: 1px solid var(--edge); margin-top: 40px; }
+  .proof-item { background: var(--surface); padding: 36px 32px; transition: background 0.3s; position: relative; }
+  .proof-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--secondary), transparent); opacity: 0; transition: opacity 0.3s; }
+  .proof-item:hover { background: var(--card); }
+  .proof-item:hover::before { opacity: 1; }
+  .proof-icon-line { width: 32px; height: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary)); margin-bottom: 20px; }
+  .proof-item h3 { font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 12px; }
+  .proof-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.75; margin: 0; }
+
+  .deliverables-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 13px; }
+  .deliverables-table th { font-family: var(--ff-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); padding: 14px 20px; text-align: left; border-bottom: 1px solid var(--edge); background: var(--surface); }
+  .deliverables-table td { padding: 16px 20px; border-bottom: 1px solid rgba(42,42,56,0.5); vertical-align: top; color: var(--text-secondary); }
+  .deliverables-table tbody th { font-family: var(--ff-display); font-size: 16px; font-style: italic; color: var(--white); text-transform: none; letter-spacing: normal; background: transparent; border-bottom: 1px solid rgba(42,42,56,0.5); font-weight: 400; }
+  .deliverables-table tr:hover td { background: rgba(255,255,255,0.01); }
+  .deliverables-table tr:last-child td, .deliverables-table tr:last-child th { border-bottom: none; }
+  .dt-asset { font-family: var(--ff-display); font-size: 16px; font-style: italic; color: var(--white); }
+  .dt-purpose { color: var(--text-secondary); line-height: 1.6; }
+  .dt-stage { font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted); }
+  .dt-geo { font-family: var(--ff-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .dt-geo-yes { color: var(--secondary); }
+  .dt-geo-partial { color: var(--text-muted); }
+  .vs-table td.vs-kx { color: var(--text-primary); background: rgba(229,9,20,0.04); }
+  .vs-table thead th.vs-kx { color: var(--primary); }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 40px; position: relative; list-style: none; padding: 0; }
+  .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent)); opacity: 0.3; }
+  .timeline-item { display: flex; gap: 32px; padding: 28px 0; border-bottom: 1px solid rgba(42,42,56,0.4); position: relative; }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--edge); display: flex; align-items: center; justify-content: center; font-family: var(--ff-mono); font-size: 11px; color: var(--primary); flex-shrink: 0; position: relative; z-index: 2; transition: border-color 0.3s, box-shadow 0.3s; }
+  .timeline-item:hover .timeline-dot { border-color: var(--primary); box-shadow: 0 0 16px rgba(229,9,20,0.3); }
+  .timeline-content { flex: 1; }
+  .timeline-day { font-family: var(--ff-mono); font-size: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+  .timeline-content h3 { font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 8px; }
+  .timeline-content p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+  .timeline-content ul { margin: 10px 0 0; padding-left: 18px; font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+  .faq-solutions { display: flex; flex-direction: column; gap: 2px; background: var(--edge); border: 1px solid var(--edge); margin-top: 40px; }
+  .faq-sol-item { background: var(--surface); padding: 32px 36px; transition: background 0.3s; }
+  .faq-sol-item:hover { background: var(--card); }
+  .faq-sol-item h3 { font-family: var(--ff-display); font-size: 20px; font-style: italic; color: var(--white); margin-bottom: 14px; }
+  .faq-sol-item p { font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin: 0; }
+  .sol-link { color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.2); text-decoration: none; }
+  .sol-link:hover { border-bottom-color: var(--primary); }
+  .sol-h2 { font-size: clamp(32px, 4vw, 56px); }
+  .sol-section { margin-bottom: 80px; }
+
+  @media (max-width: 900px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    .pipeline-grid-solutions { grid-template-columns: 1fr; }
+    .proof-grid { grid-template-columns: 1fr 1fr; }
+    .pipeline-step-solution { padding: 40px 28px; }
+  }
+  @media (max-width: 640px) {
+    .proof-grid { grid-template-columns: 1fr; }
+    .compare-col { padding: 32px 22px; }
+    .deliverables-table { font-size: 12px; }
+    .deliverables-table th, .deliverables-table td { padding: 12px 14px; }
+    .timeline-item { gap: 18px; }
+  }
+</style>
+
+<div class="container">
+
+  <!-- ═══ EN-TÊTE ═══ -->
+  <section id="overview" style="padding-bottom: 48px; border-bottom: 1px solid var(--edge); margin-top: 40px;">
+    <p class="text-mono">L'architecture</p>
+    <h1 class="title-display reveal">Le pipeline <em>GEO.</em></h1>
+    <div class="answer-box reveal stagger-1">
+      <span class="answer-label">En bref</span>
+      <p>Le système de contenu GEO de KORTEX est un pipeline en 4 couches de Generative Engine Optimization (GEO), ou optimisation pour les moteurs génératifs. À partir d'une seule vidéo de fondateur, d'un podcast ou d'un webinaire, il produit en 30 jours un système d'autorité structuré — article pilier, article à contre-courant, page comparative, cluster FAQ et contenus LinkedIn — rédigé pour que ChatGPT, Perplexity, Gemini et Google AI Overviews puissent retrouver et citer votre entreprise.</p>
+    </div>
+    <p class="section-subtitle reveal stagger-1" style="max-width: 680px;">Nous ne vendons pas des articles de blog. Nous construisons un <a class="sol-link" href="blog-arretez-de-ranker-soyez-cite.html">système de Generative Engine Optimization</a> en quatre couches. Une vidéo de fondateur riche en signal en entrée ; en sortie, une empreinte d'autorité qui se cumule, structurée pour être citée par ChatGPT, Perplexity et Gemini.</p>
+    <div style="display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap;" class="reveal stagger-2">
+      <a href="contact.html" class="btn-primary magnetic">Demander votre audit GEO</a>
+      <a href="tarifs.html" class="btn-secondary magnetic">Comparer GHOST, SWARM et TITAN</a>
+    </div>
+  </section>
+
+  <!-- ═══ ANCIEN vs NOUVEAU ═══ -->
+  <section id="shift" aria-labelledby="compare-heading" style="margin-top: 80px; margin-bottom: 80px;">
+    <p class="text-mono reveal">Le basculement</p>
+    <h2 class="title-display reveal sol-h2" id="compare-heading">Pourquoi le contenu traditionnel ne fonctionne-t-il <em>plus ?</em></h2>
+    <p class="section-subtitle reveal stagger-1">Parce que les acheteurs interrogent de plus en plus les moteurs de réponse au lieu de parcourir des pages de résultats, et que ces moteurs citent les sources qu'ils comprennent et peuvent attribuer — pas celles qui alignent le plus de mots-clés. Un contenu pensé pour le classement reste souvent invisible pour les systèmes qui rédigent désormais la réponse.</p>
+    <div class="compare-grid reveal stagger-1">
+      <div class="compare-col">
+        <h3 class="compare-label compare-label-old">Contenu SEO traditionnel</h3>
+        <ul class="compare-list">
+          <li class="compare-item"><span class="compare-marker compare-marker-old" aria-hidden="true">—</span><span class="compare-item-old">Des « guides ultimes » de 3 000 mots qui ne répondent à rien de précis et ne satisfont personne vraiment.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-old" aria-hidden="true">—</span><span class="compare-item-old">La course à la densité de mots-clés et au trafic de vanité, qui ne se traduit pas en autorité commerciale.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-old" aria-hidden="true">—</span><span class="compare-item-old">La voix du fondateur diluée par des rédacteurs génériques qui partent d'un brief vide.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-old" aria-hidden="true">—</span><span class="compare-item-old">Du volume publié sans empreinte d'entité cohérente : visible par à-coups, jamais lisible à grande échelle.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-old" aria-hidden="true">—</span><span class="compare-item-old">Un succès mesuré au classement et au trafic — des critères que les moteurs de réponse n'utilisent pas pour choisir une source.</span></li>
+        </ul>
+      </div>
+      <div class="compare-col compare-col-new">
+        <h3 class="compare-label compare-label-new">GEO by KORTEX</h3>
+        <ul class="compare-list">
+          <li class="compare-item"><span class="compare-marker compare-marker-new" aria-hidden="true">+</span><span class="compare-item-new">Des blocs de réponse précis, réponse d'abord, formatés pour être cités directement par ChatGPT, Perplexity et Gemini.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-new" aria-hidden="true">+</span><span class="compare-item-new">Des clusters d'entités sémantiques denses qu'un modèle peut attribuer à une seule source : votre marque.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-new" aria-hidden="true">+</span><span class="compare-item-new">Une logique tirée de l'enregistrement du fondateur lui-même — la conviction existe déjà, le système la convertit.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-new" aria-hidden="true">+</span><span class="compare-item-new">Un seul cycle source qui produit un graphe d'entités cohérent sur chaque surface : pilier, FAQ, LinkedIn, e-mail, ventes.</span></li>
+          <li class="compare-item"><span class="compare-marker compare-marker-new" aria-hidden="true">+</span><span class="compare-item-new">Un succès mesuré à l'autorité de citation : les modèles d'IA nomment-ils votre entreprise quand la question est pertinente ?</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══ PIPELINE 4 COUCHES ═══ -->
+  <section id="layers" class="sol-section" aria-labelledby="pipeline-heading">
+    <p class="text-mono reveal">Le système</p>
+    <h2 class="title-display reveal sol-h2" id="pipeline-heading">Comment fonctionne le pipeline GEO de <em>KORTEX ?</em></h2>
+    <p class="section-subtitle reveal stagger-1" style="margin-bottom: 40px;">Il enchaîne quatre couches dans un ordre fixe — Signal, Structure, Réponses, Diffusion — sur chaque mission. Les sources changent d'un client à l'autre ; l'architecture, elle, ne change pas. Chaque couche a des entrées, des outils et un livrable définis : rien ne dépend de l'inspiration du moment.</p>
+
+    <div class="pipeline-grid-solutions reveal stagger-2">
+
+      <article class="pipeline-step-solution" id="layer-signal">
+        <div class="step-top">
+          <span class="step-num">01</span>
+          <span class="step-tag">Signal</span>
         </div>
-      </header>
-
-      <!-- ═══ OLD vs NEW ═══ -->
-      <section aria-labelledby="compare-heading" style="margin-top: 80px; margin-bottom: 80px;">
-        <p class="text-mono reveal">The shift</p>
-        <h2 class="title-display reveal" id="compare-heading" style="font-size: clamp(32px, 4vw, 56px);">The old game is <em>over.</em></h2>
-        <div class="compare-grid reveal stagger-1">
-          <div class="compare-col">
-            <div class="compare-label compare-label-old">Traditional SEO</div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-old">—</span>
-              <span class="compare-item-old">Writing 3,000-word "Ultimate Guides" that answer nothing specifically and satisfy no one precisely.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-old">—</span>
-              <span class="compare-item-old">Chasing keyword density and vanity traffic metrics that do not translate to commercial authority.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-old">—</span>
-              <span class="compare-item-old">Losing the founder's authentic voice to generic ghostwriters operating from a blank brief.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-old">—</span>
-              <span class="compare-item-old">Publishing at volume without a coherent entity footprint. Visible in bursts, not legible at scale.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-old">—</span>
-              <span class="compare-item-old">Measuring success by traffic rank — a metric AI answer engines do not use.</span>
-            </div>
-          </div>
-          <div class="compare-col compare-col-new">
-            <div class="compare-label compare-label-new">KORTEX GEO</div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-new">+</span>
-              <span class="compare-item-new">Structuring precise answer blocks for Perplexity, ChatGPT, and Gemini — formatted for direct citation.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-new">+</span>
-              <span class="compare-item-new">Building high-density semantic entity clusters that a model attributes to one source: your brand.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-new">+</span>
-              <span class="compare-item-new">Extracting 100% of the logic from the founder's raw video — the conviction is already there, the system converts it.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-new">+</span>
-              <span class="compare-item-new">One source cycle producing a coherent entity graph across every surface — pillar, FAQ, LinkedIn, email, sales.</span>
-            </div>
-            <div class="compare-item">
-              <span class="compare-marker compare-marker-new">+</span>
-              <span class="compare-item-new">Measuring success by citation authority — whether AI models name your company as the source when the question is relevant.</span>
-            </div>
-          </div>
+        <h3>Couche 1 — Extraction du signal source</h3>
+        <p>Vous enregistrez, nous extrayons. L'enregistrement brut est transcrit puis cartographié : vocabulaire, structure argumentative, exemples récurrents, positions à contre-courant et objections auxquelles le fondateur répond instinctivement. Rien n'est inventé : tout existe déjà dans la source, le système le fait émerger.</p>
+        <p>L'empreinte de voix — les tournures qui rendent le fondateur reconnaissable — est verrouillée à cette étape et reportée dans chaque contenu en aval. Le résultat sonne comme vous, pas comme un rédacteur IA générique.</p>
+        <dl class="layer-spec">
+          <div><dt>Ce qui se passe</dt><dd>L'audio est transcrit, nettoyé et découpé par thème ; les affirmations, exemples, chiffres réellement cités et objections sont balisés et horodatés.</dd></div>
+          <div><dt>Entrée</dt><dd>Une vidéo de fondateur, un épisode de podcast, un webinaire, une démo commerciale ou un Loom (idéalement 45 à 60 minutes) et un court formulaire de cadrage.</dd></div>
+          <div><dt>Outils</dt><dd>Whisper pour la transcription, Gemini pour l'extraction structurée, n8n pour orchestrer l'ensemble du workflow.</dd></div>
+          <div><dt>Sortie</dt><dd>Un dossier source sur lequel s'appuient toutes les couches suivantes — et que vous pouvez réutiliser en interne.</dd></div>
+        </dl>
+        <div class="step-output">
+          <div class="step-output-label">Livrables</div>
+          <ul class="step-output-tags">
+            <li class="output-tag">Transcription nettoyée</li>
+            <li class="output-tag">Empreinte de voix</li>
+            <li class="output-tag">Carte argumentative</li>
+            <li class="output-tag">Liste de questions FAQ</li>
+          </ul>
         </div>
-      </section>
+      </article>
 
-      <div class="divider" aria-hidden="true"></div>
-
-      <!-- ═══ 4-LAYER PIPELINE ═══ -->
-      <section aria-labelledby="pipeline-heading" style="margin-bottom: 80px;">
-        <p class="text-mono reveal">The system</p>
-        <h2 class="title-display reveal" id="pipeline-heading" style="font-size: clamp(32px, 4vw, 56px);">Four layers. One <em>source.</em></h2>
-        <p class="section-subtitle reveal stagger-1" style="margin-bottom: 40px;">Every engagement runs the same architecture. The inputs change. The structure does not.</p>
-
-        <div class="pipeline-grid-solutions reveal stagger-2">
-
-          <article class="pipeline-step-solution">
-            <div class="step-top">
-              <span class="step-num">01</span>
-              <span class="step-tag">Signal</span>
-            </div>
-            <h2>Source Signal Extraction</h2>
-            <p>You record. We extract. The raw transcript is mapped for vocabulary, argument structure, recurring examples, contrarian positions, and the objections the founder instinctively addresses. Nothing is invented. Everything already exists in the source — the system surfaces it.</p>
-            <p style="margin-top: 14px;">The voice fingerprint — the specific phrasing patterns that make the founder's content recognizable — is locked here and carried forward into every downstream asset.</p>
-            <div class="step-output">
-              <div class="step-output-label">Produces</div>
-              <div class="step-output-tags">
-                <span class="output-tag">Entity structure doc</span>
-                <span class="output-tag">Voice fingerprint</span>
-                <span class="output-tag">Argument map</span>
-                <span class="output-tag">FAQ seed list</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="pipeline-step-solution">
-            <div class="step-top">
-              <span class="step-num">02</span>
-              <span class="step-tag">Structure</span>
-            </div>
-            <h2>Semantic Entity Structuring</h2>
-            <p>AI models do not read. They map relationships. We translate the extraction into a stable entity structure: the category you own, the problem you solve, the mechanism you use, the alternative you reject, the audience you are for. These definitions are fixed in language and carried consistently across every asset.</p>
-            <p style="margin-top: 14px;">Consistent terminology across your entity graph is the primary GEO lever. Models attribute authority to sources they can cluster. Fragmented language prevents clustering.</p>
-            <div class="step-output">
-              <div class="step-output-label">Produces</div>
-              <div class="step-output-tags">
-                <span class="output-tag">Category definition</span>
-                <span class="output-tag">Mechanism name</span>
-                <span class="output-tag">Terminology canon</span>
-                <span class="output-tag">Audience spec</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="pipeline-step-solution">
-            <div class="step-top">
-              <span class="step-num">03</span>
-              <span class="step-tag">Assets</span>
-            </div>
-            <h2>Answer Asset Production</h2>
-            <p>The source is split into a controlled publishing system. Every asset covers a specific stage of the buyer journey and the retrieval cycle. Pillar articles define the thesis. Contrarian pieces sharpen the position. Comparison pages capture mid-funnel demand. FAQ clusters map the follow-up queries an answer engine generates from the pillar.</p>
-            <p style="margin-top: 14px;">All assets use answer-first formatting: the core claim appears in the first paragraph, definitions are stated early, and structured blocks give models clean extraction points without requiring prose parsing.</p>
-            <div class="step-output">
-              <div class="step-output-label">Produces</div>
-              <div class="step-output-tags">
-                <span class="output-tag">Pillar article</span>
-                <span class="output-tag">Contrarian piece</span>
-                <span class="output-tag">Comparison page</span>
-                <span class="output-tag">FAQ cluster</span>
-                <span class="output-tag">Use-case blocks</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="pipeline-step-solution">
-            <div class="step-top">
-              <span class="step-num">04</span>
-              <span class="step-tag">Distribution</span>
-            </div>
-            <h2>Multi-Surface Distribution</h2>
-            <p>LinkedIn posts, newsletter angles, outreach sequences, and offer-page updates are all derived from the same source and all point back to the same entity graph. Distribution is not a separate function from content — it is the repeated exposure layer that gives the entity graph surface area across every channel where prospects discover categories.</p>
-            <p style="margin-top: 14px;">Every post routes the right reader into the retrieval layer. Every sequence uses the same mechanism language that the source pages establish. The message compounds instead of fragmenting.</p>
-            <div class="step-output">
-              <div class="step-output-label">Produces</div>
-              <div class="step-output-tags">
-                <span class="output-tag">8–12 LinkedIn posts</span>
-                <span class="output-tag">2 newsletter angles</span>
-                <span class="output-tag">Outreach sequences</span>
-                <span class="output-tag">CTA blocks</span>
-                <span class="output-tag">Call scripts</span>
-              </div>
-            </div>
-          </article>
-
+      <article class="pipeline-step-solution" id="layer-structure">
+        <div class="step-top">
+          <span class="step-num">02</span>
+          <span class="step-tag">Structure</span>
         </div>
-      </section>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <!-- ═══ FULL DELIVERABLES TABLE ═══ -->
-      <section aria-labelledby="deliverables-heading" style="margin-bottom: 80px;">
-        <p class="text-mono reveal">What ships</p>
-        <h2 class="title-display reveal" id="deliverables-heading" style="font-size: clamp(32px, 4vw, 56px);">Every asset. <em>Accounted for.</em></h2>
-        <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">Per source cycle. Every output carries the same entity structure and links to the same retrieval layer.</p>
-
-        <div class="reveal stagger-2" style="overflow-x: auto;">
-          <table class="deliverables-table" aria-label="KORTEX deliverables per source cycle">
-            <thead>
-              <tr>
-                <th style="width: 30%;">Asset</th>
-                <th style="width: 40%;">Purpose</th>
-                <th style="width: 15%;">Stage</th>
-                <th style="width: 15%;">GEO layer</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="dt-asset">Pillar Article</div></td>
-                <td class="dt-purpose">Defines the core thesis. Primary retrieval anchor for the source cycle. States the mechanism, the problem, and the position in answer-first format.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">ToFu / Retrieval</span></td>
-                <td><span class="dt-geo dt-geo-yes">Primary</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">Contrarian Article</div></td>
-                <td class="dt-purpose">Names the dominant false belief and rejects it with mechanism logic. Earns social traction and citation because it takes a position instead of covering a topic.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">ToFu / Authority</span></td>
-                <td><span class="dt-geo dt-geo-yes">Primary</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">Comparison Page</div></td>
-                <td class="dt-purpose">Head-to-head breakdown of your model vs the standard alternative. Captures mid-funnel demand from buyers already evaluating options.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">MoFu / Decision</span></td>
-                <td><span class="dt-geo dt-geo-yes">Primary</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">FAQ Cluster</div></td>
-                <td class="dt-purpose">10–15 structured questions mapping the follow-up prompts an answer engine generates from the pillar. FAQPage schema applied. Direct retrieval target.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">ToFu–BoFu</span></td>
-                <td><span class="dt-geo dt-geo-yes">Primary</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">LinkedIn Posts (8–12)</div></td>
-                <td class="dt-purpose">Hook, mechanism, contrarian, decision, result, and operator-take formats. Each routes back to a source article. Distribution layer for the entity graph.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">ToFu / Distribution</span></td>
-                <td><span class="dt-geo dt-geo-partial">Indirect</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">Newsletter Angles (×2)</div></td>
-                <td class="dt-purpose">One educational (cold audience), one opinionated (warm audience). Both reference the same source article and reinforce the same mechanism terminology.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">ToFu–MoFu</span></td>
-                <td><span class="dt-geo dt-geo-partial">Indirect</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">CTA Blocks</div></td>
-                <td class="dt-purpose">Offer-aligned copy units for article footers, email signatures, and page sections. Tied to the same thesis language for conversion consistency.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">BoFu</span></td>
-                <td><span class="dt-geo dt-geo-partial">Indirect</span></td>
-              </tr>
-              <tr>
-                <td><div class="dt-asset">Outreach + Call Scripts</div></td>
-                <td class="dt-purpose">Cold and warm outreach copy using mechanism language. Discovery call scripts built from the FAQ cluster so the first conversation sounds authoritative.</td>
-                <td><span style="font-family: var(--ff-mono); font-size: 10px; color: var(--text-muted);">BoFu / Sales</span></td>
-                <td><span class="dt-geo dt-geo-partial">Indirect</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <h3>Couche 2 — Structuration sémantique des entités</h3>
+        <p>Les modèles d'IA ne lisent pas comme nous : ils cartographient des relations entre entités. Nous traduisons l'extraction en une structure d'entités stable : la catégorie que vous occupez, le problème que vous résolvez, le mécanisme que vous utilisez, l'alternative que vous rejetez et l'audience que vous servez. Ces définitions sont figées et réutilisées à l'identique dans chaque contenu.</p>
+        <p>La cohérence terminologique est le premier levier du GEO. Les modèles attribuent l'autorité aux sources qu'ils peuvent regrouper ; un vocabulaire fragmenté empêche ce regroupement. C'est la couche que la plupart des équipes contenu sautent — voir notre guide de l'<a class="sol-link" href="blog-architecture-contenu-entite-first.html">architecture de contenu « entité d'abord »</a>.</p>
+        <dl class="layer-spec">
+          <div><dt>Ce qui se passe</dt><dd>Nous rédigeons une définition en une phrase pour votre catégorie, votre problème, votre mécanisme et votre audience, et choisissons les noms exacts qui seront répétés partout.</dd></div>
+          <div><dt>Entrée</dt><dd>Le dossier source de la couche 1, votre site actuel, votre offre et votre positionnement.</dd></div>
+          <div><dt>Outils</dt><dd>Gemini pour la rédaction et les contrôles de cohérence, n8n pour injecter ce référentiel dans chaque modèle de production.</dd></div>
+          <div><dt>Sortie</dt><dd>Une carte d'entités et un référentiel terminologique qui gouvernent chaque page et chaque publication.</dd></div>
+        </dl>
+        <div class="step-output">
+          <div class="step-output-label">Livrables</div>
+          <ul class="step-output-tags">
+            <li class="output-tag">Définition de catégorie</li>
+            <li class="output-tag">Nom du mécanisme</li>
+            <li class="output-tag">Référentiel terminologique</li>
+            <li class="output-tag">Fiche audience</li>
+          </ul>
         </div>
-      </section>
+      </article>
 
-      <div class="divider" aria-hidden="true"></div>
-
-      <!-- ═══ 30-DAY TIMELINE ═══ -->
-      <section aria-labelledby="timeline-heading" style="margin-bottom: 80px;">
-        <p class="text-mono reveal">The sequence</p>
-        <h2 class="title-display reveal" id="timeline-heading" style="font-size: clamp(32px, 4vw, 56px);">Thirty days. <em>One source.</em></h2>
-        <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">Publishing order is not arbitrary. The retrieval layer must be in place before the distribution layer drives traffic to it.</p>
-
-        <div class="timeline reveal stagger-2">
-          <div class="timeline-item">
-            <div class="timeline-dot">01</div>
-            <div class="timeline-content">
-              <div class="timeline-day">Day 1</div>
-              <h4>Pillar article goes live</h4>
-              <p>The retrieval anchor. Internally linked to solution page and pricing. Everything else in the cycle points back to this page. It is live before any social distribution begins.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot">02</div>
-            <div class="timeline-content">
-              <div class="timeline-day">Day 2–3</div>
-              <h4>First LinkedIn post: the hook</h4>
-              <p>The most provocative claim from the pillar, stated in one sentence. Link to the article in the first comment. Earns the first wave of attention while the source page is already indexed.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot">03</div>
-            <div class="timeline-content">
-              <div class="timeline-day">Day 5</div>
-              <h4>Contrarian article published</h4>
-              <p>Names and rejects the dominant false belief. Published before the FAQ so the contrarian framing is indexed before the follow-up questions about it arrive.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot">04</div>
-            <div class="timeline-content">
-              <div class="timeline-day">Day 7</div>
-              <h4>FAQ cluster deployed</h4>
-              <p>The full retrieval layer is now in place. Pillar, contrarian, and FAQ are live, internally linked, and indexed. The model can traverse the entity graph.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot">05</div>
-            <div class="timeline-content">
-              <div class="timeline-day">Day 12</div>
-              <h4>Comparison page + LinkedIn wave</h4>
-              <p>Comparison page captures mid-funnel demand. LinkedIn posts covering mechanism, decision framework, and contrarian takes run concurrently through day 25.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot">06</div>
-            <div class="timeline-content">
-              <div class="timeline-day">Day 20–28</div>
-              <h4>Newsletter amplification + sales asset activation</h4>
-              <p>Educational newsletter to cold audience. Opinionated newsletter to warm list. Outreach sequences updated with mechanism language. CTA blocks deployed across offer pages.</p>
-            </div>
-          </div>
+      <article class="pipeline-step-solution" id="layer-answers">
+        <div class="step-top">
+          <span class="step-num">03</span>
+          <span class="step-tag">Réponses</span>
         </div>
-      </section>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <!-- ═══ TECHNICAL PROOF ═══ -->
-      <section aria-labelledby="proof-heading" style="margin-bottom: 80px;">
-        <p class="text-mono reveal">The technical layer</p>
-        <h2 class="title-display reveal" id="proof-heading" style="font-size: clamp(32px, 4vw, 56px);">Why it gets <em>cited.</em></h2>
-        <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">Every asset is engineered against the five traits that AI answer engines use to evaluate retrieval candidates.</p>
-
-        <div class="proof-grid reveal stagger-2">
-          <div class="proof-item">
-            <div class="proof-icon-line"></div>
-            <h3>BLUF Formatting</h3>
-            <p>Bottom Line Up Front. Every page answers the core question in the first paragraph. Models scrape the opening for the extractable claim — generic preamble loses the citation before it begins.</p>
-          </div>
-          <div class="proof-item">
-            <div class="proof-icon-line"></div>
-            <h3>Opinion Density</h3>
-            <p>Generic observations get synthesized around. Named positions get cited. Every asset contains at least one quotable claim that a model can attribute to KORTEX and to the client by name.</p>
-          </div>
-          <div class="proof-item">
-            <div class="proof-icon-line"></div>
-            <h3>FAQPage Schema</h3>
-            <p>Structured data on every FAQ cluster signals to crawlers that the page contains answer-ready content. Models weight pages with proper schema markup higher in retrieval confidence.</p>
-          </div>
-          <div class="proof-item">
-            <div class="proof-icon-line"></div>
-            <h3>Semantic Adjacency</h3>
-            <p>Pages cover the conceptual territory around the main thesis, not just the thesis itself. Models reward sources that demonstrate they understand the full problem landscape.</p>
-          </div>
-          <div class="proof-item">
-            <div class="proof-icon-line"></div>
-            <h3>Internal Source Reinforcement</h3>
-            <p>Multiple pages strengthening the same entity from different angles. The model sees a coherent authority cluster, not isolated pages. Clustering increases citation probability.</p>
-          </div>
-          <div class="proof-item">
-            <div class="proof-icon-line"></div>
-            <h3>Terminology Canon</h3>
-            <p>The same mechanism name, category label, and contrasting alternatives used identically across every page and post. Consistency is what allows a model to cluster and attribute with confidence.</p>
-          </div>
+        <h3>Couche 3 — Production des contenus-réponses</h3>
+        <p>La source est découpée en un système de publication maîtrisé. Chaque contenu couvre une étape précise du parcours d'achat et du cycle de récupération par l'IA. L'article pilier pose la thèse. L'article à contre-courant affûte la position. La page comparative capte la demande de milieu de tunnel. Le cluster FAQ couvre les questions de suivi qu'un moteur de réponse génère à partir du pilier.</p>
+        <p>Chaque contenu est rédigé « réponse d'abord » : l'affirmation centrale figure dès le premier paragraphe, les définitions arrivent tôt et des blocs structurés offrent aux modèles des points d'extraction nets, sans avoir à analyser de longs paragraphes.</p>
+        <dl class="layer-spec">
+          <div><dt>Ce qui se passe</dt><dd>Les brouillons sont générés à partir du dossier et du référentiel, puis relus pour l'exactitude, la voix et la structure ; les données structurées FAQPage et Article sont préparées pour chaque page.</dd></div>
+          <div><dt>Entrée</dt><dd>Carte d'entités, référentiel terminologique, carte argumentative et liste de questions.</dd></div>
+          <div><dt>Outils</dt><dd>Gemini pour la rédaction, n8n pour la mise en forme, le maillage interne et la génération du balisage schema, puis une relecture éditoriale humaine.</dd></div>
+          <div><dt>Sortie</dt><dd>Des pages prêtes à publier, avec maillage interne et données structurées déjà en place.</dd></div>
+        </dl>
+        <div class="step-output">
+          <div class="step-output-label">Livrables</div>
+          <ul class="step-output-tags">
+            <li class="output-tag">Article pilier</li>
+            <li class="output-tag">Article à contre-courant</li>
+            <li class="output-tag">Page comparative</li>
+            <li class="output-tag">Cluster FAQ (10 à 15 Q/R)</li>
+            <li class="output-tag">Blocs cas d'usage</li>
+          </ul>
         </div>
-      </section>
+      </article>
 
-      <div class="divider" aria-hidden="true"></div>
-
-      <!-- ═══ FAQ ═══ -->
-      <section aria-labelledby="faq-heading" style="margin-bottom: 80px;">
-        <p class="text-mono reveal">Knowledge base</p>
-        <h2 class="title-display reveal" id="faq-heading" style="font-size: clamp(32px, 4vw, 56px);">Questions <em>answered.</em></h2>
-
-        <div class="faq-solutions reveal stagger-1">
-
-          <div class="faq-sol-item">
-            <h3>What is Generative Engine Optimization (GEO)?</h3>
-            <p>GEO is the practice of structuring content so that AI answer engines — ChatGPT, Perplexity, Gemini, and Google AI Overviews — retrieve and cite your brand as the authoritative source for a category-relevant question. Unlike traditional SEO, which targets search result page rankings, GEO targets citation authority: being the source a model names. The key levers are entity precision, answer-first formatting, opinion density, semantic adjacency, and internal source reinforcement.</p>
-          </div>
-
-          <div class="faq-sol-item">
-            <h3>How much of the founder's time does this require?</h3>
-            <p>Under 60 minutes per source cycle. Founders provide the raw signal — a recorded video, podcast, webinar, or Loom. No writing, no briefs, no ongoing review cycles. The KORTEX architecture handles extraction, entity structuring, asset production, internal linking, and distribution setup. The founder's job is to have the conversation. Our job is to convert it.</p>
-          </div>
-
-          <div class="faq-sol-item">
-            <h3>How long before we see results?</h3>
-            <p>Initial entity signals appear in AI-generated answers within 4–8 weeks of deploying a complete answer asset layer — pillar article, FAQ cluster, and comparison page — from a single source cycle. Full citation authority, where your company consistently appears as a named source for category-relevant queries, builds over 3–6 months of coherent source cycles. One well-structured cycle can generate citation signals significantly faster than months of high-frequency thin content.</p>
-          </div>
-
-          <div class="faq-sol-item">
-            <h3>What if we do not have existing video content?</h3>
-            <p>A 45–60 minute recorded conversation — structured around your core thesis, mechanism, contrarian position, and FAQ — is all that is needed. The recording does not need to be produced for public distribution. It is a source document, not a publish-ready asset. A Loom recording or a structured Zoom call with our team is sufficient to launch the first source cycle.</p>
-          </div>
-
-          <div class="faq-sol-item">
-            <h3>Does this work alongside existing SEO efforts?</h3>
-            <p>Yes. The KORTEX system is additive, not replacing. Technical SEO fundamentals — crawlability, page speed, schema markup, canonical URLs — remain baseline requirements and are respected in every asset produced. GEO builds the authority layer on top of that foundation. The difference is that we optimize for citation and retrieval, not just keyword rank. Teams running both see faster compounding than those running either alone.</p>
-          </div>
-
-          <div class="faq-sol-item">
-            <h3>Who is this built for?</h3>
-            <p>Founder-led B2B companies where the CEO or operator has a real point of view and existing source material — webinars, podcasts, demos, sales call recordings — that is not being converted into a retrievable authority system. SaaS teams, expert consultancies, and operator-led brands where the insight already exists but is trapped in formats with short shelf lives. If you have conviction and a camera, the system can convert it.</p>
-          </div>
-
+      <article class="pipeline-step-solution" id="layer-distribution">
+        <div class="step-top">
+          <span class="step-num">04</span>
+          <span class="step-tag">Diffusion</span>
         </div>
-      </section>
-
-      <!-- ═══ BOTTOM CTA ═══ -->
-      <section style="text-align: center; padding: 80px 0;" class="reveal" aria-label="Start with KORTEX">
-        <div style="max-width: 600px; margin: 0 auto;">
-          <p class="text-mono" style="justify-content: center;">Ready</p>
-          <h2 class="title-display" style="font-size: clamp(36px, 5vw, 68px); margin-bottom: 16px;">Send one video.<br>Get the <em>system.</em></h2>
-          <p class="section-subtitle" style="margin: 0 auto 44px; text-align: center;">We start with your strongest source and map it into articles, answer blocks, and distribution designed to compound — built for retrieval from day one.</p>
-          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <a href="contact.html" class="btn-primary btn-lg magnetic">Launch the Audit</a>
-            <a href="pricing.html" class="btn-secondary magnetic">View Plans →</a>
-          </div>
+        <h3>Couche 4 — Diffusion multi-surfaces</h3>
+        <p>Publications LinkedIn, angles de newsletter, séquences de prospection et mises à jour des pages d'offre : tout découle de la même source et renvoie au même graphe d'entités. La diffusion n'est pas séparée du contenu ; c'est la couche d'exposition répétée qui donne de la surface à votre graphe d'entités sur chaque canal où vos prospects découvrent une catégorie.</p>
+        <p>Chaque publication oriente le bon lecteur vers la couche de récupération. Chaque séquence reprend le vocabulaire du mécanisme établi par les pages sources. Le message se cumule au lieu de s'éparpiller — tout l'inverse du <a class="sol-link" href="blog-pourquoi-contenu-linkedin-b2b-meurt.html">contenu LinkedIn qui meurt en 48 heures</a>.</p>
+        <dl class="layer-spec">
+          <div><dt>Ce qui se passe</dt><dd>Publications et e-mails sont rédigés en formats accroche, mécanisme, contre-courant, décision et point de vue d'opérateur, chacun pointant vers une page source, puis planifiés selon l'ordre de publication ci-dessous.</dd></div>
+          <div><dt>Entrée</dt><dd>Les contenus-réponses publiés en couche 3 et votre empreinte de voix.</dd></div>
+          <div><dt>Outils</dt><dd>Gemini pour les variantes, n8n pour le calendrier éditorial et le transfert vers vos outils de planification.</dd></div>
+          <div><dt>Sortie</dt><dd>Un kit de diffusion prêt à publier, aligné sur les pages qu'il met en avant.</dd></div>
+        </dl>
+        <div class="step-output">
+          <div class="step-output-label">Livrables</div>
+          <ul class="step-output-tags">
+            <li class="output-tag">8 à 12 publications LinkedIn</li>
+            <li class="output-tag">2 angles de newsletter</li>
+            <li class="output-tag">Séquences de prospection</li>
+            <li class="output-tag">Blocs d'appel à l'action</li>
+            <li class="output-tag">Scripts d'appel</li>
+          </ul>
         </div>
-      </section>
+      </article>
 
     </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══ LIVRABLES ═══ -->
+  <section id="deliverables" class="sol-section" aria-labelledby="deliverables-heading">
+    <p class="text-mono reveal">Ce qui est livré</p>
+    <h2 class="title-display reveal sol-h2" id="deliverables-heading">Que recevez-vous à chaque cycle <em>source ?</em></h2>
+    <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">À chaque cycle source, vous recevez un article pilier, un article à contre-courant, une page comparative, un cluster FAQ de 10 à 15 questions, 8 à 12 publications LinkedIn, 2 angles de newsletter, des blocs d'appel à l'action, des textes de prospection et des scripts d'appel. Tous partagent la même structure d'entités et renvoient à la même couche de récupération. Le nombre de cycles par mois dépend de votre formule — voir les <a class="sol-link" href="tarifs.html">tarifs KORTEX</a>.</p>
+
+    <div class="reveal stagger-2" style="overflow-x: auto;">
+      <table class="deliverables-table">
+        <caption class="text-mono" style="caption-side: top; text-align: left; padding-top: 24px;">Livrables KORTEX par cycle source</caption>
+        <thead>
+          <tr>
+            <th scope="col" style="width: 30%;">Contenu</th>
+            <th scope="col" style="width: 40%;">Rôle</th>
+            <th scope="col" style="width: 15%;">Étape du tunnel</th>
+            <th scope="col" style="width: 15%;">Rôle GEO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Article pilier</th><td class="dt-purpose">Pose la thèse centrale. Ancre de récupération principale du cycle. Énonce le mécanisme, le problème et la position, réponse d'abord.</td><td class="dt-stage">Haut de tunnel / Récupération</td><td><span class="dt-geo dt-geo-yes">Principal</span></td></tr>
+          <tr><th scope="row">Article à contre-courant</th><td class="dt-purpose">Nomme la croyance dominante erronée et la réfute par la logique du mécanisme. Il prend position au lieu de traiter un sujet, ce qui le rend citable.</td><td class="dt-stage">Haut de tunnel / Autorité</td><td><span class="dt-geo dt-geo-yes">Principal</span></td></tr>
+          <tr><th scope="row">Page comparative</th><td class="dt-purpose">Comparaison directe de votre modèle face à l'alternative standard. Capte la demande des acheteurs qui évaluent déjà leurs options.</td><td class="dt-stage">Milieu de tunnel / Décision</td><td><span class="dt-geo dt-geo-yes">Principal</span></td></tr>
+          <tr><th scope="row">Cluster FAQ</th><td class="dt-purpose">10 à 15 questions structurées couvrant les relances qu'un moteur de réponse génère à partir du pilier. Balisage FAQPage appliqué. Cible de récupération directe.</td><td class="dt-stage">Tout le tunnel</td><td><span class="dt-geo dt-geo-yes">Principal</span></td></tr>
+          <tr><th scope="row">Publications LinkedIn (8 à 12)</th><td class="dt-purpose">Formats accroche, mécanisme, contre-courant, décision, résultat et point de vue d'opérateur. Chacune renvoie à un article source. Couche de diffusion du graphe d'entités.</td><td class="dt-stage">Haut de tunnel / Diffusion</td><td><span class="dt-geo dt-geo-partial">Indirect</span></td></tr>
+          <tr><th scope="row">Angles de newsletter (×2)</th><td class="dt-purpose">Un angle pédagogique (audience froide), un angle engagé (audience chaude). Tous deux citent le même article source et renforcent le même vocabulaire.</td><td class="dt-stage">Haut et milieu de tunnel</td><td><span class="dt-geo dt-geo-partial">Indirect</span></td></tr>
+          <tr><th scope="row">Blocs d'appel à l'action</th><td class="dt-purpose">Modules de texte alignés sur l'offre pour les pieds d'article, signatures e-mail et sections de page, avec le même langage de thèse pour une conversion cohérente.</td><td class="dt-stage">Bas de tunnel</td><td><span class="dt-geo dt-geo-partial">Indirect</span></td></tr>
+          <tr><th scope="row">Prospection + scripts d'appel</th><td class="dt-purpose">Messages de prospection à froid et à chaud reprenant le vocabulaire du mécanisme. Scripts d'appel de découverte construits à partir du cluster FAQ, pour que le premier échange soit aussi solide que le contenu.</td><td class="dt-stage">Bas de tunnel / Ventes</td><td><span class="dt-geo dt-geo-partial">Indirect</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══ SEMAINE PAR SEMAINE ═══ -->
+  <section id="timeline" class="sol-section" aria-labelledby="timeline-heading">
+    <p class="text-mono reveal">La séquence</p>
+    <h2 class="title-display reveal sol-h2" id="timeline-heading">Comment se déroule un cycle de 30 jours, semaine par <em>semaine ?</em></h2>
+    <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">Un cycle se déroule en cinq temps : un lancement, puis quatre semaines où la couche de récupération est mise en ligne en premier et la diffusion suit. L'ordre de publication n'a rien d'arbitraire : les pages que les moteurs de réponse doivent citer doivent exister avant que LinkedIn et l'e-mail n'y envoient du monde. Toute la logique est détaillée dans <a class="sol-link" href="blog-une-video-systeme-autorite.html">le système d'autorité à partir d'une seule vidéo</a>.</p>
+
+    <ol class="timeline reveal stagger-2">
+      <li class="timeline-item">
+        <div class="timeline-dot" aria-hidden="true">00</div>
+        <div class="timeline-content">
+          <div class="timeline-day">Semaine 0 — Lancement</div>
+          <h3>Audit, cadrage et enregistrement de la source</h3>
+          <p>Nous analysons votre site et votre visibilité actuelle dans les moteurs de réponse, nous nous accordons sur la catégorie et les questions à occuper, puis vous envoyez ou enregistrez la source (moins de 60 minutes de votre temps).</p>
+          <ul><li>Vous fournissez : l'enregistrement et un accès à votre site ou CMS (ou nous livrons des fichiers).</li><li>Vous recevez : une synthèse d'audit et le plan du cycle.</li></ul>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot" aria-hidden="true">01</div>
+        <div class="timeline-content">
+          <div class="timeline-day">Semaine 1 — Jours 1 à 7</div>
+          <h3>Signal, structure et ancre de récupération</h3>
+          <p>Les couches 1 et 2 tournent : transcription, carte argumentative, carte d'entités et référentiel terminologique. L'article pilier est publié en premier (jour 1 de publication), relié à vos pages solution et tarifs. Aux jours 2 et 3, la première publication LinkedIn — l'accroche — pointe vers lui. L'article à contre-courant suit au jour 5, et le cluster FAQ est déployé au jour 7.</p>
+          <ul><li>Fin de semaine 1 : pilier, article à contre-courant et FAQ sont en ligne, maillés et indexables ; un modèle peut parcourir le graphe d'entités.</li></ul>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot" aria-hidden="true">02</div>
+        <div class="timeline-content">
+          <div class="timeline-day">Semaine 2 — Jours 8 à 14</div>
+          <h3>Page comparative et vague LinkedIn</h3>
+          <p>Vers le jour 12, la page comparative est mise en ligne pour capter les acheteurs qui comparent déjà leurs options. Les publications LinkedIn sur le mécanisme, la grille de décision et les prises de position démarrent et se poursuivent jusqu'au jour 25.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot" aria-hidden="true">03</div>
+        <div class="timeline-content">
+          <div class="timeline-day">Semaine 3 — Jours 15 à 21</div>
+          <h3>Diffusion à rythme régulier</h3>
+          <p>Le calendrier de publications se poursuit, chaque post renvoyant vers une page source. La newsletter pédagogique part vers l'audience froide à partir du jour 20, et nous préparons les supports commerciaux avec le même vocabulaire de mécanisme.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot" aria-hidden="true">04</div>
+        <div class="timeline-content">
+          <div class="timeline-day">Semaine 4 — Jours 22 à 30</div>
+          <h3>Amplification, activation commerciale et bilan</h3>
+          <p>La newsletter engagée part vers votre liste chaude, les séquences de prospection sont mises à jour et les blocs d'appel à l'action sont déployés sur les pages d'offre (jours 20 à 28). Le cycle se clôt par un bilan de ce qui a été publié et des questions que le prochain cycle source doit viser.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══ COMPARATIF ═══ -->
+  <section id="comparison" class="sol-section" aria-labelledby="vs-heading">
+    <p class="text-mono reveal">Les options</p>
+    <h2 class="title-display reveal sol-h2" id="vs-heading">KORTEX, agence traditionnelle, freelance ou équipe <em>interne ?</em></h2>
+    <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">La différence ne tient pas à qui écrit, mais au fait que le contenu soit pensé comme un système conçu pour être cité par l'IA. Une agence traditionnelle ou un freelance livre généralement des pièces séparées ; une équipe interne peut bâtir ce système, mais il lui faut du temps, des outils et une expertise GEO. KORTEX livre le système complet à partir de votre vidéo de fondateur, sans engagement au-delà du mois.</p>
+
+    <div class="reveal stagger-2" style="overflow-x: auto;">
+      <table class="deliverables-table vs-table">
+        <caption class="text-mono" style="caption-side: top; text-align: left; padding-top: 24px;">Comparaison qualitative des options de contenu pour fondateurs B2B</caption>
+        <thead>
+          <tr>
+            <th scope="col">Critère</th>
+            <th scope="col" class="vs-kx">KORTEX</th>
+            <th scope="col">Agence traditionnelle</th>
+            <th scope="col">Freelance</th>
+            <th scope="col">Équipe interne</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Objectif principal</th><td class="vs-kx">Être cité par les moteurs de réponse + générer du pipeline</td><td>Classement et trafic</td><td>Livrer les pièces commandées</td><td>Ce que la feuille de route priorise</td></tr>
+          <tr><th scope="row">Origine des idées</th><td class="vs-kx">Votre propre vidéo de fondateur</td><td>Recherche de mots-clés et briefs</td><td>Votre brief</td><td>Le savoir interne, si le temps le permet</td></tr>
+          <tr><th scope="row">Temps du fondateur</th><td class="vs-kx">Moins de 60 minutes par cycle</td><td>Briefs, réunions et allers-retours</td><td>Briefs et réécriture importante</td><td>Entretiens et relectures en continu</td></tr>
+          <tr><th scope="row">Cohérence des entités et du vocabulaire</th><td class="vs-kx">Référentiel figé sur tous les contenus</td><td>Variable selon le rédacteur</td><td>Rarement traitée</td><td>Possible avec un bon éditeur</td></tr>
+          <tr><th scope="row">Format réponse d'abord + balisage schema</th><td class="vs-kx">Intégré à chaque page</td><td>Parfois, en option SEO</td><td>Rarement</td><td>Selon les compétences de l'équipe</td></tr>
+          <tr><th scope="row">Contenus de diffusion</th><td class="vs-kx">LinkedIn, newsletter, prospection, scripts issus de la même source</td><td>Souvent un forfait à part</td><td>Généralement non inclus</td><td>Postes distincts</td></tr>
+          <tr><th scope="row">Engagement</th><td class="vs-kx">Mois par mois</td><td>Souvent des contrats de plusieurs mois</td><td>Au projet</td><td>Salaires et délais de recrutement</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="illustrative-note">Comparaison générale de modèles types, pas une évaluation d'un prestataire en particulier</p>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══ COUCHE TECHNIQUE ═══ -->
+  <section id="why-cited" class="sol-section" aria-labelledby="proof-heading">
+    <p class="text-mono reveal">La couche technique</p>
+    <h2 class="title-display reveal sol-h2" id="proof-heading">Pourquoi ces contenus sont-ils <em>cités ?</em></h2>
+    <p class="section-subtitle reveal stagger-1" style="margin-bottom: 0;">Parce que chaque contenu est conçu autour de six caractéristiques qui facilitent, pour un moteur de réponse, l'extraction, la compréhension et l'attribution d'une page. Aucune n'est une astuce ; ensemble, elles font de votre entreprise la source la plus claire sur une question.</p>
+
+    <div class="proof-grid reveal stagger-2">
+      <div class="proof-item">
+        <div class="proof-icon-line" aria-hidden="true"></div>
+        <h3>La conclusion d'abord</h3>
+        <p>Format BLUF (Bottom Line Up Front) : chaque page répond à sa question centrale dès le premier paragraphe. Les modèles cherchent une affirmation extractible ; un préambule générique perd la citation avant même de commencer.</p>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon-line" aria-hidden="true"></div>
+        <h3>Densité d'opinion</h3>
+        <p>Les observations génériques sont synthétisées et noyées. Les positions assumées sont citées. Chaque contenu contient au moins une affirmation citable qu'un modèle peut attribuer nommément à votre entreprise.</p>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon-line" aria-hidden="true"></div>
+        <h3>Balisage FAQPage</h3>
+        <p>Les données structurées de chaque cluster FAQ signalent aux robots que la page contient des questions-réponses, ce qui fait de chaque réponse une unité explicite et lisible par une machine.</p>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon-line" aria-hidden="true"></div>
+        <h3>Proximité sémantique</h3>
+        <p>Les pages couvrent tout le territoire conceptuel autour de la thèse, pas seulement la thèse, et montrent que la source maîtrise l'ensemble du problème.</p>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon-line" aria-hidden="true"></div>
+        <h3>Renforcement interne des sources</h3>
+        <p>Plusieurs pages renforcent la même entité sous des angles différents : le modèle voit un cluster d'autorité cohérent plutôt que des pages isolées.</p>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon-line" aria-hidden="true"></div>
+        <h3>Référentiel terminologique</h3>
+        <p>Le même nom de mécanisme, la même étiquette de catégorie et les mêmes alternatives, employés à l'identique sur chaque page et chaque publication. C'est cette cohérence qui permet au modèle de regrouper et d'attribuer avec confiance.</p>
+      </div>
+    </div>
+    <p class="section-subtitle reveal" style="margin-top: 32px;">Vous voulez d'abord confronter vos propres pages à ces critères ? Commencez par notre <a class="sol-link" href="blog-audit-contenu-recuperation-ia.html">audit de contenu pour la récupération par l'IA</a> et le <a class="sol-link" href="blog-guide-visibilite-moteurs-de-reponse.html">guide de visibilité dans les moteurs de réponse</a>, ou parcourez tous les articles du <a class="sol-link" href="blog.html">blog GEO de KORTEX</a>.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══ FAQ ═══ -->
+  <section id="faq" class="sol-section" aria-labelledby="faq-heading">
+    <p class="text-mono reveal">Base de connaissances</p>
+    <h2 class="title-display reveal sol-h2" id="faq-heading">Vos questions, nos <em>réponses.</em></h2>
+
+    <div class="faq-solutions reveal stagger-1">
+      <div class="faq-sol-item">
+        <h3>Qu'est-ce que la Generative Engine Optimization (GEO) ?</h3>
+        <p>La Generative Engine Optimization (GEO), ou optimisation pour les moteurs génératifs, consiste à structurer vos contenus pour que les moteurs de réponse — ChatGPT, Perplexity, Gemini et Google AI Overviews — les retrouvent et citent votre marque comme source de référence sur une question de votre catégorie. Là où le SEO traditionnel vise le classement dans les pages de résultats, le GEO vise l'autorité de citation : être la source que le modèle nomme. Ses leviers : précision des entités, format réponse d'abord, densité d'opinion, proximité sémantique et renforcement interne des sources.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Quelle est la différence entre GEO et SEO ?</h3>
+        <p>Le SEO optimise le classement dans les résultats de recherche grâce aux mots-clés, aux backlinks et au taux de clic, et mesure son succès en trafic. Le GEO optimise la récupération et la citation par l'IA grâce à la clarté des entités, au format réponse d'abord, à la cohérence terminologique et au renforcement interne des sources, et mesure son succès au fait que votre entreprise soit nommée comme source dans les réponses générées.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Combien de temps cela demande-t-il au fondateur ?</h3>
+        <p>Moins de 60 minutes par cycle source. Le fondateur fournit le signal brut : une vidéo, un podcast, un webinaire ou un Loom. Pas de rédaction, pas de brief, pas d'allers-retours sans fin. KORTEX prend en charge l'extraction, la structuration des entités, la production, le maillage interne et la préparation de la diffusion. Votre rôle est d'avoir la conversation ; le nôtre est de la convertir.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Quels livrables KORTEX produit-il à chaque cycle source ?</h3>
+        <p>Un article pilier, un article à contre-courant, une page comparative, un cluster FAQ de 10 à 15 questions, 8 à 12 publications LinkedIn, 2 angles de newsletter, des blocs d'appel à l'action, des éléments de preuve pour vos pages d'atterrissage, des messages de prospection et des scripts d'appel. Tous partagent la même structure d'entités, le même vocabulaire et la même architecture de maillage interne.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Au bout de combien de temps voit-on des résultats ?</h3>
+        <p>Nous tablons sur de premiers signaux d'entité dans les réponses générées par l'IA dans les 4 à 8 semaines suivant le déploiement d'une couche complète de contenus-réponses (article pilier, cluster FAQ et page comparative). Une citation régulière comme source nommée sur les requêtes de votre catégorie se construit sur 3 à 6 mois de cycles sources cohérents. Ce sont des délais de travail, pas des garanties : les moteurs de réponse évoluent souvent et personne ne contrôle ce qu'ils citent.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Et si nous n'avons aucune vidéo existante ?</h3>
+        <p>Une conversation enregistrée de 45 à 60 minutes, structurée autour de votre thèse, de votre mécanisme, de votre position à contre-courant et des questions fréquentes de vos clients, suffit. L'enregistrement n'a pas besoin d'être produit pour être diffusé : c'est un document source, pas un contenu prêt à publier. Un Loom ou une visioconférence structurée avec notre équipe suffit à lancer le premier cycle.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Est-ce compatible avec notre référencement SEO actuel ?</h3>
+        <p>Oui. Le système KORTEX s'ajoute à l'existant. Les fondamentaux du SEO technique — exploration, vitesse des pages, balisage schema, URL canoniques — restent la base et sont respectés dans chaque contenu produit. Le GEO construit la couche d'autorité sur ces fondations, en optimisant pour la citation et la récupération plutôt que pour le seul classement.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>Quels outils font tourner le pipeline KORTEX ?</h3>
+        <p>n8n orchestre les workflows, Whisper transcrit l'enregistrement source et l'API Gemini se charge de l'extraction structurée et de la rédaction. Chaque contenu passe ensuite par une relecture éditoriale (exactitude, voix, structure) avant livraison. Vous êtes propriétaire de tous les contenus produits.</p>
+      </div>
+      <div class="faq-sol-item">
+        <h3>À qui s'adresse ce système ?</h3>
+        <p>Aux entreprises B2B portées par leur fondateur, dont le dirigeant a un vrai point de vue et des matériaux sources — webinaires, podcasts, démos, enregistrements d'appels commerciaux — qui ne sont pas encore transformés en système d'autorité récupérable : éditeurs SaaS, cabinets de conseil experts et marques portées par des opérateurs, dont l'expertise reste enfermée dans des formats à durée de vie courte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA FINAL ═══ -->
+  <section id="start" style="text-align: center; padding: 80px 0;" class="reveal" aria-labelledby="start-heading">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <p class="text-mono" style="justify-content: center;">Prêt ?</p>
+      <h2 class="title-display" id="start-heading" style="font-size: clamp(36px, 5vw, 68px); margin-bottom: 16px;">Envoyez une vidéo.<br>Recevez le <em>système.</em></h2>
+      <p class="section-subtitle" style="margin: 0 auto 44px; text-align: center;">Nous partons de votre meilleure source et la déclinons en articles, blocs de réponse et contenus de diffusion conçus pour se cumuler — pensés pour la récupération par l'IA dès le premier jour. Envie de prendre du recul d'abord ? Lisez <a class="sol-link" href="blog-nouvelle-stack-contenu-b2b.html">la nouvelle stack de contenu B2B</a> ou revenez à la <a class="sol-link" href="index.html">page d'accueil de KORTEX</a>.</p>
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="contact.html" class="btn-primary btn-lg magnetic">Demander votre audit GEO</a>
+        <a href="tarifs.html" class="btn-secondary magnetic">Voir les formules et tarifs →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.kortexlab.me/solutions.html#service",
+  "name": "Système de contenu GEO KORTEX",
+  "serviceType": "Generative Engine Optimization (GEO)",
+  "description": "Un système de Generative Engine Optimization en 4 couches qui transforme une vidéo de fondateur en système de contenu d'autorité sur 30 jours, conçu pour être cité par ChatGPT, Perplexity, Gemini et Google AI Overviews.",
+  "url": "https://www.kortexlab.me/solutions.html",
+  "inLanguage": "fr",
+  "provider": {"@id": "https://www.kortexlab.me/#organization"},
+  "areaServed": "Worldwide",
+  "availableLanguage": ["fr", "en"],
+  "audience": {"@type": "BusinessAudience", "audienceType": "Entreprises B2B portées par leur fondateur, éditeurs SaaS, cabinets de conseil"},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Pipeline GEO KORTEX — 4 couches",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Couche 1 — Extraction du signal source", "description": "Transcription (Whisper) et extraction structurée (Gemini) de l'enregistrement du fondateur : transcription, empreinte de voix, carte argumentative et liste de questions FAQ."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Couche 2 — Structuration sémantique des entités", "description": "Définition de catégorie, nom du mécanisme, référentiel terminologique et fiche audience réutilisés à l'identique dans chaque contenu."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Couche 3 — Production des contenus-réponses", "description": "Article pilier, article à contre-courant, page comparative et cluster FAQ de 10 à 15 questions, rédigés réponse d'abord avec données structurées."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Couche 4 — Diffusion multi-surfaces", "description": "8 à 12 publications LinkedIn, 2 angles de newsletter, séquences de prospection, blocs d'appel à l'action et scripts d'appel issus de la même source."}}
+    ]
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Qu'est-ce que la Generative Engine Optimization (GEO) ?", "acceptedAnswer": {"@type": "Answer", "text": "La Generative Engine Optimization (GEO), ou optimisation pour les moteurs génératifs, consiste à structurer vos contenus pour que les moteurs de réponse — ChatGPT, Perplexity, Gemini et Google AI Overviews — les retrouvent et citent votre marque comme source de référence sur une question de votre catégorie. Là où le SEO traditionnel vise le classement dans les pages de résultats, le GEO vise l'autorité de citation : être la source que le modèle nomme. Ses leviers : précision des entités, format réponse d'abord, densité d'opinion, proximité sémantique et renforcement interne des sources."}},
+    {"@type": "Question", "name": "Quelle est la différence entre GEO et SEO ?", "acceptedAnswer": {"@type": "Answer", "text": "Le SEO optimise le classement dans les résultats de recherche grâce aux mots-clés, aux backlinks et au taux de clic, et mesure son succès en trafic. Le GEO optimise la récupération et la citation par l'IA grâce à la clarté des entités, au format réponse d'abord, à la cohérence terminologique et au renforcement interne des sources, et mesure son succès au fait que votre entreprise soit nommée comme source dans les réponses générées."}},
+    {"@type": "Question", "name": "Combien de temps cela demande-t-il au fondateur ?", "acceptedAnswer": {"@type": "Answer", "text": "Moins de 60 minutes par cycle source. Le fondateur fournit le signal brut : une vidéo, un podcast, un webinaire ou un Loom. Pas de rédaction, pas de brief, pas d'allers-retours sans fin. KORTEX prend en charge l'extraction, la structuration des entités, la production, le maillage interne et la préparation de la diffusion. Votre rôle est d'avoir la conversation ; le nôtre est de la convertir."}},
+    {"@type": "Question", "name": "Quels livrables KORTEX produit-il à chaque cycle source ?", "acceptedAnswer": {"@type": "Answer", "text": "Un article pilier, un article à contre-courant, une page comparative, un cluster FAQ de 10 à 15 questions, 8 à 12 publications LinkedIn, 2 angles de newsletter, des blocs d'appel à l'action, des éléments de preuve pour vos pages d'atterrissage, des messages de prospection et des scripts d'appel. Tous partagent la même structure d'entités, le même vocabulaire et la même architecture de maillage interne."}},
+    {"@type": "Question", "name": "Au bout de combien de temps voit-on des résultats ?", "acceptedAnswer": {"@type": "Answer", "text": "Nous tablons sur de premiers signaux d'entité dans les réponses générées par l'IA dans les 4 à 8 semaines suivant le déploiement d'une couche complète de contenus-réponses (article pilier, cluster FAQ et page comparative). Une citation régulière comme source nommée sur les requêtes de votre catégorie se construit sur 3 à 6 mois de cycles sources cohérents. Ce sont des délais de travail, pas des garanties : les moteurs de réponse évoluent souvent et personne ne contrôle ce qu'ils citent."}},
+    {"@type": "Question", "name": "Et si nous n'avons aucune vidéo existante ?", "acceptedAnswer": {"@type": "Answer", "text": "Une conversation enregistrée de 45 à 60 minutes, structurée autour de votre thèse, de votre mécanisme, de votre position à contre-courant et des questions fréquentes de vos clients, suffit. L'enregistrement n'a pas besoin d'être produit pour être diffusé : c'est un document source, pas un contenu prêt à publier. Un Loom ou une visioconférence structurée avec notre équipe suffit à lancer le premier cycle."}},
+    {"@type": "Question", "name": "Est-ce compatible avec notre référencement SEO actuel ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Le système KORTEX s'ajoute à l'existant. Les fondamentaux du SEO technique — exploration, vitesse des pages, balisage schema, URL canoniques — restent la base et sont respectés dans chaque contenu produit. Le GEO construit la couche d'autorité sur ces fondations, en optimisant pour la citation et la récupération plutôt que pour le seul classement."}},
+    {"@type": "Question", "name": "Quels outils font tourner le pipeline KORTEX ?", "acceptedAnswer": {"@type": "Answer", "text": "n8n orchestre les workflows, Whisper transcrit l'enregistrement source et l'API Gemini se charge de l'extraction structurée et de la rédaction. Chaque contenu passe ensuite par une relecture éditoriale (exactitude, voix, structure) avant livraison. Vous êtes propriétaire de tous les contenus produits."}},
+    {"@type": "Question", "name": "À qui s'adresse ce système ?", "acceptedAnswer": {"@type": "Answer", "text": "Aux entreprises B2B portées par leur fondateur, dont le dirigeant a un vrai point de vue et des matériaux sources — webinaires, podcasts, démos, enregistrements d'appels commerciaux — qui ne sont pas encore transformés en système d'autorité récupérable : éditeurs SaaS, cabinets de conseil experts et marques portées par des opérateurs, dont l'expertise reste enfermée dans des formats à durée de vie courte."}}
+  ]
+}
+</script>
   </main>
 
   <footer class="footer" role="contentinfo">
     <div class="footer-grid">
       <div>
         <div class="footer-logo">KORTEX</div>
-        <p class="footer-tagline">AI content infrastructure for founder-led B2B. One video in. Authority system out.</p>
+        <p class="footer-tagline">Automatisation de contenu par IA pour fondateurs B2B. Une vidéo en entrée, une autorité citée par les IA en sortie.</p>
       </div>
-      <nav aria-label="Footer navigation">
+      <nav aria-label="Footer">
         <div class="footer-col-title">Navigation</div>
         <div class="footer-links">
-          <a href="index.html">Home</a>
+          <a href="index.html">Accueil</a>
           <a href="solutions.html">Solutions</a>
-          <a href="blog.html">Logs</a>
-          <a href="pricing.html">Pricing</a>
+          <a href="blog.html">Blog</a>
+          <a href="tarifs.html">Tarifs</a>
           <a href="contact.html">Contact</a>
         </div>
       </nav>
       <div>
-        <div class="footer-col-title">Themes</div>
+        <div class="footer-col-title">Ressources GEO</div>
         <div class="footer-links">
-          <a href="blog-stop-ranking-start-dominating.html">GEO</a>
-          <a href="blog-one-video-authority-system.html">Content Systems</a>
-          <a href="blog-b2b-linkedin-content-dies.html">LinkedIn Ops</a>
-          <a href="blog-new-b2b-content-stack.html">B2B Stack</a>
+          <a href="blog-arretez-de-ranker-soyez-cite.html">GEO vs SEO : la différence</a>
+          <a href="blog-une-video-systeme-autorite.html">Le système d'autorité en 30 jours</a>
+          <a href="blog-pourquoi-contenu-linkedin-b2b-meurt.html">Pourquoi le contenu LinkedIn échoue</a>
+          <a href="blog-nouvelle-stack-contenu-b2b.html">La nouvelle stack de contenu B2B</a>
+          <a href="blog-guide-visibilite-moteurs-de-reponse.html">Guide de visibilité sur les moteurs de réponse</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Stack</div>
+        <div class="footer-col-title">Stack d'automatisation</div>
         <div class="footer-links">
-          <a href="#">n8n</a>
-          <a href="#">Gemini API</a>
-          <a href="#">Whisper</a>
-          <a href="#">Tavily</a>
+          <span class="footer-static">Workflows n8n</span>
+          <span class="footer-static">Intégration API Gemini</span>
+          <span class="footer-static">Transcription Whisper</span>
+          <span class="footer-static">Opérations de contenu LLM</span>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 KORTEX — AI Content Infrastructure</span>
+      <span class="footer-copy">© 2026 KORTEX. Agence d'automatisation de contenu par IA. Systèmes d'autorité B2B pensés GEO.</span>
       <div class="footer-tech">
+        <a class="tech-badge" href="mailto:contact@kortexlab.me">contact@kortexlab.me</a>
         <span class="tech-badge">GEO</span>
         <span class="tech-badge">n8n</span>
-        <span class="tech-badge">Answer Engines</span>
+        <span class="tech-badge">Moteurs de réponse</span>
+        <a class="tech-badge" href="en/solutions.html" hreflang="en" lang="en">English</a>
       </div>
     </div>
   </footer>
 
-  <script src="kortex_core.js"></script>
-  <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
-
+  <script src="kortex_core.js" defer></script>
 </body>
 </html>
