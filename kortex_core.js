@@ -1,18 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════
-// KORTEX — CORE INTERACTION ENGINE v5.0  (drop-in replacement)
-//
-// • Native system cursor (no custom cursor, no cursor:none).
-// • NEURON SWARM: thousands-of-tiny-dots feeling, built from ~80-190 tiny
-//   neurons resting at home positions all over the viewport. When the
-//   cursor moves, nearby neurons wake up, leave home on unpredictable
-//   (multi-sine) paths, orbit/follow the cursor, link to each other with
-//   synapse lines, then spring back home (or fade to rest) once the
-//   cursor moves elsewhere or stops. Works over blocks, tables, cards.
-// • Card spotlight, button ripple, smoother tilt, hero-blob mouse parallax.
-// • Everything from v3/v4 preserved (reveal, magnetic, counters, nav...).
-//
-// ZERO HTML changes required.
-// ═══════════════════════════════════════════════════════════════════
+
 (function () {
   'use strict';
 
@@ -58,10 +44,12 @@
     const TAU = Math.PI * 2;
 
     // ── Tunables ─────────────────────────────────────────────────
-    const REST_ALPHA   = 0.14;   // brightness of sleeping neurons (set 0 to make them vanish at rest)
-    const RECRUIT_R    = coarse ? 150 : 235;  // distance (from a neuron's home) at which the cursor wakes it
-    const LINK_DIST    = coarse ? 62 : 86;    // max synapse length
-    const IDLE_RELEASE = 3500;   // ms without movement before the swarm settles back home
+    const REST_ALPHA   = 0.09;   // brightness of sleeping neurons (set 0 to make them vanish at rest)
+    const RECRUIT_R    = coarse ? 140 : 210;  // radius around the cursor where neurons light up
+    const ORBIT        = coarse ? 6 : 10;     // max px a lit neuron breathes around its home
+    const PUSH         = coarse ? 10 : 18;    // max px lit neurons are nudged away from the cursor
+    const LINK_DIST    = coarse ? 70 : 92;    // max synapse length
+    const IDLE_RELEASE = 2500;   // ms without movement before the field dims back to rest
     const HOT_SELECTOR = 'a,button,input,textarea,select,.feature-card,.pricing-card,.blog-card,.pipeline-step,' +
                          '.faq-item,.stat-card,.contact-method-card,.toc,.geo-visual-card,table,.data-table,.deliverables-table';
 
@@ -139,7 +127,7 @@
         const dx = n.x - e.clientX, dy = n.y - e.clientY;
         const d = Math.hypot(dx, dy) || 1;
         if (d < R) {
-          const imp = (1 - d / R) * 560;
+          const imp = (1 - d / R) * 320;
           n.vx += (dx / d) * imp;
           n.vy += (dy / d) * imp;
           n.s = Math.max(n.s, 0.6);
@@ -152,8 +140,8 @@
       builtW = W; builtH = H;
       neurons = [];
       const count = coarse
-        ? clamp(Math.round((W * H) / 16000), 40, 80)
-        : clamp(Math.round((W * H) / 10500), 80, 190);
+        ? clamp(Math.round((W * H) / 5200), 70, 150)
+        : clamp(Math.round((W * H) / 3000), 220, 420);
       const cell = Math.sqrt((W * H) / count);
       const cols = Math.ceil(W / cell), rows = Math.ceil(H / cell);
 
@@ -166,7 +154,7 @@
             hx, hy, x: hx, y: hy, vx: 0, vy: 0,
             s: 0,                                   // activation 0..1
             h: 0,                                   // heat (closeness to cursor) 0..1
-            size: 0.8 + Math.random() * 0.95,       // tiny
+            size: 0.6 + Math.random() * 0.8,       // tiny
             tint: Math.random() < 0.14 ? 1 : 0,     // 14% cyan accents
             // unpredictable orbit parameters (incommensurate frequencies)
             a0: Math.random() * TAU,
@@ -221,7 +209,6 @@
       boost += ((hot && have ? 1 : 0) - boost) * Math.min(1, dt * 6);
 
       const R = RECRUIT_R * (1 + 0.4 * boost);
-      const LEASH = R * 1.5;
       const LINK = LINK_DIST * (1 + 0.18 * boost);
       const LINK2 = LINK * LINK;
 
@@ -231,39 +218,43 @@
       for (let i = 0; i < neurons.length; i++) {
         const n = neurons[i];
 
-        const dh = have ? Math.hypot(n.hx - mx, n.hy - my) : Infinity;
-        const dc = have ? Math.hypot(n.x - mx, n.y - my) : Infinity;
-        // hysteresis: woken neurons keep chasing while inside the leash,
-        // so the swarm trails the cursor and sheds neurons behind it.
-        const want = (dh < R || (n.s > 0.25 && dc < LEASH)) ? 1 : 0;
-        const rate = want ? 4.2 * n.k : 1.5;
+        // Neurons NEVER leave their home: the cursor only lights up the ones nearby,
+        // nudges them slightly outward and lets them breathe in a tiny orbit.
+        // As soon as the cursor moves away, they dim and spring back to their exact place.
+        const dxh = n.hx - mx, dyh = n.hy - my;
+        const dh = have ? Math.hypot(dxh, dyh) : Infinity;
+        const want = have ? clamp(1 - dh / R, 0, 1) : 0;
+        const rate = want > n.s ? 7 * n.k : 2.6;          // light up fast, fade a bit slower
         n.s += (want - n.s) * Math.min(1, rate * dt);
         const e = n.s * n.s * (3 - 2 * n.s);
 
         // resting target: gentle float around home
-        const ix = n.hx + Math.sin(t * n.df + n.dp) * n.driftA;
-        const iy = n.hy + Math.cos(t * n.df * 1.13 + n.dp * 1.7) * n.driftA;
-        let tx = ix, ty = iy;
+        let tx = n.hx + Math.sin(t * n.df + n.dp) * n.driftA;
+        let ty = n.hy + Math.cos(t * n.df * 1.13 + n.dp * 1.7) * n.driftA;
 
-        if (e > 0.001 && have) {
-          // unpredictable wander around the cursor (sum of incommensurate sines)
+        if (e > 0.001) {
+          // small organic orbit around HOME (not around the cursor)
           const ang = n.a0 + Math.sin(t * n.f1 + n.p1) * 1.9 + Math.sin(t * n.f3 + n.p3) * 1.1;
-          const rad = n.r0 + Math.sin(t * n.f2 + n.p2) * n.ra + Math.sin(t * n.f3 * 1.7 + n.p1) * n.ra * 0.5;
-          const cx = mx + Math.cos(ang) * rad;
-          const cy = my + Math.sin(ang) * rad * 0.85;
-          tx = ix + (cx - ix) * e;
-          ty = iy + (cy - iy) * e;
+          const orb = ORBIT * e * (0.6 + 0.4 * Math.sin(t * n.f2 + n.p2));
+          tx += Math.cos(ang) * orb;
+          ty += Math.sin(ang) * orb;
+          // soft outward push: opens a "lens" around the cursor instead of a clump on it
+          if (have && dh > 0.001) {
+            const push = PUSH * e * (1 - dh / R);
+            tx += (dxh / dh) * push;
+            ty += (dyh / dh) * push;
+          }
         }
 
-        // spring (stiffer while following, softer on the way home)
-        const k = (16 + 44 * e) * n.k;
-        const c = 2 * Math.sqrt(k) * (0.62 + 0.25 * (1 - e));
+        // critically-damped spring back to the target (no overshoot, no wandering)
+        const k = 34 * n.k;
+        const c = 2 * Math.sqrt(k) * 0.95;
         n.vx += ((tx - n.x) * k - n.vx * c) * dt;
         n.vy += ((ty - n.y) * k - n.vy * c) * dt;
         n.x += n.vx * dt;
         n.y += n.vy * dt;
 
-        n.h = have ? clamp(1 - Math.hypot(n.x - mx, n.y - my) / (R * 0.75), 0, 1) * e : 0;
+        n.h = have ? clamp(1 - Math.hypot(n.x - mx, n.y - my) / (R * 0.6), 0, 1) * e : 0;
       }
 
       // ── Synapses ──
@@ -278,7 +269,7 @@
           const d2 = dx * dx + dy * dy;
           if (d2 > LINK2) continue;
           const d = Math.sqrt(d2);
-          const al = (1 - d / LINK) * Math.sqrt(a.s * b.s) * 0.34;
+          const al = (1 - d / LINK) * Math.sqrt(a.s * b.s) * 0.5;
           if (al < 0.01) continue;
           const heat = clamp((a.h + b.h) * 0.5 + boost * 0.25, 0, 1);
           const col = mixRGB(VIOLET, CRIMSON, heat);
