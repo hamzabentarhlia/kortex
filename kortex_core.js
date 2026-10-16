@@ -1,4 +1,18 @@
-
+// ═══════════════════════════════════════════════════════════════════
+// KORTEX — CORE INTERACTION ENGINE v5.0  (drop-in replacement)
+//
+// • Native system cursor (no custom cursor, no cursor:none).
+// • NEURON SWARM: thousands-of-tiny-dots feeling, built from ~80-190 tiny
+//   neurons resting at home positions all over the viewport. When the
+//   cursor moves, nearby neurons wake up, leave home on unpredictable
+//   (multi-sine) paths, orbit/follow the cursor, link to each other with
+//   synapse lines, then spring back home (or fade to rest) once the
+//   cursor moves elsewhere or stops. Works over blocks, tables, cards.
+// • Card spotlight, button ripple, smoother tilt, hero-blob mouse parallax.
+// • Everything from v3/v4 preserved (reveal, magnetic, counters, nav...).
+//
+// ZERO HTML changes required.
+// ═══════════════════════════════════════════════════════════════════
 (function () {
   'use strict';
 
@@ -452,9 +466,17 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    // threshold 0 = reveal as soon as ANY part enters the screen. A % threshold never
+    // fires on very tall blocks (e.g. a 20 000px article body), leaving them invisible.
 
     els.forEach((el) => io.observe(el));
+    // Safety net: anything already scrolled past or on screen gets revealed.
+    const sweep = () => els.forEach((el) => {
+      if (!el.classList.contains('visible') && el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+    window.addEventListener('load', () => setTimeout(sweep, 1200));
+    window.addEventListener('scroll', () => { clearTimeout(sweep.t); sweep.t = setTimeout(sweep, 250); }, { passive: true });
   }
 
   function initMagneticElements() {
