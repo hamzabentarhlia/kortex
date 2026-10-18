@@ -297,3 +297,10 @@ ol.after-steps{padding:0;margin-inline:0}
 .timeline h3{font-family:var(--ff-display);font-size:18px;margin-bottom:6px}
 .timeline p{color:var(--text-2);font-size:15.5px}
 .login-card{max-width:460px;margin-inline:auto;padding:clamp(24px,5vw,40px)}
+:root[lang=ar] .dg-label,:root[lang=ar] .mini-table th,:root[lang=ar] .prose th,:root[lang=ar] .tbl .row-group th,:root[lang=ar] .before-after .ba-label,:root[lang=ar] .timeline .when{font-family:var(--ff-body);letter-spacing:0;text-transform:none}
+:root[lang=ar] .dg-label{font-size:12px}
+:root[lang=ar] .tier-name,:root[lang=ar] .tbl thead th{letter-spacing:.02em}
+.prose,.in-short,.faq-a{overflow-wrap:anywhere}
+.prose code{word-break:break-all}
+.prose pre{max-width:100%;overflow-x:auto;padding:18px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--bg-sunk);font-size:13.5px;line-height:1.55}
+.prose pre code{padding:0;background:none;word-break:normal}

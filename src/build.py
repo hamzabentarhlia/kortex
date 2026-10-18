@@ -561,6 +561,13 @@ def faq_entities(body):
     ]
 
 
+def og_image(lang, pid, meta):
+    if meta.get("image"):
+        return meta["image"]
+    own = f"/assets/og/{pid}-{lang}.jpg"
+    return own if (OUT / own.lstrip("/")).exists() else f"/assets/og/home-{lang}.jpg"
+
+
 def schema(lang, pid, meta, body):
     org_id = DOMAIN + "/#organization"
     person_id = DOMAIN + "/#founder"
@@ -643,7 +650,7 @@ def schema(lang, pid, meta, body):
             "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
             "publisher": {"@id": org_id},
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
-            "image": DOMAIN + meta.get("image", "/og-image.png"),
+            "image": DOMAIN + og_image(lang, pid, meta),
         })
     if meta.get("kind") == "term":
         graph.append({"@type": "DefinedTerm", "name": strip_tags(meta.get("h1", meta["title"])), "description": meta["description"], "inDefinedTermSet": abs_url(lang, "glossary"), "url": page_url})
@@ -664,7 +671,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
     og_alt = "".join(f'<meta property="og:locale:alternate" content="{LOCALE[l]}">' for l in alts if l != lang)
     title = html.escape(meta["title"], quote=True)
     desc = html.escape(meta["description"], quote=True)
-    image = DOMAIN + meta.get("image", "/og-image.png")
+    image = DOMAIN + og_image(lang, pid, meta)
     return f'''<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
@@ -681,6 +688,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <meta property="og:image" content="{image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{title}">
 <meta property="og:locale" content="{LOCALE[lang]}">{og_alt}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -699,6 +707,54 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 ANALYTICS = f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{GA_ID}");addEventListener("load",function(){{setTimeout(function(){{var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id={GA_ID}";document.head.appendChild(s)}},1500)}})</script>'
 
 
+def mirror_path(d, w):
+    tokens = re.findall(r"[MLHVCSQTZmlhvcsqtz]|-?\d*\.?\d+", d)
+    out, cmd, idx = [], None, 0
+    for tok in tokens:
+        if tok.isalpha():
+            cmd, idx = tok, 0
+            out.append(tok)
+            continue
+        val = float(tok)
+        if cmd == "H" or (cmd in "MLCSQT" and idx % 2 == 0):
+            val = w - val
+        idx += 1
+        out.append(f"{val:g}")
+    return " ".join(out)
+
+
+def mirror_svg(svg):
+    vb = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
+    if not vb:
+        return svg
+    w = float(vb.group(1))
+
+    def rect(m):
+        tag = m.group(0)
+        x = re.search(r' x="([\d.-]+)"', tag)
+        wd = re.search(r' width="([\d.-]+)"', tag)
+        if x and wd:
+            tag = tag.replace(x.group(0), f' x="{w - float(x.group(1)) - float(wd.group(1)):g}"', 1)
+        return tag
+
+    def text(m):
+        tag = m.group(0)
+        x = re.search(r' x="([\d.-]+)"', tag)
+        if x:
+            tag = tag.replace(x.group(0), f' x="{w - float(x.group(1)):g}"', 1)
+        return tag
+
+    svg = re.sub(r"<rect\b[^>]*>", rect, svg)
+    svg = re.sub(r"<text\b[^>]*>", text, svg)
+    svg = re.sub(r'(<circle\b[^>]*?) cx="([\d.-]+)"', lambda m: f'{m.group(1)} cx="{w - float(m.group(2)):g}"', svg)
+    svg = re.sub(r' d="([^"]+)"', lambda m: f' d="{mirror_path(m.group(1), w)}"', svg)
+    return svg
+
+
+def mirror_diagrams(body):
+    return re.sub(r'<svg class="frag-lines".*?</svg>|<figure class="glass diagram[^"]*"[^>]*>\s*<svg.*?</svg>', lambda m: mirror_svg(m.group(0)), body, flags=re.S)
+
+
 def fr_typo(text):
     text = re.sub(r" ([?!;:»])", "\u202f\\1", text)
     text = text.replace("« ", "«\u202f")
@@ -709,8 +765,12 @@ def fr_typo(text):
 
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
+    if lang == "ar":
+        body = mirror_diagrams(body)
+        body = re.sub(r"(?<=[\s>])و(?=[A-Za-z])", "و\u200c", body)
+        meta = {k: re.sub(r"(?<=\s)و(?=[A-Za-z])", "و\u200c", v) for k, v in meta.items()}
     if lang == "fr":
-        body = fr_typo(body)
+        body = re.sub(r">([^<]+)<", lambda m: ">" + fr_typo(m.group(1)) + "<", body)
         meta = {k: fr_typo(v) for k, v in meta.items()}
     if meta.get("kind") in ("article", "term"):
         body = article_wrap(lang, pid, meta, body)
