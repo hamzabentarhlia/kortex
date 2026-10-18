@@ -1,0 +1,51 @@
+title: Contact KORTEX and book a strategy call | KORTEX
+description: Book a strategy call with KORTEX or send a message. Tell us where your expertise lives today and we will show you how it could appear in AI answers.
+crumb: Contact
+band: no
+---
+<section class="page-hero" aria-labelledby="contact-title">
+<div class="wrap split">
+<div>
+<span class="eyebrow">Contact</span>
+<h1 id="contact-title" class="display">Book a <span class="chip-word">strategy</span> call</h1>
+<p class="hero-lead">Tell us who you are and where your expertise lives today. We reply to every message and suggest a time for a call.</p>
+<ol class="after-steps" style="grid-template-columns:1fr">
+<li class="glass"><span class="kicker">Step 1</span><strong>You send the form</strong><p>Name, email and a link to your site or content. That is all we need.</p></li>
+<li class="glass"><span class="kicker">Step 2</span><strong>We prepare</strong><p>Before the call we look at how AI engines currently answer questions in your field.</p></li>
+<li class="glass"><span class="kicker">Step 3</span><strong>We talk, you decide</strong><p>We share what we found and whether KORTEX fits. If it does not, we say so.</p></li>
+</ol>
+</div>
+<div class="glass card" style="padding:clamp(22px,4vw,36px)">
+<div class="form-status" data-form-status tabindex="-1" hidden role="status"><strong>Message sent.</strong> Thank you. We will reply by email to suggest a time.</div>
+<form class="form" action="https://api.web3forms.com/submit" method="post" data-track-form="contact">
+<input type="hidden" name="access_key" value="@@web3forms">
+<input type="hidden" name="subject" value="New strategy call request (EN)">
+<input type="hidden" name="from_name" value="KORTEX website">
+<input type="hidden" name="redirect" value="https://www.kortexlab.me/contact/?sent=1">
+<input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="form-row">
+<div class="field"><label for="c-name">Name</label><input id="c-name" name="name" type="text" required autocomplete="name"></div>
+<div class="field"><label for="c-email">Work email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+</div>
+<div class="field"><label for="c-site">Website or content link</label><input id="c-site" name="Website" type="url" required inputmode="url" placeholder="https://" data-prefill="source"></div>
+<input type="hidden" name="Plan" value="" data-prefill="plan">
+<div class="field"><label for="c-message">Message <span class="opt">(optional)</span></label><textarea id="c-message" name="message" rows="5"></textarea></div>
+<button class="btn btn-primary" type="submit" data-track="contact-submit">Send and book a call{{icon:arrow|flip}}</button>
+<p class="form-note">Prefer email? Write to <a class="text-link" href="mailto:@@email">@@email</a>.<!--if:privacy--> See our <a class="text-link" href="@privacy">privacy policy</a>.<!--endif--></p>
+</form>
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="contact-alt" style="padding-top:24px">
+<div class="wrap">
+<div class="glass answer-block">
+<div>
+<span class="eyebrow">Not ready to talk?</span>
+<h2 id="contact-alt">Start with a free written audit</h2>
+<p class="lead-answer">Send one link and we tell you how that content would hold up in AI answers. No call needed.</p>
+</div>
+<div style="align-self:center"><a class="btn btn-ghost" href="@audit" data-track="contact-audit">Get a free GEO audit{{icon:arrow|flip}}</a></div>
+</div>
+</div>
+</section>
