@@ -699,8 +699,19 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 ANALYTICS = f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{GA_ID}");addEventListener("load",function(){{setTimeout(function(){{var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id={GA_ID}";document.head.appendChild(s)}},1500)}})</script>'
 
 
+def fr_typo(text):
+    text = re.sub(r" ([?!;:»])", "\u202f\\1", text)
+    text = text.replace("« ", "«\u202f")
+    text = re.sub(r"(\d) (\d{3})\b", "\\1\u202f\\2", text)
+    text = re.sub(r"(\d) €", "\\1\u00a0€", text)
+    return text
+
+
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
+    if lang == "fr":
+        body = fr_typo(body)
+        meta = {k: fr_typo(v) for k, v in meta.items()}
     if meta.get("kind") in ("article", "term"):
         body = article_wrap(lang, pid, meta, body)
     body = resolve(body, lang)
