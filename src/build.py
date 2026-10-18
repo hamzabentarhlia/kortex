@@ -32,9 +32,9 @@ PAGES = {
     "pricing": "/pricing/",
     "about": "/about/",
     "compare": "/compare/",
-    "vs-seo-agency": "/compare/kortex-vs-seo-agency/",
-    "vs-chatgpt": "/compare/kortex-vs-chatgpt/",
-    "vs-freelance": "/compare/kortex-vs-freelance-writer/",
+    
+    
+    
     "security": "/security/",
     "glossary": "/glossary/",
     "blog": "/blog/",
@@ -44,7 +44,14 @@ PAGES = {
     "terms": "/legal/terms/",
     "cookies": "/legal/cookies/",
     "login": "/login/",
+    "404": "/404/",
 }
+
+HUBS = {"blog": "blog", "glossary": "glossary", "compare": "compare", "solutions": "solutions"}
+
+for _file in sorted((Path(__file__).resolve().parent / "pages").glob("*/*/*.html")):
+    _id = f"{_file.parent.name}/{_file.stem}"
+    PAGES.setdefault(_id, f"/{_id}/")
 
 UI = {
     "en": {
@@ -426,7 +433,7 @@ def resolve(body, lang):
         pid = m.group(1)
         return m.group(2) if exists(lang, pid) else ""
 
-    body = re.sub(r"<!--if:([a-z0-9-]+)-->(.*?)<!--endif-->", block, body, flags=re.S)
+    body = re.sub(r"<!--if:([a-z0-9/-]+)-->(.*?)<!--endif-->", block, body, flags=re.S)
 
     def anchor(m):
         pid, inner = m.group(1), m.group(2)
@@ -434,8 +441,9 @@ def resolve(body, lang):
             return m.group(0)
         return inner
 
-    body = re.sub(r'<a[^>]*?href="@([a-z0-9-]+)[^"]*"[^>]*>(.*?)</a>', anchor, body, flags=re.S)
-    body = re.sub(r'(href|action)="@([a-z0-9-]+)', lambda m: f'{m.group(1)}="{url(lang, m.group(2))}', body)
+    body = re.sub(r'<a[^>]*?href="@([a-z0-9/-]+)[^"]*"[^>]*>(.*?)</a>', anchor, body, flags=re.S)
+    body = re.sub(r'(href|action)="@([a-z0-9/-]+)', lambda m: f'{m.group(1)}="{url(lang, m.group(2))}', body)
+    body = re.sub(r"\{\{list:([a-z]+)\}\}", lambda m: listing(lang, m.group(1)), body)
     body = body.replace("@@book", book_href(lang))
     body = body.replace("@@email", EMAIL)
     body = body.replace("@@linkedin", LINKEDIN)
@@ -443,6 +451,102 @@ def resolve(body, lang):
     body = re.sub(r"\{\{icon:([a-z]+)(?:\|([a-z -]+))?\}\}", lambda m: icon(m.group(1), m.group(2) or ""), body)
     body = body.replace("{{cta_band}}", cta_band(lang))
     return body
+
+
+LIST_TEXT = {
+    "en": {"read": "Read", "min": "min read", "by": "By", "updated": "Updated", "in_short": "In short", "author": "Hamza Bentarhlia", "related": "Keep reading"},
+    "fr": {"read": "Lire", "min": "min de lecture", "by": "Par", "updated": "Mis à jour le", "in_short": "En bref", "author": "Hamza Bentarhlia", "related": "À lire ensuite"},
+    "ar": {"read": "اقرأ", "min": "دقائق قراءة", "by": "بقلم", "updated": "آخر تحديث", "in_short": "باختصار", "author": "حمزة بنترهلية", "related": "اقرأ أيضا"},
+}
+MONTHS = {
+    "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "fr": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+    "ar": ["يناير", "فبراير", "مارس", "أبريل", "ماي", "يونيو", "يوليوز", "غشت", "شتنبر", "أكتوبر", "نونبر", "دجنبر"],
+}
+
+
+def human_date(lang, iso):
+    y, m, d = iso.split("-")
+    month = MONTHS[lang][int(m) - 1]
+    if lang == "en":
+        return f"{month} {int(d)}, {y}"
+    return f"{int(d)} {month} {y}"
+
+
+def children(lang, hub):
+    items = []
+    for pid in PAGES:
+        if pid.startswith(hub + "/") and exists(lang, pid):
+            meta, body = parse_page(source_path(lang, pid))
+            items.append((pid, meta, body))
+    if hub == "blog":
+        items.sort(key=lambda x: x[1].get("date", ""), reverse=True)
+    else:
+        items.sort(key=lambda x: strip_tags(x[1].get("h1", x[1]["title"])).lower())
+    return items
+
+
+def reading_time(body):
+    return max(3, round(len(strip_tags(body).split()) / 220))
+
+
+def listing(lang, hub):
+    t = LIST_TEXT[lang]
+    cards = []
+    for pid, meta, body in children(lang, hub):
+        title = meta.get("h1", meta["title"])
+        summary = meta.get("summary", meta["description"])
+        kicker = meta.get("kicker", "")
+        extra = f'<span class="kicker">{kicker}</span>' if kicker else ""
+        foot = ""
+        if hub == "blog":
+            foot = f'<p class="card-meta">{human_date(lang, meta["date"])} · {reading_time(body)} {t["min"]}</p>'
+        cards.append(
+            f'<a class="glass card list-card" href="{url(lang, pid)}">{extra}<h3>{strip_tags(title)}</h3><p>{summary}</p>{foot}'
+            f'<span class="card-link">{t["read"]}{icon("arrow")}</span></a>'
+        )
+    cls = "grid grid-3" if hub in ("blog", "compare") else "grid grid-3 glossary-grid"
+    return f'<div class="{cls}">{"".join(cards)}</div>'
+
+
+def article_wrap(lang, pid, meta, body):
+    t = LIST_TEXT[lang]
+    hub = pid.split("/")[0]
+    hub_label = UI[lang].get(hub, hub)
+    about = url(lang, "about") if exists(lang, "about") else None
+    author = f'<a class="text-link" href="{about}" rel="author">{t["author"]}</a>' if about else t["author"]
+    meta_line = ""
+    if meta.get("date"):
+        meta_line = (
+            f'<p class="article-meta">{t["by"]} {author} · <time datetime="{meta.get("modified", meta["date"])}">{t["updated"]} {human_date(lang, meta.get("modified", meta["date"]))}</time>'
+            f' · {reading_time(body)} {t["min"]}</p>'
+        )
+    short = ""
+    if meta.get("in_short"):
+        short = f'<aside class="glass in-short" aria-label="{t["in_short"]}"><span class="kicker">{t["in_short"]}</span><p>{meta["in_short"]}</p></aside>'
+    related = ""
+    sibs = [c for c in children(lang, hub) if c[0] != pid][:3] if hub == "blog" else []
+    if sibs:
+        cards = "".join(
+            f'<a class="glass card list-card" href="{url(lang, c[0])}"><h3>{strip_tags(c[1].get("h1", c[1]["title"]))}</h3><span class="card-link">{t["read"]}{icon("arrow")}</span></a>'
+            for c in sibs
+        )
+        related = f'<section class="section" aria-labelledby="related-title"><div class="wrap"><h2 id="related-title" class="kicker" style="margin-bottom:20px">{t["related"]}</h2><div class="grid grid-3">{cards}</div></div></section>'
+    kicker = meta.get("kicker", hub_label)
+    crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{url(lang, hub)}">{hub_label}</a></nav>' if "/" in pid and exists(lang, hub) else ""
+    return f'''<article>
+<header class="page-hero article-hero"><div class="wrap narrow">
+{crumbs}
+<span class="eyebrow">{kicker}</span>
+<h1 class="display display-sm">{meta.get("h1", meta["title"])}</h1>
+{meta_line}
+{short}
+</div></header>
+<div class="wrap narrow article-body prose">
+{body}
+</div>
+</article>
+{related}'''
 
 
 def strip_tags(s):
@@ -491,8 +595,11 @@ def schema(lang, pid, meta, body):
         },
     ]
     crumbs = [{"@type": "ListItem", "position": 1, "name": UI[lang]["home_crumb"], "item": abs_url(lang, "home")}]
+    if "/" in pid and exists(lang, pid.split("/")[0]):
+        hub = pid.split("/")[0]
+        crumbs.append({"@type": "ListItem", "position": 2, "name": UI[lang].get(hub, hub), "item": abs_url(lang, hub)})
     if pid != "home":
-        crumbs.append({"@type": "ListItem", "position": 2, "name": meta.get("crumb", meta["title"]), "item": page_url})
+        crumbs.append({"@type": "ListItem", "position": len(crumbs) + 1, "name": strip_tags(meta.get("crumb", meta.get("h1", meta["title"]))), "item": page_url})
     graph.append({"@type": "BreadcrumbList", "@id": page_url + "#breadcrumb", "itemListElement": crumbs})
     extras = [x.strip() for x in meta.get("schema", "").split(",") if x.strip()]
     if "person" in extras:
@@ -525,6 +632,21 @@ def schema(lang, pid, meta, body):
                 for name, price in offers
             ],
         })
+    if meta.get("kind") == "article":
+        graph.append({
+            "@type": "BlogPosting" if pid.startswith("blog/") else "Article",
+            "@id": page_url + "#article",
+            "headline": strip_tags(meta.get("h1", meta["title"]))[:110],
+            "description": meta["description"],
+            "inLanguage": lang,
+            "mainEntityOfPage": {"@id": page_url + "#webpage"},
+            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
+            "publisher": {"@id": org_id},
+            **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
+            "image": DOMAIN + meta.get("image", "/og-image.png"),
+        })
+    if meta.get("kind") == "term":
+        graph.append({"@type": "DefinedTerm", "name": strip_tags(meta.get("h1", meta["title"])), "description": meta["description"], "inDefinedTermSet": abs_url(lang, "glossary"), "url": page_url})
     faqs = faq_entities(body)
     if faqs:
         graph.append({"@type": "FAQPage", "@id": page_url + "#faq", "mainEntity": faqs})
@@ -532,7 +654,7 @@ def schema(lang, pid, meta, body):
 
 
 def head(lang, pid, meta, body, critical, css_v, js_v):
-    alts = available(pid)
+    alts = [] if pid == "404" else available(pid)
     hreflang = "".join(f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}">' for l in alts)
     if "en" in alts:
         hreflang += f'<link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}">'
@@ -547,7 +669,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-{robots}<link rel="canonical" href="{abs_url(lang, pid)}">
+{robots}{"" if pid == "404" else f'<link rel="canonical" href="{abs_url(lang, pid)}">'}
 {hreflang}
 <meta name="theme-color" content="#0e0907" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#faf4ec" media="(prefers-color-scheme: light)">
@@ -579,6 +701,8 @@ ANALYTICS = f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dat
 
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
+    if meta.get("kind") in ("article", "term"):
+        body = article_wrap(lang, pid, meta, body)
     body = resolve(body, lang)
     direction = ' dir="rtl"' if lang == "ar" else ""
     band = "" if meta.get("band") == "no" else cta_band(lang)
@@ -603,6 +727,8 @@ def render(lang, pid, critical, css_v, js_v):
 
 
 def output_path(lang, pid):
+    if pid == "404":
+        return OUT / "404.html"
     rel = url(lang, pid).strip("/")
     return OUT / rel / "index.html" if rel else OUT / "index.html"
 
@@ -612,13 +738,89 @@ def sitemap():
     for pid in PAGES:
         for lang in available(pid):
             meta, _ = parse_page(source_path(lang, pid))
-            if meta.get("noindex"):
+            if meta.get("noindex") or pid == "404":
                 continue
             alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in available(pid))
             if "en" in available(pid):
                 alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}"/>'
             rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified", BUILD_DATE)}</lastmod>{alts}</url>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(rows) + "\n</urlset>\n"
+
+
+BLOG_SLUGS = {
+    "answer-engine-visibility-guide": "guide-visibilite-moteurs-de-reponse",
+    "b2b-linkedin-content-dies": "pourquoi-contenu-linkedin-b2b-meurt",
+    "category-creation-ai-search": "creation-de-categorie-recherche-ia",
+    "content-audit-ai-retrieval": "audit-contenu-recuperation-ia",
+    "entity-first-content-architecture": "architecture-contenu-entite-first",
+    "new-b2b-content-stack": "nouvelle-stack-contenu-b2b",
+    "one-video-authority-system": "une-video-systeme-autorite",
+    "stop-ranking-start-dominating": "arretez-de-ranker-soyez-cite",
+}
+
+
+def redirects():
+    table = {
+        "solutions.html": ("fr", "how-it-works"),
+        "tarifs.html": ("fr", "pricing"),
+        "blog.html": ("fr", "blog"),
+        "contact.html": ("fr", "contact"),
+        "login.html": ("fr", "login"),
+        "pricing.html": ("en", "pricing"),
+        "en/index.html": ("en", "home"),
+        "en/solutions.html": ("en", "how-it-works"),
+        "en/pricing.html": ("en", "pricing"),
+        "en/blog.html": ("en", "blog"),
+        "en/contact.html": ("en", "contact"),
+        "en/login.html": ("en", "login"),
+    }
+    for en_slug, fr_slug in BLOG_SLUGS.items():
+        table[f"blog-{fr_slug}.html"] = ("fr", f"blog/{en_slug}")
+        table[f"blog-{en_slug}.html"] = ("en", f"blog/{en_slug}")
+        table[f"en/blog-{en_slug}.html"] = ("en", f"blog/{en_slug}")
+    return table
+
+
+def redirect_page(target_lang, pid):
+    lang, path = target_lang, url(target_lang, pid)
+    if not exists(lang, pid):
+        lang, path = "en", url("en", pid) if exists("en", pid) else "/"
+    full = DOMAIN + path
+    return (
+        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>'
+        f'<link rel="canonical" href="{full}"><meta name="robots" content="noindex, follow">'
+        f'<meta http-equiv="refresh" content="0; url={path}"></head>'
+        f'<body><p><a href="{path}">{full}</a></p></body></html>\n'
+    )
+
+
+def llms_txt():
+    lines = [
+        "# KORTEX",
+        "",
+        "> KORTEX is a GEO, SEO and content creation studio based in Fès, Morocco, serving clients worldwide. A client provides one source (a blog post, YouTube video, podcast episode or webinar) and KORTEX turns it into 30+ assets built to be cited by AI answer engines such as ChatGPT, Perplexity, Gemini, Google AI Overviews and Claude, and ranked by search engines. Expertise is extracted from the client's own content, never invented, and a person reviews everything before publication.",
+        "",
+        "Plans: GHOST from 2,500 EUR per month, SWARM 5,500 EUR per month, TITAN from 12,000 EUR per month. No setup fees, no commitment. Founder: Hamza Bentarhlia. Contact: " + EMAIL,
+        "",
+        "## Key pages",
+    ]
+    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "compare", "glossary", "blog", "about", "audit", "contact"]:
+        if exists("en", pid):
+            meta, _ = parse_page(source_path("en", pid))
+            lines.append(f"- [{strip_tags(meta.get('h1', meta['title']))}]({abs_url('en', pid)}): {meta['description']}")
+    for hub, label in (("glossary", "Glossary"), ("compare", "Comparisons"), ("blog", "Articles")):
+        items = children("en", hub)
+        if items:
+            lines += ["", f"## {label}"]
+            lines += [f"- [{strip_tags(m.get('h1', m['title']))}]({abs_url('en', p)}): {m['description']}" for p, m, _ in items]
+    lines += ["", "## Other languages", f"- French: {DOMAIN}/fr/", f"- Arabic: {DOMAIN}/ar/", ""]
+    return "\n".join(lines)
+
+
+def robots_txt():
+    bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot", "Claude-SearchBot", "Google-Extended", "Applebot-Extended", "CCBot"]
+    rules = "\n".join(f"User-agent: {b}\nAllow: /\n" for b in bots)
+    return f"User-agent: *\nAllow: /\nDisallow: /login/\nDisallow: /fr/login/\nDisallow: /ar/login/\n\n{rules}\nSitemap: {DOMAIN}/sitemap.xml\n"
 
 
 def main():
@@ -638,7 +840,13 @@ def main():
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(render(lang, pid, critical, css_v, js_v), encoding="utf-8")
             built += 1
+    for old, (lang, pid) in redirects().items():
+        target = OUT / old
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(redirect_page(lang, pid), encoding="utf-8")
     (OUT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
+    (OUT / "llms.txt").write_text(llms_txt(), encoding="utf-8")
+    (OUT / "robots.txt").write_text(robots_txt(), encoding="utf-8")
     print(f"built {built} pages")
 
 
