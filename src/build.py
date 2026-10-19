@@ -456,7 +456,7 @@ def resolve(body, lang):
 LIST_TEXT = {
     "en": {"read": "Read", "min": "min read", "by": "By", "updated": "Updated", "in_short": "In short", "author": "Hamza Bentarhlia", "related": "Keep reading"},
     "fr": {"read": "Lire", "min": "min de lecture", "by": "Par", "updated": "Mis à jour le", "in_short": "En bref", "author": "Hamza Bentarhlia", "related": "À lire ensuite"},
-    "ar": {"read": "اقرأ", "min": "دقائق قراءة", "by": "بقلم", "updated": "آخر تحديث", "in_short": "باختصار", "author": "حمزة بنترهلية", "related": "اقرأ أيضا"},
+    "ar": {"read": "اقرأ", "min": "دقائق قراءة", "by": "بقلم", "updated": "آخر تحديث", "in_short": "باختصار", "author": "حمزة بنتغليا", "related": "اقرأ أيضا"},
 }
 MONTHS = {
     "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
