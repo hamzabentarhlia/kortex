@@ -1,13 +1,19 @@
 # KORTEX
 
-> KORTEX is a GEO, SEO and content creation studio based in Fès, Morocco, serving clients worldwide. A client provides one source (a blog post, YouTube video, podcast episode or webinar) and KORTEX turns it into 30+ assets built to be cited by AI answer engines such as ChatGPT, Perplexity, Gemini, Google AI Overviews and Claude, and ranked by search engines. Expertise is extracted from the client's own content, never invented, and a person reviews everything before publication.
+> KORTEX is a GEO, SEO and content creation studio based in Fès, Morocco, serving clients worldwide. A client provides one source (a blog post, YouTube video, podcast episode or webinar) and KORTEX turns it into up to 30+ assets built to be cited by AI answer engines such as ChatGPT, Perplexity, Gemini, Google AI Overviews and Claude, and ranked by search engines. Expertise is extracted from the client's own content, never invented, and a person reviews everything before publication.
 
-Plans: GHOST from 2,500 EUR per month, SWARM 5,500 EUR per month, TITAN from 12,000 EUR per month. No setup fees, no commitment. Founder: Hamza Bentarhlia. Contact: contact@kortexlab.me
+## Plans
+- GHOST: €2,500 per month. 1 source per month, 10 assets per source, monthly citation check on 10 buyer questions, delivery in 5 business days.
+- SWARM: €5,500 per month. 1 source per month, 20 to 24 assets per source, schema markup and internal linking, monthly citation check on 10 buyer questions, monthly strategy call.
+- TITAN: from €12,000 per month. 2 or more sources per month, 28 or more assets per source, full citation tracking with competitors, off-site authority work, delivery in 3 to 4 business days.
+- Every plan: no setup fees, month to month with 30 days' notice, the client owns 100% of the content.
+
+Founder: Hamza Bentarhlia. Contact: contact@kortexlab.me. Book a strategy call: https://cal.com/hamza-bentarhlia
 
 ## Key pages
-- [KORTEX: GEO, SEO and content studio. One source, 30+ assets AI cites](https://www.kortexlab.me/): KORTEX turns one blog post, YouTube video, podcast or webinar into 30+ assets built to be cited by ChatGPT, Perplexity, Gemini and Google AI Overviews, and ranked by search.
-- [How KORTEX works](https://www.kortexlab.me/how-it-works/): The KORTEX method in plain language: we extract expertise from your blog, video, podcast or webinar, structure it, produce 30+ assets, have a person review them, then measure AI citations.
-- [KORTEX pricing](https://www.kortexlab.me/pricing/): KORTEX plans: GHOST €2,500 per month, SWARM €5,500 per month, TITAN from €12,000 per month. No setup fees, no commitment. See what each month delivers and compare every plan.
+- [KORTEX: GEO, SEO and content studio. One source, up to 30+ assets AI cites](https://www.kortexlab.me/): KORTEX turns one blog post, YouTube video, podcast or webinar into up to 30+ assets built to be cited by ChatGPT, Perplexity, Gemini and Google AI Overviews, and ranked by search.
+- [How KORTEX works](https://www.kortexlab.me/how-it-works/): The KORTEX method in plain language: we extract expertise from your blog, video, podcast or webinar, structure it, produce up to 30+ assets, have a person review them, then measure AI citations.
+- [Pricing](https://www.kortexlab.me/pricing/): KORTEX plans: GHOST €2,500, SWARM €5,500 and TITAN from €12,000 per month. 10 to 28+ assets per source, a monthly citation check in every plan, no setup fees, 30 days' notice.
 - [Solutions](https://www.kortexlab.me/solutions/): KORTEX works for B2B companies, creators and experts, and e-commerce brands, starting from a blog post, YouTube video, podcast episode or webinar. Find the entry point that fits you.
 - [GEO for B2B companies](https://www.kortexlab.me/solutions/b2b/): For SaaS, consulting, agencies, services and industrial businesses. KORTEX turns your expertise into content that AI engines cite while buyers build their shortlist.
 - [GEO for creators and experts](https://www.kortexlab.me/solutions/creators/): For YouTubers, podcasters, coaches, educators and speakers. KORTEX turns each episode or video into articles, FAQs and posts that AI engines can quote long after release day.
@@ -37,14 +43,14 @@ Plans: GHOST from 2,500 EUR per month, SWARM 5,500 EUR per month, TITAN from 12,
 - [KORTEX vs doing it yourself with ChatGPT](https://www.kortexlab.me/compare/kortex-vs-chatgpt/): You can draft content with ChatGPT for a few euros a month. What it does not do on its own: extract your expertise, check facts, keep 30 formats consistent and track citations. An honest comparison.
 
 ## Articles
-- [The B2B founder's complete guide to answer engine visibility.](https://www.kortexlab.me/blog/answer-engine-visibility-guide/): Answer engine visibility means being cited by ChatGPT, Perplexity and Gemini. Learn how they pick sources and the content architecture that earns citations.
+- [A practical guide to answer engine visibility](https://www.kortexlab.me/blog/answer-engine-visibility-guide/): Answer engine visibility means being cited by ChatGPT, Perplexity and Gemini. Learn how they pick sources and the content architecture that earns citations.
 - [How to build a category in the age of AI search.](https://www.kortexlab.me/blog/category-creation-ai-search/): Category creation in AI search means publishing a precise, retrievable definition before ChatGPT or Perplexity writes one for you. A 4-phase B2B playbook.
 - [The B2B content audit framework for AI retrieval readiness.](https://www.kortexlab.me/blog/content-audit-ai-retrieval/): A GEO content audit scores every page on 5 criteria AI answer engines reward, then sorts it into keep, retrofit or retire. Framework, scorecard and checklist.
 - [Entity-first content: the architecture AI search rewards.](https://www.kortexlab.me/blog/entity-first-content-architecture/): Entity-first content builds one consistent knowledge graph that ChatGPT, Perplexity and Gemini can cluster and cite. The 5 components, linking rules and schema.
-- [Why most B2B LinkedIn content dies in 48 hours.](https://www.kortexlab.me/blog/b2b-linkedin-content-dies/): B2B LinkedIn content dies fast because posts are written as activity, not infrastructure. Learn the founder system that turns posts into compounding authority.
+- [Why most B2B LinkedIn content dies in 48 hours.](https://www.kortexlab.me/blog/b2b-linkedin-content-dies/): B2B LinkedIn posts fade within two days because they are published as one-off activity. How to link each post to answer pages that keep working for months.
 - [The new B2B content stack: video, entities, answers, distribution.](https://www.kortexlab.me/blog/new-b2b-content-stack/): The B2B content stack in four layers: raw signal, entities, answer assets, distribution. How to run each, which AI tools to use, and why the old stack fails.
-- [From one founder video to a 30-day authority system.](https://www.kortexlab.me/blog/one-video-authority-system/): Turn one founder video into a 30-day authority system: pillar article, FAQ cluster, comparison page, 8–12 LinkedIn posts. The extraction method, step by step.
-- [Stop ranking. Start dominating answer engines.](https://www.kortexlab.me/blog/stop-ranking-start-dominating/): GEO vs SEO explained: how to structure B2B content so ChatGPT, Perplexity and Gemini cite your company as the source, with a five-step page framework.
+- [From one video to 30 days of content AI engines can cite](https://www.kortexlab.me/blog/one-video-authority-system/): Turn one video into 30 days of linked content: pillar article, FAQ page, comparison page and LinkedIn posts. The extraction method, step by step.
+- [Ranking is not enough. Become the source AI answers cite.](https://www.kortexlab.me/blog/stop-ranking-start-dominating/): GEO vs SEO explained: how to structure B2B content so ChatGPT, Perplexity and Gemini cite your company as the source, with a five-step page framework.
 
 ## Other languages
 - French: https://www.kortexlab.me/fr/

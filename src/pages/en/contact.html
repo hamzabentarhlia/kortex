@@ -3,18 +3,33 @@ description: Book a strategy call with KORTEX or send a message. Tell us where y
 crumb: Contact
 band: no
 ---
-<section class="page-hero" aria-labelledby="contact-title">
-<div class="wrap split">
-<div>
+<section class="page-hero" aria-labelledby="contact-title" style="padding-bottom:20px">
+<div class="wrap">
 <span class="eyebrow">Contact</span>
 <h1 id="contact-title" class="display">Book a <span class="chip-word">strategy</span> call</h1>
-<p class="hero-lead">Tell us who you are and where your expertise lives today. We reply to every message and suggest a time for a call.</p>
-<ol class="after-steps" style="grid-template-columns:1fr">
-<li class="glass"><span class="kicker">Step 1</span><strong>You send the form</strong><p>Name, email and a link to your site or content. That is all we need.</p></li>
-<li class="glass"><span class="kicker">Step 2</span><strong>We prepare</strong><p>Before the call we look at how AI engines currently answer questions in your field.</p></li>
-<li class="glass"><span class="kicker">Step 3</span><strong>We talk, you decide</strong><p>We share what we found and whether KORTEX fits. If it does not, we say so.</p></li>
-</ol>
+<p class="hero-lead">Pick a time that suits you. We look at your field in AI answers together, and you decide what happens next.</p>
+<p class="book-note">{{booknote}}</p>
 </div>
+</section>
+<section class="section" aria-label="Your booking calendar" style="padding-top:12px">
+<div class="wrap">
+<div class="glass cal-wrap">
+<div id="cal-inline" data-cal-link="hamza-bentarhlia">
+<div class="cal-ph"><div class="card-icon">{{icon:clock}}</div><h2 class="kicker">Your booking calendar</h2><p>The calendar loads here when you reach it. You can also open it directly.</p>
+<div class="hero-actions" style="justify-content:center;margin-top:0"><button class="btn btn-primary" type="button" data-cal-load data-track="contact-cal-load">Show the calendar</button><a class="btn btn-ghost" href="@@book" data-track="contact-cal-open">Open booking page</a></div></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section section-tint" aria-labelledby="call-title">
+<div class="wrap">
+<div class="section-head"><h2 id="call-title">What happens on the call</h2></div>
+<div class="grid grid-3 reveal-group"><div class="glass card"><span class="kicker" style="color:var(--accent-text)">We look at</span><h3 style="margin-top:10px">Your field in AI answers</h3><p>We ask a few of your buyers' questions to AI engines together and see who gets cited today.</p></div><div class="glass card"><span class="kicker" style="color:var(--accent-text)">You leave with</span><h3 style="margin-top:10px">A clear picture</h3><p>Where you appear, where competitors appear, and which of your sources holds the most usable expertise.</p></div><div class="glass card"><span class="kicker" style="color:var(--accent-text)">If you want to go further</span><h3 style="margin-top:10px">A written proposal</h3><p>We recommend a plan and a first source. If KORTEX is not the right fit, we say so.</p></div></div>
+</div>
+</section>
+<section class="section" aria-labelledby="form-title">
+<div class="wrap split">
+<div class="section-head" style="margin:0"><span class="eyebrow">Prefer to write?</span><h2 id="form-title">Send us a message instead</h2></div>
 <div class="glass card" style="padding:clamp(22px,4vw,36px)">
 <div class="form-status" data-form-status tabindex="-1" hidden role="status"><strong>Message sent.</strong> Thank you. We will reply by email to suggest a time.</div>
 <form class="form" action="https://api.web3forms.com/submit" method="post" data-track-form="contact">
@@ -36,7 +51,6 @@ band: no
 </div>
 </div>
 </section>
-
 <section class="section" aria-labelledby="contact-alt" style="padding-top:24px">
 <div class="wrap">
 <div class="glass answer-block">
