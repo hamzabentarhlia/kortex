@@ -31,6 +31,10 @@ schema: person, service
 </div>
 </section>
 
+<section class="section facts-sec" aria-label="KORTEX en cinq faits" style="padding:24px 0">
+<div class="wrap"><div class="facts reveal-group"><div class="fact"><span class="fact-ic">{{icon:grid}}</span><strong><span data-count="4">4</span></strong><span>types de sources de départ</span></div><div class="fact"><span class="fact-ic">{{icon:layers}}</span><strong><span data-count="5">5</span></strong><span>étapes de la source à la citation</span></div><div class="fact"><span class="fact-ic">{{icon:globe}}</span><strong><span data-count="3">3</span></strong><span>langues : anglais, français, arabe</span></div><div class="fact"><span class="fact-ic">{{icon:clock}}</span><strong><span data-count="5">5</span></strong><span>jours ouvrés de délai pour GHOST et SWARM</span></div><div class="fact"><span class="fact-ic">{{icon:loop}}</span><strong>Au mois</strong><span>Sans frais d'installation, sans engagement</span></div></div></div>
+</section>
+
 <section class="section section-tint" aria-labelledby="geo-title">
 <div class="wrap">
 <div class="section-head">
@@ -89,28 +93,16 @@ schema: person, service
 
 <section class="section" aria-labelledby="assets-title">
 <div class="wrap">
-<div class="section-head"><span class="eyebrow">Ce que devient une source</span><h2 id="assets-title">Un mois de contenus à partir d'un seul contenu existant</h2><p>Votre source contient des dizaines de réponses que vos acheteurs cherchent. Nous les extrayons une à une et donnons à chacune le format où elle fonctionne le mieux.</p></div>
-<figure class="glass diagram draw reveal dg-hover">
-<svg viewBox="0 0 960 420" role="img" aria-labelledby="dg2-t dg2-d">
-<title id="dg2-t">Une source devient jusqu'à trente contenus ou plus</title>
-<desc id="dg2-d">Une source au centre est reliée à huit familles de contenus : articles, pages FAQ, comparatifs, entrées de glossaire, posts LinkedIn, posts sociaux, newsletters et scripts vidéo courts.</desc>
-
-
-<g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 380 210, 320 80, 190 70"/><rect class="dg-box" x="20" y="48" width="170" height="44" rx="12"/><text class="dg-text" x="105" y="75" text-anchor="middle">Articles</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 380 210, 320 160, 190 160"/><rect class="dg-box" x="20" y="138" width="170" height="44" rx="12"/><text class="dg-text" x="105" y="165" text-anchor="middle">Pages FAQ</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 380 210, 320 260, 190 260"/><rect class="dg-box" x="20" y="238" width="170" height="44" rx="12"/><text class="dg-text" x="105" y="265" text-anchor="middle">Comparatifs</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 380 210, 320 350, 190 350"/><rect class="dg-box" x="20" y="328" width="170" height="44" rx="12"/><text class="dg-text" x="105" y="355" text-anchor="middle">Glossaire</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 580 210, 640 80, 770 70"/><rect class="dg-box" x="770" y="48" width="170" height="44" rx="12"/><text class="dg-text" x="855" y="75" text-anchor="middle">Posts LinkedIn</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 580 210, 640 160, 770 160"/><rect class="dg-box" x="770" y="138" width="170" height="44" rx="12"/><text class="dg-text" x="855" y="165" text-anchor="middle">Posts sociaux</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 580 210, 640 260, 770 260"/><rect class="dg-box" x="770" y="238" width="170" height="44" rx="12"/><text class="dg-text" x="855" y="265" text-anchor="middle">Newsletters</text></g><g class="dg-n"><path class="dg-line-accent" style="--len:300" d="M480 210 C 580 210, 640 350, 770 350"/><rect class="dg-box" x="770" y="328" width="170" height="44" rx="12"/><text class="dg-text" x="855" y="355" text-anchor="middle">Scripts courts</text></g><rect class="dg-box-accent" x="390" y="160" width="180" height="100" rx="18"/>
-<text class="dg-label" x="480" y="192" text-anchor="middle">1 source</text>
-<text class="dg-text" x="480" y="222" text-anchor="middle" style="font-size:22px;font-weight:800">jusqu'à 30+</text>
-<text class="dg-text-sm" x="480" y="244" text-anchor="middle">contenus par source</text>
-
-
-
-
-
-
-
-
-</svg>
-<figcaption>Chaque contenu renvoie à la même expertise et aux autres contenus. Moteurs de recherche et moteurs IA voient un expert cohérent, pas des publications éparpillées.</figcaption>
-</figure>
+<div class="section-head"><span class="eyebrow">Essayez</span><h2 id="assets-title">Choisissez une source. Voyez ce qu'elle devient.</h2><p>Choisissez ce que vous publiez déjà. Le schéma montre les contenus qu'une source produit, et comment ils finissent cités dans une réponse IA.</p></div>
+<div class="picker glass" data-picker data-active="blog">
+<div class="pk-tabs" role="tablist" aria-label="Type de source"><button type="button" role="tab" id="pk-blog" aria-controls="pk-panel" aria-selected="true" tabindex="0" data-src="blog">{{icon:doc}}<span>Article</span></button><button type="button" role="tab" id="pk-youtube" aria-controls="pk-panel" aria-selected="false" tabindex="-1" data-src="youtube">{{icon:play}}<span>Vidéo YouTube</span></button><button type="button" role="tab" id="pk-podcast" aria-controls="pk-panel" aria-selected="false" tabindex="-1" data-src="podcast">{{icon:mic}}<span>Podcast</span></button><button type="button" role="tab" id="pk-webinar" aria-controls="pk-panel" aria-selected="false" tabindex="-1" data-src="webinar">{{icon:screen}}<span>Webinaire</span></button></div>
+<div class="pk-stage run" id="pk-panel" role="tabpanel" aria-live="polite">
+<svg class="pk-wires" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true"><path class="pk-w" style="--i:0" d="M210 200 C 270 200, 270 70, 330 70"/><path class="pk-w" style="--i:1" d="M210 200 C 270 200, 270 200, 330 200"/><path class="pk-w" style="--i:2" d="M210 200 C 270 200, 270 330, 330 330"/><path class="pk-w" style="--i:3" d="M690 70 C 740 70, 740 200, 790 200"/><path class="pk-w" style="--i:4" d="M690 200 C 740 200, 740 200, 790 200"/><path class="pk-w" style="--i:5" d="M690 330 C 740 330, 740 200, 790 200"/></svg>
+<div class="pk-src"><div class="pk-src-v" data-v="blog">{{icon:doc}}<strong>Article</strong></div><div class="pk-src-v" data-v="youtube">{{icon:play}}<strong>Vidéo YouTube</strong></div><div class="pk-src-v" data-v="podcast">{{icon:mic}}<strong>Podcast</strong></div><div class="pk-src-v" data-v="webinar">{{icon:screen}}<strong>Webinaire</strong></div></div>
+<div class="pk-cards"><ul class="pk-set" data-set="blog" role="list"><li class="pk-card" style="--i:0">{{icon:doc}}<span>Pilier remis à jour</span></li><li class="pk-card" style="--i:1">{{icon:chat}}<span>Pages questions</span></li><li class="pk-card" style="--i:2">{{icon:layers}}<span>Page comparative</span></li><li class="pk-card" style="--i:3">{{icon:grid}}<span>Entrées de glossaire</span></li><li class="pk-card" style="--i:4">{{icon:linkedin}}<span>Posts sociaux</span></li><li class="pk-card" style="--i:5">{{icon:mail}}<span>Numéro de newsletter</span></li></ul><ul class="pk-set" data-set="youtube" role="list"><li class="pk-card" style="--i:0">{{icon:doc}}<span>Article long</span></li><li class="pk-card" style="--i:1">{{icon:chat}}<span>Page FAQ</span></li><li class="pk-card" style="--i:2">{{icon:grid}}<span>Guide pratique</span></li><li class="pk-card" style="--i:3">{{icon:play}}<span>Scripts courts</span></li><li class="pk-card" style="--i:4">{{icon:linkedin}}<span>Posts sociaux</span></li><li class="pk-card" style="--i:5">{{icon:mail}}<span>Numéro de newsletter</span></li></ul><ul class="pk-set" data-set="podcast" role="list"><li class="pk-card" style="--i:0">{{icon:doc}}<span>Article d'épisode</span></li><li class="pk-card" style="--i:1">{{icon:chat}}<span>Pages questions</span></li><li class="pk-card" style="--i:2">{{icon:quote}}<span>Posts citations</span></li><li class="pk-card" style="--i:3">{{icon:mail}}<span>Numéro de newsletter</span></li><li class="pk-card" style="--i:4">{{icon:play}}<span>Scripts courts</span></li><li class="pk-card" style="--i:5">{{icon:grid}}<span>Entrées de glossaire</span></li></ul><ul class="pk-set" data-set="webinar" role="list"><li class="pk-card" style="--i:0">{{icon:doc}}<span>Guide pilier</span></li><li class="pk-card" style="--i:1">{{icon:chat}}<span>Cluster FAQ</span></li><li class="pk-card" style="--i:2">{{icon:layers}}<span>Page comparative</span></li><li class="pk-card" style="--i:3">{{icon:target}}<span>Pages pour la vente</span></li><li class="pk-card" style="--i:4">{{icon:linkedin}}<span>Posts sociaux</span></li><li class="pk-card" style="--i:5">{{icon:mail}}<span>E-mails de suivi</span></li></ul></div>
+<div class="pk-ans"><div class="frag-label">Réponse IA · exemple</div><div class="frag-lines-text"><i></i><i></i><i></i></div><span class="frag-cite">{{icon:link}}Source : votremarque.fr</span><span class="pk-built" data-v="blog">Issu de votre article</span><span class="pk-built" data-v="youtube">Issu de votre vidéo</span><span class="pk-built" data-v="podcast">Issu de votre podcast</span><span class="pk-built" data-v="webinar">Issu de votre webinaire</span></div>
+</div>
+</div>
 </div>
 </section>
 

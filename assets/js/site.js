@@ -139,9 +139,10 @@ function animateCount(el) {
 
 function initReveal() {
   if (!reduceMotion) {
-    document.querySelectorAll('main .section-head, main .faq, main .compare, main .tbl-wrap, main .answer-block, main .prose > h2, main .vs, main .split > .glass').forEach((el) => {
-      if (el.getBoundingClientRect().top > innerHeight && !el.closest('.reveal,.reveal-group')) el.classList.add('reveal');
-    });
+    const vh = innerHeight;
+    const late = [...document.querySelectorAll('main .section-head, main .faq, main .compare, main .tbl-wrap, main .answer-block, main .prose > h2, main .vs, main .split > .glass')]
+      .filter((el) => !el.closest('.reveal,.reveal-group') && el.getBoundingClientRect().top > vh);
+    late.forEach((el) => el.classList.add('reveal'));
   }
   document.querySelectorAll('.draw svg').forEach((svg) => {
     svg.querySelectorAll('rect,text').forEach((el, i) => el.style.setProperty('--i', Math.min(i, 30)));
@@ -149,7 +150,7 @@ function initReveal() {
   document.querySelectorAll('.reveal-group').forEach((g) => {
     [...g.children].forEach((el, i) => el.style.setProperty('--i', Math.min(i, 8)));
   });
-  const items = document.querySelectorAll('.reveal,.reveal-group,.draw,[data-count],[data-fill],[data-typer]');
+  const items = document.querySelectorAll('.reveal,.reveal-group,.draw,.divider,.path-wrap,[data-count],[data-fill],[data-typer]');
   if (!('IntersectionObserver' in window) || reduceMotion) {
     items.forEach((el) => {
       el.classList.add('is-in');
@@ -392,6 +393,66 @@ function initPointerFx() {
   }
 }
 
+function initPicker() {
+  document.querySelectorAll('[data-picker]').forEach((pk) => {
+    const tabs = [...pk.querySelectorAll('[role=tab]')];
+    const stage = pk.querySelector('.pk-stage');
+    const select = (tab, focus) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      pk.dataset.active = tab.dataset.src;
+      stage.classList.remove('run');
+      void stage.offsetWidth;
+      stage.classList.add('run');
+      if (focus) tab.focus();
+      track('Source picker', { source: tab.dataset.src });
+    };
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      stage.classList.remove('run');
+      const io = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) {
+          stage.classList.add('run');
+          io.disconnect();
+        }
+      }, { threshold: 0.25 });
+      io.observe(stage);
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t));
+      t.addEventListener('keydown', (e) => {
+        const dir = document.documentElement.dir === 'rtl' ? -1 : 1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const step = (e.key === 'ArrowRight' ? 1 : -1) * dir;
+          select(tabs[(i + step + tabs.length) % tabs.length], true);
+        }
+      });
+    });
+  });
+}
+
+function initFinder() {
+  const f = document.querySelector('[data-finder]');
+  if (!f) return;
+  const tiers = document.querySelectorAll('[data-plan]');
+  const out = f.querySelector('[data-finder-out]');
+  const run = (first) => {
+    const src = (f.querySelector('input[name=fsrc]:checked') || {}).value;
+    const comp = (f.querySelector('input[name=fcomp]:checked') || {}).value;
+    const plan = src === 'many' || comp === 'own' ? 'titan' : comp === 'some' ? 'swarm' : 'ghost';
+    tiers.forEach((t) => t.classList.toggle('is-match', t.dataset.plan === plan));
+    out.querySelectorAll('[data-why]').forEach((w) => { w.hidden = w.dataset.why !== plan; });
+    if (first === true) return;
+    document.querySelectorAll('.tiers').forEach((g) => g.classList.add('has-match'));
+    track('Plan finder', { plan });
+  };
+  f.addEventListener('change', () => run());
+  run(true);
+}
+
 initTheme();
 initHeader();
 initMenus();
@@ -400,9 +461,8 @@ initReveal();
 initPrompt();
 initPrefill();
 initForms();
-initTracking();
 initAnimVisibility();
-initStory();
-initCalc();
-initCal();
-initPointerFx();
+initPicker();
+initFinder();
+const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
+[initStory, initCalc, initCal, initTracking, initPointerFx].forEach((fn) => idle(() => fn()));

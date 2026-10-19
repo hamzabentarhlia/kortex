@@ -217,3 +217,17 @@ p{margin:0}
 .frag-meter b i{display:block;height:100%;background:var(--ember);border-radius:4px}
 .nav-links{position:relative}
 .nav-ind{position:absolute;bottom:2px;left:0;width:100px;height:2px;border-radius:2px;background:var(--ember);transform-origin:0 50%;opacity:0;transition:transform .35s var(--ease),opacity .25s;pointer-events:none}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.m-art{display:block;width:100%;height:auto;overflow:visible}
+.hero-art-wrap{display:grid;gap:28px;align-items:center}
+@media (min-width:1040px){.hero-art-wrap{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px}}
+.page-art{max-width:460px;width:100%;justify-self:center;opacity:.95}
+@media (max-width:1039px){.page-art{max-width:360px;justify-self:start}}
+:root[dir=rtl] .page-art .m-art{transform:scaleX(-1)}
+.divider{position:relative;height:56px;max-width:var(--wrap);margin:-8px auto;padding-inline:var(--gutter);pointer-events:none}
+.divider svg{width:100%;height:100%;overflow:visible}
+.card-cover{margin:-28px -28px 18px;border-bottom:1px solid var(--line);border-radius:var(--radius) var(--radius) 0 0;overflow:hidden;aspect-ratio:16/7;background:radial-gradient(circle at 80% 30%,var(--glow-3),transparent 60%),var(--bg-sunk)}
+.card-cover .m-art{height:100%}
+.article-cover{margin-top:28px;aspect-ratio:16/7;overflow:hidden;padding:0;background:radial-gradient(circle at 75% 35%,var(--glow-1),transparent 60%),var(--bg-sunk)}
+.article-cover .m-art{height:100%}
+:root[dir=rtl] .card-cover .m-art,:root[dir=rtl] .article-cover .m-art{transform:scaleX(-1)}
