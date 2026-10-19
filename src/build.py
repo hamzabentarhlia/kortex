@@ -16,6 +16,9 @@ EMAIL = "contact@kortexlab.me"
 LINKEDIN = "https://www.linkedin.com/in/hamza-bentarhlia/"
 WEB3FORMS_KEY = "0aa868e7-7559-439c-a911-1f246b2d03e3"
 GA_ID = "G-4440VPDMPW"
+CAL_LINK = "hamza-bentarhlia"
+CAL_URL = "https://cal.com/" + CAL_LINK
+INDEXNOW_KEY = "6f1c9b2e8a4d47f3b0e5c7a19d2f4e83"
 BUILD_DATE = "2026-10-18"
 
 PAGES = {
@@ -98,6 +101,8 @@ UI = {
         "cta_text": "Tell us where your expertise lives today. We show you where AI engines already mention your field, and what it would take for them to mention you.",
         "cta_terms": "No setup fees. No commitment.",
         "home_crumb": "Home",
+        "photo_alt": "Hamza Bentarhlia, founder of KORTEX",
+        "book_note": "No pressure. You leave with a clear view of where AI engines mention your field.",
     },
     "fr": {
         "skip": "Aller au contenu principal",
@@ -143,6 +148,8 @@ UI = {
         "cta_text": "Dites-nous où vit votre expertise aujourd'hui. Nous vous montrons où les moteurs IA parlent déjà de votre domaine, et ce qu'il faudrait pour qu'ils parlent de vous.",
         "cta_terms": "Sans frais d'installation. Sans engagement.",
         "home_crumb": "Accueil",
+        "photo_alt": "Hamza Bentarhlia, fondateur de KORTEX",
+        "book_note": "Sans pression. Vous repartez avec une vision claire de la place de votre domaine dans les réponses IA.",
     },
     "ar": {
         "skip": "الانتقال إلى المحتوى الرئيسي",
@@ -188,6 +195,8 @@ UI = {
         "cta_text": "أخبرنا أين توجد خبرتك اليوم. سنريك أين تذكر محركات الذكاء الاصطناعي مجالك حاليا، وما الذي يلزم لكي تذكرك أنت.",
         "cta_terms": "بدون رسوم إعداد. بدون التزام.",
         "home_crumb": "الرئيسية",
+        "photo_alt": "حمزة بنتغليا، مؤسس KORTEX",
+        "book_note": "دون أي ضغط. تخرج بصورة واضحة عن المواضع التي تذكر فيها محركات الذكاء الاصطناعي مجالك.",
     },
 }
 
@@ -240,8 +249,15 @@ def source_path(lang, pid):
     return SRC / "pages" / lang / f"{pid}.html"
 
 
+_EXISTS = {}
+
+
 def exists(lang, pid):
-    return source_path(lang, pid).exists()
+    key = (lang, pid)
+    if key not in _EXISTS:
+        path = source_path(lang, pid)
+        _EXISTS[key] = path.exists() and "\ndraft: yes\n" not in path.read_text(encoding="utf-8").split("\n---\n", 1)[0] + "\n"
+    return _EXISTS[key]
 
 
 def url(lang, pid):
@@ -370,20 +386,42 @@ def header(lang, pid):
 <ul class="nav-links">{"".join(items)}</ul>
 <div class="nav-actions">{langs}
 <button class="icon-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="{t["theme"]}">{icon("sun", "theme-icon-light")}{icon("moon", "theme-icon-dark")}</button>
-{login}<a class="btn btn-primary btn-sm" href="{book}" data-track="nav-book">{t["book"]}</a>
+{login}<a class="btn btn-primary btn-sm" href="{book}" {BOOK_ATTRS} data-track="nav-book">{t["book"]}</a>
 <button class="icon-btn nav-burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="{t["menu"]}" data-mobile-open>{icon("menu")}</button>
 </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu" hidden>
 <button class="icon-btn mobile-close" type="button" aria-label="{t["close"]}" data-mobile-close>{icon("close")}</button>
 <ul>{"".join(mobile)}</ul>
-<div class="mobile-foot">{mobile_langs}{mobile_login}<a class="btn btn-primary" href="{book}" data-track="mobile-book">{t["book"]}</a></div>
+<div class="mobile-foot">{mobile_langs}{mobile_login}<a class="btn btn-primary" href="{book}" {BOOK_ATTRS} data-track="mobile-book">{t["book"]}</a></div>
 </div>
 </header>'''
 
 
 def book_href(lang):
-    return url(lang, "contact") if exists(lang, "contact") else url(lang, "audit")
+    return CAL_URL
+
+
+BOOK_ATTRS = f'data-cal="{CAL_LINK}" rel="noopener"'
+
+
+PHOTO = {
+    "sq": ("founder-sq", [320, 480, 640], (640, 640), "(min-width: 860px) 220px, 60vw"),
+    "portrait": ("founder-portrait", [480, 720], (720, 900), "(min-width: 960px) 420px, 90vw"),
+    "avatar": ("founder-avatar", [64, 128], (128, 128), "40px"),
+}
+
+
+def photo(lang, kind, eager=False):
+    base, widths, (w, h), sizes = PHOTO[kind]
+    alt = UI[lang]["photo_alt"]
+    srcset = lambda ext: ", ".join(f"/assets/img/{base}-{x}.{ext} {x}w" for x in widths)
+    loading = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return (
+        f'<picture><source type="image/avif" srcset="{srcset("avif")}" sizes="{sizes}">'
+        f'<source type="image/webp" srcset="{srcset("webp")}" sizes="{sizes}">'
+        f'<img src="/assets/img/{base}-{widths[-1]}.jpg" srcset="{srcset("jpg")}" sizes="{sizes}" width="{w}" height="{h}" alt="{alt}" {loading}></picture>'
+    )
 
 
 def footer(lang):
@@ -422,7 +460,8 @@ def cta_band(lang):
 <span class="eyebrow">{t["cta_kicker"]}</span>
 <h2 id="cta-band-title">{t["cta_title"]}</h2>
 <p>{t["cta_text"]}</p>
-<div class="hero-actions"><a class="btn btn-primary" href="{book_href(lang)}" data-track="band-book">{t["book"]}{icon("arrow", "flip")}</a>{audit}</div>
+<div class="hero-actions"><a class="btn btn-primary" href="{book_href(lang)}" {BOOK_ATTRS} data-track="band-book">{t["book"]}{icon("arrow", "flip")}</a>{audit}</div>
+<p class="book-note">{t["book_note"]}</p>
 <p class="hero-note">{t["cta_terms"]}</p>
 </div>
 </section>'''
@@ -444,7 +483,11 @@ def resolve(body, lang):
     body = re.sub(r'<a[^>]*?href="@([a-z0-9/-]+)[^"]*"[^>]*>(.*?)</a>', anchor, body, flags=re.S)
     body = re.sub(r'(href|action)="@([a-z0-9/-]+)', lambda m: f'{m.group(1)}="{url(lang, m.group(2))}', body)
     body = re.sub(r"\{\{list:([a-z]+)\}\}", lambda m: listing(lang, m.group(1)), body)
-    body = body.replace("@@book", book_href(lang))
+    body = re.sub(r'(<div class="hero-actions">(?:(?!</div>).)*?href="@@book".*?</div>)(?!\s*<p class="book-note")', lambda m: m.group(1) + f'<p class="book-note">{UI[lang]["book_note"]}</p>', body, flags=re.S)
+    body = body.replace("{{booknote}}", UI[lang]["book_note"])
+    body = body.replace('href="@@book"', f'href="{CAL_URL}" {BOOK_ATTRS}')
+    body = body.replace("@@book", CAL_URL)
+    body = re.sub(r"\{\{photo:([a-z]+)(\|eager)?\}\}", lambda m: photo(lang, m.group(1), bool(m.group(2))), body)
     body = body.replace("@@email", EMAIL)
     body = body.replace("@@linkedin", LINKEDIN)
     body = body.replace("@@web3forms", WEB3FORMS_KEY)
@@ -516,10 +559,11 @@ def article_wrap(lang, pid, meta, body):
     about = url(lang, "about") if exists(lang, "about") else None
     author = f'<a class="text-link" href="{about}" rel="author">{t["author"]}</a>' if about else t["author"]
     meta_line = ""
+    avatar = f'<a class="byline-avatar" href="{about}" tabindex="-1" aria-hidden="true">{photo(lang, "avatar")}</a>' if about else ""
     if meta.get("date"):
         meta_line = (
-            f'<p class="article-meta">{t["by"]} {author} · <time datetime="{meta.get("modified", meta["date"])}">{t["updated"]} {human_date(lang, meta.get("modified", meta["date"]))}</time>'
-            f' · {reading_time(body)} {t["min"]}</p>'
+            f'<p class="article-meta">{avatar}<span>{t["by"]} {author} · <time datetime="{meta.get("modified", meta["date"])}">{t["updated"]} {human_date(lang, meta.get("modified", meta["date"]))}</time>'
+            f' · {reading_time(body)} {t["min"]}</span></p>'
         )
     short = ""
     if meta.get("in_short"):
@@ -578,10 +622,13 @@ def schema(lang, pid, meta, body):
             "@id": org_id,
             "name": "KORTEX",
             "url": DOMAIN + "/",
-            "logo": DOMAIN + "/logo.svg",
+            "logo": {"@type": "ImageObject", "url": DOMAIN + "/logo.svg"},
+            "image": DOMAIN + "/assets/og/home-en.jpg",
+            "alternateName": "KORTEX Lab",
             "email": EMAIL,
-            "description": "KORTEX is a GEO, SEO and content creation studio. It turns one source, such as a blog post, YouTube video, podcast episode or webinar, into 30+ assets built to be cited by AI answer engines and ranked by search engines.",
-            "founder": {"@id": person_id},
+            "description": "KORTEX is a GEO, SEO and content creation studio. It turns one source, such as a blog post, YouTube video, podcast episode or webinar, into up to 30+ assets built to be cited by AI answer engines and ranked by search engines.",
+            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-720.jpg", "sameAs": [LINKEDIN]},
+            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": EMAIL, "url": CAL_URL, "availableLanguage": ["English", "French", "Arabic"]},
             "address": {"@type": "PostalAddress", "addressLocality": "Fès", "addressCountry": "MA"},
             "areaServed": "Worldwide",
             "knowsLanguage": ["en", "fr", "ar"],
@@ -615,13 +662,18 @@ def schema(lang, pid, meta, body):
             "@id": person_id,
             "name": "Hamza Bentarhlia",
             "jobTitle": "Founder",
+            "image": DOMAIN + "/assets/img/founder-portrait-720.jpg",
             "worksFor": {"@id": org_id},
             "homeLocation": {"@type": "Place", "name": "Fès, Morocco"},
             "sameAs": [LINKEDIN],
             "knowsAbout": ["Customer retention", "Business intelligence", "Automation", "Generative Engine Optimization"],
         })
     if "service" in extras:
-        offers = [("GHOST", "2500"), ("SWARM", "5500"), ("TITAN", "12000")]
+        offers = [
+            ("GHOST", "2500", "1 source per month, 10 assets per source, monthly citation check on 10 buyer questions, editorial review, delivery in 5 business days."),
+            ("SWARM", "5500", "1 source per month, 20 to 24 assets per source, schema markup and internal linking, monthly citation check on 10 buyer questions, monthly strategy call."),
+            ("TITAN", "12000", "2 or more sources per month, 28 or more assets per source, full citation tracking with competitors, off-site authority work, dedicated operator."),
+        ]
         graph.append({
             "@type": "Service",
             "@id": DOMAIN + "/#service",
@@ -633,10 +685,11 @@ def schema(lang, pid, meta, body):
                 {
                     "@type": "Offer",
                     "name": name,
+                    "description": desc,
                     "priceCurrency": "EUR",
                     "priceSpecification": {"@type": "UnitPriceSpecification", "price": price, "priceCurrency": "EUR", "unitText": "MONTH", **({"minPrice": price} if name == "TITAN" else {})},
                 }
-                for name, price in offers
+                for name, price, desc in offers
             ],
         })
     if meta.get("kind") == "article":
@@ -647,7 +700,7 @@ def schema(lang, pid, meta, body):
             "description": meta["description"],
             "inLanguage": lang,
             "mainEntityOfPage": {"@id": page_url + "#webpage"},
-            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
+            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-720.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
             "publisher": {"@id": org_id},
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
             "image": DOMAIN + og_image(lang, pid, meta),
@@ -752,7 +805,7 @@ def mirror_svg(svg):
 
 
 def mirror_diagrams(body):
-    return re.sub(r'<svg class="frag-lines".*?</svg>|<figure class="glass diagram[^"]*"[^>]*>\s*<svg.*?</svg>', lambda m: mirror_svg(m.group(0)), body, flags=re.S)
+    return re.sub(r'<svg class="frag-lines".*?</svg>|<svg class="hero-pipe".*?</svg>|<figure class="glass diagram[^"]*"[^>]*>\s*<svg.*?</svg>', lambda m: mirror_svg(m.group(0)), body, flags=re.S)
 
 
 def fr_typo(text):
@@ -852,13 +905,19 @@ def redirects():
     return table
 
 
-def redirect_page(target_lang, pid):
+SLASHLESS = {"blog.html": "blog", "contact.html": "contact", "login.html": "login", "solutions.html": "solutions"}
+
+
+def redirect_page(target_lang, pid, old=""):
     lang, path = target_lang, url(target_lang, pid)
     if not exists(lang, pid):
         lang, path = "en", url("en", pid) if exists("en", pid) else "/"
     full = DOMAIN + path
+    guard = ""
+    if old in SLASHLESS:
+        guard = f'<script>if(!/\\.html$/.test(location.pathname))location.replace("{url("en", SLASHLESS[old])}"+location.search)</script>'
     return (
-        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>'
+        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>{guard}'
         f'<link rel="canonical" href="{full}"><meta name="robots" content="noindex, follow">'
         f'<meta http-equiv="refresh" content="0; url={path}"></head>'
         f'<body><p><a href="{path}">{full}</a></p></body></html>\n'
@@ -869,9 +928,15 @@ def llms_txt():
     lines = [
         "# KORTEX",
         "",
-        "> KORTEX is a GEO, SEO and content creation studio based in Fès, Morocco, serving clients worldwide. A client provides one source (a blog post, YouTube video, podcast episode or webinar) and KORTEX turns it into 30+ assets built to be cited by AI answer engines such as ChatGPT, Perplexity, Gemini, Google AI Overviews and Claude, and ranked by search engines. Expertise is extracted from the client's own content, never invented, and a person reviews everything before publication.",
+        "> KORTEX is a GEO, SEO and content creation studio based in Fès, Morocco, serving clients worldwide. A client provides one source (a blog post, YouTube video, podcast episode or webinar) and KORTEX turns it into up to 30+ assets built to be cited by AI answer engines such as ChatGPT, Perplexity, Gemini, Google AI Overviews and Claude, and ranked by search engines. Expertise is extracted from the client's own content, never invented, and a person reviews everything before publication.",
         "",
-        "Plans: GHOST from 2,500 EUR per month, SWARM 5,500 EUR per month, TITAN from 12,000 EUR per month. No setup fees, no commitment. Founder: Hamza Bentarhlia. Contact: " + EMAIL,
+        "## Plans",
+        "- GHOST: €2,500 per month. 1 source per month, 10 assets per source, monthly citation check on 10 buyer questions, delivery in 5 business days.",
+        "- SWARM: €5,500 per month. 1 source per month, 20 to 24 assets per source, schema markup and internal linking, monthly citation check on 10 buyer questions, monthly strategy call.",
+        "- TITAN: from €12,000 per month. 2 or more sources per month, 28 or more assets per source, full citation tracking with competitors, off-site authority work, delivery in 3 to 4 business days.",
+        "- Every plan: no setup fees, month to month with 30 days' notice, the client owns 100% of the content.",
+        "",
+        "Founder: Hamza Bentarhlia. Contact: " + EMAIL + ". Book a strategy call: " + CAL_URL,
         "",
         "## Key pages",
     ]
@@ -914,7 +979,8 @@ def main():
     for old, (lang, pid) in redirects().items():
         target = OUT / old
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(redirect_page(lang, pid), encoding="utf-8")
+        target.write_text(redirect_page(lang, pid, old), encoding="utf-8")
+    (OUT / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
     (OUT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     (OUT / "llms.txt").write_text(llms_txt(), encoding="utf-8")
     (OUT / "robots.txt").write_text(robots_txt(), encoding="utf-8")

@@ -3,18 +3,33 @@ description: Réservez un appel stratégique avec KORTEX ou envoyez-nous un mess
 crumb: Contact
 band: no
 ---
-<section class="page-hero" aria-labelledby="contact-title">
-<div class="wrap split">
-<div>
+<section class="page-hero" aria-labelledby="contact-title" style="padding-bottom:20px">
+<div class="wrap">
 <span class="eyebrow">Contact</span>
 <h1 id="contact-title" class="display">Réservez un appel <span class="chip-word">stratégique</span></h1>
-<p class="hero-lead">Dites-nous qui vous êtes et où vit votre expertise aujourd'hui. Nous répondons à chaque message et vous proposons un créneau.</p>
-<ol class="after-steps" style="grid-template-columns:1fr">
-<li class="glass"><span class="kicker">Étape 1</span><strong>Vous envoyez le formulaire</strong><p>Nom, e-mail et un lien vers votre site ou vos contenus. C'est tout.</p></li>
-<li class="glass"><span class="kicker">Étape 2</span><strong>Nous préparons l'échange</strong><p>Avant l'appel, nous regardons comment les moteurs IA répondent aujourd'hui aux questions de votre domaine.</p></li>
-<li class="glass"><span class="kicker">Étape 3</span><strong>Nous échangeons, vous décidez</strong><p>Nous partageons ce que nous avons trouvé et si KORTEX vous convient. Si ce n'est pas le cas, nous vous le disons.</p></li>
-</ol>
+<p class="hero-lead">Choisissez le créneau qui vous convient. Nous regardons ensemble votre domaine dans les réponses IA, et vous décidez de la suite.</p>
+<p class="book-note">{{booknote}}</p>
 </div>
+</section>
+<section class="section" aria-label="Votre calendrier de réservation" style="padding-top:12px">
+<div class="wrap">
+<div class="glass cal-wrap">
+<div id="cal-inline" data-cal-link="hamza-bentarhlia">
+<div class="cal-ph"><div class="card-icon">{{icon:clock}}</div><h2 class="kicker">Votre calendrier de réservation</h2><p>Le calendrier se charge ici lorsque vous l'atteignez. Vous pouvez aussi l'ouvrir directement.</p>
+<div class="hero-actions" style="justify-content:center;margin-top:0"><button class="btn btn-primary" type="button" data-cal-load data-track="contact-cal-load">Afficher le calendrier</button><a class="btn btn-ghost" href="@@book" data-track="contact-cal-open">Ouvrir la page de réservation</a></div></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section section-tint" aria-labelledby="call-title">
+<div class="wrap">
+<div class="section-head"><h2 id="call-title">Ce qui se passe pendant l'appel</h2></div>
+<div class="grid grid-3 reveal-group"><div class="glass card"><span class="kicker" style="color:var(--accent-text)">Nous regardons</span><h3 style="margin-top:10px">Votre domaine dans les réponses IA</h3><p>Nous posons ensemble quelques questions de vos acheteurs aux moteurs IA et regardons qui est cité aujourd'hui.</p></div><div class="glass card"><span class="kicker" style="color:var(--accent-text)">Vous repartez avec</span><h3 style="margin-top:10px">Une vision claire</h3><p>Où vous apparaissez, où vos concurrents apparaissent, et laquelle de vos sources contient le plus d'expertise exploitable.</p></div><div class="glass card"><span class="kicker" style="color:var(--accent-text)">Si vous voulez aller plus loin</span><h3 style="margin-top:10px">Une proposition écrite</h3><p>Nous recommandons une offre et une première source. Si KORTEX ne vous convient pas, nous vous le disons.</p></div></div>
+</div>
+</section>
+<section class="section" aria-labelledby="form-title">
+<div class="wrap split">
+<div class="section-head" style="margin:0"><span class="eyebrow">Vous préférez écrire ?</span><h2 id="form-title">Envoyez-nous plutôt un message</h2></div>
 <div class="glass card" style="padding:clamp(22px,4vw,36px)">
 <div class="form-status" data-form-status tabindex="-1" hidden role="status"><strong>Message envoyé.</strong> Merci. Nous vous répondons par e-mail pour fixer un créneau.</div>
 <form class="form" action="https://api.web3forms.com/submit" method="post" data-track-form="contact">
