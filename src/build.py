@@ -4,6 +4,8 @@ import json
 import re
 from pathlib import Path
 
+import art
+
 SRC = Path(__file__).resolve().parent
 OUT = SRC.parent
 DOMAIN = "https://www.kortexlab.me"
@@ -238,6 +240,9 @@ ICONS = {
 }
 
 LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="kxg" cx="70%" cy="75%" r="70%"><stop offset="0" stop-color="#ffb648"/><stop offset=".55" stop-color="#ff6b2c"/><stop offset="1" stop-color="#c9341f"/></radialGradient></defs><rect width="32" height="32" rx="9" fill="url(#kxg)"/><path d="M11 8.5v15M11 16l9-7.5M13.8 13.6l7.2 9.9" stroke="#1b0c05" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>'
+
+
+art.ICON_PATHS = ICONS
 
 
 def icon(name, cls=""):
@@ -544,8 +549,9 @@ def listing(lang, hub):
         foot = ""
         if hub == "blog":
             foot = f'<p class="card-meta">{human_date(lang, meta["date"])} · {reading_time(body)} {t["min"]}</p>'
+        cover = f'<div class="card-cover" data-anim>{art.cover_svg(pid)}</div>' if hub == "blog" else ""
         cards.append(
-            f'<a class="glass card list-card" href="{url(lang, pid)}">{extra}<h3>{strip_tags(title)}</h3><p>{summary}</p>{foot}'
+            f'<a class="glass card list-card" href="{url(lang, pid)}">{cover}{extra}<h3>{strip_tags(title)}</h3><p>{summary}</p>{foot}'
             f'<span class="card-link">{t["read"]}{icon("arrow")}</span></a>'
         )
     cls = "grid grid-3" if hub in ("blog", "compare") else "grid grid-3 glossary-grid"
@@ -577,6 +583,7 @@ def article_wrap(lang, pid, meta, body):
         )
         related = f'<section class="section" aria-labelledby="related-title"><div class="wrap"><h2 id="related-title" class="kicker" style="margin-bottom:20px">{t["related"]}</h2><div class="grid grid-3">{cards}</div></div></section>'
     kicker = meta.get("kicker", hub_label)
+    cover_block = f'<div class="article-cover glass" data-anim>{art.cover_svg(pid)}</div>' if hub == "blog" else ""
     crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><a href="{url(lang, hub)}">{hub_label}</a></nav>' if "/" in pid and exists(lang, hub) else ""
     return f'''<article>
 <header class="page-hero article-hero"><div class="wrap narrow">
@@ -584,6 +591,7 @@ def article_wrap(lang, pid, meta, body):
 <span class="eyebrow">{kicker}</span>
 <h1 class="display display-sm">{meta.get("h1", meta["title"])}</h1>
 {meta_line}
+{cover_block}
 {short}
 </div></header>
 <div class="wrap narrow article-body prose">
@@ -808,6 +816,24 @@ def mirror_diagrams(body):
     return re.sub(r'<svg class="frag-lines".*?</svg>|<svg class="hero-pipe".*?</svg>|<figure class="glass diagram[^"]*"[^>]*>\s*<svg.*?</svg>', lambda m: mirror_svg(m.group(0)), body, flags=re.S)
 
 
+def decorate(body, pid, meta):
+    if meta.get("art") != "none" and '<section class="page-hero"' in body:
+        head = re.search(r'<section class="page-hero"[^>]*>\n<div class="wrap">', body)
+        if head:
+            end = body.find("</div>\n</section>", head.end())
+            kind = pid if pid in art.GLYPH else "generic"
+            panel = f'<div class="page-art" data-anim aria-hidden="true">{art.hero_art(kind)}</div>'
+            body = body[: head.start()] + head.group(0).replace('<div class="wrap">', '<div class="wrap hero-art-wrap"><div class="hero-copy">') + body[head.end() : end] + "</div>" + panel + body[end:]
+    count = [0]
+
+    def sep(m):
+        count[0] += 1
+        return "</section>\n" + art.divider(count[0]) + "\n<section"
+
+    body = re.sub(r"</section>\s*\n\s*<section", sep, body)
+    return body
+
+
 def fr_typo(text):
     text = re.sub(r" ([?!;:»])", "\u202f\\1", text)
     text = text.replace("« ", "«\u202f")
@@ -818,6 +844,7 @@ def fr_typo(text):
 
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
+    body = decorate(body, pid, meta)
     if lang == "ar":
         body = mirror_diagrams(body)
         body = re.sub(r"(?<=[\s>])و(?=[A-Za-z])", "و\u200c", body)
@@ -838,8 +865,10 @@ def render(lang, pid, critical, css_v, js_v):
 <body>
 {header(lang, pid)}
 <main id="main" tabindex="-1">
+{art.SPRITE}
 <div class="ambient" aria-hidden="true"></div>
 {body.strip()}
+{art.divider(0) if band else ""}
 {band}
 </main>
 {footer(lang)}
