@@ -756,7 +756,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <meta property="og:site_name" content="KORTEX">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:url" content="{abs_url(lang, pid)}">
+{"" if pid == "404" else f'<meta property="og:url" content="{abs_url(lang, pid)}">'}
 <meta property="og:image" content="{image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -773,7 +773,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <link rel="preload" href="/assets/css/site.css?v={css_v}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="/assets/css/site.css?v={css_v}"></noscript>
 <script type="module" src="/assets/js/site.js?v={js_v}"></script>
-<script type="application/ld+json">{schema(lang, pid, meta, body)}</script>'''
+{"" if pid == "404" else f'<script type="application/ld+json">{schema(lang, pid, meta, body)}</script>'}'''
 
 
 ANALYTICS = f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{GA_ID}");addEventListener("load",function(){{setTimeout(function(){{var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id={GA_ID}";document.head.appendChild(s)}},1500)}})</script>'
@@ -975,6 +975,10 @@ def redirects():
         "free-geo-audit/index.html": ("en", "contact"),
         "fr/free-geo-audit/index.html": ("fr", "contact"),
         "ar/free-geo-audit/index.html": ("ar", "contact"),
+        "contact_v2.html": ("fr", "contact"),
+        "legal/index.html": ("en", "privacy"),
+        "fr/legal/index.html": ("fr", "privacy"),
+        "ar/legal/index.html": ("ar", "privacy"),
     }
     for en_slug, fr_slug in BLOG_SLUGS.items():
         table[f"blog-{fr_slug}.html"] = ("fr", f"blog/{en_slug}")
