@@ -6,7 +6,7 @@ def deliverables(lang):
     ex = label(kit.EXAMPLE[lang])
     article = (
         f'<article class="sd sd-article st" style="--i:0"><div class="sd-k">{icon("doc")}{T(lang, "Article page", "Page article", "صفحة مقال")}</div>'
-        f'<h4>{T(lang, "Why yearly supplier audits miss most risk events", "Pourquoi l’audit fournisseur annuel rate la plupart des incidents", "لماذا يفوّت التدقيق السنوي للموردين معظم المخاطر")}</h4>'
+        f'<h3>{T(lang, "Why yearly supplier audits miss most risk events", "Pourquoi l’audit fournisseur annuel rate la plupart des incidents", "لماذا يفوّت التدقيق السنوي للموردين معظم المخاطر")}</h3>'
         f'<p class="sd-meta">Acme · {T(lang, "8 min read", "8 min de lecture", "8 دقائق قراءة")}</p>'
         f'<p class="sd-lead">{T(lang, "Short answer: an audit shows what was true on one day. Payment delays and order changes show trouble months earlier.", "Réponse courte : un audit montre ce qui était vrai un jour donné. Les retards de paiement et les changements de commande signalent un problème des mois plus tôt.", "الإجابة المختصرة: التدقيق يُظهر ما كان صحيحا في يوم واحد، أما تأخر المدفوعات وتغيّر الطلبيات فتكشف المشكلة قبل أشهر.")}</p>'
         '<i class="vx-line" style="--w:94%"></i><i class="vx-line" style="--w:86%"></i><i class="vx-line" style="--w:70%"></i></article>'
