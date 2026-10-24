@@ -330,6 +330,7 @@ function initCalc() {
     out.firstChild.textContent = tpl.replace('{d}', fmt.format(inh - kx));
   };
   form.addEventListener('input', run);
+  form.addEventListener('change', () => track('Calculator', { plan: plan.value }));
   run();
 }
 

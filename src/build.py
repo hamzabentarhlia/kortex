@@ -830,7 +830,14 @@ def decorate(body, pid, meta, lang):
             copy = re.sub(r'(<h1[^>]*class="display)', r"\1 display-sentence", copy, count=1)
         kind = meta.get("hero", "")
         vis = meta.get("visual", "")
-        panel = visuals.render(vis, lang) if vis else ""
+        panel = visuals.render(vis, lang) if vis and not vis.startswith("#") else ""
+        if vis.startswith("#"):
+            found = re.search(r'<(\w+)[^>]*\bid="%s".*?</\1>' % re.escape(vis[1:]), body, re.S)
+            if found:
+                panel = found.group(0)
+                body = body.replace(panel, "", 1)
+                head = re.search(r'<section class="page-hero[^"]*"[^>]*>\n<div class="wrap">', body)
+                end = body.find("</div>\n</section>", head.end())
         section = head.group(0)
         if kind in HERO_KINDS and panel:
             section = section.replace('class="page-hero', f'class="page-hero hero-{kind}', 1)
