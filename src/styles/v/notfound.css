@@ -1,0 +1,18 @@
+.nf-card{display:grid;gap:14px;padding:22px;border:1px solid var(--line-strong);border-radius:var(--v-r-lg);background:var(--surface-solid);box-shadow:var(--v-shadow),0 60px 120px -60px var(--glow-1);text-align:start}
+.nf-head{display:flex;align-items:center;justify-content:space-between}
+.nf-status{font:800 13px var(--ff-display);color:var(--accent-text);padding:4px 10px;border:1px solid var(--chip-line);border-radius:var(--radius-pill);background:var(--chip-bg)}
+.nf-q{display:flex;align-items:center;gap:10px;margin:0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font:600 15px var(--ff-body)}
+.nf-q svg{width:17px;height:17px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round}
+.nf-path{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nf-scan{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nf-scan i{height:44px;border-radius:10px;border:1px dashed var(--line-strong);background:var(--surface);animation:nfscan 2.6s var(--ease) infinite;animation-delay:calc(var(--n,0)*.18s)}
+.nf-scan i:nth-child(2){--n:1}.nf-scan i:nth-child(3){--n:2}.nf-scan i:nth-child(4){--n:3}.nf-scan i:nth-child(5){--n:4}
+@keyframes nfscan{0%,100%{opacity:.35;transform:none}40%{opacity:1;transform:translateY(-3px)}}
+.nf-a{margin:0;color:var(--text-2);line-height:1.55}
+.nf-a strong{display:block;color:var(--text);font-size:18px;margin-bottom:4px}
+.nf-links{display:flex;flex-wrap:wrap;gap:8px}
+.nf-link{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--text);font-weight:600;font-size:14.5px;text-decoration:none;transition:border-color .2s,background-color .2s,transform .2s var(--ease)}
+.nf-link svg{width:14px;height:14px;fill:none;stroke:var(--accent-text);stroke-width:2;stroke-linecap:round}
+.nf-link:hover{border-color:var(--chip-line);background:var(--chip-bg);transform:translateY(-2px)}
+.nf-link:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+.nf-link:first-child{border-color:var(--chip-line);background:var(--chip-bg);color:var(--accent-text)}
