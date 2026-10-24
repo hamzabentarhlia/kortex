@@ -172,19 +172,9 @@ function initReveal() {
   items.forEach((el) => io.observe(el));
 }
 
-function initPrompt() {
-  document.querySelectorAll('[data-prompt]').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-      const input = form.querySelector('input');
-      const value = input.value.trim();
-      if (!value) { e.preventDefault(); input.focus(); return; }
-      if (!/^https?:\/\//i.test(value)) input.value = 'https://' + value;
-      track('Prompt submit');
-    });
-  });
-}
-
 function initPrefill() {
+  const nf = document.querySelector('[data-nf-path]');
+  if (nf) nf.textContent = 'kortexlab.me' + location.pathname;
   const params = new URLSearchParams(location.search);
   const source = params.get('source');
   const field = document.querySelector('[data-prefill=source]');
@@ -229,6 +219,82 @@ function runTyper(card, instant) {
     else finish();
   };
   tick();
+}
+
+function initBookBar() {
+  const bar = document.querySelector('[data-bookbar]');
+  const hero = document.querySelector('main > section');
+  const ends = [...document.querySelectorAll('.site-footer, .cta-band')];
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  let pastHero = false;
+  const seen = new Set();
+  const set = () => bar.classList.toggle('is-on', pastHero && !seen.size);
+  new IntersectionObserver((es) => { pastHero = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; set(); }).observe(hero);
+  const io = new IntersectionObserver((es) => { es.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target))); set(); });
+  ends.forEach((el) => io.observe(el));
+}
+
+function initVisuals() {
+  const vx = [...document.querySelectorAll('.vx')];
+  if (!('IntersectionObserver' in window) || reduceMotion) {
+    vx.forEach((v) => v.classList.add('is-in', 'is-on'));
+    return;
+  }
+  const typeIn = (el, delay) => {
+    const text = el.textContent;
+    el.style.minHeight = el.offsetHeight + 'px';
+    el.textContent = '';
+    el.classList.add('is-typing');
+    let i = 0;
+    const tick = () => {
+      el.textContent = text.slice(0, ++i);
+      if (i < text.length) setTimeout(tick, 26);
+      else el.classList.remove('is-typing');
+    };
+    setTimeout(tick, delay);
+  };
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    const v = e.target;
+    v.classList.toggle('is-on', e.isIntersecting);
+    if (e.isIntersecting && !v.classList.contains('is-in')) {
+      v.classList.add('is-in');
+      v.querySelectorAll('[data-type]').forEach((el) => typeIn(el, parseInt(el.dataset.type, 10) || 300));
+    }
+  }), { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+  vx.forEach((v) => io.observe(v));
+}
+
+function initScroll() {
+  const scrub = [...document.querySelectorAll('[data-scrub]')];
+  const para = window.matchMedia('(pointer: fine)').matches ? [...document.querySelectorAll('[data-parallax]')] : [];
+  if (reduceMotion || (!scrub.length && !para.length) || !('IntersectionObserver' in window)) {
+    scrub.forEach((el) => el.style.setProperty('--p', '1'));
+    return;
+  }
+  const live = new Set();
+  const io = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? live.add(e.target) : live.delete(e.target))));
+  scrub.concat(para).forEach((el) => io.observe(el));
+  let raf = 0;
+  const tick = () => {
+    raf = 0;
+    const vh = innerHeight;
+    live.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (el.dataset.scrub !== undefined) {
+        const pin = el.dataset.scrub === 'pin';
+        const p = pin ? -r.top / Math.max(1, r.height - vh) : (vh - r.top) / (vh + r.height);
+        el.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(3));
+      }
+      if (el.dataset.parallax !== undefined) {
+        const k = parseFloat(el.dataset.parallax) || 0.08;
+        el.style.transform = `translate3d(0,${((r.top + r.height / 2 - vh / 2) * -k).toFixed(1)}px,0)`;
+      }
+    });
+  };
+  const req = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  addEventListener('scroll', req, { passive: true });
+  addEventListener('resize', req);
+  req();
 }
 
 function initAnimVisibility() {
@@ -277,6 +343,7 @@ function initCalc() {
     out.firstChild.textContent = tpl.replace('{d}', fmt.format(inh - kx));
   };
   form.addEventListener('input', run);
+  form.addEventListener('change', () => track('Calculator', { plan: plan.value }));
   run();
 }
 
@@ -393,44 +460,57 @@ function initPointerFx() {
   }
 }
 
-function initPicker() {
-  document.querySelectorAll('[data-picker]').forEach((pk) => {
-    const tabs = [...pk.querySelectorAll('[role=tab]')];
-    const stage = pk.querySelector('.pk-stage');
-    const select = (tab, focus) => {
+function initPipeline() {
+  document.querySelectorAll('[data-hp]').forEach((hp) => {
+    const tabs = [...hp.querySelectorAll('[role=tab]')];
+    const panel = hp.querySelector('[role=tabpanel]');
+    let auto = !reduceMotion;
+    let visible = false;
+    let timer = 0;
+    const schedule = () => {
+      clearTimeout(timer);
+      if (auto && visible) timer = setTimeout(() => {
+        const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+        select(tabs[(i + 1) % tabs.length]);
+      }, 7000);
+    };
+    const select = (tab, focus, user) => {
       tabs.forEach((t) => {
         const on = t === tab;
         t.setAttribute('aria-selected', String(on));
         t.tabIndex = on ? 0 : -1;
       });
-      pk.dataset.active = tab.dataset.src;
-      stage.classList.remove('run');
-      void stage.offsetWidth;
-      stage.classList.add('run');
+      hp.dataset.active = tab.dataset.src;
+      panel.setAttribute('aria-labelledby', tab.id);
+      hp.classList.remove('run');
+      void hp.offsetWidth;
+      hp.classList.add('run');
       if (focus) tab.focus();
-      track('Source picker', { source: tab.dataset.src });
+      if (user) {
+        auto = false;
+        clearTimeout(timer);
+        track('Source picker', { source: tab.dataset.src });
+      } else schedule();
     };
-    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      stage.classList.remove('run');
-      const io = new IntersectionObserver((es) => {
-        if (es.some((e) => e.isIntersecting)) {
-          stage.classList.add('run');
-          io.disconnect();
-        }
-      }, { threshold: 0.25 });
-      io.observe(stage);
-    }
     tabs.forEach((t, i) => {
-      t.addEventListener('click', () => select(t));
+      t.addEventListener('click', () => select(t, false, true));
       t.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
         const dir = document.documentElement.dir === 'rtl' ? -1 : 1;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const step = (e.key === 'ArrowRight' ? 1 : -1) * dir;
-          select(tabs[(i + step + tabs.length) % tabs.length], true);
-        }
+        const step = (e.key === 'ArrowRight' ? 1 : -1) * dir;
+        select(tabs[(i + step + tabs.length) % tabs.length], true, true);
       });
     });
+    hp.addEventListener('pointerenter', () => clearTimeout(timer));
+    hp.addEventListener('pointerleave', schedule);
+    hp.addEventListener('focusin', () => clearTimeout(timer));
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((es) => {
+        visible = es[0].isIntersecting;
+        if (visible) schedule(); else clearTimeout(timer);
+      }, { threshold: 0.3 }).observe(hp);
+    }
   });
 }
 
@@ -458,11 +538,13 @@ initHeader();
 initMenus();
 initMobileMenu();
 initReveal();
-initPrompt();
 initPrefill();
 initForms();
 initAnimVisibility();
-initPicker();
+initVisuals();
+initBookBar();
+initScroll();
+initPipeline();
 initFinder();
 const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
 [initStory, initCalc, initCal, initTracking, initPointerFx].forEach((fn) => idle(() => fn()));
