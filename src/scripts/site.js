@@ -260,7 +260,7 @@ function initVisuals() {
       v.classList.add('is-in');
       v.querySelectorAll('[data-type]').forEach((el) => typeIn(el, parseInt(el.dataset.type, 10) || 300));
     }
-  }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  }), { rootMargin: '0px 0px -10% 0px', threshold: 0 });
   vx.forEach((v) => io.observe(v));
 }
 

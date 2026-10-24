@@ -711,7 +711,7 @@ def schema(lang, pid, meta, body):
                 for name, price, desc in offers
             ],
         })
-    if meta.get("kind") == "article":
+    if meta.get("kind") == "article" or "article" in meta.get("schema", ""):
         graph.append({
             "@type": "BlogPosting" if pid.startswith("blog/") else "Article",
             "@id": page_url + "#article",
