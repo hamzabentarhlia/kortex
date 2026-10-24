@@ -822,6 +822,13 @@ HERO_KINDS = {"split", "stage", "backdrop", "editorial"}
 
 def decorate(body, pid, meta, lang):
     body = re.sub(r"\{\{v:([a-z0-9-]+)\}\}", lambda m: visuals.render(m.group(1), lang), body)
+    vis = meta.get("visual", "")
+    inline = ""
+    if vis.startswith("#"):
+        found = re.search(r'<(\w+)[^>]*\bid="%s".*?</\1>\n?' % re.escape(vis[1:]), body, re.S)
+        if found:
+            inline = found.group(0).strip()
+            body = body.replace(found.group(0), "", 1)
     head = re.search(r'<section class="page-hero[^"]*"[^>]*>\n<div class="wrap">', body)
     if head:
         end = body.find("</div>\n</section>", head.end())
@@ -829,15 +836,7 @@ def decorate(body, pid, meta, lang):
         if meta.get("case") == "sentence":
             copy = re.sub(r'(<h1[^>]*class="display)', r"\1 display-sentence", copy, count=1)
         kind = meta.get("hero", "")
-        vis = meta.get("visual", "")
-        panel = visuals.render(vis, lang) if vis and not vis.startswith("#") else ""
-        if vis.startswith("#"):
-            found = re.search(r'<(\w+)[^>]*\bid="%s".*?</\1>' % re.escape(vis[1:]), body, re.S)
-            if found:
-                panel = found.group(0)
-                body = body.replace(panel, "", 1)
-                head = re.search(r'<section class="page-hero[^"]*"[^>]*>\n<div class="wrap">', body)
-                end = body.find("</div>\n</section>", head.end())
+        panel = inline or (visuals.render(vis, lang) if vis else "")
         section = head.group(0)
         if kind in HERO_KINDS and panel:
             section = section.replace('class="page-hero', f'class="page-hero hero-{kind}', 1)
