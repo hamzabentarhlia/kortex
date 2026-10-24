@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 
 import art
+import visuals
 
 SRC = Path(__file__).resolve().parent
 OUT = SRC.parent
@@ -43,7 +44,6 @@ PAGES = {
     "security": "/security/",
     "glossary": "/glossary/",
     "blog": "/blog/",
-    "audit": "/free-geo-audit/",
     "contact": "/contact/",
     "privacy": "/legal/privacy/",
     "terms": "/legal/terms/",
@@ -74,7 +74,7 @@ UI = {
         "about": "About",
         "login": "Login",
         "book": "Book a strategy call",
-        "audit": "Get a free GEO audit",
+        "see_pricing": "See pricing",
         "menu": "Open menu",
         "close": "Close menu",
         "theme": "Switch light and dark theme",
@@ -104,7 +104,7 @@ UI = {
         "cta_terms": "No setup fees. No commitment.",
         "home_crumb": "Home",
         "photo_alt": "Hamza Bentarhlia, founder of KORTEX",
-        "book_note": "No pressure. You leave with a clear view of where AI engines mention your field.",
+        "book_note": "30 minutes, no pressure. You leave with a clear view of where AI engines mention your field.",
     },
     "fr": {
         "skip": "Aller au contenu principal",
@@ -121,7 +121,7 @@ UI = {
         "about": "À propos",
         "login": "Connexion",
         "book": "Réserver un appel stratégique",
-        "audit": "Obtenir un audit GEO gratuit",
+        "see_pricing": "Voir les tarifs",
         "menu": "Ouvrir le menu",
         "close": "Fermer le menu",
         "theme": "Basculer entre thème clair et sombre",
@@ -151,7 +151,7 @@ UI = {
         "cta_terms": "Sans frais d'installation. Sans engagement.",
         "home_crumb": "Accueil",
         "photo_alt": "Hamza Bentarhlia, fondateur de KORTEX",
-        "book_note": "Sans pression. Vous repartez avec une vision claire de la place de votre domaine dans les réponses IA.",
+        "book_note": "30 minutes, sans pression. Vous repartez avec une vision claire de la place de votre domaine dans les réponses IA.",
     },
     "ar": {
         "skip": "الانتقال إلى المحتوى الرئيسي",
@@ -168,7 +168,7 @@ UI = {
         "about": "من نحن",
         "login": "تسجيل الدخول",
         "book": "احجز مكالمة استراتيجية",
-        "audit": "احصل على تدقيق GEO مجاني",
+        "see_pricing": "اطلع على الأسعار",
         "menu": "فتح القائمة",
         "close": "إغلاق القائمة",
         "theme": "التبديل بين الوضع الفاتح والداكن",
@@ -198,7 +198,7 @@ UI = {
         "cta_terms": "بدون رسوم إعداد. بدون التزام.",
         "home_crumb": "الرئيسية",
         "photo_alt": "حمزة بنتغليا، مؤسس KORTEX",
-        "book_note": "دون أي ضغط. تخرج بصورة واضحة عن المواضع التي تذكر فيها محركات الذكاء الاصطناعي مجالك.",
+        "book_note": "30 دقيقة ودون أي ضغط. تخرج بصورة واضحة عن المواضع التي تذكر فيها محركات الذكاء الاصطناعي مجالك.",
     },
 }
 
@@ -243,6 +243,7 @@ LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="kx
 
 
 art.ICON_PATHS = ICONS
+visuals.kit.ICONS = ICONS
 
 
 def icon(name, cls=""):
@@ -411,9 +412,9 @@ BOOK_ATTRS = f'data-cal="{CAL_LINK}" rel="noopener"'
 
 
 PHOTO = {
-    "sq": ("founder-sq", [320, 480, 640], (640, 640), "(min-width: 860px) 220px, 60vw"),
-    "portrait": ("founder-portrait", [480, 720], (720, 900), "(min-width: 960px) 420px, 90vw"),
-    "avatar": ("founder-avatar", [64, 128], (128, 128), "40px"),
+    "portrait": ("founder-portrait", [480, 608], (608, 760), "(min-width: 960px) 440px, 90vw"),
+    "wide": ("founder-wide", [640, 1080], (1080, 608), "(min-width: 1200px) 1100px, 100vw"),
+    "avatar": ("founder-avatar", [64, 128, 256], (256, 256), "88px"),
 }
 
 
@@ -438,7 +439,7 @@ def footer(lang):
 
     tup = lambda pid: t[pid][0]
     cols = [
-        col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("audit", t["audit"]), ("security", t["security"])]),
+        col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("security", t["security"])]),
         col(t["col_solutions"], [(p, tup(p)) for p in ["b2b", "creators", "ecommerce", "from-blog", "from-youtube", "from-podcast", "from-webinar"]]),
         col(t["col_resources"], [("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
         col(t["col_company"], [("about", t["about"]), ("contact", t["contact"]), ("login", t["login"])]),
@@ -459,13 +460,13 @@ def footer(lang):
 
 def cta_band(lang):
     t = UI[lang]
-    audit = f'<a class="btn btn-ghost" href="{url(lang, "audit")}" data-track="band-audit">{t["audit"]}</a>' if exists(lang, "audit") else ""
+    second = f'<a class="btn btn-ghost" href="{url(lang, "pricing")}" data-track="band-pricing">{t["see_pricing"]}</a>' if exists(lang, "pricing") else ""
     return f'''<section class="cta-band" aria-labelledby="cta-band-title">
 <div class="wrap">
 <span class="eyebrow">{t["cta_kicker"]}</span>
 <h2 id="cta-band-title">{t["cta_title"]}</h2>
 <p>{t["cta_text"]}</p>
-<div class="hero-actions"><a class="btn btn-primary" href="{book_href(lang)}" {BOOK_ATTRS} data-track="band-book">{t["book"]}{icon("arrow", "flip")}</a>{audit}</div>
+<div class="hero-actions"><a class="btn btn-primary" href="{book_href(lang)}" {BOOK_ATTRS} data-track="band-book">{t["book"]}{icon("arrow", "flip")}</a>{second}</div>
 <p class="book-note">{t["book_note"]}</p>
 <p class="hero-note">{t["cta_terms"]}</p>
 </div>
@@ -635,7 +636,7 @@ def schema(lang, pid, meta, body):
             "alternateName": "KORTEX Lab",
             "email": EMAIL,
             "description": "KORTEX is a GEO, SEO and content creation studio. It turns one source, such as a blog post, YouTube video, podcast episode or webinar, into up to 30+ assets built to be cited by AI answer engines and ranked by search engines.",
-            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-720.jpg", "sameAs": [LINKEDIN]},
+            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "sameAs": [LINKEDIN]},
             "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": EMAIL, "url": CAL_URL, "availableLanguage": ["English", "French", "Arabic"]},
             "address": {"@type": "PostalAddress", "addressLocality": "Fès", "addressCountry": "MA"},
             "areaServed": "Worldwide",
@@ -670,7 +671,7 @@ def schema(lang, pid, meta, body):
             "@id": person_id,
             "name": "Hamza Bentarhlia",
             "jobTitle": "Founder",
-            "image": DOMAIN + "/assets/img/founder-portrait-720.jpg",
+            "image": DOMAIN + "/assets/img/founder-portrait-608.jpg",
             "worksFor": {"@id": org_id},
             "homeLocation": {"@type": "Place", "name": "Fès, Morocco"},
             "sameAs": [LINKEDIN],
@@ -708,7 +709,7 @@ def schema(lang, pid, meta, body):
             "description": meta["description"],
             "inLanguage": lang,
             "mainEntityOfPage": {"@id": page_url + "#webpage"},
-            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-720.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
+            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
             "publisher": {"@id": org_id},
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
             "image": DOMAIN + og_image(lang, pid, meta),
@@ -816,14 +817,32 @@ def mirror_diagrams(body):
     return re.sub(r'<svg class="frag-lines".*?</svg>|<svg class="hero-pipe".*?</svg>|<figure class="glass diagram[^"]*"[^>]*>\s*<svg.*?</svg>', lambda m: mirror_svg(m.group(0)), body, flags=re.S)
 
 
-def decorate(body, pid, meta):
-    if meta.get("art") != "none" and '<section class="page-hero"' in body:
-        head = re.search(r'<section class="page-hero"[^>]*>\n<div class="wrap">', body)
-        if head:
-            end = body.find("</div>\n</section>", head.end())
-            kind = pid if pid in art.GLYPH else "generic"
-            panel = f'<div class="page-art" data-anim aria-hidden="true">{art.hero_art(kind)}</div>'
-            body = body[: head.start()] + head.group(0).replace('<div class="wrap">', '<div class="wrap hero-art-wrap"><div class="hero-copy">') + body[head.end() : end] + "</div>" + panel + body[end:]
+HERO_KINDS = {"split", "stage", "backdrop", "editorial"}
+
+
+def decorate(body, pid, meta, lang):
+    body = re.sub(r"\{\{v:([a-z0-9-]+)\}\}", lambda m: visuals.render(m.group(1), lang), body)
+    head = re.search(r'<section class="page-hero[^"]*"[^>]*>\n<div class="wrap">', body)
+    if head:
+        end = body.find("</div>\n</section>", head.end())
+        copy = body[head.end() : end]
+        if meta.get("case") == "sentence":
+            copy = re.sub(r'(<h1[^>]*class="display)', r"\1 display-sentence", copy, count=1)
+        kind = meta.get("hero", "")
+        vis = meta.get("visual", "")
+        panel = visuals.render(vis, lang) if vis else ""
+        section = head.group(0)
+        if kind in HERO_KINDS and panel:
+            section = section.replace('class="page-hero', f'class="page-hero hero-{kind}', 1)
+            if kind in ("split", "editorial"):
+                inner = f'<div class="hero-grid"><div class="hero-copy">{copy}</div><div class="hero-visual">{panel}</div></div>'
+            elif kind == "stage":
+                inner = f'<div class="hero-copy">{copy}</div><div class="hero-visual">{panel}</div>'
+            else:
+                inner = f'<div class="hero-visual" aria-hidden="true">{panel}</div><div class="hero-copy">{copy}</div>'
+            body = body[: head.start()] + section + inner + body[end:]
+        else:
+            body = body[: head.start()] + section + copy + body[end:]
     count = [0]
 
     def sep(m):
@@ -842,9 +861,19 @@ def fr_typo(text):
     return text
 
 
+VCSS = {}
+
+
+def visual_css(body):
+    used = visuals.modules_in(body)
+    if not used:
+        return ""
+    return VCSS["kit"] + "".join(VCSS.get(n, "") for n in used)
+
+
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
-    body = decorate(body, pid, meta)
+    body = decorate(body, pid, meta, lang)
     if lang == "ar":
         body = mirror_diagrams(body)
         body = re.sub(r"(?<=[\s>])و(?=[A-Za-z])", "و\u200c", body)
@@ -860,7 +889,7 @@ def render(lang, pid, critical, css_v, js_v):
     page = f'''<!doctype html>
 <html lang="{lang}"{direction}>
 <head>
-{head(lang, pid, meta, body, critical, css_v, js_v)}
+{head(lang, pid, meta, body, critical + visual_css(body), css_v, js_v)}
 </head>
 <body>
 {header(lang, pid)}
@@ -926,6 +955,9 @@ def redirects():
         "en/blog.html": ("en", "blog"),
         "en/contact.html": ("en", "contact"),
         "en/login.html": ("en", "login"),
+        "free-geo-audit/index.html": ("en", "contact"),
+        "fr/free-geo-audit/index.html": ("fr", "contact"),
+        "ar/free-geo-audit/index.html": ("ar", "contact"),
     }
     for en_slug, fr_slug in BLOG_SLUGS.items():
         table[f"blog-{fr_slug}.html"] = ("fr", f"blog/{en_slug}")
@@ -969,7 +1001,7 @@ def llms_txt():
         "",
         "## Key pages",
     ]
-    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "compare", "glossary", "blog", "about", "audit", "contact"]:
+    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "compare", "glossary", "blog", "about", "contact"]:
         if exists("en", pid):
             meta, _ = parse_page(source_path("en", pid))
             lines.append(f"- [{strip_tags(meta.get('h1', meta['title']))}]({abs_url('en', pid)}): {meta['description']}")
@@ -991,6 +1023,8 @@ def robots_txt():
 def main():
     critical = minify_css((SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
     site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8"))
+    for f in sorted((SRC / "styles" / "v").glob("*.css")):
+        VCSS[f.stem] = minify_css(f.read_text(encoding="utf-8"))
     css_out = OUT / "assets" / "css" / "site.css"
     css_out.parent.mkdir(parents=True, exist_ok=True)
     css_out.write_text(site_css, encoding="utf-8")
