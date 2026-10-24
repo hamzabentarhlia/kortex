@@ -221,6 +221,19 @@ function runTyper(card, instant) {
   tick();
 }
 
+function initBookBar() {
+  const bar = document.querySelector('[data-bookbar]');
+  const hero = document.querySelector('main > section');
+  const ends = [...document.querySelectorAll('.site-footer, .cta-band')];
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  let pastHero = false;
+  const seen = new Set();
+  const set = () => bar.classList.toggle('is-on', pastHero && !seen.size);
+  new IntersectionObserver((es) => { pastHero = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; set(); }).observe(hero);
+  const io = new IntersectionObserver((es) => { es.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target))); set(); });
+  ends.forEach((el) => io.observe(el));
+}
+
 function initVisuals() {
   const vx = [...document.querySelectorAll('.vx')];
   if (!('IntersectionObserver' in window) || reduceMotion) {
@@ -529,6 +542,7 @@ initPrefill();
 initForms();
 initAnimVisibility();
 initVisuals();
+initBookBar();
 initScroll();
 initPipeline();
 initFinder();

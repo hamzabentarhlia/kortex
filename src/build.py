@@ -74,6 +74,7 @@ UI = {
         "about": "About",
         "login": "Login",
         "book": "Book a strategy call",
+        "book_bar": "30-minute call",
         "see_pricing": "See pricing",
         "menu": "Open menu",
         "close": "Close menu",
@@ -121,6 +122,7 @@ UI = {
         "about": "À propos",
         "login": "Connexion",
         "book": "Réserver un appel stratégique",
+        "book_bar": "Appel de 30 minutes",
         "see_pricing": "Voir les tarifs",
         "menu": "Ouvrir le menu",
         "close": "Fermer le menu",
@@ -168,6 +170,7 @@ UI = {
         "about": "من نحن",
         "login": "تسجيل الدخول",
         "book": "احجز مكالمة استراتيجية",
+        "book_bar": "مكالمة من 30 دقيقة",
         "see_pricing": "اطلع على الأسعار",
         "menu": "فتح القائمة",
         "close": "إغلاق القائمة",
@@ -406,6 +409,13 @@ def header(lang, pid):
 
 def book_href(lang):
     return CAL_URL
+
+
+def book_bar(lang, pid):
+    if pid in ("contact", "login", "404", "privacy", "terms", "cookies"):
+        return ""
+    t = UI[lang]
+    return f'<div class="book-bar" data-bookbar><span>{t["book_bar"]}</span><a class="btn btn-primary btn-sm" href="{book_href(lang)}" {BOOK_ATTRS} data-track="bar-book">{t["book"]}</a></div>'
 
 
 BOOK_ATTRS = f'data-cal="{CAL_LINK}" rel="noopener"'
@@ -906,6 +916,7 @@ def render(lang, pid, critical, css_v, js_v):
 {art.divider(0) if band else ""}
 {band}
 </main>
+{book_bar(lang, pid)}
 {footer(lang)}
 {ANALYTICS}
 </body>
