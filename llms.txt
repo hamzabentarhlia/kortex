@@ -22,7 +22,6 @@ Founder: Hamza Bentarhlia. Contact: contact@kortexlab.me. Book a strategy call: 
 - [GEO glossary](https://www.kortexlab.me/glossary/): Short, clear definitions of GEO, AEO, SEO, entities, citation rate, schema markup and other terms you meet when working on visibility in AI answer engines.
 - [Blog](https://www.kortexlab.me/blog/): Practical articles on Generative Engine Optimization, AI answer engines, entity-first content and turning one source into a month of content that gets cited.
 - [About KORTEX](https://www.kortexlab.me/about/): Why I built KORTEX: people choose the source they trust when they need an answer, and that moment now happens inside AI assistants. Founder story, mission and beliefs.
-- [Free GEO audit: see how your content holds up in AI answers | KORTEX](https://www.kortexlab.me/free-geo-audit/): Send one link to a blog post, video, podcast or webinar. KORTEX reviews how AI answer engines would read it and what it could become. Free, written, no call required.
 - [Contact KORTEX and book a strategy call | KORTEX](https://www.kortexlab.me/contact/): Book a strategy call with KORTEX or send a message. Tell us where your expertise lives today and we will show you how it could appear in AI answers.
 
 ## Glossary
