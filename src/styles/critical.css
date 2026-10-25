@@ -155,7 +155,7 @@ p{margin:0}
 @media (min-width:900px){.page-hero{padding:190px 0 60px}}
 .page-hero h1{font-size:clamp(28px,5.2vw,64px);margin:20px 0 22px}
 .page-hero .hero-lead{max-width:62ch}
-.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}

@@ -1,4 +1,4 @@
-.js .vx .au-in{opacity:0;transform:translateY(14px);transition:opacity var(--v-dur) var(--ease),transform var(--v-dur) var(--ease);transition-delay:calc(var(--i,0)*80ms + var(--d,0ms))}
+.js .vx .au-in{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
 .js .vx.is-in .au-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .vx .au-in{opacity:1;transform:none}.js .vx .au-rt-stop::before{transform:none}}
 .au-rt{display:grid;gap:18px}

@@ -51,10 +51,10 @@
 .compare-c-row.compare-me{border-color:var(--chip-line)}
 .compare-c-row.compare-me span{color:var(--accent-text)}
 .js .vx.is-in .compare-c-row{transform:translateY(calc(var(--i)*(var(--rh) + 6px)*-1 + min(var(--i),2)*8px)) scale(calc(1 - min(var(--i),2)*.04))}
-.js .vx.is-in .compare-c-row:nth-child(n+4){opacity:0}
+.js .vx.is-in .compare-c-row:nth-child(n+4){opacity:.4}
 .compare-c-note{display:none;position:absolute;inset-inline:16px;top:calc(var(--rh) + 82px);align-items:center;gap:8px;margin:0;padding:12px 14px;padding-inline-end:60px;border:1px dashed var(--chip-line);border-radius:12px;font-weight:600;font-size:14px;color:var(--accent-text);transition:opacity .6s 2.7s}
 .js .compare-c-note{display:flex}
-.js .vx:not(.is-in) .compare-c-note{opacity:0}
+.js .vx:not(.is-in) .compare-c-note{opacity:.4}
 [dir=rtl] .compare-c-note svg{transform:scaleX(-1)}
 .compare-c-ans{position:relative;z-index:2;margin-top:104px;margin-inline-start:-34px}
 .compare-c-ans .vx-answer{padding:22px;gap:14px;transform:translateY(calc(var(--p,0)*-26px));box-shadow:var(--v-shadow),0 50px 100px -40px var(--glow-1)}

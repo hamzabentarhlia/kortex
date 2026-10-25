@@ -254,7 +254,7 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 @keyframes drift2{to{transform:translate(70px,-30px) scale(.94)}}
 @supports (animation-timeline:scroll()){.ambient{animation:para linear both;animation-timeline:scroll(root);animation-range:0 1200px}@keyframes para{to{transform:translateY(-180px)}}}
 [data-anim]:not(.is-visible),[data-anim]:not(.is-visible) *{animation-play-state:paused!important}
-.js .reveal-group>*{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease) calc(var(--i,0)*70ms),transform .6s var(--ease) calc(var(--i,0)*70ms)}
+.js .reveal-group>*{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease) calc(var(--i,0)*40ms),transform .38s var(--ease) calc(var(--i,0)*40ms)}
 .js .reveal-group.is-in>*{opacity:1;transform:none}
 
 .hero-pipe{width:100%;height:auto;overflow:visible}
@@ -385,7 +385,7 @@ main{overflow-x:clip}
 .path li::after{display:none!important}
 .path-node{display:grid;place-items:center;width:40px;height:40px;margin-bottom:12px;border-radius:50%;background:var(--surface-solid);border:1px solid var(--chip-line);color:var(--accent-text);position:relative;z-index:1}
 .path-node svg{width:20px;height:20px}
-.js .path-wrap .path li{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease) calc(.3s + var(--i)*.35s),transform .6s var(--ease) calc(.3s + var(--i)*.35s)}
+.js .path-wrap .path li{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease) calc(var(--i)*.06s),transform .38s var(--ease) calc(var(--i)*.06s)}
 .js .path-wrap.is-in .path li{opacity:1;transform:none}
 .path li.acc .path-node{background:var(--ember);color:var(--on-ember)}
 .audience ul li{display:flex;align-items:center;gap:10px}
@@ -446,3 +446,6 @@ main{overflow-x:clip}
 .case-facts div{padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
 .case-facts dt{font-size:12.5px;color:var(--text-3)}
 .case-facts dd{margin:4px 0 0;font-weight:650}
+[data-count]{display:inline-block}
+.is-counted{animation:countpop .38s var(--ease)}
+@keyframes countpop{from{opacity:.5;transform:translateY(6px)}}

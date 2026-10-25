@@ -68,15 +68,15 @@
 .hpipe.run .hp-tile{animation:hpfan .55s var(--ease) both;animation-delay:calc(1.2s + var(--i) * .09s)}
 .hpipe.run .hp-answer{animation:hprise .7s var(--ease) both;animation-delay:1.9s}
 .hpipe.run .hp-cite{animation:hpglow 1.4s var(--ease) both;animation-delay:2.5s}
-@keyframes hpin{from{opacity:0;transform:scale(.94)}}
+@keyframes hpin{from{opacity:.35;transform:scale(.94)}}
 @keyframes hpmark{to{transform:scaleX(1)}}
-@keyframes hpslide{from{opacity:0;transform:translateX(-14px)}}
+@keyframes hpslide{from{opacity:.35;transform:translateX(-14px)}}
 [dir=rtl] .hpipe.run .hp-pulls li{animation-name:hpslider}
-@keyframes hpslider{from{opacity:0;transform:translateX(14px)}}
-@keyframes hpfan{from{opacity:0;transform:translateX(-22px) scale(.94)}}
+@keyframes hpslider{from{opacity:.35;transform:translateX(14px)}}
+@keyframes hpfan{from{opacity:.35;transform:translateX(-22px) scale(.94)}}
 [dir=rtl] .hpipe.run .hp-tile{animation-name:hpfanr}
-@keyframes hpfanr{from{opacity:0;transform:translateX(22px) scale(.94)}}
-@keyframes hprise{from{opacity:0;transform:translateY(22px)}}
+@keyframes hpfanr{from{opacity:.35;transform:translateX(22px) scale(.94)}}
+@keyframes hprise{from{opacity:.35;transform:translateY(22px)}}
 @keyframes hpglow{0%{transform:scale(1)}35%{transform:scale(1.08)}100%{transform:scale(1)}}
 .hp-mark::after{animation-fill-mode:both}
 @media (max-width:760px){.hp-stage{grid-template-columns:1fr;row-gap:12px}.hp-col-a,.hp-col-b,.hp-answer{grid-column:1;grid-row:auto}.hp-beam{display:none}.hp-answer{margin-inline-start:0}.hpipe[data-active] .hp-pulls{display:none}.hp-player,.hp-slide{aspect-ratio:16/7}.hp-wave{height:64px}}
@@ -142,7 +142,7 @@
 .ht-c i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--line-strong);transition:transform .45s cubic-bezier(.3,1.4,.5,1);transition-delay:calc(var(--i) * 70ms)}
 .ht-c.is-cited i{background:var(--ember);border-color:var(--ember);color:var(--on-ember);box-shadow:0 0 16px -4px var(--glow-1)}
 .ht-c svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.js .vx:not(.is-in) .ht-c i{transform:scale(0)}
+.js .vx:not(.is-in) .ht-c i{transform:scale(.6)}
 .ht-scan{position:absolute;inset-inline:0;top:0;height:calc(100% / 11);border-radius:8px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ember) 14%,transparent),transparent);pointer-events:none;animation:htscan 7s linear infinite}
 @keyframes htscan{from{transform:translateY(100%)}to{transform:translateY(1100%)}}
 .ht-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--text-2)}

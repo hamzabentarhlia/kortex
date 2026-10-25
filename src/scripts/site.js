@@ -126,15 +126,7 @@ function initMobileMenu() {
 }
 
 function animateCount(el) {
-  const target = Number(el.dataset.count);
-  if (reduceMotion) { el.textContent = target; return; }
-  const start = performance.now();
-  const step = (now) => {
-    const t = Math.min(1, (now - start) / 1400);
-    el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
-    if (t < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
+  if (!reduceMotion) el.classList.add('is-counted');
 }
 
 function initReveal() {
@@ -150,12 +142,11 @@ function initReveal() {
   document.querySelectorAll('.reveal-group').forEach((g) => {
     [...g.children].forEach((el, i) => el.style.setProperty('--i', Math.min(i, 8)));
   });
-  const items = document.querySelectorAll('.reveal,.reveal-group,.draw,.divider,.path-wrap,[data-count],[data-fill],[data-typer]');
+  const items = document.querySelectorAll('.reveal,.reveal-group,.draw,.divider,.path-wrap,[data-count],[data-fill]');
   if (!('IntersectionObserver' in window) || reduceMotion) {
     items.forEach((el) => {
       el.classList.add('is-in');
       if (el.dataset.count) el.textContent = el.dataset.count;
-      if (el.matches('[data-typer]')) runTyper(el, true);
     });
     return;
   }
@@ -165,10 +156,9 @@ function initReveal() {
       const el = entry.target;
       el.classList.add('is-in');
       if (el.dataset.count) animateCount(el);
-      if (el.matches('[data-typer]')) runTyper(el);
       io.unobserve(el);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  }, { rootMargin: '0px 0px 15% 0px', threshold: 0 });
   items.forEach((el) => io.observe(el));
 }
 
@@ -200,25 +190,6 @@ function initTracking() {
     const el = e.target.closest('[data-track]');
     if (el) track('CTA click', { cta: el.dataset.track, page: location.pathname });
   });
-}
-
-function runTyper(card, instant) {
-  const out = card.querySelector('[data-typed]');
-  const text = out.dataset.typed;
-  const lines = [...card.querySelectorAll('.demo-a p')];
-  const hit = card.querySelector('.demo-src .hit');
-  const finish = () => {
-    lines.forEach((p, i) => setTimeout(() => p.classList.add('on'), instant ? 0 : 350 + i * 450));
-    setTimeout(() => hit && hit.classList.add('on'), instant ? 0 : 350 + lines.length * 450 + 200);
-  };
-  if (instant) { out.textContent = text; finish(); return; }
-  let i = 0;
-  const tick = () => {
-    out.textContent = text.slice(0, ++i);
-    if (i < text.length) setTimeout(tick, 34);
-    else finish();
-  };
-  tick();
 }
 
 function initConsent() {
@@ -278,17 +249,8 @@ function initVisuals() {
     return;
   }
   const typeIn = (el, delay) => {
-    const text = el.textContent;
-    el.style.minHeight = el.offsetHeight + 'px';
-    el.textContent = '';
+    el.style.setProperty('--type-delay', delay + 'ms');
     el.classList.add('is-typing');
-    let i = 0;
-    const tick = () => {
-      el.textContent = text.slice(0, ++i);
-      if (i < text.length) setTimeout(tick, 26);
-      else el.classList.remove('is-typing');
-    };
-    setTimeout(tick, delay);
   };
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     const v = e.target;
@@ -297,7 +259,7 @@ function initVisuals() {
       v.classList.add('is-in');
       v.querySelectorAll('[data-type]').forEach((el) => typeIn(el, parseInt(el.dataset.type, 10) || 300));
     }
-  }), { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+  }), { rootMargin: '0px 0px 15% 0px', threshold: 0 });
   vx.forEach((v) => io.observe(v));
 }
 
