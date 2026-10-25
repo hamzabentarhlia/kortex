@@ -411,7 +411,7 @@ def header(lang, pid):
 
 
 def book_href(lang):
-    return CAL_URL
+    return f"{CAL_URL}?lng={lang}"
 
 
 def book_bar(lang, pid):
@@ -504,8 +504,8 @@ def resolve(body, lang):
     body = re.sub(r"\{\{list:([a-z]+)\}\}", lambda m: listing(lang, m.group(1)), body)
     body = re.sub(r'(<div class="hero-actions">(?:(?!</div>).)*?href="@@book".*?</div>)(?!\s*<p class="book-note")', lambda m: m.group(1) + f'<p class="book-note">{UI[lang]["book_note"]}</p>', body, flags=re.S)
     body = body.replace("{{booknote}}", UI[lang]["book_note"])
-    body = body.replace('href="@@book"', f'href="{CAL_URL}" {BOOK_ATTRS}')
-    body = body.replace("@@book", CAL_URL)
+    body = body.replace('href="@@book"', f'href="{book_href(lang)}" {BOOK_ATTRS}')
+    body = body.replace("@@book", book_href(lang))
     body = re.sub(r"\{\{photo:([a-z]+)(\|eager)?\}\}", lambda m: photo(lang, m.group(1), bool(m.group(2))), body)
     body = body.replace("@@email", EMAIL)
     body = body.replace("@@linkedin", LINKEDIN)

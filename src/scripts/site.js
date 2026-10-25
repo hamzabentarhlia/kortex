@@ -30,6 +30,7 @@ function initTheme() {
       root.dataset.theme = next;
       store('kx-theme', next);
       document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(next === 'light')));
+      if (window.Cal && window.Cal.ns && window.Cal.ns.kx) window.Cal.ns.kx('ui', { theme: next });
     });
   });
 }
@@ -383,6 +384,9 @@ function initCalc() {
   run();
 }
 
+const calLang = () => ({ en: 'en', fr: 'fr', ar: 'ar' })[document.documentElement.lang] || 'en';
+const calConfig = () => ({ theme: currentTheme(), layout: 'month_view', lng: calLang() });
+
 function loadCal() {
   if (window.__calP) return window.__calP;
   window.__calP = new Promise((resolve, reject) => {
@@ -426,7 +430,7 @@ function initCal() {
     e.preventDefault();
     track('Booking click', { cta: a.dataset.track || 'book', page: location.pathname });
     loadCal().then(() => {
-      window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: { theme: currentTheme(), layout: 'month_view' } });
+      window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: calConfig() });
     }).catch(() => { location.href = a.href; });
   });
   const inline = document.getElementById('cal-inline');
@@ -436,7 +440,7 @@ function initCal() {
     inline.dataset.loaded = '1';
     loadCal().then(() => {
       inline.innerHTML = '';
-      window.Cal.ns.kx('inline', { elementOrSelector: '#cal-inline', calLink: inline.dataset.calLink, config: { theme: currentTheme(), layout: 'month_view' } });
+      window.Cal.ns.kx('inline', { elementOrSelector: '#cal-inline', calLink: inline.dataset.calLink, config: calConfig() });
     }).catch(() => { inline.dataset.failed = '1'; });
   };
   const btn = document.querySelector('[data-cal-load]');
