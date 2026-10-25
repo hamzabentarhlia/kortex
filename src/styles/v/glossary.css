@@ -75,7 +75,6 @@
 .gl-sc-row:first-of-type .gl-sc-reg{border-top:1px solid var(--line-strong);border-radius:16px 16px 0 0}
 .gl-sc-row:last-child .gl-sc-reg{border-bottom:1px solid var(--line-strong);border-radius:0 0 16px 16px}
 .gl-sc-out{position:absolute;inset:7px;border:1.5px dashed var(--ember);border-radius:10px;opacity:.85;transition:opacity .6s;transition-delay:calc(var(--i)*.25s + .7s)}
-.js .vx:not(.is-in) .gl-sc-out{opacity:0}
 .gl-sc-reg i{display:block;height:7px;width:var(--w,100%);border-radius:4px;background:var(--line-strong)}
 .gl-sc-crumb,.gl-sc-org,.gl-sc-by,.gl-sc-faq div{display:flex;align-items:center;gap:10px}
 .gl-sc-crumb i{width:54px}.gl-sc-crumb .is-w{width:96px}
@@ -297,6 +296,6 @@
 .gl-lf-b li{grid-template-columns:22px 1fr;gap:8px}
 }
 @media (prefers-reduced-motion:reduce){.js .vx .gl-en-e line,.js .vx .gl-tc-f,.js .vx .gl-tm-t i{transform:none!important}.js .vx .gl-tm-t i{transform:scaleX(var(--s))!important}.js .vx .gl-sc-out{opacity:.85}.gl-lf-b li::before{display:none}}
-.js .vx .gl-u{opacity:0;transform:translateY(14px);transition:opacity var(--v-dur) var(--ease),transform var(--v-dur) var(--ease);transition-delay:calc(var(--i,0)*80ms + var(--d,0ms))}
+.js .vx .gl-u{transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
 .js .vx.is-in .gl-u{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .vx .gl-u{opacity:1;transform:none}}

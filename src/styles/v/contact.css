@@ -39,8 +39,8 @@
 .ct-next{display:inline-flex;align-items:center;gap:6px;justify-self:start;margin-top:2px;padding:4px 10px;border-radius:var(--radius-pill);background:var(--ember);color:var(--on-ember);font-weight:700;font-size:12.5px}
 .ct-foot{display:flex;align-items:center;gap:8px;margin:0;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--text-2)}
 .ct-foot .ct-i{color:var(--accent-text)}
-.js .vx .ct-up{opacity:0;transform:translateY(14px);transition:opacity var(--v-dur) var(--ease),transform var(--v-dur) var(--ease);transition-delay:calc(var(--i,0)*110ms + var(--d,0ms))}
-.js .vx .ct-pop{opacity:0;transform:scale(.85) rotate(-40deg);transition:opacity .7s var(--ease),transform .9s cubic-bezier(.3,1.3,.5,1)}
+.js .vx .ct-up{transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
+.js .vx .ct-pop{transform:scale(.94) rotate(-40deg);transition:opacity .38s var(--ease),transform .38s cubic-bezier(.3,1.3,.5,1)}
 .js .vx.is-in .ct-up,.js .vx.is-in .ct-pop{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .vx .ct-up,.js .vx .ct-pop{opacity:1;transform:none}}
 @media (max-width:640px){.ct-clock{width:84px}.ct-min b{font-size:36px}.ct-sub{font-size:15px}}

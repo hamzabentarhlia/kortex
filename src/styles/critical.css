@@ -32,7 +32,7 @@
   --line:rgba(74,38,14,.10);--line-strong:rgba(74,38,14,.20);
   --highlight:rgba(255,255,255,.9);
   --text:#1d130d;--text-2:#56423a;--text-3:#6c574a;
-  --ember:#ec5a1c;--ember-2:#f07a3e;--amber:#d98a12;--crimson:#b02c18;--success:#1f8a5b;
+  --ember:#ec5a1c;--ember-2:#f07a3e;--amber:#d98a12;--crimson:#b02c18;--success:#16714a;
   --accent-text:#b23f0c;--on-ember:#1b0c05;
   --glow-1:rgba(255,120,60,.20);--glow-2:rgba(214,70,40,.12);--glow-3:rgba(255,190,90,.22);
   --chip-bg:rgba(236,90,28,.12);--chip-line:rgba(236,90,28,.45);
@@ -47,7 +47,7 @@
     --line:rgba(74,38,14,.10);--line-strong:rgba(74,38,14,.20);
     --highlight:rgba(255,255,255,.9);
     --text:#1d130d;--text-2:#56423a;--text-3:#6c574a;
-    --ember:#ec5a1c;--ember-2:#f07a3e;--amber:#d98a12;--crimson:#b02c18;--success:#1f8a5b;
+    --ember:#ec5a1c;--ember-2:#f07a3e;--amber:#d98a12;--crimson:#b02c18;--success:#16714a;
     --accent-text:#b23f0c;--on-ember:#1b0c05;
     --glow-1:rgba(255,120,60,.20);--glow-2:rgba(214,70,40,.12);--glow-3:rgba(255,190,90,.22);
     --chip-bg:rgba(236,90,28,.12);--chip-line:rgba(236,90,28,.45);
@@ -145,8 +145,8 @@ p{margin:0}
 :root[lang=ar] .display{text-transform:none;letter-spacing:0;line-height:1.25}
 .chip-word{display:inline-block;padding:.02em .28em .06em;border:1px solid var(--chip-line);border-radius:.22em;background:var(--chip-bg);color:var(--accent-text);box-shadow:0 0 40px -6px var(--glow-1),0 0 0 1px rgba(255,255,255,.04) inset}
 
-.hero{position:relative;padding:150px 0 70px}
-@media (min-width:900px){.hero{padding:180px 0 110px}}
+.hero{position:relative;padding:150px 0 48px}
+@media (min-width:900px){.hero{padding:180px 0 72px}}
 .hero h1{font-size:clamp(34px,4.9vw,62px);margin:22px 0 24px}
 .hero-lead{max-width:56ch;font-size:clamp(17px,1.6vw,19px);color:var(--text-2)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
@@ -155,7 +155,7 @@ p{margin:0}
 @media (min-width:900px){.page-hero{padding:190px 0 60px}}
 .page-hero h1{font-size:clamp(28px,5.2vw,64px);margin:20px 0 22px}
 .page-hero .hero-lead{max-width:62ch}
-.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal{transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
