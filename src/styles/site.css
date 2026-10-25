@@ -254,7 +254,7 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 @keyframes drift2{to{transform:translate(70px,-30px) scale(.94)}}
 @supports (animation-timeline:scroll()){.ambient{animation:para linear both;animation-timeline:scroll(root);animation-range:0 1200px}@keyframes para{to{transform:translateY(-180px)}}}
 [data-anim]:not(.is-visible),[data-anim]:not(.is-visible) *{animation-play-state:paused!important}
-.js .reveal-group>*{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease) calc(var(--i,0)*40ms),transform .38s var(--ease) calc(var(--i,0)*40ms)}
+.js .reveal-group>*{transform:translateY(10px);transition:opacity .38s var(--ease) calc(var(--i,0)*40ms),transform .38s var(--ease) calc(var(--i,0)*40ms)}
 .js .reveal-group.is-in>*{opacity:1;transform:none}
 
 .hero-pipe{width:100%;height:auto;overflow:visible}
@@ -385,7 +385,7 @@ main{overflow-x:clip}
 .path li::after{display:none!important}
 .path-node{display:grid;place-items:center;width:40px;height:40px;margin-bottom:12px;border-radius:50%;background:var(--surface-solid);border:1px solid var(--chip-line);color:var(--accent-text);position:relative;z-index:1}
 .path-node svg{width:20px;height:20px}
-.js .path-wrap .path li{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease) calc(var(--i)*.06s),transform .38s var(--ease) calc(var(--i)*.06s)}
+.js .path-wrap .path li{transform:translateY(10px);transition:opacity .38s var(--ease) calc(var(--i)*.06s),transform .38s var(--ease) calc(var(--i)*.06s)}
 .js .path-wrap.is-in .path li{opacity:1;transform:none}
 .path li.acc .path-node{background:var(--ember);color:var(--on-ember)}
 .audience ul li{display:flex;align-items:center;gap:10px}
@@ -424,7 +424,7 @@ main{overflow-x:clip}
 .belief p{margin:0;font-size:14px;line-height:1.55;color:var(--text-2)}
 @media (prefers-reduced-motion:reduce){.path-line i{transform:none}.path li{--k:1}}
 .book-bar{display:none}
-@media (max-width:760px){.book-bar{position:fixed;inset-inline:12px;bottom:12px;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 16px;padding-inline:16px 8px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--nav-bg-scrolled);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 20px 50px -20px rgba(0,0,0,.6);font-size:13.5px;font-weight:600;color:var(--text-2);transform:translateY(140%);opacity:0;transition:transform .45s var(--ease),opacity .3s;pointer-events:none}.book-bar.is-on{transform:none;opacity:1;pointer-events:auto}}
+@media (max-width:760px){.book-bar{position:fixed;inset-inline:12px;bottom:12px;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 16px;padding-inline:16px 8px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--nav-bg-scrolled);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 20px 50px -20px rgba(0,0,0,.6);font-size:13.5px;font-weight:600;color:var(--text-2);transform:translateY(140%);opacity:0;transition:transform .45s var(--ease),translate .3s var(--ease),opacity .3s;pointer-events:none}.book-bar.is-on{transform:none;opacity:1;pointer-events:auto}}
 .dv-line{fill:none;stroke:var(--ember);stroke-width:1.6;vector-effect:non-scaling-stroke;opacity:.75}
 .dv-wipe{transform-box:fill-box;transform-origin:left center;transition:transform 1.6s var(--ease)}
 .js .divider:not(.is-in) .dv-wipe{transform:scaleX(0)}
@@ -437,7 +437,7 @@ main{overflow-x:clip}
 .consent-actions .btn{min-width:104px;min-height:44px;justify-content:center}
 @keyframes consentin{from{opacity:0;transform:translateY(12px)}}
 @media (max-width:640px){.consent{inset-inline:10px;bottom:10px;flex-direction:column;align-items:stretch;padding:14px}.consent p{font-size:13.5px}.consent-actions .btn{flex:1}}
-.consent-open .book-bar{bottom:calc(var(--consent-h,140px) + 22px)}
+.consent-open .book-bar{translate:0 calc(-1 * var(--consent-h,140px) - 10px)}
 .link-btn{padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;text-decoration:none}
 .link-btn:hover{color:var(--text)}
 .link-btn:focus-visible{outline:2px solid var(--ember);outline-offset:3px}

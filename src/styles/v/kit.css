@@ -84,8 +84,8 @@
 .vx-phone{position:relative;width:220px;padding:10px;border:1px solid var(--line-strong);border-radius:34px;background:var(--bg-raised);box-shadow:var(--v-shadow),0 40px 90px -40px var(--glow-1)}
 .vx-phone-notch{position:absolute;top:16px;left:50%;width:70px;height:18px;margin-left:-35px;border-radius:10px;background:var(--bg-sunk);z-index:2}
 .vx-phone-screen{overflow:hidden;border-radius:26px;background:var(--surface-solid);min-height:380px}
-.js .vx .st{opacity:.4;transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
-.js .vx .pop{opacity:.4;transform:scale(.94);transition:opacity .38s var(--ease),transform .38s cubic-bezier(.3,1.4,.5,1);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
+.js .vx .st{transform:translateY(10px);transition:opacity .38s var(--ease),transform .38s var(--ease);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
+.js .vx .pop{transform:scale(.94);transition:opacity .38s var(--ease),transform .38s cubic-bezier(.3,1.4,.5,1);transition-delay:calc(var(--i,0)*40ms + var(--d,0ms))}
 .js .vx.is-in .st,.js .vx.is-in .pop{opacity:1;transform:none}
 .js .vx .vx-wipe{transform:scaleX(0)}
 .js .vx.is-in .vx-wipe{transform:none}
