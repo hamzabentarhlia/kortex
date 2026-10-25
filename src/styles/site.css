@@ -429,3 +429,15 @@ main{overflow-x:clip}
 .dv-wipe{transform-box:fill-box;transform-origin:left center;transition:transform 1.6s var(--ease)}
 .js .divider:not(.is-in) .dv-wipe{transform:scaleX(0)}
 @media (prefers-reduced-motion:reduce){.js .divider .dv-wipe{transform:none}.dv-node{transform:scale(1)}}
+.consent{position:fixed;inset-inline:16px;bottom:16px;z-index:70;display:flex;align-items:center;gap:14px 20px;max-width:760px;margin-inline:auto;padding:14px 16px;padding-inline:20px 14px;border:1px solid var(--line-strong);border-radius:20px;background:var(--nav-bg-scrolled);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 24px 60px -24px rgba(0,0,0,.6);animation:consentin .35s var(--ease)}
+.consent[hidden]{display:none}
+.consent p{margin:0;font-size:14px;line-height:1.5;color:var(--text-2)}
+.consent a{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px}
+.consent-actions{display:flex;gap:8px;flex-shrink:0}
+.consent-actions .btn{min-width:104px;min-height:44px;justify-content:center}
+@keyframes consentin{from{opacity:0;transform:translateY(12px)}}
+@media (max-width:640px){.consent{inset-inline:10px;bottom:10px;flex-direction:column;align-items:stretch;padding:14px}.consent p{font-size:13.5px}.consent-actions .btn{flex:1}}
+.consent-open .book-bar{bottom:calc(var(--consent-h,140px) + 22px)}
+.link-btn{padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;text-decoration:none}
+.link-btn:hover{color:var(--text)}
+.link-btn:focus-visible{outline:2px solid var(--ember);outline-offset:3px}

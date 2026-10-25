@@ -12,8 +12,7 @@ function store(key, value) {
 }
 
 function track(name, props) {
-  if (typeof window.plausible === 'function') window.plausible(name, { props });
-  if (typeof window.gtag === 'function') window.gtag('event', name, props || {});
+  if (window.kxGA && typeof window.gtag === 'function') window.gtag('event', name, props || {});
 }
 
 function currentTheme() {
@@ -219,6 +218,43 @@ function runTyper(card, instant) {
     else finish();
   };
   tick();
+}
+
+function initConsent() {
+  const box = document.querySelector('[data-consent]');
+  if (!box) return;
+  const html = document.documentElement;
+  const show = (focus) => {
+    box.hidden = false;
+    html.classList.add('consent-open');
+    html.style.setProperty('--consent-h', box.offsetHeight + 'px');
+    if (focus) box.querySelector('button').focus();
+  };
+  const hide = () => {
+    box.hidden = true;
+    html.classList.remove('consent-open');
+  };
+  const clearGA = () => {
+    document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((n) => n.startsWith('_ga')).forEach((n) => {
+      [location.hostname, '.' + location.hostname.replace(/^www\./, '')].forEach((d) => {
+        document.cookie = n + '=; Max-Age=0; path=/; domain=' + d;
+      });
+      document.cookie = n + '=; Max-Age=0; path=/';
+    });
+  };
+  box.querySelectorAll('[data-consent-choice]').forEach((b) => b.addEventListener('click', () => {
+    const v = b.dataset.consentChoice;
+    try { localStorage.setItem('kx-consent', JSON.stringify({ v, t: Date.now() })); } catch (e) { }
+    window.kxConsent = v;
+    if (v === 'granted') window.kxLoadGA();
+    else {
+      if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      clearGA();
+    }
+    hide();
+  }));
+  document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => show(true)));
+  if (!window.kxConsent) show(false);
 }
 
 function initBookBar() {
@@ -534,6 +570,7 @@ function initFinder() {
 }
 
 initTheme();
+initConsent();
 initHeader();
 initMenus();
 initMobileMenu();
