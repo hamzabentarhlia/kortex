@@ -1,6 +1,7 @@
 import hashlib
 import html
 import json
+import os
 import re
 from pathlib import Path
 
@@ -38,9 +39,7 @@ PAGES = {
     "pricing": "/pricing/",
     "about": "/about/",
     "compare": "/compare/",
-    
-    
-    
+    "case-studies": "/case-studies/",
     "security": "/security/",
     "glossary": "/glossary/",
     "blog": "/blog/",
@@ -268,7 +267,8 @@ def exists(lang, pid):
     key = (lang, pid)
     if key not in _EXISTS:
         path = source_path(lang, pid)
-        _EXISTS[key] = path.exists() and "\ndraft: yes\n" not in path.read_text(encoding="utf-8").split("\n---\n", 1)[0] + "\n"
+        draft = path.exists() and "\ndraft: yes\n" in path.read_text(encoding="utf-8").split("\n---\n", 1)[0] + "\n"
+        _EXISTS[key] = path.exists() and (not draft or os.environ.get("KX_DRAFTS") == "1")
     return _EXISTS[key]
 
 
