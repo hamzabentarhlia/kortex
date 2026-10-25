@@ -449,3 +449,11 @@ main{overflow-x:clip}
 [data-count]{display:inline-block}
 .is-counted{animation:countpop .38s var(--ease)}
 @keyframes countpop{from{opacity:.5;transform:translateY(6px)}}
+@media (pointer:coarse),(max-width:900px){
+.site-footer a,.site-footer .link-btn,.founder-meta .text-link,.card-link,.crumbs a,.lang-switch .nav-link,.article-meta a,li>a:only-child{display:inline-flex;align-items:center;min-height:44px}
+.icon-btn{min-width:44px;min-height:44px}
+.btn-sm{min-height:44px}
+.nav-link{min-height:44px}
+.site-footer li{margin:0}
+}
+@media (prefers-reduced-motion:reduce){.marquee-track>[aria-hidden=true]{display:none}}

@@ -231,7 +231,7 @@ function initConsent() {
 
 function initBookBar() {
   const bar = document.querySelector('[data-bookbar]');
-  const hero = document.querySelector('main > section');
+  const hero = document.querySelector('main > section, main > article > header');
   const ends = [...document.querySelectorAll('.site-footer, .cta-band')];
   if (!bar || !hero || !('IntersectionObserver' in window)) return;
   let pastHero = false;
