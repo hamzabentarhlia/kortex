@@ -884,7 +884,7 @@ def decorate(body, pid, meta, lang):
 
     def sep(m):
         count[0] += 1
-        return "</section>\n" + art.divider(count[0]) + "\n<section"
+        return "</section>\n" + (art.divider(count[0]) if count[0] in (2, 6) else "") + "\n<section"
 
     body = re.sub(r"</section>\s*\n\s*<section", sep, body)
     return body

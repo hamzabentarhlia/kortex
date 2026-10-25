@@ -145,8 +145,8 @@ p{margin:0}
 :root[lang=ar] .display{text-transform:none;letter-spacing:0;line-height:1.25}
 .chip-word{display:inline-block;padding:.02em .28em .06em;border:1px solid var(--chip-line);border-radius:.22em;background:var(--chip-bg);color:var(--accent-text);box-shadow:0 0 40px -6px var(--glow-1),0 0 0 1px rgba(255,255,255,.04) inset}
 
-.hero{position:relative;padding:150px 0 70px}
-@media (min-width:900px){.hero{padding:180px 0 110px}}
+.hero{position:relative;padding:150px 0 48px}
+@media (min-width:900px){.hero{padding:180px 0 72px}}
 .hero h1{font-size:clamp(34px,4.9vw,62px);margin:22px 0 24px}
 .hero-lead{max-width:56ch;font-size:clamp(17px,1.6vw,19px);color:var(--text-2)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}

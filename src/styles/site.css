@@ -1,7 +1,7 @@
-.section{position:relative;padding:72px 0}
-@media (min-width:900px){.section{padding:112px 0}}
+.section{position:relative;padding:48px 0}
+@media (min-width:900px){.section{padding:76px 0}}
 .section-tint{background:linear-gradient(180deg,transparent,var(--bg-sunk) 18%,var(--bg-sunk) 82%,transparent)}
-.section-head{max-width:760px;margin-bottom:48px}
+.section-head{max-width:760px;margin-bottom:34px}
 .section-head.center{margin-inline:auto;text-align:center}
 .section-head h2{font-family:var(--ff-display);font-weight:800;font-size:clamp(28px,3.8vw,46px);letter-spacing:-.01em;margin:16px 0 18px}
 .section-head p{color:var(--text-2);font-size:clamp(16.5px,1.4vw,18.5px);max-width:64ch}
