@@ -908,13 +908,36 @@ def visual_css(body):
     return VCSS["kit"] + "".join(VCSS.get(n, "") for n in used)
 
 
+AR_LATIN = r"[A-Za-z][A-Za-z0-9.+&-]*(?:\s(?:[A-Z][A-Za-z0-9.+&-]*|AI))*"
+
+
+def ar_latin_plain(text):
+    return re.sub(r"(?<![\w\u0600-\u06FF])و\u200c?\s?(?=[A-Za-z])", "و ", text)
+
+
+def ar_latin(body):
+    def text_node(m):
+        t = re.sub(r"(?<![\w\u0600-\u06FF])و\u200c?\s?(" + AR_LATIN + ")", r"و <bdi>\1</bdi>", m.group(1))
+        return ">" + t + "<"
+    def attr(m):
+        return m.group(1) + '="' + ar_latin_plain(m.group(2)) + '"'
+    parts = re.split(r"(<svg\b.*?</svg>|<script\b.*?</script>|<style\b.*?</style>)", body, flags=re.S)
+    out = []
+    for i, part in enumerate(parts):
+        if i % 2:
+            out.append(re.sub(r">([^<]+)<", lambda m: ">" + ar_latin_plain(m.group(1)) + "<", part))
+        else:
+            part = re.sub(r">([^<]+)<", text_node, part)
+            out.append(re.sub(r'\b(aria-label|alt|title|content|placeholder|data-tip)="([^"]*)"', attr, part))
+    return "".join(out)
+
+
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
     body = decorate(body, pid, meta, lang)
     if lang == "ar":
         body = mirror_diagrams(body)
-        body = re.sub(r"(?<=[\s>])و(?=[A-Za-z])", "و\u200c", body)
-        meta = {k: re.sub(r"(?<=\s)و(?=[A-Za-z])", "و\u200c", v) for k, v in meta.items()}
+        meta = {k: ar_latin_plain(v) for k, v in meta.items()}
     if lang == "fr":
         body = re.sub(r">([^<]+)<", lambda m: ">" + fr_typo(m.group(1)) + "<", body)
         meta = {k: fr_typo(v) for k, v in meta.items()}
@@ -944,6 +967,10 @@ def render(lang, pid, critical, css_v, js_v):
 </body>
 </html>
 '''
+    if lang == "ar":
+        start = page.find("<body>")
+        head_part = re.sub(r'(<script type="application/ld\+json">)(.*?)(</script>)', lambda m: m.group(1) + ar_latin_plain(m.group(2)) + m.group(3), page[:start], flags=re.S)
+        page = head_part + ar_latin(page[start:])
     return re.sub(r"\n{2,}", "\n", page)
 
 
