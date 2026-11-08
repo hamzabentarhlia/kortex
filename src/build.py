@@ -1,8 +1,10 @@
+import datetime
 import hashlib
 import html
 import json
 import os
 import re
+import subprocess
 from pathlib import Path
 
 import art
@@ -18,7 +20,6 @@ LANG_NAME = {"en": "English", "fr": "Français", "ar": "العربية"}
 LANG_SHORT = {"en": "EN", "fr": "FR", "ar": "AR"}
 EMAIL = "contact@kortexlab.me"
 LINKEDIN = "https://www.linkedin.com/in/hamza-bentarhlia/"
-WEB3FORMS_KEY = "0aa868e7-7559-439c-a911-1f246b2d03e3"
 GA_ID = "G-4440VPDMPW"
 CAL_LINK = "hamza-bentarhlia"
 CAL_URL = "https://cal.com/" + CAL_LINK
@@ -509,7 +510,6 @@ def resolve(body, lang):
     body = re.sub(r"\{\{photo:([a-z]+)(\|eager)?\}\}", lambda m: photo(lang, m.group(1), bool(m.group(2))), body)
     body = body.replace("@@email", EMAIL)
     body = body.replace("@@linkedin", LINKEDIN)
-    body = body.replace("@@web3forms", WEB3FORMS_KEY)
     body = re.sub(r"\{\{icon:([a-z]+)(?:\|([a-z -]+))?\}\}", lambda m: icon(m.group(1), m.group(2) or ""), body)
     body = body.replace("{{cta_band}}", cta_band(lang))
     return body
@@ -714,7 +714,7 @@ def schema(lang, pid, meta, body):
                 for name, price, desc in offers
             ],
         })
-    if meta.get("kind") == "article" or "article" in meta.get("schema", ""):
+    if (meta.get("kind") == "article" or "article" in meta.get("schema", "")) and meta.get("date"):
         graph.append({
             "@type": "BlogPosting" if pid.startswith("blog/") else "Article",
             "@id": page_url + "#article",
@@ -752,7 +752,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 {robots}{"" if pid == "404" else f'<link rel="canonical" href="{abs_url(lang, pid)}">'}
-{hreflang}
+{feed_link(lang, pid)}{hreflang}
 <meta name="theme-color" content="#0B1327" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#F4EDE3" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="{meta.get("og_type", "website")}">
@@ -981,6 +981,48 @@ def output_path(lang, pid):
     return OUT / rel / "index.html" if rel else OUT / "index.html"
 
 
+def feed_link(lang, pid):
+    if pid != "blog" and not pid.startswith("blog/"):
+        return ""
+    title = html.escape(f"KORTEX {t_blog_label(lang)}", quote=True)
+    return f'<link rel="alternate" type="application/rss+xml" title="{title}" href="{DOMAIN}{url(lang, "blog")}feed.xml">\n'
+
+
+def t_blog_label(lang):
+    return {"en": "Blog", "fr": "Blog", "ar": "المدونة"}[lang]
+
+
+def rfc822(iso):
+    return datetime.date.fromisoformat(iso).strftime("%a, %d %b %Y 00:00:00 +0000")
+
+
+def feed_xml(lang):
+    items = []
+    for pid, meta, _ in children(lang, "blog"):
+        link = abs_url(lang, pid)
+        items.append(
+            f"<item><title>{html.escape(strip_tags(meta.get('h1', meta['title'])))}</title><link>{link}</link>"
+            f'<guid isPermaLink="true">{link}</guid><pubDate>{rfc822(meta["date"])}</pubDate>'
+            f"<description>{html.escape(strip_tags(meta.get('summary', meta['description'])))}</description></item>"
+        )
+    home = abs_url(lang, "blog")
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
+        f"<title>KORTEX {t_blog_label(lang)}</title><link>{home}</link><description>{html.escape(parse_page(source_path(lang, 'blog'))[0]['description'])}</description>"
+        f'<language>{lang}</language><atom:link href="{home}feed.xml" rel="self" type="application/rss+xml"/>'
+        + "".join(items)
+        + "</channel></rss>\n"
+    )
+
+
+def git_lastmod(path):
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(path)], capture_output=True, text=True, cwd=OUT, check=True).stdout.strip()
+    except (subprocess.SubprocessError, OSError):
+        out = ""
+    return out or BUILD_DATE
+
+
 def sitemap():
     rows = []
     for pid in PAGES:
@@ -991,7 +1033,7 @@ def sitemap():
             alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in available(pid))
             if "en" in available(pid):
                 alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}"/>'
-            rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified", BUILD_DATE)}</lastmod>{alts}</url>')
+            rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified") or git_lastmod(source_path(lang, pid))}</lastmod>{alts}</url>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(rows) + "\n</urlset>\n"
 
 
@@ -1103,6 +1145,9 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(redirect_page(lang, pid, old), encoding="utf-8")
     (OUT / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
+    for lang in LANGS:
+        feed_path = OUT / url(lang, "blog").lstrip("/") / "feed.xml"
+        feed_path.write_text(feed_xml(lang), encoding="utf-8")
     (OUT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     (OUT / "llms.txt").write_text(llms_txt(), encoding="utf-8")
     (OUT / "robots.txt").write_text(robots_txt(), encoding="utf-8")
