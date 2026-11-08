@@ -244,7 +244,7 @@ ICONS = {
     "x": '<path d="M7 7l10 10M17 7L7 17"/>',
 }
 
-LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="kxg" cx="70%" cy="75%" r="70%"><stop offset="0" stop-color="#ffb648"/><stop offset=".55" stop-color="#ff6b2c"/><stop offset="1" stop-color="#c9341f"/></radialGradient></defs><rect width="32" height="32" rx="9" fill="url(#kxg)"/><path d="M11 8.5v15M11 16l9-7.5M13.8 13.6l7.2 9.9" stroke="#1b0c05" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>'
+LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="kxg" cx="70%" cy="75%" r="70%"><stop offset="0" stop-color="#FF8576"/><stop offset=".55" stop-color="#FF6B5B"/><stop offset="1" stop-color="#FF6B5B"/></radialGradient></defs><rect width="32" height="32" rx="9" fill="url(#kxg)"/><path d="M11 8.5v15M11 16l9-7.5M13.8 13.6l7.2 9.9" stroke="#14213D" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>'
 
 
 art.ICON_PATHS = ICONS
@@ -753,8 +753,8 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <meta name="description" content="{desc}">
 {robots}{"" if pid == "404" else f'<link rel="canonical" href="{abs_url(lang, pid)}">'}
 {hreflang}
-<meta name="theme-color" content="#0e0907" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#faf4ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1327" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4EDE3" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="{meta.get("og_type", "website")}">
 <meta property="og:site_name" content="KORTEX">
 <meta property="og:title" content="{title}">
@@ -1009,12 +1009,7 @@ BLOG_SLUGS = {
 
 def redirects():
     table = {
-        "solutions.html": ("fr", "how-it-works"),
         "tarifs.html": ("fr", "pricing"),
-        "blog.html": ("fr", "blog"),
-        "contact.html": ("fr", "contact"),
-        "login.html": ("fr", "login"),
-        "pricing.html": ("en", "pricing"),
         "en/index.html": ("en", "home"),
         "en/solutions.html": ("en", "how-it-works"),
         "en/pricing.html": ("en", "pricing"),
@@ -1036,19 +1031,13 @@ def redirects():
     return table
 
 
-SLASHLESS = {"blog.html": "blog", "contact.html": "contact", "login.html": "login", "solutions.html": "solutions"}
-
-
 def redirect_page(target_lang, pid, old=""):
     lang, path = target_lang, url(target_lang, pid)
     if not exists(lang, pid):
         lang, path = "en", url("en", pid) if exists("en", pid) else "/"
     full = DOMAIN + path
-    guard = ""
-    if old in SLASHLESS:
-        guard = f'<script>if(!/\\.html$/.test(location.pathname))location.replace("{url("en", SLASHLESS[old])}"+location.search)</script>'
     return (
-        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>{guard}'
+        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>'
         f'<link rel="canonical" href="{full}"><meta name="robots" content="noindex, follow">'
         f'<meta http-equiv="refresh" content="0; url={path}"></head>'
         f'<body><p><a href="{path}">{full}</a></p></body></html>\n'
@@ -1091,7 +1080,7 @@ def robots_txt():
 
 
 def main():
-    critical = minify_css((SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
+    critical = minify_css((SRC / "styles" / "tokens.css").read_text(encoding="utf-8") + (SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
     site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8"))
     for f in sorted((SRC / "styles" / "v").glob("*.css")):
         VCSS[f.stem] = minify_css(f.read_text(encoding="utf-8"))

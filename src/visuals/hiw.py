@@ -85,7 +85,7 @@ def _art_review(lang):
 def _art_publish(lang):
     q = T(lang, "How often should suppliers be reviewed?", "À quelle fréquence revoir ses fournisseurs ?", "كم مرة يجب مراجعة الموردين؟")
     page = (
-        f'<div class="hl-page-mini"><div class="hl-pm-bar"><i></i><i></i><i></i><span dir="ltr">yourbrand.com/faq</span></div>'
+        f'<div class="hl-page-mini"><div class="hl-pm-bar"><i></i><i></i><i></i><span dir="ltr">acme.com/faq</span></div>'
         f'<div class="hl-pm-b"><b>{q}</b><p class="hl-pm-ans">{T(lang, "Answer first, in two sentences.", "La réponse d’abord, en deux phrases.", "الإجابة أولا، في جملتين.")}</p>'
         '<i class="vx-line" style="--w:90%"></i><i class="vx-line" style="--w:70%"></i>'
         '<span class="hl-schema"><code dir="ltr">FAQPage</code><code dir="ltr">Organization</code><code dir="ltr">BreadcrumbList</code></span></div></div>'

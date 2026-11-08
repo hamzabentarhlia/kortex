@@ -15,13 +15,35 @@ function track(name, props) {
   if (window.kxGA && typeof window.gtag === 'function') window.gtag('event', name, props || {});
 }
 
+const LEGACY_PAGES = { '/blog.html': '/fr/blog/', '/contact.html': '/fr/contact/', '/login.html': '/fr/login/', '/solutions.html': '/fr/how-it-works/', '/pricing.html': '/pricing/' };
+
+function redirectLegacyPage() {
+  const target = LEGACY_PAGES[location.pathname];
+  if (target) location.replace(target + location.search);
+}
+
 function currentTheme() {
   const set = root.dataset.theme;
   if (set) return set;
   return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 }
 
+const THEME_COLORS = { light: '#F4EDE3', dark: '#0B1327' };
+
+function syncThemeColor(theme) {
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => { meta.setAttribute('content', THEME_COLORS[theme]); });
+}
+
 function initTheme() {
+  if (!root.dataset.theme) {
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    mq.addEventListener('change', () => {
+      if (root.dataset.theme) return;
+      document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(currentTheme() === 'light')));
+      syncThemeColor(currentTheme());
+    });
+  }
+  syncThemeColor(currentTheme());
   document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
     const sync = () => btn.setAttribute('aria-pressed', String(currentTheme() === 'light'));
     sync();
@@ -29,6 +51,8 @@ function initTheme() {
       const next = currentTheme() === 'light' ? 'dark' : 'light';
       root.dataset.theme = next;
       store('kx-theme', next);
+      syncThemeColor(next);
+      track('theme_toggle', { theme: next });
       document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(next === 'light')));
       if (window.Cal && window.Cal.ns && window.Cal.ns.kx) window.Cal.ns.kx('ui', { theme: next });
     });
@@ -375,7 +399,7 @@ function loadCal() {
     window.Cal('init', 'kx', { origin: 'https://cal.com' });
     window.Cal.ns.kx('ui', {
       theme: currentTheme(),
-      cssVarsPerTheme: { light: { 'cal-brand': '#ec5a1c' }, dark: { 'cal-brand': '#ff6b2c' } },
+      cssVarsPerTheme: { light: { 'cal-brand': '#FF6B5B' }, dark: { 'cal-brand': '#FF6B5B' } },
       hideEventTypeDetails: false,
       layout: 'month_view',
     });
@@ -535,6 +559,7 @@ function initFinder() {
   run(true);
 }
 
+redirectLegacyPage();
 initTheme();
 initConsent();
 initHeader();
