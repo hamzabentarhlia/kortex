@@ -38,12 +38,12 @@
 .pt-list svg{color:var(--accent-text)}
 .pt-st{flex-shrink:0;padding:2px 8px;border-radius:var(--radius-pill);font-size:10.5px;font-weight:600;white-space:nowrap}
 .pt-st-live{background:color-mix(in srgb,var(--success) 18%,transparent);color:var(--success)}
-.pt-st-ok{background:var(--chip-bg);color:var(--accent-text)}
+.pt-st-ok{background:var(--chip-bg);color:color-mix(in srgb,var(--accent-text) 82%,var(--text))}
 .pt-st-review{background:color-mix(in srgb,var(--amber) 20%,transparent);color:var(--text)}
 .pt-st-draft{background:var(--surface-strong);color:var(--text-3)}
 .pt-tr{display:flex;gap:8px;margin:0;padding:7px 8px;border-radius:8px;line-height:1.45;color:var(--text-2)}
 .pt-tr span{flex-shrink:0;font:500 10.5px/1.9 var(--ff-mono);color:var(--text-3)}
-.pt-tr.is-hl{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--text);box-shadow:inset 3px 0 0 var(--amber)}
+.pt-tr.is-hl{background:color-mix(in srgb,var(--ember) 9%,transparent);color:var(--text);box-shadow:inset 3px 0 0 var(--amber)}
 [dir=rtl] .pt-tr.is-hl{box-shadow:inset -3px 0 0 var(--amber)}
 .pt-out{list-style:none;margin:0;padding:0;display:grid;gap:9px}
 .pt-out li{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:4px 8px}
@@ -78,6 +78,8 @@
 .pt-voice b{position:absolute;top:50%;inset-inline-start:calc(var(--x) * 100%);width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--ember);box-shadow:0 0 0 4px var(--chip-bg)}
 .pt-terms{display:flex;flex-wrap:wrap;gap:6px}
 .pt-term{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:var(--radius-pill);background:var(--chip-bg);color:var(--accent-text);font-weight:600}
-.pt-term.is-no{background:var(--surface-strong);color:var(--text-3);text-decoration:line-through}
+.pt-term.is-no{background:var(--surface-strong);color:var(--text-2);text-decoration:line-through}
 @media (max-width:760px){.pw{padding-bottom:0}.pw-browser{width:100%}.pw-phone{position:relative;width:200px;margin:-70px 0 0 auto;inset-inline-end:auto}[dir=rtl] .pw-phone{margin:-70px auto 0 0}.pt{grid-template-columns:1fr;min-height:0}.pt-nav{display:none}.pt-kpis{grid-template-columns:1fr 1fr}.pt-split,.pt-split-eq{grid-template-columns:1fr}.pt-split .pt-card:first-child{display:none}}
 @media (min-width:960px){.portal-split{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);align-items:center}}
+
+.pt-tr.is-hl span{color:var(--text-2)}

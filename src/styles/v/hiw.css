@@ -69,7 +69,7 @@
 .hl-pm-b b{font-size:14.5px;line-height:1.3}
 .hl-pm-ans{margin:0;padding:8px 10px;border-inline-start:3px solid var(--ember);border-radius:6px;background:var(--chip-bg);font-size:12.5px;color:var(--text)}
 .hl-schema{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
-.hl-schema code{padding:3px 7px;border-radius:6px;background:var(--surface-strong);font:500 11px var(--ff-mono);color:var(--accent-text)}
+.hl-schema code{padding:3px 7px;border-radius:6px;background:var(--surface-strong);font:500 11px var(--ff-mono);color:color-mix(in srgb,var(--accent-text) 82%,var(--text))}
 .hl-pub-r{display:grid;gap:10px}
 .hl-ans{padding:12px}
 .hl-ans .vx-ans-q{font-size:12.5px}

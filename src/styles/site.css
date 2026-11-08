@@ -111,7 +111,7 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 :root[lang=ar] .deeper summary{letter-spacing:0;font-family:var(--ff-body);font-size:14px}
 
 .cta-band{position:relative;margin:40px 0 0;padding:clamp(40px,7vw,96px) 0;overflow:hidden;text-align:center;border-top:1px solid var(--line)}
-.cta-band::before{content:"";position:absolute;inset:-40% -20% auto;height:150%;background:radial-gradient(closest-side at 50% 70%,var(--glow-1),transparent),radial-gradient(closest-side at 20% 90%,var(--glow-2),transparent);pointer-events:none}
+.cta-band::before{content:"";position:absolute;inset:-40% -20% auto;height:150%;background:radial-gradient(closest-side at 50% 70%,var(--glow-1),transparent);pointer-events:none}
 .cta-band>*{position:relative}
 .cta-band h2{font-family:var(--ff-display);font-weight:800;font-size:clamp(30px,4.6vw,58px);text-transform:uppercase;line-height:1;max-width:18ch;margin:16px auto 20px}
 :root[lang=ar] .cta-band h2{text-transform:none;line-height:1.3}
