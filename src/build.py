@@ -766,6 +766,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <meta property="og:image:alt" content="{title}">
 <meta property="og:locale" content="{LOCALE[lang]}">{og_alt}
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{image}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
