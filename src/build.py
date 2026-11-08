@@ -1,8 +1,10 @@
+import datetime
 import hashlib
 import html
 import json
 import os
 import re
+import subprocess
 from pathlib import Path
 
 import art
@@ -18,7 +20,6 @@ LANG_NAME = {"en": "English", "fr": "Français", "ar": "العربية"}
 LANG_SHORT = {"en": "EN", "fr": "FR", "ar": "AR"}
 EMAIL = "contact@kortexlab.me"
 LINKEDIN = "https://www.linkedin.com/in/hamza-bentarhlia/"
-WEB3FORMS_KEY = "0aa868e7-7559-439c-a911-1f246b2d03e3"
 GA_ID = "G-4440VPDMPW"
 CAL_LINK = "hamza-bentarhlia"
 CAL_URL = "https://cal.com/" + CAL_LINK
@@ -42,6 +43,7 @@ PAGES = {
     "case-studies": "/case-studies/",
     "security": "/security/",
     "glossary": "/glossary/",
+    "resources": "/resources/",
     "blog": "/blog/",
     "contact": "/contact/",
     "privacy": "/legal/privacy/",
@@ -244,7 +246,7 @@ ICONS = {
     "x": '<path d="M7 7l10 10M17 7L7 17"/>',
 }
 
-LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="kxg" cx="70%" cy="75%" r="70%"><stop offset="0" stop-color="#ffb648"/><stop offset=".55" stop-color="#ff6b2c"/><stop offset="1" stop-color="#c9341f"/></radialGradient></defs><rect width="32" height="32" rx="9" fill="url(#kxg)"/><path d="M11 8.5v15M11 16l9-7.5M13.8 13.6l7.2 9.9" stroke="#1b0c05" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>'
+LOGO = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="kxg" cx="70%" cy="75%" r="70%"><stop offset="0" stop-color="#FF8576"/><stop offset=".55" stop-color="#FF6B5B"/><stop offset="1" stop-color="#FF6B5B"/></radialGradient></defs><rect width="32" height="32" rx="9" fill="url(#kxg)"/><path d="M11 8.5v15M11 16l9-7.5M13.8 13.6l7.2 9.9" stroke="#14213D" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>'
 
 
 art.ICON_PATHS = ICONS
@@ -344,7 +346,7 @@ def dropdown(lang, key, label, groups, current):
 
 
 SOLUTION_GROUPS = lambda t: [(t["by_audience"], ["b2b", "creators", "ecommerce"]), (t["by_source"], ["from-blog", "from-youtube", "from-podcast", "from-webinar"])]
-RESOURCE_GROUPS = [(None, ["blog", "glossary", "compare", "about"])]
+RESOURCE_GROUPS = [(None, ["resources", "blog", "glossary", "compare", "about"])]
 
 
 def lang_links(lang, pid, mobile=False):
@@ -454,7 +456,7 @@ def footer(lang):
     cols = [
         col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("security", t["security"])]),
         col(t["col_solutions"], [(p, tup(p)) for p in ["b2b", "creators", "ecommerce", "from-blog", "from-youtube", "from-podcast", "from-webinar"]]),
-        col(t["col_resources"], [("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
+        col(t["col_resources"], [("resources", t["resources"]), ("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
         col(t["col_company"], [("about", t["about"]), ("contact", t["contact"]), ("login", t["login"])]),
     ]
     legal = "".join(f'<a href="{url(lang, p)}">{t[p]}</a>' for p in ["privacy", "terms", "cookies"] if exists(lang, p))
@@ -509,7 +511,6 @@ def resolve(body, lang):
     body = re.sub(r"\{\{photo:([a-z]+)(\|eager)?\}\}", lambda m: photo(lang, m.group(1), bool(m.group(2))), body)
     body = body.replace("@@email", EMAIL)
     body = body.replace("@@linkedin", LINKEDIN)
-    body = body.replace("@@web3forms", WEB3FORMS_KEY)
     body = re.sub(r"\{\{icon:([a-z]+)(?:\|([a-z -]+))?\}\}", lambda m: icon(m.group(1), m.group(2) or ""), body)
     body = body.replace("{{cta_band}}", cta_band(lang))
     return body
@@ -714,7 +715,7 @@ def schema(lang, pid, meta, body):
                 for name, price, desc in offers
             ],
         })
-    if meta.get("kind") == "article" or "article" in meta.get("schema", ""):
+    if (meta.get("kind") == "article" or "article" in meta.get("schema", "")) and meta.get("date"):
         graph.append({
             "@type": "BlogPosting" if pid.startswith("blog/") else "Article",
             "@id": page_url + "#article",
@@ -752,9 +753,9 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 {robots}{"" if pid == "404" else f'<link rel="canonical" href="{abs_url(lang, pid)}">'}
-{hreflang}
-<meta name="theme-color" content="#0e0907" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#faf4ec" media="(prefers-color-scheme: light)">
+{feed_link(lang, pid)}{hreflang}
+<meta name="theme-color" content="#0B1327" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4EDE3" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="{meta.get("og_type", "website")}">
 <meta property="og:site_name" content="KORTEX">
 <meta property="og:title" content="{title}">
@@ -766,6 +767,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <meta property="og:image:alt" content="{title}">
 <meta property="og:locale" content="{LOCALE[lang]}">{og_alt}
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{image}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -901,8 +903,10 @@ def fr_typo(text):
 VCSS = {}
 
 
-def visual_css(body):
+def visual_css(body, pid=""):
     used = visuals.modules_in(body)
+    if pid.startswith("blog/") and "blog" not in used:
+        used = sorted(used + ["blog"])
     if not used:
         return ""
     return VCSS["kit"] + "".join(VCSS.get(n, "") for n in used)
@@ -949,7 +953,7 @@ def render(lang, pid, critical, css_v, js_v):
     page = f'''<!doctype html>
 <html lang="{lang}"{direction}>
 <head>
-{head(lang, pid, meta, body, critical + visual_css(body), css_v, js_v)}
+{head(lang, pid, meta, body, critical + visual_css(body, pid), css_v, js_v)}
 </head>
 <body>
 {header(lang, pid)}
@@ -981,6 +985,48 @@ def output_path(lang, pid):
     return OUT / rel / "index.html" if rel else OUT / "index.html"
 
 
+def feed_link(lang, pid):
+    if pid != "blog" and not pid.startswith("blog/"):
+        return ""
+    title = html.escape(f"KORTEX {t_blog_label(lang)}", quote=True)
+    return f'<link rel="alternate" type="application/rss+xml" title="{title}" href="{DOMAIN}{url(lang, "blog")}feed.xml">\n'
+
+
+def t_blog_label(lang):
+    return {"en": "Blog", "fr": "Blog", "ar": "المدونة"}[lang]
+
+
+def rfc822(iso):
+    return datetime.date.fromisoformat(iso).strftime("%a, %d %b %Y 00:00:00 +0000")
+
+
+def feed_xml(lang):
+    items = []
+    for pid, meta, _ in children(lang, "blog"):
+        link = abs_url(lang, pid)
+        items.append(
+            f"<item><title>{html.escape(strip_tags(meta.get('h1', meta['title'])))}</title><link>{link}</link>"
+            f'<guid isPermaLink="true">{link}</guid><pubDate>{rfc822(meta["date"])}</pubDate>'
+            f"<description>{html.escape(strip_tags(meta.get('summary', meta['description'])))}</description></item>"
+        )
+    home = abs_url(lang, "blog")
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
+        f"<title>KORTEX {t_blog_label(lang)}</title><link>{home}</link><description>{html.escape(parse_page(source_path(lang, 'blog'))[0]['description'])}</description>"
+        f'<language>{lang}</language><atom:link href="{home}feed.xml" rel="self" type="application/rss+xml"/>'
+        + "".join(items)
+        + "</channel></rss>\n"
+    )
+
+
+def git_lastmod(path):
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(path)], capture_output=True, text=True, cwd=OUT, check=True).stdout.strip()
+    except (subprocess.SubprocessError, OSError):
+        out = ""
+    return out or BUILD_DATE
+
+
 def sitemap():
     rows = []
     for pid in PAGES:
@@ -991,7 +1037,7 @@ def sitemap():
             alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in available(pid))
             if "en" in available(pid):
                 alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}"/>'
-            rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified", BUILD_DATE)}</lastmod>{alts}</url>')
+            rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified") or git_lastmod(source_path(lang, pid))}</lastmod>{alts}</url>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(rows) + "\n</urlset>\n"
 
 
@@ -1009,12 +1055,7 @@ BLOG_SLUGS = {
 
 def redirects():
     table = {
-        "solutions.html": ("fr", "how-it-works"),
         "tarifs.html": ("fr", "pricing"),
-        "blog.html": ("fr", "blog"),
-        "contact.html": ("fr", "contact"),
-        "login.html": ("fr", "login"),
-        "pricing.html": ("en", "pricing"),
         "en/index.html": ("en", "home"),
         "en/solutions.html": ("en", "how-it-works"),
         "en/pricing.html": ("en", "pricing"),
@@ -1036,19 +1077,13 @@ def redirects():
     return table
 
 
-SLASHLESS = {"blog.html": "blog", "contact.html": "contact", "login.html": "login", "solutions.html": "solutions"}
-
-
 def redirect_page(target_lang, pid, old=""):
     lang, path = target_lang, url(target_lang, pid)
     if not exists(lang, pid):
         lang, path = "en", url("en", pid) if exists("en", pid) else "/"
     full = DOMAIN + path
-    guard = ""
-    if old in SLASHLESS:
-        guard = f'<script>if(!/\\.html$/.test(location.pathname))location.replace("{url("en", SLASHLESS[old])}"+location.search)</script>'
     return (
-        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>{guard}'
+        f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><title>KORTEX</title>'
         f'<link rel="canonical" href="{full}"><meta name="robots" content="noindex, follow">'
         f'<meta http-equiv="refresh" content="0; url={path}"></head>'
         f'<body><p><a href="{path}">{full}</a></p></body></html>\n'
@@ -1071,7 +1106,7 @@ def llms_txt():
         "",
         "## Key pages",
     ]
-    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "compare", "glossary", "blog", "about", "contact"]:
+    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "resources", "compare", "glossary", "blog", "about", "contact"]:
         if exists("en", pid):
             meta, _ = parse_page(source_path("en", pid))
             lines.append(f"- [{strip_tags(meta.get('h1', meta['title']))}]({abs_url('en', pid)}): {meta['description']}")
@@ -1091,7 +1126,7 @@ def robots_txt():
 
 
 def main():
-    critical = minify_css((SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
+    critical = minify_css((SRC / "styles" / "tokens.css").read_text(encoding="utf-8") + (SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
     site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8"))
     for f in sorted((SRC / "styles" / "v").glob("*.css")):
         VCSS[f.stem] = minify_css(f.read_text(encoding="utf-8"))
@@ -1114,6 +1149,9 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(redirect_page(lang, pid, old), encoding="utf-8")
     (OUT / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
+    for lang in LANGS:
+        feed_path = OUT / url(lang, "blog").lstrip("/") / "feed.xml"
+        feed_path.write_text(feed_xml(lang), encoding="utf-8")
     (OUT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     (OUT / "llms.txt").write_text(llms_txt(), encoding="utf-8")
     (OUT / "robots.txt").write_text(robots_txt(), encoding="utf-8")

@@ -1,0 +1,76 @@
+title: llms.txt: what it does, what is hype, what we do | KORTEX
+description: What llms.txt is, what its author claims, what Google says about it, and how we run one on this site without treating it as a ranking lever.
+h1: llms.txt: what it is, what we know, what is hype, and what we do
+summary: What llms.txt is, what its author claims, what Google says about it, and how we run one on this site without treating it as a ranking lever.
+kind: article
+kicker: Article
+date: 2026-11-08
+modified: 2026-11-08
+in_short: llms.txt is a markdown file at the root of a site that points language models to the pages worth reading. Google says its Search ignores the file, and that it neither helps nor harms. It is cheap to publish and fine to keep, but it is not a ranking lever, and nobody has shown it is a citation lever either.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>llms.txt is a proposal, not a standard. It is a markdown file with one required element: an H1 with the site name.</li>
+<li>Its author says it is mainly used by agents that fetch pages on demand, most heavily for software documentation.</li>
+<li>Google says Search does not use llms.txt, and that publishing one will neither help nor harm visibility in Google Search.</li>
+<li>We publish one anyway, generated from the same files as the site, because it costs almost nothing and some tools read it.</li>
+<li>We do not sell it as a citation tactic. We have no evidence that it moves citations in ChatGPT, Perplexity or Gemini.</li>
+</ul>
+</div>
+<h2>What llms.txt is</h2>
+<p>llms.txt is a plain markdown file placed at the root of a website, at <code>/llms.txt</code>. It gives a language model a short, curated map of the site: what it is, and where the useful pages are.</p>
+<p>The proposal is published at llmstxt.org. It asks site owners to add the file, and to offer clean markdown versions of pages at the same address with <code>.md</code> added. The idea is simple. A web page wraps its content in navigation, scripts and layout. An agent that wants the content has to strip all of that off, and the result is imprecise. A small file that points straight at clean text saves the agent that work.</p>
+<p>The file has a fixed shape, in this order:</p>
+<ul>
+<li>An H1 with the name of the site. This is the only required part.</li>
+<li>A blockquote with a short summary.</li>
+<li>Optional paragraphs or lists with more detail, but no headings.</li>
+<li>Sections under H2 headings that hold lists of links. Each link can carry a short note after a colon.</li>
+</ul>
+<p>By convention, a section called "Optional" holds secondary links an agent can skip when it needs a shorter context.</p>
+<h2>What the proposal claims, and what it does not</h2>
+<p>The current version describes itself as version 2 and says it is based on two years of adoption. It reports that thousands of sites publish the file, that documentation platforms generate it automatically, and that Chrome's Lighthouse checks for it as part of its agentic browsing checks. It also notes that OpenAI, Anthropic and Gemini publish llms.txt files for their own developer documentation.</p>
+<p>Read what that does and does not say. It says the file exists and is read in some workflows. It says the use is heaviest for software documentation, where a coding agent follows the links to find an API reference. It does not say that publishing one makes a model more likely to cite your site in an answer. The author's own expectation is that the file is useful at inference time, when an agent needs something on demand, and mainly not for training.</p>
+<p>The proposal also states how it relates to older files. A sitemap lists every page for search engines. llms.txt offers a curated overview. robots.txt says what automated tools may access. llms.txt is used when an agent is already allowed in and needs context. They do different jobs, and one does not replace the other.</p>
+<h2>What Google says about it</h2>
+<p>Google is direct. In its guide to generative AI features in Search, it lists llms.txt files among the things you can ignore for Google Search. Its wording: you do not need to create new machine-readable files, AI text files, markup or markdown to appear in Google Search, including its generative AI features, because Google Search itself does not use them.</p>
+<p>It then adds a sentence worth reading twice. Creating and maintaining an llms.txt file for other services is fine, and doing so will neither harm nor help your visibility or rankings in Google Search, because Google Search ignores it.</p>
+<p>That settles one question and leaves another open. For Google Search, the answer is clear. For everything else, such as ChatGPT, Perplexity and the many agents that browse on behalf of users, there is no equivalent public statement that we could find and open. Absence of a statement is not evidence in either direction.</p>
+<h2>Where the claims go too far</h2>
+<p>You will see llms.txt sold as a way to get cited by AI engines. We have not seen a controlled test that shows this, and the proposal itself does not make the claim. Three things are worth separating:</p>
+<ul>
+<li><strong>The file exists and some tools read it.</strong> True, according to the proposal.</li>
+<li><strong>Reading it changes what a model says about you.</strong> Unproven.</li>
+<li><strong>Not having one costs you citations.</strong> Unproven, and Google says it does not matter for its own Search.</li>
+</ul>
+<p>If a vendor quotes a lift in citations from adding the file, ask for the method: which prompts, how many runs, which engines, and what else changed in the same weeks. Without that, the number is a story.</p>
+<h2>What we do on this site</h2>
+<p>We publish a file at <code>/llms.txt</code>. It has a title, a short description of what KORTEX does, the three plans with their prices, our key pages, and lists of every glossary entry, comparison and article. It also points to the French and Arabic versions.</p>
+<p>We do not write it by hand. The site builder generates it from the same source files as the pages, so the prices and page descriptions in the file cannot drift from the pages. When a price changes on the site, the file changes in the same build.</p>
+<p>We keep it because it costs almost nothing, a person can read it in a minute, and some tools do fetch it. We do not report it to clients as a result, and we do not put it in a plan as a deliverable that moves rankings.</p>
+<p>The effort that does matter sits elsewhere. Pages have to be indexed and eligible to show a snippet. Our robots.txt allows the crawlers of the main AI engines on public pages. Important content is in plain HTML text, so it is readable without running scripts. The content has something specific to say. That is where a month of effort is better spent than on a text file.</p>
+<h2>How to write a good one if you decide to</h2>
+<ol>
+<li>Start with the H1 and a two-sentence summary that says what you do and for whom, with no adjectives.</li>
+<li>List the pages you would want an agent to read first. Ten to thirty links is plenty for a company site.</li>
+<li>Add a short note after each link that says what is on the page.</li>
+<li>Put secondary material under an "Optional" heading.</li>
+<li>Generate it from your content source rather than editing it by hand, so it stays true.</li>
+<li>Check it every time a price, plan or page changes.</li>
+</ol>
+<h2>When to skip it</h2>
+<p>Skip it if nobody will own it. A stale llms.txt that lists retired pages or old prices is worse than no file, because it gives a model wrong information with the confidence of a curated list. If you cannot generate it from your real content, do not publish it.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://llmstxt.org" rel="noopener">The /llms.txt file, v2, llmstxt.org</a>: format, claims about adoption, relation to robots.txt and sitemaps.</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a>: the statement on llms.txt and special markup. Last updated July 10, 2026.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">AI features and your website, Google Search Central</a>: no extra requirements to appear in AI Overviews or AI Mode.</li>
+</ul>
+<h2 id="faq">Common questions about llms.txt</h2><div><details><summary>Is llms.txt an official standard?</summary><div><p>No. It is a proposal published at llmstxt.org. It is not an IETF or W3C standard. Some documentation platforms generate it and some tools read it, but no body governs it.</p></div></details><details><summary>Does Google use llms.txt?</summary><div><p>No. Google states that Google Search does not use llms.txt files, and that having one will neither help nor harm your visibility or rankings in Google Search.</p></div></details><details><summary>Will llms.txt get me cited by ChatGPT or Perplexity?</summary><div><p>We have no evidence that it does. The proposal does not claim it, and we found no public test showing it. Treat any promised lift with caution and ask for the method behind it.</p></div></details><details><summary>Where does the file go?</summary><div><p>At the root of the site, at /llms.txt. The proposal also allows the file at a subpath, such as /docs/llms.txt, where it covers the pages under that path.</p></div></details><details><summary>What is the difference between llms.txt and robots.txt?</summary><div><p>robots.txt tells automated tools what they may access. llms.txt gives an agent that is already reading your site a curated overview and links. The first is about permission, the second is about guidance.</p></div></details><details><summary>Should I list every page?</summary><div><p>No. The point is curation. List the pages you would want an agent to read first, and use the sitemap for the full list.</p></div></details></div>
+<div id="cta">
+<p>Method</p>
+<h2>Want a site that is easy for machines and people to read?</h2>
+<p>We build the content, the structure and the files from one source, then check what the engines say. See how a month works on the <a href="@how-it-works">how it works page</a>.</p>
+<a href="@contact">Book a strategy call</a>
+</div>

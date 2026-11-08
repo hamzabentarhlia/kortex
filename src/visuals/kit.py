@@ -32,7 +32,7 @@ EXAMPLE = {"en": "Example", "fr": "Exemple", "ar": "مثال"}
 DEMO = {"en": "Demo data", "fr": "Données de démo", "ar": "بيانات تجريبية"}
 ILLUSTRATIVE = {"en": "Illustrative", "fr": "Illustratif", "ar": "توضيحي"}
 SAMPLE = {"en": "Sample", "fr": "Exemple", "ar": "نموذج"}
-BRAND = "yourbrand.com"
+BRAND = "acme.com"
 ENGINES = ["ChatGPT", "Perplexity", "Gemini", "Google AI Overviews", "Claude"]
 
 _state = {"prefix": "v", "n": 0}

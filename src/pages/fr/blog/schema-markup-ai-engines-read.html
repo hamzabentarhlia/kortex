@@ -1,0 +1,84 @@
+title: Balisage schema et IA : ce qui vaut d'être ajouté | KORTEX
+description: Quels types schema.org nous ajoutons à un site B2B, ce que Google dit des données structurées et de l'IA, et pourquoi le résultat FAQ a disparu.
+h1: Le balisage schema qui vaut d'être ajouté, et ce qu'il ne fera pas
+summary: Quels types schema.org nous ajoutons à un site B2B, ce que Google dit des données structurées et des fonctions d'IA, et pourquoi le résultat enrichi FAQ n'existe plus.
+kind: article
+kicker: Article
+date: 2026-11-08
+modified: 2026-11-08
+in_short: Le balisage schema ne vous fait pas entrer dans les réponses d'IA. Google dit qu'aucun balisage spécial n'existe pour ses fonctions d'IA, et il a cessé d'afficher les résultats enrichis FAQ. Nous ajoutons quand même Organization, Person, article et termes définis, parce que cela dit qui vous êtes et ce qu'est une page, et que cela coûte peu, à condition que cela corresponde au texte visible.
+---
+<div id="essentiel">
+<span>L'essentiel à retenir</span>
+<ul>
+<li>Google dit qu'aucun balisage schema.org particulier n'est nécessaire pour AI Overviews ou AI Mode, et il range l'excès d'attention aux données structurées parmi les choses à ignorer.</li>
+<li>La page de mises à jour de Google indique que le résultat enrichi FAQ n'est plus affiché dans la recherche, et sa documentation a été retirée.</li>
+<li>Le balisage doit décrire un contenu que les lecteurs voient sur la page. Baliser du contenu caché enfreint la politique de Google.</li>
+<li>Nous ajoutons quand même quatre types : Organization, Person, article, et FAQ ou terme défini là où la page contient ce contenu.</li>
+<li>Nous le contrôlons avec un script, pour que le balisage ne s'écarte pas du texte visible.</li>
+</ul>
+</div>
+<h2>Ce que dit Google du balisage et de l'IA</h2>
+<p>La question revient dans toutes les conversations sur la visibilité dans l'IA : le balisage schema aide-t-il une page à être citée ? Du côté de Google, l'entreprise a répondu par écrit.</p>
+<p>Dans son guide sur l'IA générative, Google dit que les données structurées ne sont pas requises pour la recherche par IA générative, et qu'aucun balisage schema.org particulier n'est à ajouter. Il range « l'excès d'attention aux données structurées » parmi les mythes à ignorer. Dans le même passage, il ajoute qu'il reste judicieux de continuer à utiliser des données structurées dans votre stratégie SEO globale, parce qu'elles aident à devenir éligible aux résultats enrichis dans la recherche Google.</p>
+<p>L'autre document de Google dit la même chose sous un autre angle : vous n'avez pas besoin de créer de nouveaux fichiers lisibles par machine, de fichiers texte pour l'IA ou de balisage pour apparaître dans ces fonctions. Une page doit être indexée et pouvoir s'afficher avec un extrait. C'est la seule exigence.</p>
+<p>Quiconque vous dit qu'ajouter un bloc JSON-LD vous fera entrer dans les réponses d'IA promet donc quelque chose qui, selon Google, ne correspond pas au fonctionnement de sa recherche. Pour les autres moteurs, nous n'avons trouvé aucune déclaration publique dans un sens ou dans l'autre.</p>
+<h2>Le résultat enrichi FAQ a disparu</h2>
+<p>Pendant des années, le balisage FAQ a valu un résultat étendu dans la recherche Google. C'est terminé. La page de mises à jour de Google indique que la documentation du résultat enrichi FAQ a été retirée parce que la fonction n'apparaît plus dans les résultats de recherche, comme annoncé dans une entrée du journal des modifications de mai 2026.</p>
+<p>Cela compte, car le balisage FAQ était l'un des conseils de schema les plus répandus. Si vous l'aviez ajouté pour le résultat enrichi, la raison a disparu. Si une page contient une vraie FAQ pour les lecteurs, gardez la FAQ. Garder le balisage est une petite décision : il est inoffensif quand il correspond au texte, et il indique à une machine que la page contient des questions et des réponses. Mais n'attendez pas que Google l'affiche.</p>
+<h2>À quoi servent les données structurées</h2>
+<p>Google décrit les données structurées comme un format standardisé pour donner des indices explicites sur le sens d'une page. Il utilise ce qu'il trouve pour comprendre la page et pour recueillir des informations sur les personnes, les livres ou les entreprises présents dans le balisage. L'avantage le plus visible a été les résultats enrichis, qui dépendent du type de balisage et de la fonction.</p>
+<p>La règle clé figure dans les règles générales de Google sur les données structurées : ne balisez pas un contenu que les lecteurs ne voient pas. Si le JSON-LD décrit un artiste, le corps de la page doit décrire ce même artiste. Ne balisez pas de contenu hors sujet ou trompeur, et n'utilisez pas les données structurées pour usurper une identité ou fausser une présentation.</p>
+<p>Cette règle est aussi un bon test de ce qu'il faut ajouter. Le balisage est une étiquette posée sur un contenu qui existe déjà.</p>
+<h2>Les quatre types que nous ajoutons, et pourquoi</h2>
+<p>Le site schema.org indique l'usage de chaque type, d'après des agrégations mensuelles de l'index web de Google (août 2026) : Organization et Person apparaissent sur plus de dix millions de domaines, FAQPage et BlogPosting sur un à dix millions, et DefinedTerm sur dix mille à cent mille. L'usage ne prouve pas l'utilité, mais montre que ces types sont bien compris.</p>
+<div class="table-wrap"><table>
+<caption>Le balisage que nous utilisons sur un site B2B</caption>
+<thead><tr><th scope="col">Type</th><th scope="col">Où</th><th scope="col">Ce qu'il énonce</th></tr></thead>
+<tbody>
+<tr><td>Organization</td><td>Chaque page, lié une fois</td><td>Nom de l'entreprise, site, logo, point de contact, profils réellement les vôtres</td></tr>
+<tr><td>Person</td><td>Page à propos et auteurs d'articles</td><td>Qui a écrit ou fondé, relié à l'Organization</td></tr>
+<tr><td>BlogPosting ou Article</td><td>Chaque article</td><td>Titre, dates, auteur, éditeur, langue</td></tr>
+<tr><td>FAQPage</td><td>Pages avec une FAQ visible</td><td>Les mêmes questions et réponses que voit le lecteur</td></tr>
+<tr><td>DefinedTerm</td><td>Entrées du glossaire</td><td>Un terme, sa description et le glossaire auquel il appartient</td></tr>
+</tbody>
+</table></div>
+<p>Nous les ajoutons pour trois raisons simples. Ils disent qui est derrière le site, ce qui est utile à tout système qui doit décider si deux pages viennent de la même entreprise. Ils sont peu coûteux, car un script de génération les produit à partir du contenu de la page. Et ils ne nuisent pas quand ils correspondent à ce que voit le lecteur.</p>
+<p>Nous ne prétendons pas qu'ils augmentent les citations. C'est l'hygiène que vous appliqueriez à un site pour n'importe quelle raison.</p>
+<h2>Comment nous restons honnêtes</h2>
+<p>La plupart des problèmes de balisage viennent d'un décalage. Quelqu'un modifie une question sur la page et oublie le JSON-LD. Un prix change à un seul endroit. Nous traitons cela de trois façons.</p>
+<ul>
+<li><strong>Générer, pas écrire à la main.</strong> Le balisage est construit à partir de la même source que la page. Les prix des offres viennent d'un seul jeu de données. Le balisage FAQ est extrait de la FAQ visible.</li>
+<li><strong>Valider avant chaque mise en ligne.</strong> Un script analyse chaque bloc JSON-LD, vérifie les champs obligatoires de chaque type et compare les questions de la FAQ à celles qui sont visibles. Le contrôle échoue en cas d'écart.</li>
+<li><strong>Relire avant publication.</strong> Google demande que les contenus assistés par IA, y compris les métadonnées et les données structurées, soient vérifiés avant leur mise en ligne. Nous faisons de même.</li>
+</ul>
+<h2>Ce qu'il faut éviter</h2>
+<ul>
+<li><strong>Le balisage d'avis et de notes que vous ne pouvez pas justifier.</strong> Les faux avis figurent dans les règles de Google parmi les contenus à ne pas baliser.</li>
+<li><strong>Le balisage de pages qui n'existent pas.</strong> Ne décrivez pas un produit, un auteur ou un événement que la page ne montre pas.</li>
+<li><strong>L'imbrication sans fin.</strong> Une Organization propre, une Person et le type de la page suffisent pour la plupart des pages B2B.</li>
+</ul>
+<h2>Une courte liste de contrôle</h2>
+<ol>
+<li>Choisissez les types que la page est vraiment : article, entrée de glossaire, FAQ, page d'entreprise.</li>
+<li>Générez le balisage à partir du contenu de la page, pas de mémoire.</li>
+<li>Vérifiez que chaque valeur du balisage est visible sur la page.</li>
+<li>Validez la syntaxe, puis comparez les questions et réponses au texte visible.</li>
+<li>Relancez le contrôle chaque fois que prix, noms ou dates changent.</li>
+</ol>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a> (en anglais) : données structurées non requises, pas de schema spécial. Mis à jour le 10 juillet 2026.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">AI features and your website, Google Search Central</a> (en anglais) : aucune exigence supplémentaire, pas de données structurées schema.org spéciales.</li>
+<li><a href="https://developers.google.com/search/updates" rel="noopener">Google Search Central documentation updates</a> (en anglais) : retrait de la documentation du résultat enrichi FAQ.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" rel="noopener">Introduction to structured data, Google Search Central</a> (en anglais) : à quoi servent les données structurées.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies" rel="noopener">Structured data general guidelines, Google Search Central</a> (en anglais) : ne pas baliser un contenu invisible.</li>
+<li><a href="https://schema.org/FAQPage" rel="noopener">FAQPage</a>, <a href="https://schema.org/DefinedTerm" rel="noopener">DefinedTerm</a>, <a href="https://schema.org/Organization" rel="noopener">Organization</a> et <a href="https://schema.org/Person" rel="noopener">Person</a> sur schema.org : définitions des types et fourchettes d'usage.</li>
+</ul>
+<h2 id="faq">Questions fréquentes sur le balisage schema</h2><div><details><summary>Le balisage schema m'aide-t-il à apparaître dans les AI Overviews ?</summary><div><p>Google dit qu'aucun balisage schema.org particulier n'est nécessaire pour AI Overviews ou AI Mode, et que les données structurées ne sont pas requises pour la recherche par IA générative. Une page doit être indexée et pouvoir s'afficher avec un extrait.</p></div></details><details><summary>Le schema FAQ vaut-il encore la peine ?</summary><div><p>Google n'affiche plus le résultat enrichi FAQ et a retiré sa documentation. Si votre page contient une vraie FAQ pour les lecteurs, garder un balisage cohérent ne nuit pas, mais n'attendez pas de bénéfice visuel dans la recherche Google.</p></div></details><details><summary>Quels types schema une entreprise B2B doit-elle ajouter ?</summary><div><p>Organization pour l'entreprise, Person pour le fondateur et les auteurs, BlogPosting ou Article pour les articles, et FAQPage ou DefinedTerm seulement là où la page contient ce contenu. Gardez chacun aligné sur le texte visible.</p></div></details><details><summary>Le balisage schema peut-il me nuire ?</summary><div><p>Oui, s'il décrit un contenu que les lecteurs ne voient pas ou s'il induit en erreur. Les règles de Google interdisent de baliser un contenu caché, hors sujet ou trompeur, et d'usurper une personne ou une organisation.</p></div></details><details><summary>Comment vérifier mon balisage ?</summary><div><p>Analysez chaque bloc pour vérifier que le JSON est valide, contrôlez les propriétés requises du type, et comparez le balisage au texte visible. Nous utilisons un script qui fait les trois avant chaque mise en ligne.</p></div></details><details><summary>Les autres moteurs d'IA lisent-ils le balisage schema ?</summary><div><p>Nous n'avons trouvé aucune documentation publique d'autres moteurs qui dise oui ou non. Nous traitons le balisage comme une bonne pratique, pas comme une tactique.</p></div></details></div>
+<div id="cta">
+<p>Méthode</p>
+<h2>Un balisage construit à partir de votre contenu et contrôlé à chaque mise en ligne ?</h2>
+<p>Nous générons et validons les données structurées à partir des mêmes fichiers que vos pages. Voyez comment se déroule un mois sur la page <a href="@how-it-works">comment ça marche</a>.</p>
+<a href="@contact">Réserver un appel stratégique</a>
+</div>

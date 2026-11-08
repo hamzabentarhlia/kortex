@@ -1,0 +1,84 @@
+title: Schema markup for AI: what is worth adding | KORTEX
+description: Which schema.org types we add to a B2B site, what Google says about structured data and AI features, and why the FAQ rich result no longer matters.
+h1: The schema markup worth adding, and what it will not do
+summary: Which schema.org types we add to a B2B site, what Google says about structured data and AI features, and why the FAQ rich result no longer matters.
+kind: article
+kicker: Article
+date: 2026-11-08
+modified: 2026-11-08
+in_short: Schema markup does not get you into AI answers. Google says there is no special markup for its AI features, and it has stopped showing FAQ rich results. We still add Organization, Person, article and defined-term markup because it states who you are and what a page is, and it costs little, as long as it matches the visible text.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>Google says no special schema.org markup is needed for AI Overviews or AI Mode, and it lists over-focusing on structured data among the things to ignore.</li>
+<li>Google's own updates page says the FAQ rich result is no longer shown in Search, and its FAQ documentation was removed.</li>
+<li>Markup must describe content that readers can see on the page. Marking up hidden content breaks Google's policy.</li>
+<li>We still add four types: Organization, Person, article and FAQ or defined-term markup where a page has that content.</li>
+<li>We check it with a script, so the markup cannot drift away from the visible text.</li>
+</ul>
+</div>
+<h2>What Google says about markup and AI</h2>
+<p>The question comes up in every conversation about AI visibility: does schema markup help a page get cited? On Google's side, the company has answered it in writing.</p>
+<p>In its guide to generative AI features, Google says structured data is not required for generative AI search, and that there is no special schema.org markup you need to add. It lists "overfocusing on structured data" among the myths to ignore. In the same passage it adds that it is a good idea to keep using structured data as part of your overall SEO strategy, because it helps with eligibility for rich results in Google Search.</p>
+<p>The other Google document says the same thing from another angle: you do not need to create new machine-readable files, AI text files or markup to appear in these features. A page has to be indexed and eligible to show a snippet. That is the requirement.</p>
+<p>So anyone who tells you that adding a block of JSON-LD will put you into AI answers is promising something Google says is not how its Search works. For other engines, we found no public statement either way.</p>
+<h2>The FAQ rich result is gone</h2>
+<p>For years, FAQ markup earned an expanded result in Google Search. That has ended. Google's updates page records that the documentation for the FAQ rich result was removed because the feature is no longer shown in Search results, as announced in a May 2026 changelog entry.</p>
+<p>This matters because FAQ markup was one of the most common pieces of schema advice. If you added it for the rich result, the reason is gone. If a page has a real FAQ for readers, keep the FAQ. Whether to keep the markup is a small decision: it is harmless when it matches the text, and it tells a machine that the page contains questions and answers. But do not expect Google to display it.</p>
+<h2>What structured data is for</h2>
+<p>Google describes structured data as a standardized format for giving explicit clues about the meaning of a page. It uses what it finds to understand the page and to gather information about people, books or companies in the markup. The most visible benefit has been rich results, which depend on the type of markup and the feature.</p>
+<p>The key rule is in Google's structured data policies: do not mark up content that is not visible to readers. If the JSON-LD describes a performer, the page body must describe that performer. Do not mark up irrelevant or misleading content, and do not use structured data to impersonate or misrepresent.</p>
+<p>That rule is also a good test for what to add. Markup is a label on content that already exists.</p>
+<h2>The four types we add, and why</h2>
+<p>The schema.org site shows how widely each type is used, based on monthly aggregations from Google's web index (August 2026): Organization and Person appear on more than ten million domains, FAQPage and BlogPosting on one to ten million, and DefinedTerm on ten thousand to one hundred thousand. Usage is not proof of value, but it shows the types are well understood.</p>
+<div class="table-wrap"><table>
+<caption>The markup we use on a B2B site</caption>
+<thead><tr><th scope="col">Type</th><th scope="col">Where</th><th scope="col">What it states</th></tr></thead>
+<tbody>
+<tr><td>Organization</td><td>Every page, linked once</td><td>Company name, website, logo, contact point, profiles that are really yours</td></tr>
+<tr><td>Person</td><td>About page and article authors</td><td>Who wrote or founded this, linked to the Organization</td></tr>
+<tr><td>BlogPosting or Article</td><td>Each article</td><td>Headline, dates, author, publisher, language</td></tr>
+<tr><td>FAQPage</td><td>Pages with a visible FAQ</td><td>The same questions and answers a reader sees</td></tr>
+<tr><td>DefinedTerm</td><td>Glossary entries</td><td>A term, its description, and the glossary it belongs to</td></tr>
+</tbody>
+</table></div>
+<p>We add them for three plain reasons. They state who is behind the site, which is useful to any system that has to decide whether two pages come from the same company. They are cheap, because a build script generates them from the page content. And they do no harm when they match what the reader sees.</p>
+<p>We do not claim they raise citations. They are the same hygiene you would apply to a site for any reason.</p>
+<h2>How we keep it honest</h2>
+<p>Most markup problems come from drift. Someone edits a question on the page and forgets the JSON-LD. A price changes in one place only. We handle this in three ways.</p>
+<ul>
+<li><strong>Generate, do not hand-write.</strong> The markup is built from the same source as the page. Plan prices come from one data set. The FAQ markup is extracted from the visible FAQ.</li>
+<li><strong>Validate before every release.</strong> A script parses every JSON-LD block, checks required fields for each type and compares the FAQ questions to the visible ones. The check fails if they differ.</li>
+<li><strong>Review before publishing.</strong> Google asks that AI-assisted content, including metadata and structured data, be fact-checked before it goes live. We do the same.</li>
+</ul>
+<h2>What to skip</h2>
+<ul>
+<li><strong>Review and rating markup you cannot back up.</strong> Fake reviews are named in Google's policies as content you must not mark up.</li>
+<li><strong>Markup for pages that do not exist.</strong> Do not describe a product, an author or an event the page does not show.</li>
+<li><strong>Endless nesting.</strong> A clean Organization, a Person and the page type is enough for most B2B pages.</li>
+</ul>
+<h2>A short checklist</h2>
+<ol>
+<li>Pick the types the page really is: article, glossary entry, FAQ, company page.</li>
+<li>Generate the markup from the page content, not from memory.</li>
+<li>Check that every value in the markup is visible on the page.</li>
+<li>Validate the syntax, then compare questions and answers with the visible text.</li>
+<li>Re-run the check whenever prices, names or dates change.</li>
+</ol>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a>: structured data is not required, no special schema. Last updated July 10, 2026.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">AI features and your website, Google Search Central</a>: no additional requirements, no special schema.org structured data.</li>
+<li><a href="https://developers.google.com/search/updates" rel="noopener">Google Search Central documentation updates</a>: removal of the FAQ rich result documentation.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" rel="noopener">Introduction to structured data, Google Search Central</a>: what structured data does.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies" rel="noopener">Structured data general guidelines, Google Search Central</a>: do not mark up content that is not visible.</li>
+<li><a href="https://schema.org/FAQPage" rel="noopener">FAQPage</a>, <a href="https://schema.org/DefinedTerm" rel="noopener">DefinedTerm</a>, <a href="https://schema.org/Organization" rel="noopener">Organization</a> and <a href="https://schema.org/Person" rel="noopener">Person</a> on schema.org: type definitions and usage ranges.</li>
+</ul>
+<h2 id="faq">Common questions about schema markup</h2><div><details><summary>Does schema markup help me appear in AI Overviews?</summary><div><p>Google says there is no special schema.org markup you need for AI Overviews or AI Mode, and that structured data is not required for generative AI search. A page has to be indexed and eligible to show a snippet.</p></div></details><details><summary>Is FAQ schema still worth adding?</summary><div><p>Google no longer shows the FAQ rich result, and removed its documentation. If your page has a real FAQ for readers, keeping matching markup does no harm, but do not expect a visual benefit in Google Search.</p></div></details><details><summary>Which schema types should a B2B company add?</summary><div><p>Organization for the company, Person for the founder and authors, BlogPosting or Article for articles, and FAQPage or DefinedTerm only where the page contains that content. Keep each one matched to visible text.</p></div></details><details><summary>Can schema markup hurt me?</summary><div><p>It can if it describes content readers cannot see or if it misleads. Google's policies say not to mark up hidden, irrelevant or misleading content, and not to impersonate a person or organization.</p></div></details><details><summary>How do I check my markup?</summary><div><p>Parse each block to make sure the JSON is valid, check the required properties for the type, and compare the markup with the visible text. We run a script that does all three before each release.</p></div></details><details><summary>Do other AI engines read schema markup?</summary><div><p>We found no public documentation from other engines that says they do or do not. We treat the markup as good practice and not as a tactic.</p></div></details></div>
+<div id="cta">
+<p>Method</p>
+<h2>Want the markup built from your content and checked on every release?</h2>
+<p>We generate and validate structured data from the same files as your pages. See how a month works on the <a href="@how-it-works">how it works page</a>.</p>
+<a href="@contact">Book a strategy call</a>
+</div>

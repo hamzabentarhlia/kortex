@@ -15,13 +15,35 @@ function track(name, props) {
   if (window.kxGA && typeof window.gtag === 'function') window.gtag('event', name, props || {});
 }
 
+const LEGACY_PAGES = { '/blog.html': '/fr/blog/', '/contact.html': '/fr/contact/', '/login.html': '/fr/login/', '/solutions.html': '/fr/how-it-works/', '/pricing.html': '/pricing/' };
+
+function redirectLegacyPage() {
+  const target = LEGACY_PAGES[location.pathname];
+  if (target) location.replace(target + location.search);
+}
+
 function currentTheme() {
   const set = root.dataset.theme;
   if (set) return set;
   return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 }
 
+const THEME_COLORS = { light: '#F4EDE3', dark: '#0B1327' };
+
+function syncThemeColor(theme) {
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => { meta.setAttribute('content', THEME_COLORS[theme]); });
+}
+
 function initTheme() {
+  if (!root.dataset.theme) {
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    mq.addEventListener('change', () => {
+      if (root.dataset.theme) return;
+      document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(currentTheme() === 'light')));
+      syncThemeColor(currentTheme());
+    });
+  }
+  syncThemeColor(currentTheme());
   document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
     const sync = () => btn.setAttribute('aria-pressed', String(currentTheme() === 'light'));
     sync();
@@ -29,6 +51,8 @@ function initTheme() {
       const next = currentTheme() === 'light' ? 'dark' : 'light';
       root.dataset.theme = next;
       store('kx-theme', next);
+      syncThemeColor(next);
+      track('theme_toggle', { theme: next });
       document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(next === 'light')));
       if (window.Cal && window.Cal.ns && window.Cal.ns.kx) window.Cal.ns.kx('ui', { theme: next });
     });
@@ -172,23 +196,47 @@ function initPrefill() {
   const plan = params.get('plan');
   const planField = document.querySelector('[data-prefill=plan]');
   if (plan && planField) planField.value = plan.slice(0, 40);
-  if (params.get('sent') === '1') {
-    const status = document.querySelector('[data-form-status]');
-    if (status) { status.hidden = false; status.focus(); }
-    track('Form submitted', { page: location.pathname });
-  }
 }
 
 function initForms() {
   document.querySelectorAll('form[data-track-form]').forEach((form) => {
-    form.addEventListener('submit', () => track('Form submit', { form: form.dataset.trackForm }));
+    form.addEventListener('submit', async (event) => {
+      if (!form.hasAttribute('data-lead-form') || !window.fetch) { track('Form submit', { form: form.dataset.trackForm }); return; }
+      event.preventDefault();
+      const success = form.parentElement.querySelector('[data-form-status]');
+      const failure = form.parentElement.querySelector('[data-form-error]');
+      const button = form.querySelector('[type=submit]');
+      if (success) success.hidden = true;
+      if (failure) failure.hidden = true;
+      if (form.querySelector('.hp') && form.querySelector('.hp').checked) { form.reset(); return; }
+      if (button) button.disabled = true;
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('rejected');
+        form.reset();
+        form.hidden = true;
+        if (success) { success.hidden = false; success.focus(); }
+        track('generate_lead', { form: form.dataset.trackForm, page: location.pathname });
+      } catch (error) {
+        if (failure) { failure.hidden = false; failure.focus(); }
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
   });
 }
 
 function initTracking() {
   document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link && (link.hasAttribute('data-cal') || /(^|\.)cal\.com\//.test(link.href.replace(/^https?:\/\//, '')))) {
+      track('book_call_click', { cta: link.dataset.track || 'book', page: location.pathname });
+    }
+    if (link && link.closest('#menu-lang')) {
+      track('language_switch', { to: link.getAttribute('hreflang') || link.lang || link.pathname, page: location.pathname });
+    }
     const el = e.target.closest('[data-track]');
-    if (el) track('CTA click', { cta: el.dataset.track, page: location.pathname });
+    if (el) track('cta_click', { cta: el.dataset.track, page: location.pathname });
   });
 }
 
@@ -375,7 +423,7 @@ function loadCal() {
     window.Cal('init', 'kx', { origin: 'https://cal.com' });
     window.Cal.ns.kx('ui', {
       theme: currentTheme(),
-      cssVarsPerTheme: { light: { 'cal-brand': '#ec5a1c' }, dark: { 'cal-brand': '#ff6b2c' } },
+      cssVarsPerTheme: { light: { 'cal-brand': '#FF6B5B' }, dark: { 'cal-brand': '#FF6B5B' } },
       hideEventTypeDetails: false,
       layout: 'month_view',
     });
@@ -390,7 +438,6 @@ function initCal() {
     const a = e.target.closest('a[data-cal]');
     if (!a || !desktop.matches || e.metaKey || e.ctrlKey || e.shiftKey) return;
     e.preventDefault();
-    track('Booking click', { cta: a.dataset.track || 'book', page: location.pathname });
     loadCal().then(() => {
       window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: calConfig() });
     }).catch(() => { location.href = a.href; });
@@ -535,6 +582,7 @@ function initFinder() {
   run(true);
 }
 
+redirectLegacyPage();
 initTheme();
 initConsent();
 initHeader();

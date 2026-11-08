@@ -201,7 +201,7 @@ def tracking(lang):
         '<div class="ht">'
         f'<div class="ht-top"><b>{T(lang, "Monthly citation check", "Vérification mensuelle des citations", "الفحص الشهري للاستشهادات")}</b>{label(kit.ILLUSTRATIVE[lang])}</div>'
         f'<div class="ht-grid">{head}{"".join(rows)}<i class="ht-scan" aria-hidden="true"></i></div>'
-        f'<div class="ht-foot"><span><b>{cited}/{total}</b> {T(lang, "answers cite yourbrand.com in this illustration", "réponses citent yourbrand.com dans cette illustration", "إجابة تستشهد بـ yourbrand.com في هذا المثال")}</span>'
+        f'<div class="ht-foot"><span><b>{cited}/{total}</b> {T(lang, "answers cite acme.com in this illustration", "réponses citent acme.com dans cette illustration", "إجابة تستشهد بـ acme.com في هذا المثال")}</span>'
         f'<span class="ht-key"><i class="is-cited"></i>{T(lang, "cited", "cité", "مستشهد به")}</span></div></div>'
     )
 
