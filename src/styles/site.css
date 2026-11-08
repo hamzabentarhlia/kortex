@@ -177,6 +177,8 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .prose figure,.prose .table-wrap{margin:2em 0}
 .prose .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-sm)}
 .prose table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+@media (max-width:640px){.prose table:not(:has(th:nth-child(4))){min-width:0;font-size:13.5px}.prose table:not(:has(th:nth-child(4))) th,.prose table:not(:has(th:nth-child(4))) td{padding:10px 8px}}
+.prose caption{caption-side:top;text-align:start;padding:14px 12px 4px;font-weight:600;color:var(--text)}
 .prose th,.prose td{padding:12px 14px;text-align:start;vertical-align:top;border-bottom:1px solid var(--line)}
 .prose th{font:500 11px/1.4 var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);background:var(--surface)}
 .prose td{color:var(--text-2)}

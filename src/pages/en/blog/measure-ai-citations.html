@@ -1,0 +1,90 @@
+title: How to measure AI citations without a tool budget | KORTEX
+description: A repeatable monthly method to track whether ChatGPT, Perplexity and Gemini cite you: a fixed prompt list, a simple log, Search Console and one rule for reading it.
+h1: How to measure AI citations without a tool budget
+summary: A repeatable monthly method to track whether ChatGPT, Perplexity and Gemini cite you: a fixed prompt list, a simple log, Search Console and one rule for reading it.
+kind: article
+kicker: Article
+date: 2026-11-08
+modified: 2026-11-08
+in_short: You can measure AI citations with a spreadsheet. Write ten buyer questions, run the same wording in each engine every month, log who is cited, and read the trend over several runs. Add Google's Generative AI report in Search Console for the Google side. Be careful with any tool that sells a single score.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>A fixed list of ten buyer questions, run monthly with identical wording, tells you more than a one-off check.</li>
+<li>Log the engine, the date, the answer, your page if cited, and the other sources cited. The competitor column is as useful as your own.</li>
+<li>Answers vary from run to run and across features, so read trends over several months, not one result.</li>
+<li>For Google, Search Console has a Generative AI performance report. It is first-party data.</li>
+<li>Google warns that no third-party tool can see its internal ranking or AI systems.</li>
+</ul>
+</div>
+<h2>Start with the question list, not the tool</h2>
+<p>The method rests on one thing: a fixed list of questions your buyers actually ask. Get them from sales calls, support tickets, the questions prospects raise in the first meeting. Write each one the way a buyer would type it, in full. Not "supplier risk software" but "which approach to supplier risk works for a mid-size manufacturer with suppliers in several countries".</p>
+<p>Aim for ten. That is enough to see a pattern and small enough to run by hand in an afternoon. Group them by stage if you like: a few that define the problem, a few that compare approaches, a few that are close to a purchase decision.</p>
+<p>Then freeze the wording. Changing a question between months breaks the comparison. If a question stops being relevant, retire it and add a new one with a new row, and say so in the notes.</p>
+<h2>The log</h2>
+<p>One spreadsheet, one row for each question in each engine in each month. These are the columns we use:</p>
+<div class="table-wrap"><table>
+<caption>Columns for a citation log</caption>
+<thead><tr><th scope="col">Column</th><th scope="col">What goes in it</th></tr></thead>
+<tbody>
+<tr><td>Date</td><td>The day you ran the question</td></tr>
+<tr><td>Engine and surface</td><td>For example Perplexity web, ChatGPT app, Google AI Mode. Note the surface, because they can differ</td></tr>
+<tr><td>Question</td><td>The exact wording, copied from the list</td></tr>
+<tr><td>AI answer shown</td><td>Yes or no. Google says AI Overviews often do not trigger, so "no answer" is a real result</td></tr>
+<tr><td>You named</td><td>Yes or no: does the answer mention your brand in the text</td></tr>
+<tr><td>You cited</td><td>Yes or no: is one of your pages a linked source</td></tr>
+<tr><td>Your page</td><td>The URL cited, if any</td></tr>
+<tr><td>Others cited</td><td>The other domains listed as sources</td></tr>
+<tr><td>Notes</td><td>Anything odd: a wrong fact about you, an outdated price, a confusion with another company</td></tr>
+</tbody>
+</table></div>
+<p>Two columns earn their place beyond the obvious. "You named" and "You cited" are different outcomes: an engine can describe you without linking you, or link you without naming you. And "Others cited" tells you who owns the answer today. Over a few months it shows you which competitor pages or third-party sites are doing the work you want to do.</p>
+<h2>The one metric to compute</h2>
+<p>Citation rate is the share of tracked questions where an engine cites your site. If you track ten questions and your page is a linked source in three, the citation rate is three out of ten for that engine that month. Keep the rate per engine, because they behave differently, and track "named" as a second rate.</p>
+<p>That is the whole calculation. Resist the urge to add weights, indexes or a single blended score. With ten questions, a score with two decimals is false precision.</p>
+<h2>Why results move, and how to read them</h2>
+<p>Expect variation. Google's own documentation says AI Overviews are shown only when its systems determine they add to classic Search, so they often do not trigger. It also says AI Mode and AI Overviews may use different models and techniques, so the set of responses and links they show will vary. Perplexity states that its user agent fetches pages when a person asks a question. All of this means the same question can produce different sources on different days.</p>
+<p>So read the log like this:</p>
+<ul>
+<li>Do not react to one month. Wait for three runs before calling a change real.</li>
+<li>Look for stable patterns: a question where you are cited every time, or where a competitor always is.</li>
+<li>Treat a sudden drop on every question at once as a technical problem first. Check that your pages are still indexed and not blocked.</li>
+<li>Record what you changed on the site and when, in the notes, so that a later change in the log can be linked to a cause.</li>
+</ul>
+<h2>Google's own data: Search Console</h2>
+<p>For Google, you do not have to guess. Google states that sites appearing in AI features such as AI Overviews and AI Mode are included in the overall traffic in Search Console, and its guide points to a Generative AI performance report there. Use it as the first-party record for Google, and use your manual log for the engines that do not give you one.</p>
+<p>The two sources answer different questions. Search Console tells you how people find your pages through Google's generative features. The log tells you whether a specific buyer question gets your page as a source, across engines.</p>
+<h2>A light automation, with limits</h2>
+<p>You can automate the boring parts. In n8n, a Schedule Trigger on the first working day of the month can start a flow that reads the question list from a Google Sheets node, creates the month's empty rows, and sends an email with the Send Email node to whoever runs the check. A Code node can then calculate the citation rate from the filled rows and write it to a summary sheet.</p>
+<p>What we do not automate is the reading of the answers. Engines return different results through different surfaces, and we do not know how closely an automated call matches what a person sees in the product. We log the surface we used, run the questions in the product people use, and read each answer. Run by hand, ten questions is a short job.</p>
+<h2>Third-party tools: what to ask</h2>
+<p>Citation tracking tools exist and some may save you time. Google's guide gives one clear warning: no third-party tool has access to its internal ranking or AI systems, and tools claiming to use internal Google metrics should be treated with care. Evaluate their advice against the official guidance.</p>
+<p>Before you pay, ask the vendor:</p>
+<ul>
+<li>Which prompts do you run, and can I supply my own?</li>
+<li>How many times is each prompt run, and how is variation handled?</li>
+<li>Which product surface do you query: the app, the website or an API?</li>
+<li>Can I export the raw answers, so I can check them?</li>
+</ul>
+<p>If the answers are vague, a spreadsheet is the better tool.</p>
+<h2>What to do with the results</h2>
+<ol>
+<li>For questions where you are never cited, check whether the page exists, is indexed and answers the question directly with something specific.</li>
+<li>For questions where a competitor is cited, read their page. Ask what it contains that yours does not. Do not copy it. Add something only you have.</li>
+<li>For wrong or outdated statements about you, fix the source on your own site first and make the correct fact easy to find.</li>
+<li>For questions where you are cited, leave the page alone unless the facts change. Update the date when you do.</li>
+</ol>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a>: Generative AI performance report, third-party tool warning. Last updated July 10, 2026.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">AI features and your website, Google Search Central</a>: AI Overviews do not always trigger, AI Mode and AI Overviews differ, Search Console reporting.</li>
+<li><a href="https://docs.perplexity.ai/guides/bots" rel="noopener">Perplexity crawlers, Perplexity documentation</a>: Perplexity-User fetches pages when a user asks a question.</li>
+</ul>
+<h2 id="faq">Common questions about measuring AI citations</h2><div><details><summary>How many questions should I track?</summary><div><p>Ten is a good start. It is enough to see a pattern, small enough to run by hand each month, and easy to group by buying stage. Add more only when you can still review each answer.</p></div></details><details><summary>How often should I run the check?</summary><div><p>Once a month, with identical wording. Running it more often adds noise, because answers vary between runs. Judge change over at least three months.</p></div></details><details><summary>What is the difference between being named and being cited?</summary><div><p>Named means the answer text mentions your brand. Cited means one of your pages appears as a linked source. Either can happen without the other, so log both.</p></div></details><details><summary>Can Search Console show AI Overview traffic?</summary><div><p>Google says sites appearing in AI Overviews and AI Mode are included in overall Search Console traffic, and its guide points to a Generative AI performance report. It covers Google only.</p></div></details><details><summary>Why do I see no AI answer for some questions?</summary><div><p>Google says AI Overviews are only shown when its systems judge them additive to classic Search, so they often do not trigger. Log "no AI answer" as a result and do not count it as a miss.</p></div></details><details><summary>Should I use an API or the product itself?</summary><div><p>We use the product, because that is what buyers see, and we log the surface. We do not know how closely API answers match the product, so we do not assume they are the same.</p></div></details></div>
+<div id="cta">
+<p>Method</p>
+<h2>Want this check run for you every month?</h2>
+<p>Every KORTEX plan includes a monthly citation check. What each plan covers is on the <a href="@pricing">pricing page</a>.</p>
+<a href="@contact">Book a strategy call</a>
+</div>

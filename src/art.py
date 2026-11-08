@@ -407,6 +407,121 @@ def _c_video():
     return out
 
 
+def _c_llms():
+    out = []
+    page = _rect(34, 34, 196, 212, 12, "blog-c-card")
+    page += _rect(50, 52, 86, 7, 3.5, "m-ink")
+    page += _rect(50, 70, 150, 12, 6, "blog-c-chip blog-c-chip-hl") + _rect(58, 74, 110, 4, 2, "m-acc")
+    for i, w in enumerate([140, 118, 150, 100, 128]):
+        page += _rect(50, 98 + i * 26, 8, 8, 4, "blog-c-ok" if i != 2 else "m-acc")
+        page += _rect(66, 99 + i * 26, w, 5, 2.5, "m-ink" if i == 2 else "m-faint")
+        page += _rect(66, 109 + i * 26, w * 0.6, 3.5, 1.75, "m-faint")
+    out.append(_g(page, "blog-c-fl"))
+    ys = [60, 130, 200]
+    for i, y in enumerate(ys):
+        src = 98 + [0, 2, 4][i] * 26 + 4
+        out.insert(0, _path(f"M230 {src}C300 {src} 330 {y + 22} 392 {y + 22}", "blog-c-wire-hot" if i == 1 else "blog-c-link"))
+        out.append(_g(_card(392, y, 170, 46, (0.6, 0.86), i == 1, "doc"), f"blog-c-row blog-c-o{i + 1}" if i != 1 else "blog-c-row"))
+    out.append(_cite(572, 62, 17))
+    out.append(_dots([(300, 40, 2.5), (360, 250, 2), (600, 230, 3)]))
+    return out
+
+
+def _c_geoseo():
+    out = []
+    out.append(_path("M40 232H600", "blog-c-axis"))
+    for i, x in enumerate([60, 188, 316, 444]):
+        out.append(_chip(x, 244, 112, i == 1))
+    for i in range(3):
+        y = 44 + i * 52
+        out.insert(0, _path(f"M244 {y + 20}C300 {y + 20} 300 120 340 120", "blog-c-wire-hot" if i == 1 else "blog-c-wire"))
+        out.append(_g(_card(40, y, 204, 40, (0.6, 0.9), i == 1, None), "blog-c-row" + (f" blog-c-o{i + 1}" if i != 1 else "")))
+    out.append(_circ(340, 120, 5, "m-dot blog-c-bl"))
+    out.append(_g(_answer(372, 52, 230, 136, (0.86, 0.7, 0.8, 0.56), 0.46), "blog-c-fl"))
+    out.append(_cite(604, 52, 17))
+    out.append(_dots([(330, 30, 2.5), (620, 208, 2)]))
+    return out
+
+
+def _c_cited():
+    out = []
+    icons = ["route", "doc", "chat", "stamp", "flag", "gauge"]
+    xs = [60 + i * 96 for i in range(6)]
+    out.append(_path("M60 140H540", "blog-c-wire"))
+    for i, (x, ic) in enumerate(zip(xs, icons)):
+        hot = i == 5
+        out.append(_g(_node(x, 140, 26, ic), "blog-c-fl" if hot else "blog-c-row"))
+        out.append(_rect(x - 18, 186, 36, 5, 2.5, "m-ink" if hot else "m-faint"))
+        out.append(_rect(x - 24, 198, 48, 4, 2, "m-faint"))
+    out.append(_path("M60 140H540", "blog-c-wire-hot", ' stroke-dasharray="6 8"'))
+    out.append(_g(_answer(468, 34, 150, 66, (0.8, 0.6), 0.4), "blog-c-fl2"))
+    out.append(_cite(618, 36, 15))
+    out.append(_dots([(40, 60, 2.5), (300, 80, 2), (320, 232, 3), (600, 250, 2)]))
+    return out
+
+
+def _c_measure():
+    out = []
+    tones = [["ok", "x", "ok", "x"], ["ok", "ok", "x", "x"], ["x", "ok", "ok", "x"], ["ok", "ok", "ok", "x"]]
+    out.append(_rect(34, 34, 330, 212, 12, "blog-c-card"))
+    for c in range(4):
+        out.append(_rect(116 + c * 62, 48, 40, 5, 2.5, "m-ink" if c == 3 else "m-faint"))
+    for r in range(4):
+        y = 70 + r * 40
+        out.append(_rect(50, y + 6, 46, 5, 2.5, "m-faint"))
+        for c in range(4):
+            cx = 136 + c * 62
+            cls = "blog-c-ok" if tones[r][c] == "ok" else "blog-c-empty"
+            out.append(_rect(cx - 20, y - 4, 40, 28, 8, "blog-c-chip blog-c-chip-hl" if (r, c) == (1, 3) else "blog-c-chip"))
+            out.append(_circ(cx, y + 10, 5, cls))
+    out.append(_path("M404 220C440 214 452 178 484 170S540 130 612 82", "blog-c-wire-hot"))
+    out.append(_path("M404 232H612", "blog-c-axis"))
+    for x, y in [(404, 220), (452, 190), (500, 164), (556, 118), (612, 82)]:
+        out.append(_circ(x, y, 4.5, "m-dot blog-c-bl"))
+    out.append(_g(_gauge(508, 70, 34, 0.55), "blog-c-fl2"))
+    out.append(_cite(612, 56, 15))
+    out.append(_dots([(390, 40, 2.5), (440, 250, 2)]))
+    return out
+
+
+def _c_schema():
+    out = []
+    code = _rect(34, 34, 214, 212, 12, "blog-c-card")
+    code += _path("M62 60c-10 0-14 6-14 14v20c0 8-4 12-10 12 6 0 10 4 10 12v20c0 8 4 14 14 14", "blog-c-axis")
+    for i, (x, w) in enumerate([(78, 90), (92, 110), (92, 80), (78, 70), (92, 104), (92, 64)]):
+        code += _rect(x, 64 + i * 24, w, 6, 3, "m-acc" if i in (1, 4) else "m-faint")
+    out.append(_g(code, "blog-c-fl"))
+    out.append(_path("M248 140C290 140 296 140 336 140", "blog-c-wire-hot"))
+    out.append(_circ(292, 140, 5, "m-dot blog-c-bl"))
+    page = _rect(336, 34, 270, 212, 12, "blog-c-card")
+    page += _rect(356, 54, 130, 8, 4, "m-ink")
+    for i, w in enumerate([226, 200, 214, 170]):
+        page += _rect(356, 82 + i * 18, w, 4.5, 2.25, "m-faint")
+    out.append(_g(page, "blog-c-fl2"))
+    for i, (x, w, hl) in enumerate([(356, 92, True), (460, 58, False), (530, 52, False)]):
+        out.append(_chip(x, 168, w, hl))
+    out.append(_chip(356, 196, 104, False))
+    out.append(_cite(606, 34, 16))
+    out.append(_dots([(270, 60, 2.5), (320, 238, 2)]))
+    return out
+
+
+def _c_webinar():
+    out = []
+    out.append(_g(_card(34, 94, 150, 92, (0.6, 0.9, 0.7), True, "film"), "blog-c-fl"))
+    out.append(_circ(204, 140, 5, "m-dot blog-c-bl"))
+    icons = ["doc", "chat", "linkedin", "question"]
+    for i, ic in enumerate(icons):
+        y = 28 + i * 58
+        hot = i == 0
+        out.insert(0, _path(f"M204 140C250 140 260 {y + 20} 316 {y + 20}", "blog-c-wire-hot" if hot else "blog-c-wire"))
+        out.append(_g(_card(316, y, 190, 42, (0.6, 0.86), hot, ic), "blog-c-row" + ("" if hot else f" blog-c-o{min(i + 1, 4)}")))
+    out.append(_stamp(560, 180, 28, "blog-c-fl2"))
+    out.append(_cite(566, 52, 17))
+    out.append(_dots([(250, 40, 2.5), (250, 250, 2), (610, 250, 3)]))
+    return out
+
+
 COVERS = {
     "blog/stop-ranking-start-dominating": _c_ranked,
     "blog/answer-engine-visibility-guide": _c_gates,
@@ -416,6 +531,12 @@ COVERS = {
     "blog/entity-first-content-architecture": _c_entity,
     "blog/new-b2b-content-stack": _c_stack,
     "blog/one-video-authority-system": _c_video,
+    "blog/llms-txt-what-to-do": _c_llms,
+    "blog/geo-vs-seo-for-b2b": _c_geoseo,
+    "blog/get-cited-by-chatgpt-perplexity-gemini": _c_cited,
+    "blog/measure-ai-citations": _c_measure,
+    "blog/schema-markup-ai-engines-read": _c_schema,
+    "blog/webinar-to-content-system": _c_webinar,
 }
 
 

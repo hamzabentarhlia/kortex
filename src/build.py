@@ -902,8 +902,10 @@ def fr_typo(text):
 VCSS = {}
 
 
-def visual_css(body):
+def visual_css(body, pid=""):
     used = visuals.modules_in(body)
+    if pid.startswith("blog/") and "blog" not in used:
+        used = sorted(used + ["blog"])
     if not used:
         return ""
     return VCSS["kit"] + "".join(VCSS.get(n, "") for n in used)
@@ -950,7 +952,7 @@ def render(lang, pid, critical, css_v, js_v):
     page = f'''<!doctype html>
 <html lang="{lang}"{direction}>
 <head>
-{head(lang, pid, meta, body, critical + visual_css(body), css_v, js_v)}
+{head(lang, pid, meta, body, critical + visual_css(body, pid), css_v, js_v)}
 </head>
 <body>
 {header(lang, pid)}

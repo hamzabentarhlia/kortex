@@ -1,0 +1,81 @@
+title: Get cited by ChatGPT, Perplexity and Gemini: a playbook | KORTEX
+description: A practical playbook for getting your brand cited in AI answers, with each step labelled as documented by an engine or as our own practice.
+h1: How to get your brand cited by ChatGPT, Perplexity and Gemini
+summary: A practical playbook for getting your brand cited in AI answers, with each step labelled as documented by an engine or as our own practice.
+kind: article
+kicker: Article
+date: 2026-11-08
+modified: 2026-11-08
+in_short: Citations come from pages an engine can reach, read and trust, and that say something worth quoting. Some steps are documented by the engines. Others are our own practice. This playbook labels each one so you know which is which.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>No engine publishes a full recipe for being cited. Treat any guarantee as a red flag.</li>
+<li>Step one is access: the page must be reachable, and for Google, indexed and eligible to show a snippet.</li>
+<li>Step two is substance. Google asks for non-commodity content with a real point of view. We apply that standard to every engine.</li>
+<li>Step three is clarity: one name for your company, one name for each idea, used the same way everywhere.</li>
+<li>Step four is checking. Run the same prompts every month and log what the engines say.</li>
+</ul>
+</div>
+<h2>What is documented and what is not</h2>
+<p>Before the steps, a rule for reading them. The engines publish different amounts. Google publishes a detailed guide for its AI features. Perplexity publishes documentation on its crawlers. For the selection logic of other assistants we found no primary documentation we could open and quote. So every step below carries one of two labels:</p>
+<ul>
+<li><strong>Documented:</strong> an engine states it in its own documentation, and we link it.</li>
+<li><strong>Our practice:</strong> something we do and have seen work for clients, with no independent proof.</li>
+</ul>
+<div class="table-wrap"><table>
+<caption>The playbook at a glance</caption>
+<thead><tr><th scope="col">Step</th><th scope="col">What you do</th><th scope="col">Label</th></tr></thead>
+<tbody>
+<tr><td>1. Be reachable</td><td>Allow the crawlers, check firewalls, keep pages indexable</td><td>Documented</td></tr>
+<tr><td>2. Say something only you can say</td><td>First-hand material, a point of view, specific numbers you own</td><td>Documented (Google)</td></tr>
+<tr><td>3. Answer the question first</td><td>Open each page with a direct answer, then support it</td><td>Our practice</td></tr>
+<tr><td>4. Be consistent about who you are</td><td>One company name, one author, one set of terms</td><td>Our practice</td></tr>
+<tr><td>5. Keep claims checkable</td><td>Cite sources, date the page, review before publishing</td><td>Documented (Google)</td></tr>
+<tr><td>6. Measure</td><td>Same prompts, every month, logged</td><td>Documented (Search Console), our practice for the rest</td></tr>
+</tbody>
+</table></div>
+<h2>Step 1: Be reachable</h2>
+<p>An engine cannot cite a page it cannot fetch. For Google's AI features, a page has to be indexed and eligible to be shown in Search with a snippet. Google lists no further technical requirement.</p>
+<p>For Perplexity, the documentation says PerplexityBot is designed to surface and link websites in Perplexity search results, and recommends allowing it in robots.txt and permitting its published IP ranges. A second agent, Perplexity-User, fetches pages when a person asks a question, and generally ignores robots.txt because a user requested the fetch.</p>
+<p>What to do: open your robots.txt and read it as if you were a crawler. Look at your firewall or CDN rules. A bot-protection setting that blocks unknown crawlers will block these too. Then load your key pages with scripts turned off, and check the core text is still there. Our site is built so that all copy is present in the HTML before any script runs, for this reason.</p>
+<h2>Step 2: Say something only you can say</h2>
+<p>This is the step where most teams lose. Google's guide says that content people find unique, compelling and useful will likely influence presence in generative AI search more than any other suggestion in the guide. It contrasts commodity content, built on common knowledge that could come from anyone, with non-commodity content, which offers a personal or expert take.</p>
+<p>Google makes this point about its own Search. We apply the same standard to every engine because it is hard to see why a system built to answer questions would prefer the tenth restatement of a common idea.</p>
+<p>What to do: for each page, write down the one thing it contains that a generic article cannot. A figure from your own data. A mistake a client made and what it cost. A decision you reversed. If you cannot name it, the page is not ready.</p>
+<h2>Step 3: Answer the question first</h2>
+<p>Open each page with the answer in two or three sentences, then explain. This is our practice, not a documented requirement. Google says outright that you do not need to rewrite content in a special way for generative AI, and that its systems understand synonyms and meaning. We write answer-first because it also serves the human reader who wants the point before the detail, which is the audience Google tells you to write for.</p>
+<p>What to do: check that the first paragraph under every heading can stand alone if quoted. Remove openers that restate the heading. Keep the claim, add one concrete detail, stop.</p>
+<h2>Step 4: Be consistent about who you are</h2>
+<p>Use one spelling of your company name. Name the author with the same name on the page, in the author page and in any structured data. Give each recurring idea one term and keep it. This is our practice. It helps readers and removes ambiguity for any system that has to decide whether two mentions refer to the same thing.</p>
+<p>What to do: write a one-page style sheet with the company name, the founder names, product names and the five terms you use most. Check every new page against it. We call this an entity sheet and keep one for each client.</p>
+<h2>Step 5: Keep claims checkable</h2>
+<p>Google's guidance on AI-assisted content says generative models predict likely sequences of words and do not retrieve facts, so output may contain inaccuracies. It says it is critical to manually fact-check and review such content before publishing, including metadata and structured data. It also suggests telling readers how automation was used where that helps them.</p>
+<p>What to do: put a person in the loop for every page. Cite a primary source for every statistic, or cut the statistic. Show a publication date and a last-updated date. On this site the sources list at the bottom of each article links only to pages we opened and read.</p>
+<h2>Step 6: Measure</h2>
+<p>Google's report for generative AI features sits in Search Console, and its AI feature traffic is part of your overall data. For ChatGPT, Perplexity and Gemini outside Google Search, there is no equivalent first-party report we know of, so we check by hand.</p>
+<p>What to do: write ten buyer questions in the words your customers use. Run them in each engine once a month. For each answer, log the date, the engine, the prompt, whether you were cited, which page, and who else was cited. Keep the wording identical month to month, so changes mean something. We cover this method in detail in <a href="@blog/measure-ai-citations">measuring AI citations</a>.</p>
+<h2>What not to do</h2>
+<ul>
+<li><strong>Do not buy mentions.</strong> Google says seeking inauthentic mentions across the web is not as helpful as it might seem.</li>
+<li><strong>Do not multiply near-duplicate pages.</strong> Writing separate pages for every phrasing, mainly to manipulate AI responses, violates Google's scaled content abuse policy.</li>
+<li><strong>Do not trust a guaranteed citation.</strong> No agency or tool has access to the internal systems of these engines.</li>
+</ul>
+<h2>A worked example</h2>
+<p>Imagine a mid-size supplier-risk software company. A buyer asks an assistant which approach to supplier risk works for a mid-size manufacturer. The company's best material is a webinar in which its head of customer success explains why yearly audits miss most events, using three real patterns from client accounts.</p>
+<p>The weak move is to publish a post titled "Five tips for supplier risk". The better move is a page that opens with the direct answer, names the three patterns from the webinar, cites the sources for any external claim, and carries the speaker's name and the date. The page is reachable, specific and checkable. Whether an engine cites it is still not guaranteed. But it has done everything within its control.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a>: technical requirements, non-commodity content, myths, measurement. Last updated July 10, 2026.</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" rel="noopener">Guidance on using generative AI content on your website, Google Search Central</a>: fact-checking and context for readers. Last updated October 1, 2026.</li>
+<li><a href="https://developers.google.com/search/docs/essentials/spam-policies" rel="noopener">Spam policies for Google web search, Google Search Central</a>: scaled content abuse.</li>
+<li><a href="https://docs.perplexity.ai/guides/bots" rel="noopener">Perplexity crawlers, Perplexity documentation</a>: PerplexityBot, Perplexity-User and firewall settings.</li>
+</ul>
+<h2 id="faq">Common questions about getting cited</h2><div><details><summary>Can I pay to be cited by ChatGPT or Perplexity?</summary><div><p>We know of no documented way to buy a citation in an AI answer, and we would be cautious with anyone who sells one. What you can do is make your pages reachable, specific and checkable, and measure the result.</p></div></details><details><summary>Do I need to allow AI crawlers in robots.txt?</summary><div><p>To be shown by an engine, the page has to be reachable by the systems that find it. Perplexity recommends allowing PerplexityBot. Google needs the page indexed and eligible for a snippet. Check your robots.txt and any firewall that sits in front of your site.</p></div></details><details><summary>How long does it take to get cited?</summary><div><p>There is no documented timeline. Google says indexing and serving are not guaranteed even when a page meets every requirement. Plan on checking monthly and judging over several months, not weeks.</p></div></details><details><summary>Does schema markup help me get cited?</summary><div><p>Google says there is no special schema.org markup you need for its AI features. Structured data is still worth using for other reasons, and it must match the visible text.</p></div></details><details><summary>Why do I get cited one month and not the next?</summary><div><p>Google notes that AI Overviews are only shown when they add to classic Search, so they often do not trigger, and that responses and links vary between features. Expect variation and read trends over several runs.</p></div></details><details><summary>Should I use a tool that tracks AI citations?</summary><div><p>You can, if it saves you time. Google warns that no third-party tool has access to its internal metrics, so judge any score against your own logged prompts and against Search Console.</p></div></details></div>
+<div id="cta">
+<p>Method</p>
+<h2>Want a monthly citation check run for you?</h2>
+<p>Every KORTEX plan includes a monthly citation check. See what each plan covers on the <a href="@pricing">pricing page</a>.</p>
+<a href="@contact">Book a strategy call</a>
+</div>
