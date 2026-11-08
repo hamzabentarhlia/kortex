@@ -29,10 +29,10 @@
 .ab-no{background:var(--surface-strong);color:var(--text-3);transform:translateY(14px)}
 .ab-5{gap:4px}
 .ab-5 .ab-yes,.ab-5 .ab-no{margin-inline-start:-6px}
-.js .vx:not(.is-in) .ab>*{opacity:0;transform:scale(.8)}
-.ab>*{transition:opacity .6s var(--ease),transform .6s cubic-bezier(.3,1.4,.5,1)}
-.ab>*:nth-child(2){transition-delay:.15s}
-.ab>*:nth-child(3){transition-delay:.3s}
+.js .vx:not(.is-in) .ab>*{opacity:.4;transform:scale(.94)}
+.ab>*{transition:opacity .38s var(--ease),transform .38s cubic-bezier(.3,1.4,.5,1)}
+.ab>*:nth-child(2){transition-delay:.06s}
+.ab>*:nth-child(3){transition-delay:.12s}
 .vx.is-in .ab-yes{transform:translateY(-14px)}
 .vx.is-in .ab-no{transform:translateY(14px)}
 .vx.is-in .ab-mark{transform:rotate(-12deg)}

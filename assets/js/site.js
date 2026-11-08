@@ -12,8 +12,7 @@ function store(key, value) {
 }
 
 function track(name, props) {
-  if (typeof window.plausible === 'function') window.plausible(name, { props });
-  if (typeof window.gtag === 'function') window.gtag('event', name, props || {});
+  if (window.kxGA && typeof window.gtag === 'function') window.gtag('event', name, props || {});
 }
 
 function currentTheme() {
@@ -31,6 +30,7 @@ function initTheme() {
       root.dataset.theme = next;
       store('kx-theme', next);
       document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(next === 'light')));
+      if (window.Cal && window.Cal.ns && window.Cal.ns.kx) window.Cal.ns.kx('ui', { theme: next });
     });
   });
 }
@@ -126,15 +126,7 @@ function initMobileMenu() {
 }
 
 function animateCount(el) {
-  const target = Number(el.dataset.count);
-  if (reduceMotion) { el.textContent = target; return; }
-  const start = performance.now();
-  const step = (now) => {
-    const t = Math.min(1, (now - start) / 1400);
-    el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
-    if (t < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
+  if (!reduceMotion) el.classList.add('is-counted');
 }
 
 function initReveal() {
@@ -150,12 +142,11 @@ function initReveal() {
   document.querySelectorAll('.reveal-group').forEach((g) => {
     [...g.children].forEach((el, i) => el.style.setProperty('--i', Math.min(i, 8)));
   });
-  const items = document.querySelectorAll('.reveal,.reveal-group,.draw,.divider,.path-wrap,[data-count],[data-fill],[data-typer]');
+  const items = document.querySelectorAll('.reveal,.reveal-group,.draw,.divider,.path-wrap,[data-count],[data-fill]');
   if (!('IntersectionObserver' in window) || reduceMotion) {
     items.forEach((el) => {
       el.classList.add('is-in');
       if (el.dataset.count) el.textContent = el.dataset.count;
-      if (el.matches('[data-typer]')) runTyper(el, true);
     });
     return;
   }
@@ -165,10 +156,9 @@ function initReveal() {
       const el = entry.target;
       el.classList.add('is-in');
       if (el.dataset.count) animateCount(el);
-      if (el.matches('[data-typer]')) runTyper(el);
       io.unobserve(el);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  }, { rootMargin: '0px 0px 15% 0px', threshold: 0 });
   items.forEach((el) => io.observe(el));
 }
 
@@ -202,28 +192,46 @@ function initTracking() {
   });
 }
 
-function runTyper(card, instant) {
-  const out = card.querySelector('[data-typed]');
-  const text = out.dataset.typed;
-  const lines = [...card.querySelectorAll('.demo-a p')];
-  const hit = card.querySelector('.demo-src .hit');
-  const finish = () => {
-    lines.forEach((p, i) => setTimeout(() => p.classList.add('on'), instant ? 0 : 350 + i * 450));
-    setTimeout(() => hit && hit.classList.add('on'), instant ? 0 : 350 + lines.length * 450 + 200);
+function initConsent() {
+  const box = document.querySelector('[data-consent]');
+  if (!box) return;
+  const html = document.documentElement;
+  const show = (focus) => {
+    box.hidden = false;
+    html.classList.add('consent-open');
+    html.style.setProperty('--consent-h', box.offsetHeight + 'px');
+    if (focus) box.querySelector('button').focus();
   };
-  if (instant) { out.textContent = text; finish(); return; }
-  let i = 0;
-  const tick = () => {
-    out.textContent = text.slice(0, ++i);
-    if (i < text.length) setTimeout(tick, 34);
-    else finish();
+  const hide = () => {
+    box.hidden = true;
+    html.classList.remove('consent-open');
   };
-  tick();
+  const clearGA = () => {
+    document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((n) => n.startsWith('_ga')).forEach((n) => {
+      [location.hostname, '.' + location.hostname.replace(/^www\./, '')].forEach((d) => {
+        document.cookie = n + '=; Max-Age=0; path=/; domain=' + d;
+      });
+      document.cookie = n + '=; Max-Age=0; path=/';
+    });
+  };
+  box.querySelectorAll('[data-consent-choice]').forEach((b) => b.addEventListener('click', () => {
+    const v = b.dataset.consentChoice;
+    try { localStorage.setItem('kx-consent', JSON.stringify({ v, t: Date.now() })); } catch (e) { }
+    window.kxConsent = v;
+    if (v === 'granted') window.kxLoadGA();
+    else {
+      if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      clearGA();
+    }
+    hide();
+  }));
+  document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => show(true)));
+  if (!window.kxConsent) show(false);
 }
 
 function initBookBar() {
   const bar = document.querySelector('[data-bookbar]');
-  const hero = document.querySelector('main > section');
+  const hero = document.querySelector('main > section, main > article > header');
   const ends = [...document.querySelectorAll('.site-footer, .cta-band')];
   if (!bar || !hero || !('IntersectionObserver' in window)) return;
   let pastHero = false;
@@ -241,17 +249,8 @@ function initVisuals() {
     return;
   }
   const typeIn = (el, delay) => {
-    const text = el.textContent;
-    el.style.minHeight = el.offsetHeight + 'px';
-    el.textContent = '';
+    el.style.setProperty('--type-delay', delay + 'ms');
     el.classList.add('is-typing');
-    let i = 0;
-    const tick = () => {
-      el.textContent = text.slice(0, ++i);
-      if (i < text.length) setTimeout(tick, 26);
-      else el.classList.remove('is-typing');
-    };
-    setTimeout(tick, delay);
   };
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     const v = e.target;
@@ -260,7 +259,7 @@ function initVisuals() {
       v.classList.add('is-in');
       v.querySelectorAll('[data-type]').forEach((el) => typeIn(el, parseInt(el.dataset.type, 10) || 300));
     }
-  }), { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+  }), { rootMargin: '0px 0px 15% 0px', threshold: 0 });
   vx.forEach((v) => io.observe(v));
 }
 
@@ -347,6 +346,9 @@ function initCalc() {
   run();
 }
 
+const calLang = () => ({ en: 'en', fr: 'fr', ar: 'ar' })[document.documentElement.lang] || 'en';
+const calConfig = () => ({ theme: currentTheme(), layout: 'month_view', lng: calLang() });
+
 function loadCal() {
   if (window.__calP) return window.__calP;
   window.__calP = new Promise((resolve, reject) => {
@@ -390,7 +392,7 @@ function initCal() {
     e.preventDefault();
     track('Booking click', { cta: a.dataset.track || 'book', page: location.pathname });
     loadCal().then(() => {
-      window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: { theme: currentTheme(), layout: 'month_view' } });
+      window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: calConfig() });
     }).catch(() => { location.href = a.href; });
   });
   const inline = document.getElementById('cal-inline');
@@ -400,7 +402,7 @@ function initCal() {
     inline.dataset.loaded = '1';
     loadCal().then(() => {
       inline.innerHTML = '';
-      window.Cal.ns.kx('inline', { elementOrSelector: '#cal-inline', calLink: inline.dataset.calLink, config: { theme: currentTheme(), layout: 'month_view' } });
+      window.Cal.ns.kx('inline', { elementOrSelector: '#cal-inline', calLink: inline.dataset.calLink, config: calConfig() });
     }).catch(() => { inline.dataset.failed = '1'; });
   };
   const btn = document.querySelector('[data-cal-load]');
@@ -534,6 +536,7 @@ function initFinder() {
 }
 
 initTheme();
+initConsent();
 initHeader();
 initMenus();
 initMobileMenu();

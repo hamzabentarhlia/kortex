@@ -1,6 +1,7 @@
 import hashlib
 import html
 import json
+import os
 import re
 from pathlib import Path
 
@@ -38,9 +39,7 @@ PAGES = {
     "pricing": "/pricing/",
     "about": "/about/",
     "compare": "/compare/",
-    
-    
-    
+    "case-studies": "/case-studies/",
     "security": "/security/",
     "glossary": "/glossary/",
     "blog": "/blog/",
@@ -99,6 +98,7 @@ UI = {
         "terms": "Terms",
         "cookies": "Cookies",
         "rights": "KORTEX. All rights reserved.",
+        "consent_label": "Cookie choice", "consent_text": "We use Google Analytics cookies to count visits, only if you agree. The site works the same either way.", "consent_more": "Cookie details", "consent_yes": "Accept", "consent_no": "Decline", "consent_settings": "Cookie settings",
         "cta_kicker": "Next step",
         "cta_title": "Make your expertise the answer",
         "cta_text": "Tell us where your expertise lives today. We show you where AI engines already mention your field, and what it would take for them to mention you.",
@@ -147,6 +147,7 @@ UI = {
         "terms": "Conditions",
         "cookies": "Cookies",
         "rights": "KORTEX. Tous droits réservés.",
+        "consent_label": "Choix des cookies", "consent_text": "Nous utilisons les cookies de Google Analytics pour compter les visites, seulement si vous l'acceptez. Le site fonctionne de la même façon dans les deux cas.", "consent_more": "Détails sur les cookies", "consent_yes": "Accepter", "consent_no": "Refuser", "consent_settings": "Paramètres des cookies",
         "cta_kicker": "Prochaine étape",
         "cta_title": "Faites de votre expertise la réponse",
         "cta_text": "Dites-nous où vit votre expertise aujourd'hui. Nous vous montrons où les moteurs IA parlent déjà de votre domaine, et ce qu'il faudrait pour qu'ils parlent de vous.",
@@ -195,6 +196,7 @@ UI = {
         "terms": "الشروط",
         "cookies": "ملفات تعريف الارتباط",
         "rights": "KORTEX. جميع الحقوق محفوظة.",
+        "consent_label": "اختيار ملفات تعريف الارتباط", "consent_text": "نستخدم ملفات تعريف الارتباط من Google Analytics لإحصاء الزيارات، وذلك فقط إن وافقت. ويعمل الموقع بالطريقة نفسها في الحالتين.", "consent_more": "تفاصيل ملفات تعريف الارتباط", "consent_yes": "قبول", "consent_no": "رفض", "consent_settings": "إعدادات ملفات تعريف الارتباط",
         "cta_kicker": "الخطوة التالية",
         "cta_title": "اجعل خبرتك هي الإجابة",
         "cta_text": "أخبرنا أين توجد خبرتك اليوم. سنريك أين تذكر محركات الذكاء الاصطناعي مجالك حاليا، وما الذي يلزم لكي تذكرك أنت.",
@@ -265,7 +267,8 @@ def exists(lang, pid):
     key = (lang, pid)
     if key not in _EXISTS:
         path = source_path(lang, pid)
-        _EXISTS[key] = path.exists() and "\ndraft: yes\n" not in path.read_text(encoding="utf-8").split("\n---\n", 1)[0] + "\n"
+        draft = path.exists() and "\ndraft: yes\n" in path.read_text(encoding="utf-8").split("\n---\n", 1)[0] + "\n"
+        _EXISTS[key] = path.exists() and (not draft or os.environ.get("KX_DRAFTS") == "1")
     return _EXISTS[key]
 
 
@@ -408,7 +411,7 @@ def header(lang, pid):
 
 
 def book_href(lang):
-    return CAL_URL
+    return f"{CAL_URL}?lng={lang}"
 
 
 def book_bar(lang, pid):
@@ -463,7 +466,7 @@ def footer(lang):
 <p><a class="text-link" href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn</a></p></div>
 {"".join(cols)}
 </div>
-<div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}</nav></div>
+<div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
 </div>
 </footer>'''
 
@@ -501,8 +504,8 @@ def resolve(body, lang):
     body = re.sub(r"\{\{list:([a-z]+)\}\}", lambda m: listing(lang, m.group(1)), body)
     body = re.sub(r'(<div class="hero-actions">(?:(?!</div>).)*?href="@@book".*?</div>)(?!\s*<p class="book-note")', lambda m: m.group(1) + f'<p class="book-note">{UI[lang]["book_note"]}</p>', body, flags=re.S)
     body = body.replace("{{booknote}}", UI[lang]["book_note"])
-    body = body.replace('href="@@book"', f'href="{CAL_URL}" {BOOK_ATTRS}')
-    body = body.replace("@@book", CAL_URL)
+    body = body.replace('href="@@book"', f'href="{book_href(lang)}" {BOOK_ATTRS}')
+    body = body.replace("@@book", book_href(lang))
     body = re.sub(r"\{\{photo:([a-z]+)(\|eager)?\}\}", lambda m: photo(lang, m.group(1), bool(m.group(2))), body)
     body = body.replace("@@email", EMAIL)
     body = body.replace("@@linkedin", LINKEDIN)
@@ -776,7 +779,25 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 {"" if pid == "404" else f'<script type="application/ld+json">{schema(lang, pid, meta, body)}</script>'}'''
 
 
-ANALYTICS = f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{GA_ID}");addEventListener("load",function(){{setTimeout(function(){{var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id={GA_ID}";document.head.appendChild(s)}},1500)}})</script>'
+ANALYTICS = (
+    '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
+    'gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied"});'
+    'window.kxLoadGA=function(){if(window.kxGA)return;window.kxGA=1;gtag("consent","update",{analytics_storage:"granted"});'
+    'gtag("js",new Date());gtag("config","%s");var s=document.createElement("script");s.async=true;'
+    's.src="https://www.googletagmanager.com/gtag/js?id=%s";document.head.appendChild(s)};'
+    'try{var c=JSON.parse(localStorage.getItem("kx-consent")||"null");if(c&&c.t>Date.now()-15768e6){window.kxConsent=c.v;'
+    'if(c.v==="granted")addEventListener("load",function(){setTimeout(window.kxLoadGA,800)})}}catch(e){}</script>' % (GA_ID, GA_ID)
+)
+
+
+def consent_banner(lang):
+    t = UI[lang]
+    return (
+        f'<div class="consent" data-consent role="region" aria-label="{t["consent_label"]}" hidden>'
+        f'<p>{t["consent_text"]} <a href="{url(lang, "cookies")}">{t["consent_more"]}</a></p>'
+        f'<div class="consent-actions"><button type="button" class="btn btn-ghost btn-sm" data-consent-choice="granted">{t["consent_yes"]}</button>'
+        f'<button type="button" class="btn btn-ghost btn-sm" data-consent-choice="denied">{t["consent_no"]}</button></div></div>'
+    )
 
 
 def mirror_path(d, w):
@@ -863,7 +884,7 @@ def decorate(body, pid, meta, lang):
 
     def sep(m):
         count[0] += 1
-        return "</section>\n" + art.divider(count[0]) + "\n<section"
+        return "</section>\n" + (art.divider(count[0]) if count[0] in (2, 6) else "") + "\n<section"
 
     body = re.sub(r"</section>\s*\n\s*<section", sep, body)
     return body
@@ -887,13 +908,36 @@ def visual_css(body):
     return VCSS["kit"] + "".join(VCSS.get(n, "") for n in used)
 
 
+AR_LATIN = r"[A-Za-z][A-Za-z0-9.+&-]*(?:\s(?:[A-Z][A-Za-z0-9.+&-]*|AI))*"
+
+
+def ar_latin_plain(text):
+    return re.sub(r"(?<![\w\u0600-\u06FF])و\u200c?\s?(?=[A-Za-z])", "و ", text)
+
+
+def ar_latin(body):
+    def text_node(m):
+        t = re.sub(r"(?<![\w\u0600-\u06FF])و\u200c?\s?(" + AR_LATIN + ")", r"و <bdi>\1</bdi>", m.group(1))
+        return ">" + t + "<"
+    def attr(m):
+        return m.group(1) + '="' + ar_latin_plain(m.group(2)) + '"'
+    parts = re.split(r"(<svg\b.*?</svg>|<script\b.*?</script>|<style\b.*?</style>)", body, flags=re.S)
+    out = []
+    for i, part in enumerate(parts):
+        if i % 2:
+            out.append(re.sub(r">([^<]+)<", lambda m: ">" + ar_latin_plain(m.group(1)) + "<", part))
+        else:
+            part = re.sub(r">([^<]+)<", text_node, part)
+            out.append(re.sub(r'\b(aria-label|alt|title|content|placeholder|data-tip)="([^"]*)"', attr, part))
+    return "".join(out)
+
+
 def render(lang, pid, critical, css_v, js_v):
     meta, body = parse_page(source_path(lang, pid))
     body = decorate(body, pid, meta, lang)
     if lang == "ar":
         body = mirror_diagrams(body)
-        body = re.sub(r"(?<=[\s>])و(?=[A-Za-z])", "و\u200c", body)
-        meta = {k: re.sub(r"(?<=\s)و(?=[A-Za-z])", "و\u200c", v) for k, v in meta.items()}
+        meta = {k: ar_latin_plain(v) for k, v in meta.items()}
     if lang == "fr":
         body = re.sub(r">([^<]+)<", lambda m: ">" + fr_typo(m.group(1)) + "<", body)
         meta = {k: fr_typo(v) for k, v in meta.items()}
@@ -918,10 +962,15 @@ def render(lang, pid, critical, css_v, js_v):
 </main>
 {book_bar(lang, pid)}
 {footer(lang)}
+{consent_banner(lang)}
 {ANALYTICS}
 </body>
 </html>
 '''
+    if lang == "ar":
+        start = page.find("<body>")
+        head_part = re.sub(r'(<script type="application/ld\+json">)(.*?)(</script>)', lambda m: m.group(1) + ar_latin_plain(m.group(2)) + m.group(3), page[:start], flags=re.S)
+        page = head_part + ar_latin(page[start:])
     return re.sub(r"\n{2,}", "\n", page)
 
 

@@ -115,7 +115,7 @@ def collapse(lang):
     return (
         '<div class="hc" data-scrub>'
         f'<div class="hc-search"><div class="hc-head"><span class="hc-k">{T(lang, "Classic search", "Recherche classique", "البحث التقليدي")}</span></div>'
-        f'<p class="hc-q">{icon("search")}<span>{q}</span></p><ol class="hc-list">{rows}</ol><p class="hc-cap">{a1}</p></div>'
+        f'<p class="hc-q">{icon("search")}<span>{q}</span></p><div class="hc-stack"><ol class="hc-list">{rows}</ol><span class="hc-badge" aria-hidden="true">{T(lang, "10 links", "10 liens", "10 روابط")}</span></div><p class="hc-cap">{a1}</p></div>'
         f'<div class="hc-arrow" aria-hidden="true">{icon("arrow", "flip")}</div>'
         f'<div class="hc-ai"><div class="hc-head"><span class="hc-k">{T(lang, "AI answer", "Réponse IA", "إجابة الذكاء الاصطناعي")}</span>{label(kit.EXAMPLE[lang])}</div>'
         f'<div class="vx-answer hc-card"><p class="vx-ans-q">{icon("search")}<span>{q}</span></p>'
