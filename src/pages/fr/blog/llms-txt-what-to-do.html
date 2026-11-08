@@ -1,0 +1,76 @@
+title: llms.txt : ce qu'il fait, ce qui est du bruit | KORTEX
+description: Ce qu'est llms.txt, ce qu'en dit son auteur, ce qu'en dit Google, et comment nous en publions un sans le présenter comme un levier de classement.
+h1: llms.txt : ce que c'est, ce que l'on sait, ce qui est du bruit, et ce que nous faisons
+summary: Ce qu'est llms.txt, ce qu'en dit son auteur, ce qu'en dit Google, et comment nous en publions un sans le présenter comme un levier de classement.
+kind: article
+kicker: Article
+date: 2026-11-08
+modified: 2026-11-08
+in_short: llms.txt est un fichier markdown, à la racine d'un site, qui indique aux modèles de langage les pages à lire. Google précise que sa recherche l'ignore et qu'il n'aide ni ne nuit. Il coûte peu et peut rester en ligne, mais ce n'est pas un levier de classement, et personne n'a montré que c'en était un pour les citations.
+---
+<div id="essentiel">
+<span>L'essentiel à retenir</span>
+<ul>
+<li>llms.txt est une proposition, pas une norme. C'est un fichier markdown dont le seul élément obligatoire est un titre H1 avec le nom du site.</li>
+<li>Son auteur explique qu'il sert surtout aux agents qui récupèrent des pages à la demande, et en premier lieu pour la documentation logicielle.</li>
+<li>Google indique que la recherche Google n'utilise pas llms.txt et que publier ce fichier n'aide ni ne nuit à la visibilité dans Google.</li>
+<li>Nous en publions un quand même, généré à partir des mêmes fichiers que le site, parce que cela coûte presque rien et que certains outils le lisent.</li>
+<li>Nous ne le vendons pas comme une tactique de citation. Nous n'avons aucune preuve qu'il change les citations dans ChatGPT, Perplexity ou Gemini.</li>
+</ul>
+</div>
+<h2>Ce qu'est llms.txt</h2>
+<p>llms.txt est un fichier markdown placé à la racine d'un site, à l'adresse <code>/llms.txt</code>. Il donne à un modèle de langage une carte courte et choisie du site : ce qu'il est, et où se trouvent les pages utiles.</p>
+<p>La proposition est publiée sur llmstxt.org. Elle demande aux sites d'ajouter ce fichier, et de proposer des versions markdown propres des pages, à la même adresse avec <code>.md</code> en plus. L'idée est simple. Une page web enrobe son contenu de menus, de scripts et de mise en page. Un agent qui veut le contenu doit tout retirer, et le résultat reste approximatif. Un petit fichier qui pointe directement vers du texte propre lui épargne ce travail.</p>
+<p>Le fichier suit une forme fixe, dans cet ordre :</p>
+<ul>
+<li>Un H1 avec le nom du site. C'est la seule partie obligatoire.</li>
+<li>Une citation en bloc avec un court résumé.</li>
+<li>Des paragraphes ou listes facultatifs avec plus de détails, sans titres.</li>
+<li>Des sections sous des titres H2 qui contiennent des listes de liens. Chaque lien peut être suivi d'une courte note après deux-points.</li>
+</ul>
+<p>Par convention, une section nommée « Optional » regroupe les liens secondaires qu'un agent peut ignorer quand il a besoin d'un contexte plus court.</p>
+<h2>Ce que la proposition affirme, et ce qu'elle n'affirme pas</h2>
+<p>La version actuelle se présente comme la version 2 et dit s'appuyer sur deux ans d'adoption. Elle indique que des milliers de sites publient le fichier, que des plateformes de documentation le génèrent automatiquement, et que Lighthouse, l'outil de Chrome, le vérifie dans ses contrôles de navigation par agents. Elle note aussi qu'OpenAI, Anthropic et Gemini publient des fichiers llms.txt pour leur documentation développeur.</p>
+<p>Lisez bien ce que cela dit, et ce que cela ne dit pas. Le fichier existe et il est lu dans certains usages. L'usage est le plus fort pour la documentation logicielle, où un agent de code suit les liens vers une référence d'API. Rien n'affirme que publier ce fichier rend un modèle plus enclin à citer votre site dans une réponse. L'attente de l'auteur est que le fichier serve au moment de l'inférence, quand un agent a besoin d'une information à la demande, et surtout pas à l'entraînement.</p>
+<p>La proposition précise aussi son rapport avec les fichiers plus anciens. Un sitemap liste toutes les pages pour les moteurs de recherche. llms.txt propose une vue choisie. robots.txt dit ce que les outils automatiques peuvent consulter. llms.txt sert quand un agent est déjà entré et a besoin de contexte. Ils font des métiers différents, et l'un ne remplace pas l'autre.</p>
+<h2>Ce que dit Google</h2>
+<p>Google est direct. Dans son guide sur les fonctions d'IA générative de la recherche, il range les fichiers llms.txt parmi les choses que vous pouvez ignorer pour la recherche Google. Ses termes : vous n'avez pas besoin de créer de nouveaux fichiers lisibles par machine, de fichiers texte pour l'IA, de balisage ou de markdown pour apparaître dans la recherche Google, y compris dans ses fonctions d'IA générative, parce que la recherche Google elle-même ne les utilise pas.</p>
+<p>Il ajoute une phrase qui mérite deux lectures. Créer et maintenir un fichier llms.txt pour d'autres services est tout à fait acceptable, et cela n'aidera ni ne nuira à votre visibilité ou à votre classement dans la recherche Google, puisque celle-ci l'ignore.</p>
+<p>Cela règle une question et en laisse une autre ouverte. Pour la recherche Google, la réponse est claire. Pour le reste, comme ChatGPT, Perplexity et les nombreux agents qui naviguent pour le compte d'utilisateurs, nous n'avons trouvé aucune déclaration publique équivalente que nous aurions pu ouvrir et citer. L'absence de déclaration n'est une preuve dans aucun sens.</p>
+<h2>Là où les affirmations vont trop loin</h2>
+<p>On voit llms.txt vendu comme un moyen d'être cité par les moteurs d'IA. Nous n'avons pas vu de test contrôlé qui le montre, et la proposition elle-même ne l'affirme pas. Trois choses sont à distinguer :</p>
+<ul>
+<li><strong>Le fichier existe et certains outils le lisent.</strong> Vrai, selon la proposition.</li>
+<li><strong>Le lire change ce qu'un modèle dit de vous.</strong> Non démontré.</li>
+<li><strong>Ne pas en avoir vous coûte des citations.</strong> Non démontré, et Google dit que cela ne compte pas pour sa propre recherche.</li>
+</ul>
+<p>Si un prestataire annonce un gain de citations grâce à ce fichier, demandez la méthode : quelles requêtes, combien d'essais, quels moteurs, et ce qui a changé d'autre pendant les mêmes semaines. Sans cela, le chiffre est une histoire.</p>
+<h2>Ce que nous faisons sur ce site</h2>
+<p>Nous publions un fichier à l'adresse <code>/llms.txt</code>. Il contient un titre, une courte description de ce que fait KORTEX, les trois offres avec leurs prix, nos pages clés, et la liste de chaque entrée du glossaire, de chaque comparatif et de chaque article. Il renvoie aussi vers les versions française et arabe.</p>
+<p>Nous ne l'écrivons pas à la main. Le générateur du site le produit à partir des mêmes fichiers sources que les pages, si bien que les prix et les descriptions du fichier ne peuvent pas s'écarter des pages. Quand un prix change sur le site, le fichier change dans la même génération.</p>
+<p>Nous le gardons parce qu'il coûte presque rien, qu'une personne le lit en une minute et que certains outils le récupèrent. Nous ne le présentons pas à nos clients comme un résultat, et nous ne l'inscrivons pas dans une offre comme un livrable qui ferait monter les classements.</p>
+<p>L'effort qui compte se trouve ailleurs. Les pages doivent être indexées et pouvoir s'afficher avec un extrait. Notre robots.txt autorise les robots des principaux moteurs d'IA sur les pages publiques. Le contenu important est en HTML simple, lisible sans exécuter de script. Le contenu a quelque chose de précis à dire. C'est là qu'un mois de travail est mieux employé que sur un fichier texte.</p>
+<h2>Comment en écrire un bon si vous décidez d'en faire un</h2>
+<ol>
+<li>Commencez par le H1 et un résumé en deux phrases qui dit ce que vous faites et pour qui, sans adjectifs.</li>
+<li>Listez les pages qu'un agent devrait lire en premier. Dix à trente liens suffisent largement pour un site d'entreprise.</li>
+<li>Ajoutez après chaque lien une courte note qui dit ce que contient la page.</li>
+<li>Rangez le secondaire sous un titre « Optional ».</li>
+<li>Générez-le à partir de votre source de contenu au lieu de le modifier à la main, pour qu'il reste vrai.</li>
+<li>Vérifiez-le à chaque changement de prix, d'offre ou de page.</li>
+</ol>
+<h2>Quand s'en passer</h2>
+<p>Passez votre tour si personne n'en sera responsable. Un llms.txt périmé qui liste des pages retirées ou d'anciens prix est pire que pas de fichier, car il donne à un modèle des informations fausses avec l'assurance d'une liste choisie. Si vous ne pouvez pas le générer à partir de votre vrai contenu, ne le publiez pas.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://llmstxt.org" rel="noopener">The /llms.txt file, v2, llmstxt.org</a> (en anglais) : format, adoption, rapport avec robots.txt et les sitemaps.</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a> (en anglais) : la déclaration sur llms.txt et le balisage spécial. Mis à jour le 10 juillet 2026.</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">AI features and your website, Google Search Central</a> (en anglais) : aucune exigence supplémentaire pour apparaître dans AI Overviews ou AI Mode.</li>
+</ul>
+<h2 id="faq">Questions fréquentes sur llms.txt</h2><div><details><summary>llms.txt est-il une norme officielle ?</summary><div><p>Non. C'est une proposition publiée sur llmstxt.org. Ce n'est pas une norme de l'IETF ni du W3C. Certaines plateformes de documentation le génèrent et certains outils le lisent, mais aucun organisme ne le gouverne.</p></div></details><details><summary>Google utilise-t-il llms.txt ?</summary><div><p>Non. Google indique que la recherche Google n'utilise pas les fichiers llms.txt, et qu'en avoir un n'aide ni ne nuit à votre visibilité ou à votre classement dans la recherche Google.</p></div></details><details><summary>llms.txt me fera-t-il citer par ChatGPT ou Perplexity ?</summary><div><p>Nous n'avons aucune preuve que ce soit le cas. La proposition ne l'affirme pas et nous n'avons trouvé aucun test public qui le montre. Méfiez-vous de tout gain promis et demandez la méthode.</p></div></details><details><summary>Où place-t-on le fichier ?</summary><div><p>À la racine du site, à l'adresse /llms.txt. La proposition permet aussi de le placer dans un sous-chemin, comme /docs/llms.txt, où il couvre les pages situées sous ce chemin.</p></div></details><details><summary>Quelle différence entre llms.txt et robots.txt ?</summary><div><p>robots.txt indique aux outils automatiques ce qu'ils peuvent consulter. llms.txt donne à un agent déjà en train de lire votre site une vue d'ensemble choisie et des liens. Le premier parle d'autorisation, le second d'orientation.</p></div></details><details><summary>Faut-il lister toutes les pages ?</summary><div><p>Non. L'intérêt est le tri. Listez les pages que vous voudriez voir lues en premier, et laissez au sitemap la liste complète.</p></div></details></div>
+<div id="cta">
+<p>Méthode</p>
+<h2>Un site facile à lire pour les machines comme pour les gens ?</h2>
+<p>Nous construisons le contenu, la structure et les fichiers à partir d'une seule source, puis nous vérifions ce que disent les moteurs. Voyez comment se déroule un mois sur la page <a href="@how-it-works">comment ça marche</a>.</p>
+<a href="@contact">Réserver un appel stratégique</a>
+</div>

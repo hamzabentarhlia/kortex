@@ -43,6 +43,7 @@ PAGES = {
     "case-studies": "/case-studies/",
     "security": "/security/",
     "glossary": "/glossary/",
+    "resources": "/resources/",
     "blog": "/blog/",
     "contact": "/contact/",
     "privacy": "/legal/privacy/",
@@ -345,7 +346,7 @@ def dropdown(lang, key, label, groups, current):
 
 
 SOLUTION_GROUPS = lambda t: [(t["by_audience"], ["b2b", "creators", "ecommerce"]), (t["by_source"], ["from-blog", "from-youtube", "from-podcast", "from-webinar"])]
-RESOURCE_GROUPS = [(None, ["blog", "glossary", "compare", "about"])]
+RESOURCE_GROUPS = [(None, ["resources", "blog", "glossary", "compare", "about"])]
 
 
 def lang_links(lang, pid, mobile=False):
@@ -455,7 +456,7 @@ def footer(lang):
     cols = [
         col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("security", t["security"])]),
         col(t["col_solutions"], [(p, tup(p)) for p in ["b2b", "creators", "ecommerce", "from-blog", "from-youtube", "from-podcast", "from-webinar"]]),
-        col(t["col_resources"], [("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
+        col(t["col_resources"], [("resources", t["resources"]), ("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
         col(t["col_company"], [("about", t["about"]), ("contact", t["contact"]), ("login", t["login"])]),
     ]
     legal = "".join(f'<a href="{url(lang, p)}">{t[p]}</a>' for p in ["privacy", "terms", "cookies"] if exists(lang, p))
@@ -1105,7 +1106,7 @@ def llms_txt():
         "",
         "## Key pages",
     ]
-    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "compare", "glossary", "blog", "about", "contact"]:
+    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "resources", "compare", "glossary", "blog", "about", "contact"]:
         if exists("en", pid):
             meta, _ = parse_page(source_path("en", pid))
             lines.append(f"- [{strip_tags(meta.get('h1', meta['title']))}]({abs_url('en', pid)}): {meta['description']}")

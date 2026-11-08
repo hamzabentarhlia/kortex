@@ -41,11 +41,19 @@ Accessibility, best practices and SEO are 100 on all 24 pages (home, pricing, co
 - Confirmation that the Pageclip form key is active and that submissions reach your inbox.
 - Cal.com account settings: Google Meet as the only location, 30-minute duration, account language.
 
-## Not done in this round
+## Second batch
 
-- The twelve new articles, the new glossary terms, the extra comparisons, the /resources/ hub and the blog category filter. Technical fixes were agreed as the first batch.
-- The neural-network canvas: kortex_core.js does not exist in this repo, so there was nothing to recolour.
-- Reading progress bar, table of contents, pointer glow, View Transitions and the pipeline diagram on /how-it-works/ were not rebuilt in this round.
+- Sources were read by hand from Google Search Central (AI features, the generative AI optimization guide, spam policies, helpful content, generative AI content, structured data policies, documentation updates), llmstxt.org, Perplexity's crawler documentation and schema.org. OpenAI's crawler documentation could not be opened from this environment, so no OpenAI statement is made anywhere.
+- Six articles in English and French, three glossary terms in three languages, one comparison in three languages, and the /resources/ hub in three languages.
+- Findings that affect existing copy, from Google's own guide: llms.txt, special markup and chunking are not needed for Google Search; the FAQ rich result is no longer shown; separate pages for every query variation can breach the scaled content abuse policy. Older articles and some page copy still describe these as levers. They were not rewritten.
+
+## Not done
+
+- Articles 5 to 12 of the queue (entity SEO for founders, agency vs in-house vs studio, repurposing mistakes, human QA layer, podcast to authority, GEO in French and Arabic) and Arabic versions of all new articles.
+- The extra comparison "kortex-vs-hiring-an-agency": it would repeat the existing SEO agency comparison.
+- The neural-network canvas: kortex_core.js does not exist in this repo.
+- Reading progress bar, table of contents, cursor glow, View Transitions and the pipeline diagram on how it works.
+- Blog category filter and pagination.
 
 ## Deploy on GitHub Pages
 

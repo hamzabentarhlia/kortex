@@ -1,38 +1,15 @@
-.section{position:relative;padding:48px 0}
-@media (min-width:900px){.section{padding:76px 0}}
 .section-tint{background:linear-gradient(180deg,transparent,var(--bg-sunk) 18%,var(--bg-sunk) 82%,transparent)}
-.section-head{max-width:760px;margin-bottom:34px}
-.section-head.center{margin-inline:auto;text-align:center}
-.section-head h2{font-family:var(--ff-display);font-weight:800;font-size:clamp(28px,3.8vw,46px);letter-spacing:-.01em;margin:16px 0 18px}
-.section-head p{color:var(--text-2);font-size:clamp(16.5px,1.4vw,18.5px);max-width:64ch}
-.section-head.center p{margin-inline:auto}
-:root[lang=ar] .section-head h2{line-height:1.35}
 .lead-answer{font-size:clamp(17px,1.5vw,19.5px);color:var(--text);max-width:64ch}
 .prose{max-width:68ch}
 .prose p+p{margin-top:1em}
 .prose p,.muted{color:var(--text-2)}
 .prose a,.text-link{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .prose a:hover,.text-link:hover{text-decoration-thickness:2px}
-.kicker{font:500 11.5px/1.4 var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
-:root[lang=ar] .kicker{letter-spacing:0;font-family:var(--ff-body)}
 
 .glass{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
-.card{padding:28px}
-.card h3{font-family:var(--ff-display);font-size:19px;font-weight:700;letter-spacing:0;margin-bottom:10px;line-height:1.25}
-.card p{color:var(--text-2);font-size:15.5px}
-.card-icon{display:grid;place-items:center;width:44px;height:44px;margin-bottom:18px;border:1px solid var(--chip-line);border-radius:12px;background:var(--chip-bg);color:var(--accent-text)}
-.card-icon svg{width:22px;height:22px}
-.card-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-weight:600;font-size:15px;color:var(--accent-text);text-decoration:none}
-.card-link svg{width:16px;height:16px;transition:transform .2s}
-.card-link:hover svg{transform:translateX(3px)}
-:root[dir=rtl] .card-link svg{transform:scaleX(-1)}
-:root[dir=rtl] .card-link:hover svg{transform:scaleX(-1) translateX(3px)}
 a.glass{text-decoration:none;transition:border-color .25s,transform .25s var(--ease)}
 a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 
-.grid{display:grid;gap:16px}
-@media (min-width:700px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3,.grid-4{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1000px){.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}}
 
 .compare{display:grid;gap:16px}
 @media (min-width:860px){.compare{grid-template-columns:1fr 1fr}}
@@ -199,10 +176,6 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .before-after>div:last-child{border-color:var(--chip-line)}
 .before-after .ba-label{display:block;margin-bottom:8px;font:500 11px/1.4 var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
 .before-after p{margin:0;font-size:15.5px}
-.list-card{display:flex;flex-direction:column}
-.list-card .kicker{margin-bottom:10px;color:var(--accent-text)}
-.list-card h3{font-size:18px}
-.list-card .card-link{margin-top:auto;padding-top:18px}
 .card-meta{margin-top:14px;font-size:13.5px!important;color:var(--text-3)!important}
 .tbl{width:100%;border-collapse:collapse;font-size:15px}
 .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}

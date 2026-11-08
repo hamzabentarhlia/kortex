@@ -14,3 +14,10 @@
 | Social images | 117 indexable URLs | 37 hand-made images, the rest fell back to the home image | One 1200x630 image per URL from scripts/build-og-images.mjs, plus twitter:image |
 | Accessibility | compare pages, home, how-it-works | landmark-unique and colour-contrast findings | axe-core: 0 violations on 15 pages in both themes |
 | Placeholders | home, how-it-works visuals | Sample brand text "yourbrand.com" | Sample brand "acme.com" |
+| Articles | /blog/llms-txt-what-to-do/, /geo-vs-seo-for-b2b/, /get-cited-by-chatgpt-perplexity-gemini/, /measure-ai-citations/, /schema-markup-ai-engines-read/, /webinar-to-content-system/ (and /fr/ versions) | none | Six sourced articles in English and French, each with a sources list of pages opened and read, a visible update date, FAQ and its own cover |
+| Glossary | /glossary/retrieval-augmented-generation/, /query-fan-out/, /e-e-a-t/ | 10 entries | 13 entries in English, French and Arabic, each citing Google documentation |
+| Compare | /compare/kortex-vs-in-house-writer/ | 3 comparisons under a heading that says four | 4 comparisons in three languages, each with a section on when the other option is better |
+| Hub | /resources/, /fr/resources/, /ar/resources/ | Menu led nowhere for resources | Hub page linking articles, glossary and comparisons, added to the menu, footer, sitemap and llms.txt |
+| Layout | all pages | Grid and card base rules in the async stylesheet caused a layout shift on two pages | Base layout rules moved into the inlined critical CSS. CLS 0 on the re-tested pages |
+| Tables | article pages | Three-column tables scrolled sideways on phones | Narrow tables fit at 390 px, captions styled |
+
