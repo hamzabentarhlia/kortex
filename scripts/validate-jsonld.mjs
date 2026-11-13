@@ -52,7 +52,7 @@ for (const page of pages) {
   const html = readFileSync(page, 'utf8');
   if (/http-equiv="refresh"/.test(html)) continue;
   const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
-  const visibleQuestions = [...html.matchAll(/<details class="faq-item"[^>]*>\s*<summary>([\s\S]*?)<\/summary>/g)].map((m) => plain(m[1]));
+  const visibleQuestions = [...html.matchAll(/<details(?: class="faq-item")?>\s*<summary>([\s\S]*?)<\/summary>/g)].map((m) => plain(m[1]));
   let hasFaqSchema = false;
   for (const match of scripts) {
     blocks += 1;

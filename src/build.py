@@ -123,6 +123,11 @@ UI = {
         "audit_cta": "Get the AI Citation Audit, €490",
         "audit_cta_short": "AI Citation Audit, €490",
         "audit_note": "Credited in full against your first month on any plan.",
+        "post_kicker": "Next step",
+        "post_audit_title": "Want this tested on your own site?",
+        "post_audit_text": "The AI Citation Audit tests your brand on 40 buyer questions in four engines and tells you what to fix first. 490 euros, five business days, credited against your first month.",
+        "post_call_title": "Want this applied to your own expertise?",
+        "post_call_text": "Book a 30-minute call. We look at where AI engines mention your field today and what it would take for them to mention you.",
         "nl_title": "One GEO teardown, twice a month",
         "nl_text": "One teardown of how a real page gets cited in AI answers, and what changed in AI search. Twice a month, no filler.",
         "nl_label": "Work email",
@@ -186,6 +191,11 @@ UI = {
         "audit_cta": "Commander l'audit de citations IA, 490 €",
         "audit_cta_short": "Audit de citations IA, 490 €",
         "audit_note": "Déduit en totalité de votre premier mois, quelle que soit l'offre.",
+        "post_kicker": "Étape suivante",
+        "post_audit_title": "Envie de le tester sur votre propre site ?",
+        "post_audit_text": "L'audit de citations IA teste votre marque sur 40 questions d'acheteurs dans quatre moteurs et vous dit quoi corriger en premier. 490 euros, cinq jours ouvrés, déduits de votre premier mois.",
+        "post_call_title": "Envie de l'appliquer à votre propre expertise ?",
+        "post_call_text": "Réservez un appel de 30 minutes. Nous regardons où les moteurs d'IA parlent aujourd'hui de votre domaine et ce qu'il faudrait pour qu'ils parlent de vous.",
         "nl_title": "Une analyse GEO, deux fois par mois",
         "nl_text": "L'analyse d'une vraie page citée dans les réponses d'IA, et ce qui a changé dans la recherche IA. Deux fois par mois, sans remplissage.",
         "nl_label": "E-mail professionnel",
@@ -243,6 +253,11 @@ UI = {
         "home_crumb": "الرئيسية",
         "photo_alt": "حمزة بنتغليا، مؤسس KORTEX",
         "book_note": "30 دقيقة دون عرض تقديمي، وتخرج بثلاثة إصلاحات سواء عملنا معا أم لا.",
+        "post_kicker": "الخطوة التالية",
+        "post_audit_title": "هل تريد تجربة هذا على موقعك؟",
+        "post_audit_text": "يختبر تدقيق الاستشهادات علامتك على 40 سؤالا من أسئلة المشترين في أربعة محركات ويخبرك بما تصلحه أولا.",
+        "post_call_title": "هل تريد تطبيق هذا على خبرتك؟",
+        "post_call_text": "احجز مكالمة من 30 دقيقة. نرى أين تذكر محركات الذكاء الاصطناعي مجالك اليوم، وما الذي يلزم لتذكرك.",
         "nl_title": "تحليل واحد لـ GEO، مرتين في الشهر",
         "nl_text": "تحليل لصفحة حقيقية يُستشهد بها في إجابات الذكاء الاصطناعي، وما تغيّر في البحث بالذكاء الاصطناعي. مرتين في الشهر، دون حشو.",
         "nl_label": "البريد المهني",
@@ -646,10 +661,10 @@ def newsletter_form(lang, pid, place):
 
 def newsletter_block(lang, pid, place):
     t = UI[lang]
-    return (
-        f'<section class="nl-block glass" aria-labelledby="nl-title-{place}"><div class="nl-copy"><h2 id="nl-title-{place}">{t["nl_title"]}</h2><p>{t["nl_text"]}</p></div>'
-        f'{newsletter_form(lang, pid, place)}</section>'
-    )
+    inner = f'<div class="nl-copy"><h2 id="nl-title-{place}">{t["nl_title"]}</h2><p>{t["nl_text"]}</p></div>{newsletter_form(lang, pid, place)}'
+    if place == "footer":
+        return f'<div class="nl-block glass">{inner}</div>'
+    return f'<section class="nl-block glass" aria-labelledby="nl-title-{place}">{inner}</section>'
 
 
 def newsletter_slide(lang, pid):
@@ -713,12 +728,19 @@ def article_cta(lang, pid, body):
         return body
     slug = pid.split("/", 1)[1]
     t = UI[lang]
-    tail = r'<a href="@contact">[^<]*</a>\s*</div>\s*$'
-    if slug in AUDIT_POSTS and exists(lang, "audit"):
-        replacement = f'<a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><p class="cta-second"><a class="text-link" href="@@book" data-cta="post-book">{t["book"]}</a></p></div>'
+    audit = slug in AUDIT_POSTS and exists(lang, "audit")
+    if '<div id="cta">' not in body:
+        if audit:
+            block = f'<div id="cta"><p>{t["post_kicker"]}</p><h2>{t["post_audit_title"]}</h2><p>{t["post_audit_text"]}</p><a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><p class="cta-second"><a class="text-link" href="@@book" data-cta="post-book">{t["book"]}</a></p></div>'
+        else:
+            block = f'<div id="cta"><p>{t["post_kicker"]}</p><h2>{t["post_call_title"]}</h2><p>{t["post_call_text"]}</p><a href="@@book" data-cta="post-book">{t["book"]}</a></div>'
+        return body.rstrip() + "\n" + block
+    contact = r'<a href="@contact">[^<]*</a>'
+    if audit:
+        replacement = f'<a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><a href="@@book" data-cta="post-book">{t["book"]}</a>'
     else:
-        replacement = f'<a href="@@book" data-cta="post-book">{t["book"]}</a></div>'
-    return re.sub(tail, replacement, body.rstrip(), count=1)
+        replacement = f'<a href="@@book" data-cta="post-book">{t["book"]}</a>'
+    return re.sub(contact, replacement, body, count=1)
 
 
 AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide"}
@@ -879,7 +901,7 @@ def strip_tags(s):
 
 
 def faq_entities(body):
-    items = re.findall(r'<details class="faq-item"[^>]*>\s*<summary>(.*?)</summary>\s*<div class="faq-a">(.*?)</div>\s*</details>', body, flags=re.S)
+    items = re.findall(r'<details(?: class="faq-item")?>\s*<summary>(.*?)</summary>\s*<div(?: class="faq-a")?>(.*?)</div>\s*</details>', body, flags=re.S)
     return [
         {"@type": "Question", "name": strip_tags(q), "acceptedAnswer": {"@type": "Answer", "text": strip_tags(a)}}
         for q, a in items
@@ -1396,7 +1418,7 @@ def llms_txt():
         "",
         "## Key pages",
     ]
-    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "resources", "compare", "glossary", "blog", "about", "contact"]:
+    for pid in ["home", "how-it-works", "pricing", "audit", "checklist", "proof", "solutions", "b2b", "creators", "ecommerce", "resources", "compare", "glossary", "blog", "about", "contact"]:
         if exists("en", pid):
             meta, _ = parse_page(source_path("en", pid))
             lines.append(f"- [{strip_tags(meta.get('h1', meta['title']))}]({abs_url('en', pid)}): {meta['description']}")
