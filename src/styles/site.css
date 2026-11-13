@@ -63,8 +63,8 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 @media (min-width:860px){.founder{grid-template-columns:260px 1fr;gap:56px}}
 .founder-photo{display:grid;place-items:center;aspect-ratio:1;width:100%;max-width:220px;border:1px solid var(--chip-line);border-radius:24px;background:radial-gradient(circle at 30% 20%,var(--glow-3),transparent 60%),radial-gradient(circle at 80% 90%,var(--glow-1),transparent 60%),var(--surface-solid);font:800 54px/1 var(--ff-display);color:var(--accent-text);letter-spacing:.04em}
 .founder-photo img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
-.founder blockquote{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.55;color:var(--text)}
-.founder blockquote p+p{margin-top:.8em}
+.founder blockquote,.founder .founder-copy{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.55;color:var(--text)}
+.founder blockquote p+p,.founder .founder-copy p+p{margin-top:.8em}
 .founder-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:22px;color:var(--text-3);font-size:14.5px}
 .founder-meta strong{color:var(--text);font-size:16px}
 
@@ -474,3 +474,5 @@ body{transition:background-color var(--dur-base,360ms) ease,color var(--dur-base
 @media (min-width:760px){.risk-grid{grid-template-columns:repeat(3,1fr)}}
 .risk-grid .card p{margin:0}
 .proof-log td,.proof-log th{white-space:normal}
+.finder .finder-book{width:max-content;justify-self:start;display:inline-flex;justify-content:center;margin-top:16px;padding-inline:26px;white-space:nowrap}
+.tier-per{margin:16px 0 18px}

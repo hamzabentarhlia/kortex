@@ -189,3 +189,11 @@ p{margin:0}
 .list-card .kicker{margin-bottom:10px;color:var(--accent-text)}
 .list-card h3{font-size:18px}
 .list-card .card-link{margin-top:auto;padding-top:18px}
+.nav-split{display:flex;align-items:center;border-radius:var(--radius-pill)}
+.nav-split:hover{background:var(--surface-strong)}
+.nav-split .nav-link{padding-inline-end:2px}
+.nav-split .nav-link:hover{background:none}
+.nav-caret{display:inline-grid;place-items:center;min-width:44px;min-height:44px;border:0;border-radius:var(--radius-pill);background:none;color:var(--text-2);cursor:pointer}
+.nav-caret svg{width:14px;height:14px;transition:transform .2s}
+.nav-caret[aria-expanded=true] svg{transform:rotate(180deg)}
+.nav-caret:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}

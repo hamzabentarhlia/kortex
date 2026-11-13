@@ -384,9 +384,15 @@ def dropdown(lang, key, label, groups, current):
     links = menu_links(lang, groups, current)
     if not links:
         return ""
+    menu = f'<div class="nav-menu" id="menu-{key}" hidden>{links}</div>'
+    if exists(lang, key):
+        cur = ' aria-current="page"' if current == key else ""
+        return (
+            f'<li class="nav-split"><a class="nav-link" href="{url(lang, key)}"{cur}>{label}</a>'
+            f'<button class="nav-caret" type="button" aria-expanded="false" aria-controls="menu-{key}" data-menu-toggle aria-label="{label}">{icon("chevron")}</button>{menu}</li>'
+        )
     return (
-        f'<li><button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-{key}" data-menu-toggle>{label}{icon("chevron")}</button>'
-        f'<div class="nav-menu" id="menu-{key}" hidden>{links}</div></li>'
+        f'<li><button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-{key}" data-menu-toggle>{label}{icon("chevron")}</button>{menu}</li>'
     )
 
 
@@ -559,6 +565,59 @@ def checklist_form(lang, place):
     )
 
 
+PROOF = json.loads((Path(__file__).resolve().parent.parent / "data" / "citations.json").read_text(encoding="utf-8"))
+CASES = json.loads((Path(__file__).resolve().parent.parent / "data" / "case-studies.json").read_text(encoding="utf-8"))
+PROOF_TEXT = {
+    "en": {"date": "Date", "engine": "Engine and surface", "question": "Question", "named": "Named", "cited": "Cited", "others": "Others cited", "yes": "Yes", "no": "No", "none": "The first dated run has not been published yet. When it is, the full results land here: every question, every engine, what we found and what we changed.", "caption": "Citation log for kortexlab.me", "changes": "Date", "change": "What changed", "case_none": "No case study is published yet. This page is the layout future case studies will use, and it stays out of the sitemap and the navigation until a real one exists.", "challenge": "Challenge", "approach": "Approach", "results": "Results", "quote": "In the client's words", "asof": "Measured"},
+    "fr": {"date": "Date", "engine": "Moteur et interface", "question": "Question", "named": "Nommé", "cited": "Cité", "others": "Autres cités", "yes": "Oui", "no": "Non", "none": "La première série datée n'est pas encore publiée. Quand elle le sera, les résultats complets arriveront ici : chaque question, chaque moteur, ce que nous avons trouvé et ce que nous avons changé.", "caption": "Journal des citations de kortexlab.me", "changes": "Date", "change": "Ce qui a changé", "case_none": "Aucune étude de cas n'est encore publiée. Cette page est la mise en page que les futures études de cas utiliseront, et elle reste hors du sitemap et de la navigation tant qu'une vraie étude n'existe pas.", "challenge": "Enjeu", "approach": "Approche", "results": "Résultats", "quote": "Dans les mots du client", "asof": "Mesuré"},
+}
+
+
+def proof_log(lang):
+    t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
+    runs = PROOF["runs"]
+    if not runs:
+        return f'<div class="glass card"><p>{t["none"]}</p></div>'
+    rows = "".join(
+        f'<tr><td>{html.escape(r["date"])}</td><td>{html.escape(r["engine"])}</td><td>{html.escape(r["question"])}</td><td>{t["yes"] if r["named"] else t["no"]}</td><td>{t["yes"] if r["cited"] else t["no"]}</td><td>{html.escape(r.get("others", ""))}</td></tr>'
+        for r in runs
+    )
+    return (
+        f'<div class="tbl-wrap"><table class="tbl proof-log"><caption class="visually-hidden">{t["caption"]}</caption>'
+        f'<thead><tr><th scope="col">{t["date"]}</th><th scope="col">{t["engine"]}</th><th scope="col">{t["question"]}</th><th scope="col">{t["named"]}</th><th scope="col">{t["cited"]}</th><th scope="col">{t["others"]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+    )
+
+
+def proof_screens(lang):
+    shots = [r for r in PROOF["runs"] if r.get("screenshot")]
+    if not shots:
+        return ""
+    figs = "".join(f'<figure class="glass card" style="margin:0"><img src="{html.escape(r["screenshot"])}" alt="{html.escape(r["engine"] + " , " + r["date"])}" loading="lazy" width="640" height="400"><figcaption class="vx-caption">{html.escape(r["engine"])}, {html.escape(r["date"])}</figcaption></figure>' for r in shots)
+    return f'<div class="grid grid-2">{figs}</div>'
+
+
+def proof_changelog(lang):
+    t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
+    code = lang if lang in ("en", "fr") else "en"
+    rows = "".join(f'<tr><td>{html.escape(c["date"])}</td><td>{html.escape(c[code])}</td></tr>' for c in sorted(PROOF["changelog"], key=lambda c: c["date"], reverse=True))
+    return f'<div class="tbl-wrap"><table class="tbl"><caption class="visually-hidden">Changelog</caption><thead><tr><th scope="col">{t["changes"]}</th><th scope="col">{t["change"]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+
+
+def case_studies(lang):
+    t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
+    if not CASES:
+        return f'<div class="glass card"><p>{t["case_none"]}</p></div>'
+    out = []
+    for c in CASES:
+        results = "".join(f'<li>{icon("check")}<span><strong>{html.escape(r["metric"])}</strong> {html.escape(r["value"])} <small>{t["asof"]} {html.escape(r["date"])}</small></span></li>' for r in c["results"])
+        quote = f'<blockquote class="glass card"><p>{html.escape(c["quote"]["text"])}</p><footer>{html.escape(c["quote"]["by"])}</footer></blockquote>' if c.get("quote") else ""
+        out.append(
+            f'<article class="glass card"><h2>{html.escape(c["title"])}</h2><h3>{t["challenge"]}</h3><p>{html.escape(c["challenge"])}</p>'
+            f'<h3>{t["approach"]}</h3><p>{html.escape(c["approach"])}</p><h3>{t["results"]}</h3><ul class="checklist">{results}</ul>{quote}</article>'
+        )
+    return "".join(out)
+
+
 NL_COUNTER = [0]
 
 
@@ -650,19 +709,16 @@ def tag_ctas(page, pid):
 
 
 def article_cta(lang, pid, body):
-    if not pid.startswith("blog/") or not exists(lang, "audit"):
+    if not pid.startswith("blog/"):
         return body
     slug = pid.split("/", 1)[1]
-    if slug not in AUDIT_POSTS:
-        return body
     t = UI[lang]
-    swapped = re.sub(
-        r'<a href="@contact">[^<]*</a>\s*</div>\s*$',
-        f'<a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><p class="cta-second"><a class="text-link" href="@@book" data-cta="post-book">{t["book"]}</a></p></div>',
-        body.rstrip(),
-        count=1,
-    )
-    return swapped
+    tail = r'<a href="@contact">[^<]*</a>\s*</div>\s*$'
+    if slug in AUDIT_POSTS and exists(lang, "audit"):
+        replacement = f'<a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><p class="cta-second"><a class="text-link" href="@@book" data-cta="post-book">{t["book"]}</a></p></div>'
+    else:
+        replacement = f'<a href="@@book" data-cta="post-book">{t["book"]}</a></div>'
+    return re.sub(tail, replacement, body.rstrip(), count=1)
 
 
 AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide"}
@@ -708,6 +764,7 @@ def resolve(body, lang):
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
     body = body.replace("{{checklist_items}}", checklist_items(lang))
+    body = body.replace("{{proof_log}}", proof_log(lang)).replace("{{proof_screens}}", proof_screens(lang)).replace("{{proof_changelog}}", proof_changelog(lang)).replace("{{case_studies}}", case_studies(lang))
     body = body.replace("{{checklist_form_top}}", checklist_form(lang, "top")).replace("{{checklist_form_bottom}}", checklist_form(lang, "bottom"))
     body = body.replace("@@contact_action", CONTACT_ACTION).replace("@@leads_action", LEADS_ACTION)
     body = body.replace("@@linkedin", LINKEDIN)

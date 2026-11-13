@@ -629,7 +629,7 @@ function initFinder() {
     const comp = val('fcomp');
     const goal = val('fgoal');
     const pub = val('fpub');
-    const plan = src === 'many' || comp === 'own' || goal === 'category' || pub === 'cms' ? 'titan' : goal === 'test' && comp === 'quiet' ? 'ghost' : 'swarm';
+    const plan = src === 'many' || comp === 'own' || goal === 'category' || pub === 'cms' ? 'titan' : comp === 'quiet' && (goal === undefined || goal === 'test') ? 'ghost' : 'swarm';
     tiers.forEach((t) => t.classList.toggle('is-match', t.dataset.plan === plan));
     out.querySelectorAll('[data-why]').forEach((w) => { w.hidden = w.dataset.why !== plan; });
     f.querySelectorAll('[data-finder-book]').forEach((link) => {
