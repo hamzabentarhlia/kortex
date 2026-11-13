@@ -20,7 +20,7 @@
 ## Where this brief did not match the repo
 
 - **The stub bug was already fixed.** PR 7 deleted the five root files that served noindex stubs. The live site was checked on 2026-11-13: `/pricing/`, `/blog/` and `/contact/` return 200 with no robots meta and a self canonical, and the slashless forms return 301. Before and after matrices are in `docs/audit/stub-matrix.md`.
-- **Arabic is live, so I did not remove it.** The brief asked to remove every Arabic reference. `/ar/` ships 35 pages with correct hreflang, so removing it would delete real pages. `scripts/check-hreflang.mjs` verifies every cluster is reciprocal, has a self reference and an English x-default, and that `og:locale:alternate` only lists languages that exist.
+- **Arabic is live, so I did not remove it.** The brief asked to remove every Arabic reference. `/ar/` ships 47 pages with correct hreflang, so removing it would delete real pages. `scripts/check-hreflang.mjs` verifies every cluster is reciprocal, has a self reference and an English x-default, and that `og:locale:alternate` only lists languages that exist.
 - **JSON-LD was already shipped** on every page. The gaps I found and fixed: `DefinedTermSet` on the glossary, `FAQPage` on blog post FAQs, and `Service` and `Offer` for the audit.
 - **Branch:** work is on `claude/practical-euler-czw19j`, the branch this session was assigned, not `kortex-monetize`.
 - **The new pages exist in English and French.** Arabic readers see the call to action but not the audit, checklist or proof pages.
@@ -137,7 +137,7 @@ The host is GitHub Pages (CNAME file, no server config). There is no nginx to to
 3. After a few minutes, open `/audit/`, `/checklist/`, `/proof/` and `/pricing/`, and submit the audit form once.
 4. In Search Console, resubmit `sitemap.xml` and request indexing for `/audit/`, `/checklist/` and `/proof/`.
 
-Rollback: revert the merge commit on `main` with `git revert -m 1 <merge commit>` and push. To undo only the offer, set nothing in `data/site.json` and remove the audit links; the rest keeps working.
+Rollback: revert the merge commit on `main` with `git revert -m 1 <merge commit>` and push. The offer, the checklist and the log are separate pages, so a single page can be reverted on its own without touching the rest.
 
 ## The one metric to watch weekly
 
