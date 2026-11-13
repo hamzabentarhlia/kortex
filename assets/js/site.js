@@ -198,27 +198,34 @@ function initPrefill() {
   if (plan && planField) planField.value = plan.slice(0, 40);
 }
 
+const LEAD_EVENTS = { newsletter: 'newsletter_signup', checklist: 'checklist_download' };
+
 function initForms() {
-  document.querySelectorAll('form[data-track-form]').forEach((form) => {
+  document.querySelectorAll('form[data-lead-form]').forEach((form) => {
+    const name = form.dataset.formName || form.dataset.trackForm || 'form';
+    const ok = form.querySelector('[data-form-ok]') || form.parentElement.querySelector('[data-form-status]');
+    const fail = form.querySelector('[data-form-error]') || form.parentElement.querySelector('[data-form-error]');
+    const button = form.querySelector('[type=submit]');
     form.addEventListener('submit', async (event) => {
-      if (!form.hasAttribute('data-lead-form') || !window.fetch) { track('Form submit', { form: form.dataset.trackForm }); return; }
+      if (!window.fetch) return;
       event.preventDefault();
-      const success = form.parentElement.querySelector('[data-form-status]');
-      const failure = form.parentElement.querySelector('[data-form-error]');
-      const button = form.querySelector('[type=submit]');
-      if (success) success.hidden = true;
-      if (failure) failure.hidden = true;
-      if (form.querySelector('.hp') && form.querySelector('.hp').checked) { form.reset(); return; }
+      if (ok) ok.hidden = true;
+      if (fail) fail.hidden = true;
+      const trap = form.querySelector('.hp');
+      if (trap && trap.checked) { form.reset(); return; }
       if (button) button.disabled = true;
       try {
         const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!response.ok) throw new Error('rejected');
+        track('generate_lead', { form_name: name, page: location.pathname });
+        if (LEAD_EVENTS[name]) track(LEAD_EVENTS[name], { form_name: name, page: location.pathname });
         form.reset();
-        form.hidden = true;
-        if (success) { success.hidden = false; success.focus(); }
-        track('generate_lead', { form: form.dataset.trackForm, page: location.pathname });
+        if (form.dataset.thanks) { setTimeout(() => { location.href = form.dataset.thanks; }, 250); return; }
+        [...form.children].forEach((c) => { if (c !== ok) c.hidden = true; });
+        if (form.parentElement.contains(ok) && ok.hasAttribute('data-form-status')) form.hidden = true;
+        if (ok) { ok.hidden = false; if (ok.hasAttribute('tabindex')) ok.focus(); }
       } catch (error) {
-        if (failure) { failure.hidden = false; failure.focus(); }
+        if (fail) { fail.hidden = false; if (fail.hasAttribute('tabindex')) fail.focus(); }
       } finally {
         if (button) button.disabled = false;
       }
@@ -228,16 +235,61 @@ function initForms() {
 
 function initTracking() {
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (link && (link.hasAttribute('data-cal') || /(^|\.)cal\.com\//.test(link.href.replace(/^https?:\/\//, '')))) {
-      track('book_call_click', { cta: link.dataset.track || 'book', page: location.pathname });
+    const el = e.target.closest('[data-cta],[data-track],a');
+    if (!el) return;
+    const cta = el.dataset.cta || el.dataset.track || '';
+    const page = location.pathname;
+    const a = el.closest('a');
+    if (a && (a.hasAttribute('data-cal') || /(^|\.)cal\.com\//.test(a.href.replace(/^https?:\/\//, '')))) {
+      track('book_call_click', { cta, page });
+      track('outbound_calcom', { cta, page });
     }
-    if (link && link.closest('#menu-lang')) {
-      track('language_switch', { to: link.getAttribute('hreflang') || link.lang || link.pathname, page: location.pathname });
-    }
-    const el = e.target.closest('[data-track]');
-    if (el) track('cta_click', { cta: el.dataset.track, page: location.pathname });
+    if (a && (a.hasAttribute('data-audit-pay') || /\/audit\/?(#|$)/.test(a.pathname + a.hash))) track('audit_cta_click', { cta, page });
+    if (a && a.closest('#menu-lang')) track('language_switch', { to: a.getAttribute('hreflang') || a.pathname, page });
+    if (a && a.hasAttribute('data-checklist-download')) track('checklist_download', { form_name: 'thanks', page });
+    if (cta) track('cta_click', { cta, page });
   });
+}
+
+function initPlanView() {
+  const cards = document.querySelectorAll('.tier[data-plan]');
+  if (!cards.length || !('IntersectionObserver' in window)) return;
+  const seen = new Set();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      const plan = en.target.dataset.plan;
+      if (!en.isIntersecting || seen.has(plan)) return;
+      seen.add(plan);
+      track('pricing_plan_view', { plan, page: location.pathname });
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.6 });
+  cards.forEach((c) => io.observe(c));
+}
+
+function initSlide() {
+  const box = document.querySelector('[data-slide]');
+  if (!box || !window.matchMedia('(min-width: 900px) and (pointer: fine)').matches) return;
+  const key = 'kx-slide';
+  try { if (sessionStorage.getItem(key)) return; } catch (e) { }
+  const remember = () => { try { sessionStorage.setItem(key, '1'); } catch (e) { } };
+  const show = () => {
+    window.removeEventListener('scroll', onScroll);
+    box.hidden = false;
+    requestAnimationFrame(() => box.classList.add('is-in'));
+  };
+  const onScroll = () => {
+    const doc = document.documentElement;
+    if ((window.scrollY + window.innerHeight) / doc.scrollHeight >= 0.6) show();
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  box.querySelector('[data-slide-close]').addEventListener('click', () => { box.hidden = true; remember(); });
+  box.querySelector('form').addEventListener('submit', remember);
+}
+
+function initThanks() {
+  const block = document.querySelector('[data-thanks-block=checklist]');
+  if (block && new URLSearchParams(location.search).get('f') === 'checklist') block.hidden = false;
 }
 
 function initConsent() {
@@ -439,7 +491,10 @@ function initCal() {
     if (!a || !desktop.matches || e.metaKey || e.ctrlKey || e.shiftKey) return;
     e.preventDefault();
     loadCal().then(() => {
-      window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: calConfig() });
+      const q = new URL(a.href).searchParams;
+      const utm = {};
+      q.forEach((v, k) => { if (k.startsWith('utm_') || k === 'notes') utm[k] = v; });
+      window.Cal.ns.kx('modal', { calLink: a.dataset.cal, config: { ...calConfig(), ...utm } });
     }).catch(() => { location.href = a.href; });
   });
   const inline = document.getElementById('cal-inline');
@@ -566,14 +621,23 @@ function initPipeline() {
 function initFinder() {
   const f = document.querySelector('[data-finder]');
   if (!f) return;
-  const tiers = document.querySelectorAll('[data-plan]');
+  const tiers = document.querySelectorAll('.tier[data-plan]');
   const out = f.querySelector('[data-finder-out]');
+  const val = (n) => (f.querySelector('input[name=' + n + ']:checked') || {}).value;
   const run = (first) => {
-    const src = (f.querySelector('input[name=fsrc]:checked') || {}).value;
-    const comp = (f.querySelector('input[name=fcomp]:checked') || {}).value;
-    const plan = src === 'many' || comp === 'own' ? 'titan' : comp === 'some' ? 'swarm' : 'ghost';
+    const src = val('fsrc');
+    const comp = val('fcomp');
+    const goal = val('fgoal');
+    const pub = val('fpub');
+    const plan = src === 'many' || comp === 'own' || goal === 'category' || pub === 'cms' ? 'titan' : goal === 'test' && comp === 'quiet' ? 'ghost' : 'swarm';
     tiers.forEach((t) => t.classList.toggle('is-match', t.dataset.plan === plan));
     out.querySelectorAll('[data-why]').forEach((w) => { w.hidden = w.dataset.why !== plan; });
+    f.querySelectorAll('[data-finder-book]').forEach((link) => {
+      const u = new URL(link.href);
+      u.searchParams.set('notes', 'Plan I am considering: ' + plan.toUpperCase());
+      u.searchParams.set('utm_content', 'plan_' + plan);
+      link.href = u.toString();
+    });
     if (first === true) return;
     document.querySelectorAll('.tiers').forEach((g) => g.classList.add('has-match'));
     track('Plan finder', { plan });
@@ -597,5 +661,7 @@ initBookBar();
 initScroll();
 initPipeline();
 initFinder();
+initSlide();
+initThanks();
 const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
-[initStory, initCalc, initCal, initTracking, initPointerFx].forEach((fn) => idle(() => fn()));
+[initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx].forEach((fn) => idle(() => fn()));

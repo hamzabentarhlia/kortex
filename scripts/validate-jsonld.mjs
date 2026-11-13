@@ -24,7 +24,7 @@ const required = {
   FAQPage: ['mainEntity'],
   BreadcrumbList: ['itemListElement'],
   Service: ['name', 'provider'],
-  Offer: ['priceCurrency', 'priceSpecification'],
+  Offer: ['priceCurrency'],
   DefinedTerm: ['name', 'description'],
   DefinedTermSet: ['name', 'hasDefinedTerm'],
   SoftwareApplication: ['name'],
@@ -69,6 +69,7 @@ for (const page of pages) {
         for (const key of required[type] || []) {
           if (node[key] === undefined || node[key] === '') fail(page, `${type} is missing ${key}`);
         }
+        if (type === 'Offer' && node.price === undefined && !node.priceSpecification) fail(page, 'Offer needs price or priceSpecification');
         if (type === 'FAQPage') {
           hasFaqSchema = true;
           const schemaQuestions = node.mainEntity.map((q) => q.name);
