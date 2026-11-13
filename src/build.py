@@ -728,8 +728,18 @@ def schema(lang, pid, meta, body):
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
             "image": DOMAIN + og_image(lang, pid, meta),
         })
+    if pid == "glossary":
+        terms = children(lang, "glossary")
+        graph.append({
+            "@type": "DefinedTermSet",
+            "@id": page_url + "#termset",
+            "name": strip_tags(meta.get("h1", meta["title"])),
+            "url": page_url,
+            "inLanguage": lang,
+            "hasDefinedTerm": [{"@type": "DefinedTerm", "name": strip_tags(m.get("h1", m["title"])), "description": strip_tags(m.get("in_short") or m["description"]), "url": abs_url(lang, p)} for p, m, _ in terms],
+        })
     if meta.get("kind") == "term":
-        graph.append({"@type": "DefinedTerm", "name": strip_tags(meta.get("h1", meta["title"])), "description": meta["description"], "inDefinedTermSet": abs_url(lang, "glossary"), "url": page_url})
+        graph.append({"@type": "DefinedTerm", "name": strip_tags(meta.get("h1", meta["title"])), "description": meta["description"], "inDefinedTermSet": abs_url(lang, "glossary") + "#termset", "url": page_url})
     faqs = faq_entities(body)
     if faqs:
         graph.append({"@type": "FAQPage", "@id": page_url + "#faq", "mainEntity": faqs})

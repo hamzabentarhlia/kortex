@@ -26,7 +26,7 @@ const required = {
   Service: ['name', 'provider'],
   Offer: ['priceCurrency', 'priceSpecification'],
   DefinedTerm: ['name', 'description'],
-  DefinedTermSet: ['name'],
+  DefinedTermSet: ['name', 'hasDefinedTerm'],
   SoftwareApplication: ['name'],
 };
 
