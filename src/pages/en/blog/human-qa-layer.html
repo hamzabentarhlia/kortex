@@ -1,0 +1,78 @@
+title: The human QA layer: what a person checks before AI-assisted content ships | KORTEX
+description: Why an editor reviews every AI-assisted asset, the eight things they check against your source, what they leave alone, and how the review shows on the page.
+h1: The human QA layer: what a person checks before anything ships
+summary: Why an editor reviews every AI-assisted asset, the eight things they check against your source, what they leave alone, and how the review should show on the page.
+kind: article
+kicker: Article
+date: 2026-11-14
+modified: 2026-11-14
+in_short: Generative models predict likely words, they do not retrieve facts, so Google says to fact-check and review AI-generated content before publishing, metadata and structured data included. At KORTEX an editor checks every asset against your source, you approve it, and only then does it go live. The review covers claims, figures, names, quotes, links, markup, voice and the gaps where your source says nothing.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>Google states that generative models do not retrieve facts but predict a likely sequence of words, and that outputs may contain inaccuracies.</li>
+<li>Its guidance says it is critical to manually fact-check and review AI-generated content, including titles, meta descriptions, structured data and image alt text.</li>
+<li>The review works because it has something to check against: your source. Every claim must trace back to where you said it.</li>
+<li>The editor does not add expertise. When an asset needs a fact the source lacks, the answer is to ask you, not to fill the gap.</li>
+<li>Nothing goes live until you approve it. The approval is the second check, and the one that matters most.</li>
+</ul>
+</div>
+<h2>Why a person has to be in the loop</h2>
+<p>Google's guidance on generative AI content is blunt about the mechanism: generative models do not retrieve facts but predict a likely sequence of words based on training data, so their output may contain inaccuracies, often called hallucinations. The guidance says that it is critical to manually fact-check and review all AI-generated content for accuracy and trustworthiness before publishing.</p>
+<p>The same passage extends the review to the parts of a page that people forget: <code>title</code> elements, meta descriptions, structured data and the alternative text of images, all of which can appear in Search results. A review that covers the body and skips the markup leaves half of the published surface unchecked.</p>
+<p>This is the design reason behind KORTEX. Agents handle volume and consistency. A person handles judgement. The five stages on <a href="@how-it-works">how it works</a> put the review before publication and put your approval after it.</p>
+<h2>The eight checks an editor runs</h2>
+<p>A review is only as good as the thing it compares against. Ours compares each asset with your source, the recording, article or transcript you gave us, and with a short intake form that lists your offer, your buyers, your competitors and the words you never want to use.</p>
+<div class="table-wrap"><table>
+<caption>What the editor checks, against what, and what a failure looks like</caption>
+<thead><tr><th scope="col">Check</th><th scope="col">Compared with</th><th scope="col">A failure looks like</th></tr></thead>
+<tbody>
+<tr><td>Claims</td><td>The place in the source where you made them</td><td>An asset says "always" where you said "usually"</td></tr>
+<tr><td>Figures and dates</td><td>The recording, slide or article</td><td>A percentage that appears in no source</td></tr>
+<tr><td>Names and terms</td><td>The intake form and the voice guide</td><td>Your method named two different ways</td></tr>
+<tr><td>Quotes</td><td>The transcript, word for word</td><td>A paraphrase inside quotation marks</td></tr>
+<tr><td>Links</td><td>The live pages</td><td>A source link that returns an error</td></tr>
+<tr><td>Markup and metadata</td><td>The visible page</td><td>A FAQ in the JSON-LD that is absent from the text</td></tr>
+<tr><td>Voice</td><td>Your voice and terminology guide</td><td>A phrase you told us never to use</td></tr>
+<tr><td>Gaps</td><td>What the source actually covers</td><td>A confident paragraph on a topic the source never touched</td></tr>
+</tbody>
+</table></div>
+<h2>The pointer: every claim traces back to you</h2>
+<p>The extraction stage produces a list of claims, examples, numbers, objections and questions, each with a pointer to where it appears in the source, such as a timestamp or a paragraph. That list is the reference that makes later review fast. When an editor sees a figure in a draft they open the pointer and compare.</p>
+<p>The pointer also makes one failure visible: a claim with no pointer. If a sentence in a draft has no entry in the extraction list, either it is connective tissue or it came from the model. The editor decides which, and cuts it if it is the second.</p>
+<blockquote class="pull reveal">A sentence with no pointer back to your source is a sentence nobody has checked.</blockquote>
+<h2>What the editor does not do</h2>
+<p>Review is not a second round of generation. Three things stay outside it.</p>
+<ul>
+<li><strong>Inventing expertise.</strong> If an asset needs a fact you did not give us, we ask you. We do not fill the gap with plausible text.</li>
+<li><strong>Softening your opinions.</strong> An opinion that is yours and clear stays yours. The editor checks that it is stated as you stated it, not that it is balanced.</li>
+<li><strong>Judging your field.</strong> We do not need to be experts in your domain, because nothing is written from nothing. We check fidelity to your source.</li>
+</ul>
+<details class="aside"><summary>An example of a gap found in review</summary><div><p>An invented example: a draft FAQ answer on supplier review frequency says reviews should happen quarterly. The editor opens the pointer. In the webinar the founder said that "most audits happen once a year" and that the question of frequency depends on the supplier's risk profile, with no figure given. The answer is rewritten to say exactly that, and a note goes to the founder asking whether a recommended frequency exists. The draft does not ship with the quarterly figure.</p></div></details>
+<h2>The approval is the second check</h2>
+<p>An editor can compare a draft with a source. Only you can tell whether the source says what you mean. That is why nothing goes live until you approve it, and why review happens in shared documents with comments rather than in a meeting. You approve or comment, and we revise. The delivery timeline on the <a href="@how-it-works">how it works page</a> allows for this: assets arrive in batches, and review speed is yours to set.</p>
+<h2>How the review shows on the page</h2>
+<p>Google's Who, How and Why questions apply here. It suggests that disclosing how content was created helps readers, particularly when automation was used to substantially generate it, and that bylines should lead to further information about the author. For published assets we recommend three visible signals.</p>
+<ol>
+<li>A byline that names a real person and links to a page about them.</li>
+<li>A publication date and a last-updated date, with the second changing only when the content does.</li>
+<li>A short line saying how the page was made when readers might wonder, for example that it was drafted with AI assistance from a named source and reviewed by a person.</li>
+</ol>
+<p>These are the same signals the entity and trust checks in <a href="@checklist">the GEO Audit Checklist</a> look for, and <a href="@blog/entity-seo-for-founders">entity SEO for founders</a> explains why the byline has to be real.</p>
+<h2>How to hold a provider to this</h2>
+<p>If you buy AI-assisted content from anyone, ask four things: what each claim is checked against, who does the checking, what happens to a claim that fails, and whether you can see the review trail. Keep a short correction log for the first three months, noting what was changed and why. We do not publish a correction rate, because we have not measured one across clients and we will not quote a number we cannot back. The log is yours, and it is the most direct evidence of whether the review is working.</p>
+<p>Related: <a href="@blog/agency-vs-in-house-vs-ai-studio">agency, in-house team or AI studio</a> and <a href="@blog/repurposing-mistakes-that-kill-authority">seven repurposing mistakes</a>.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" rel="noopener">Google Search's guidance on using generative AI content on your website, Google Search Central</a>: models predict sequences of words, fact-check and review before publishing, metadata and structured data included, giving users context.</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" rel="noopener">Creating helpful, reliable, people-first content, Google Search Central</a>: Who, How and Why, bylines and disclosure of automation.</li>
+<li><a href="@how-it-works">How KORTEX works</a>: the five stages, the review step and the approval step.</li>
+</ul>
+<h2 id="faq">Common questions about the human QA layer</h2><div><details><summary>Does a human review make AI-assisted content safe to publish?</summary><div><p>It makes it much safer, not risk-free. The review compares the draft with a source. If the source is wrong or outdated, the draft can be wrong in a way the review cannot see, which is why your approval matters.</p></div></details><details><summary>What does the editor check first?</summary><div><p>Claims and figures, because they are the ones that can mislead a reader and the ones an engine may quote. Names, quotes, links, markup, voice and gaps follow.</p></div></details><details><summary>Does Google require disclosure of AI use?</summary><div><p>Google says disclosures are useful where someone might wonder how content was created, and recommends adding them when reasonably expected. It does not set a universal rule.</p></div></details><details><summary>Can I review the work myself instead?</summary><div><p>You always do: nothing is published without your approval. The editor's review comes first so that your time goes on the questions only you can answer.</p></div></details><details><summary>What happens when the source lacks a fact the asset needs?</summary><div><p>We ask you for it. If you do not have it, the asset is written without that claim.</p></div></details><details><summary>Do you review the schema markup too?</summary><div><p>Yes. Google's guidance extends the review to structured data and metadata. We generate markup from the same content as the page and validate it before each release.</p></div></details></div>
+<div id="cta">
+<p>Method</p>
+<h2>Want to see the review trail on a real batch?</h2>
+<p>On the strategy call we walk through the five stages, the pointer list and what an approval looks like in practice.</p>
+<a href="@contact">Book a strategy call</a>
+</div>

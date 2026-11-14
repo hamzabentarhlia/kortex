@@ -1025,7 +1025,7 @@ def article_cta(lang, pid, body):
     return re.sub(contact, replacement, body, count=1)
 
 
-AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide"}
+AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide", "entity-seo-for-founders", "repurposing-mistakes-that-kill-authority", "geo-in-french-and-arabic"}
 
 
 def cta_band(lang):

@@ -1,0 +1,11 @@
+title: Qu'est-ce que hreflang ? | KORTEX glossaire
+description: hreflang indique aux moteurs quelle version linguistique ou régionale d'une page montrer à quel utilisateur. Les règles, un exemple et l'erreur courante.
+h1: hreflang
+summary: Une étiquette qui relie les versions linguistiques d'une page.
+kind: term
+kicker: Glossaire
+date: 2026-11-14
+modified: 2026-11-14
+in_short: hreflang est une annotation qui indique aux moteurs de recherche les versions linguistiques et régionales d'une page, et laquelle montrer à quel utilisateur. Chaque version doit se lister elle-même et lister toutes les autres, et les liens doivent être réciproques.
+---
+<h2>En détail</h2><p>Google décrit trois façons équivalentes d'indiquer les versions alternatives : les éléments link du HTML, les en-têtes HTTP et le sitemap. Les URL alternatives doivent être complètes, une valeur <code>x-default</code> peut désigner une page de repli pour les langues non couvertes, et si deux pages ne se renvoient pas l'une à l'autre, les annotations sont ignorées. Google n'utilise ni hreflang ni l'attribut <code>lang</code> pour détecter la langue d'une page : il lit le contenu visible.</p><h2>Un exemple</h2><p>Un site qui propose sa page de tarifs en anglais, en français et en arabe donne aux trois pages le même ensemble de quatre annotations : <code>en</code>, <code>fr</code>, <code>ar</code> et <code>x-default</code>, chacune avec une adresse https complète. L'erreur courante est une page française qui renvoie vers l'anglais alors que la page anglaise ne renvoie pas vers elle : la paire est ignorée.</p><p>Source : <a href="https://developers.google.com/search/docs/specialty/international/localized-versions" rel="noopener">Tell Google about localized versions of your page, Google Search Central</a>.</p><h2>Termes liés</h2><ul><li><a href="@glossary/entity">Entité</a></li><li><a href="@glossary/schema-markup">Balisage schema</a></li><li><a href="@glossary/topical-authority">Autorité thématique</a></li></ul>
