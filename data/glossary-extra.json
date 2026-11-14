@@ -1,0 +1,112 @@
+{
+  "ai-overviews": {
+    "related": ["query-fan-out", "citation", "zero-click-search", "grounding"],
+    "en": "Your page can only be a supporting link here if it is indexed and eligible for a snippet. No extra markup changes that.",
+    "fr": "Votre page ne peut devenir un lien de soutien ici que si elle est indexée et éligible à un extrait. Aucun balisage supplémentaire n'y change rien."
+  },
+  "answer-engine-optimization": {
+    "related": ["generative-engine-optimization", "answer-first-content", "citation"],
+    "en": "It names the goal: being the source an answer engine picks for one specific question.",
+    "fr": "Le terme nomme l'objectif : être la source qu'un moteur de réponse retient pour une question précise."
+  },
+  "answer-first-content": {
+    "related": ["answer-engine-optimization", "information-gain", "topical-authority"],
+    "en": "A page that states the answer in its first lines is easy to quote and easy to check.",
+    "fr": "Une page qui donne la réponse dans ses premières lignes se cite facilement et se vérifie facilement."
+  },
+  "citation": {
+    "related": ["citation-rate", "grounding", "share-of-model", "ai-overviews"],
+    "en": "A citation is the link a buyer can click. Being named without a link and being linked without a name are different results.",
+    "fr": "La citation est le lien sur lequel l'acheteur peut cliquer. Être nommé sans lien et être lié sans nom sont deux résultats différents."
+  },
+  "citation-rate": {
+    "related": ["citation", "share-of-model", "prompt-level-demand"],
+    "en": "It is the one number we compute: the share of tracked questions where an engine cites your site.",
+    "fr": "C'est le seul chiffre que nous calculons : la part des questions suivies pour lesquelles un moteur cite votre site."
+  },
+  "content-decay": {
+    "related": ["information-gain", "topical-authority", "citation-rate"],
+    "en": "An outdated page stops being the safest source to quote, so a dated review beats a silent edit.",
+    "fr": "Une page périmée n'est plus la source la plus sûre à citer : une relecture datée vaut mieux qu'une modification silencieuse."
+  },
+  "e-e-a-t": {
+    "related": ["entity", "topical-authority", "knowledge-graph"],
+    "en": "It is how Google describes trust in content. First-hand detail is the part a copy cannot fake.",
+    "fr": "C'est la façon dont Google décrit la confiance dans un contenu. Le détail de première main est ce qu'une copie ne peut pas imiter."
+  },
+  "entity": {
+    "related": ["knowledge-graph", "schema-markup", "e-e-a-t"],
+    "en": "A machine that cannot tell whether two names are the same company has a reason not to cite either.",
+    "fr": "Une machine qui ne sait pas si deux noms désignent la même entreprise a une raison de ne citer ni l'un ni l'autre."
+  },
+  "generative-engine-optimization": {
+    "related": ["answer-engine-optimization", "search-engine-optimization", "citation-rate"],
+    "en": "For Google it is SEO under another name. Across other engines it is a label for the same craft, applied to more surfaces.",
+    "fr": "Pour Google, c'est du SEO sous un autre nom. Pour les autres moteurs, c'est une étiquette pour le même métier, appliqué à plus de surfaces."
+  },
+  "grounding": {
+    "related": ["retrieval-augmented-generation", "citation", "ai-overviews"],
+    "en": "Grounding is why an answer links sources at all. A page that states checkable facts gives it something to hold on to.",
+    "fr": "Le grounding explique pourquoi une réponse affiche des sources. Une page qui énonce des faits vérifiables lui donne de quoi s'appuyer."
+  },
+  "hreflang": {
+    "related": ["entity", "schema-markup", "topical-authority"],
+    "en": "A wrong language version can be the one a buyer is sent to, so each version needs to point to its siblings.",
+    "fr": "Une mauvaise version linguistique peut être celle vers laquelle l'acheteur est envoyé : chaque version doit renvoyer vers ses jumelles."
+  },
+  "information-gain": {
+    "related": ["answer-first-content", "e-e-a-t", "content-decay"],
+    "en": "A page that only restates what is online gives an engine no reason to pick it. Your own data and cases do.",
+    "fr": "Une page qui ne fait que répéter ce qui est en ligne ne donne aucune raison de la choisir. Vos données et vos cas, si."
+  },
+  "knowledge-graph": {
+    "related": ["entity", "schema-markup", "e-e-a-t"],
+    "en": "It is where entities and their links are stored. A consistent description of you is what feeds it.",
+    "fr": "C'est là que sont stockés les entités et leurs liens. Une description cohérente de votre entreprise est ce qui l'alimente."
+  },
+  "llms-txt": {
+    "related": ["schema-markup", "ai-overviews", "generative-engine-optimization"],
+    "en": "Google says it does not need the file for Search. For other engines we found no public statement either way.",
+    "fr": "Google indique ne pas avoir besoin de ce fichier pour la Recherche. Pour les autres moteurs, nous n'avons trouvé aucune déclaration publique."
+  },
+  "prompt-level-demand": {
+    "related": ["query-fan-out", "citation-rate", "share-of-model"],
+    "en": "It tells you which full buyer questions are asked, so you write the page that answers one of them.",
+    "fr": "Il indique quelles questions complètes les acheteurs posent, pour que vous écriviez la page qui répond à l'une d'elles."
+  },
+  "query-fan-out": {
+    "related": ["ai-overviews", "prompt-level-demand", "topical-authority"],
+    "en": "One buyer question becomes several searches, so a page that answers a real sub-question has more ways in.",
+    "fr": "Une question d'acheteur devient plusieurs recherches : une page qui répond à une vraie sous-question a plus de portes d'entrée."
+  },
+  "retrieval-augmented-generation": {
+    "related": ["grounding", "citation", "entity"],
+    "en": "The model reads retrieved pages before it answers, which is why a clear, specific page can be quoted.",
+    "fr": "Le modèle lit des pages récupérées avant de répondre : c'est pourquoi une page claire et précise peut être citée."
+  },
+  "schema-markup": {
+    "related": ["entity", "knowledge-graph", "llms-txt"],
+    "en": "It labels who you are and what a page is. Google says no special markup is needed for its AI features.",
+    "fr": "Il indique qui vous êtes et ce qu'est une page. Google précise qu'aucun balisage spécial n'est nécessaire pour ses fonctions d'IA."
+  },
+  "search-engine-optimization": {
+    "related": ["generative-engine-optimization", "topical-authority", "e-e-a-t"],
+    "en": "It is still the base. A page that is not indexed cannot be cited by Google's AI features.",
+    "fr": "Cela reste la base. Une page non indexée ne peut pas être citée par les fonctions d'IA de Google."
+  },
+  "share-of-model": {
+    "related": ["citation-rate", "prompt-level-demand", "citation"],
+    "en": "The phrase is used loosely. We use a plain version: how often an engine names you across a fixed question list.",
+    "fr": "L'expression est employée de façon floue. Nous retenons la version simple : la fréquence à laquelle un moteur vous nomme sur une liste fixe de questions."
+  },
+  "topical-authority": {
+    "related": ["information-gain", "query-fan-out", "content-decay"],
+    "en": "Pages that cover a subject together and link to each other give an engine several reasons to trust you on it.",
+    "fr": "Des pages qui couvrent ensemble un sujet et se renvoient l'une à l'autre donnent plusieurs raisons de vous faire confiance sur ce sujet."
+  },
+  "zero-click-search": {
+    "related": ["ai-overviews", "citation", "share-of-model"],
+    "en": "When the answer ends the search, being quoted in it matters more than a rank you cannot click.",
+    "fr": "Quand la réponse met fin à la recherche, être cité dans cette réponse compte plus qu'un rang sur lequel on ne clique pas."
+  }
+}

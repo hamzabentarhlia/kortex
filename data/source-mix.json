@@ -1,0 +1,308 @@
+{
+ "sources": [
+  {
+   "id": "blog",
+   "page": "from-blog",
+   "en": {
+    "pull": [
+     "The main claim and the evidence behind it",
+     "Every question the article answers, even in passing",
+     "Definitions and frameworks you use",
+     "Examples, numbers and comparisons",
+     "Gaps: questions the article raises but never answers"
+    ],
+    "becomes": [
+     {
+      "name": "Refreshed pillar",
+      "desc": "The original article restructured answer-first, with clearer headings."
+     },
+     {
+      "name": "Question pages",
+      "desc": "Each sub-question gets its own short, quotable page."
+     },
+     {
+      "name": "Comparison page",
+      "desc": "Where the article weighs options, a proper comparison table."
+     },
+     {
+      "name": "Glossary entries",
+      "desc": "Your terms defined once and linked from everywhere."
+     },
+     {
+      "name": "Social posts",
+      "desc": "Posts that each carry one idea and link back."
+     },
+     {
+      "name": "Newsletter issue",
+      "desc": "A version for your email list."
+     }
+    ],
+    "pull_title": "What we pull out of a blog post"
+   },
+   "fr": {
+    "pull": [
+     "L'idée principale et ce qui la prouve",
+     "Chaque question traitée, même en passant",
+     "Les définitions et méthodes que vous utilisez",
+     "Exemples, chiffres et comparaisons",
+     "Les manques : questions soulevées mais jamais traitées"
+    ],
+    "becomes": [
+     {
+      "name": "Pilier remis à jour",
+      "desc": "L'article d'origine restructuré réponse d'abord, avec des titres plus clairs."
+     },
+     {
+      "name": "Pages questions",
+      "desc": "Chaque sous-question obtient sa propre page, courte et citable."
+     },
+     {
+      "name": "Page comparative",
+      "desc": "Là où l'article compare des options, un vrai tableau comparatif."
+     },
+     {
+      "name": "Entrées de glossaire",
+      "desc": "Vos termes définis une fois et liés partout."
+     },
+     {
+      "name": "Posts sociaux",
+      "desc": "Des posts portant chacun une idée, avec un lien retour."
+     },
+     {
+      "name": "Numéro de newsletter",
+      "desc": "Une version pour votre liste e-mail."
+     }
+    ],
+    "pull_title": "Ce que nous tirons d'un article"
+   }
+  },
+  {
+   "id": "video",
+   "page": "from-youtube",
+   "en": {
+    "pull": [
+     "Your core argument and how you build it",
+     "Step-by-step methods you demonstrate",
+     "Stories and examples, with timestamps",
+     "Questions answered in the comments or Q&A",
+     "Short moments strong enough for clips"
+    ],
+    "becomes": [
+     {
+      "name": "Long-form article",
+      "desc": "The video as a structured article with your examples."
+     },
+     {
+      "name": "FAQ page",
+      "desc": "The questions you answer, one by one."
+     },
+     {
+      "name": "How-to guide",
+      "desc": "Your method written as clear steps."
+     },
+     {
+      "name": "Short-form scripts",
+      "desc": "Scripts for shorts and reels from the best moments."
+     },
+     {
+      "name": "Social posts",
+      "desc": "Posts that carry one idea each."
+     },
+     {
+      "name": "Newsletter issue",
+      "desc": "A readable version for subscribers."
+     }
+    ],
+    "pull_title": "What we pull out of a video"
+   },
+   "fr": {
+    "pull": [
+     "Votre argument central et sa construction",
+     "Les méthodes pas à pas que vous montrez",
+     "Histoires et exemples, avec leur minutage",
+     "Les questions traitées en commentaire ou en Q&amp;R",
+     "Les moments forts qui feront de bons extraits"
+    ],
+    "becomes": [
+     {
+      "name": "Article long",
+      "desc": "La vidéo sous forme d'article structuré, avec vos exemples."
+     },
+     {
+      "name": "Page FAQ",
+      "desc": "Les questions auxquelles vous répondez, une par une."
+     },
+     {
+      "name": "Guide pratique",
+      "desc": "Votre méthode rédigée en étapes claires."
+     },
+     {
+      "name": "Scripts courts",
+      "desc": "Des scripts pour shorts et reels tirés des meilleurs moments."
+     },
+     {
+      "name": "Posts sociaux",
+      "desc": "Des posts portant chacun une idée."
+     },
+     {
+      "name": "Numéro de newsletter",
+      "desc": "Une version lisible pour vos abonnés."
+     }
+    ],
+    "pull_title": "Ce que nous tirons d'une vidéo"
+   }
+  },
+  {
+   "id": "podcast",
+   "page": "from-podcast",
+   "en": {
+    "pull": [
+     "The strongest opinions from host and guest",
+     "Questions asked and how they were answered",
+     "Frameworks, lists and step-by-step advice",
+     "Stories that illustrate a point",
+     "Names, tools and resources mentioned"
+    ],
+    "becomes": [
+     {
+      "name": "Episode article",
+      "desc": "The conversation as a clear article, not a raw transcript."
+     },
+     {
+      "name": "Question pages",
+      "desc": "Each question discussed, answered on its own page."
+     },
+     {
+      "name": "Quote cards and posts",
+      "desc": "The best lines, ready for social."
+     },
+     {
+      "name": "Newsletter issue",
+      "desc": "The episode for readers who will not listen."
+     },
+     {
+      "name": "Short-form scripts",
+      "desc": "Clips with a script and a hook."
+     },
+     {
+      "name": "Glossary entries",
+      "desc": "Concepts you keep coming back to, defined."
+     }
+    ],
+    "pull_title": "What we pull out of an episode"
+   },
+   "fr": {
+    "pull": [
+     "Les opinions les plus fortes de l'hôte et de l'invité",
+     "Les questions posées et leurs réponses",
+     "Méthodes, listes et conseils pas à pas",
+     "Les histoires qui illustrent un point",
+     "Les noms, outils et ressources cités"
+    ],
+    "becomes": [
+     {
+      "name": "Article d'épisode",
+      "desc": "La conversation sous forme d'article clair, pas de transcription brute."
+     },
+     {
+      "name": "Pages questions",
+      "desc": "Chaque question abordée, traitée sur sa propre page."
+     },
+     {
+      "name": "Citations et posts",
+      "desc": "Les meilleures phrases, prêtes pour les réseaux."
+     },
+     {
+      "name": "Numéro de newsletter",
+      "desc": "L'épisode pour ceux qui n'écouteront pas."
+     },
+     {
+      "name": "Scripts courts",
+      "desc": "Des extraits avec un script et une accroche."
+     },
+     {
+      "name": "Entrées de glossaire",
+      "desc": "Les notions auxquelles vous revenez souvent, définies."
+     }
+    ],
+    "pull_title": "Ce que nous tirons d'un épisode"
+   }
+  },
+  {
+   "id": "webinar",
+   "page": "from-webinar",
+   "en": {
+    "pull": [
+     "The framework or method you present",
+     "Every audience question, word for word",
+     "Objections and how you handle them",
+     "Data or examples shown on your slides",
+     "Demo moments that explain your product"
+    ],
+    "becomes": [
+     {
+      "name": "Pillar article",
+      "desc": "The talk as a structured guide."
+     },
+     {
+      "name": "FAQ cluster",
+      "desc": "Built from the live Q&amp;A, in your buyers' own words."
+     },
+     {
+      "name": "Comparison page",
+      "desc": "Your approach compared with the alternatives you discussed."
+     },
+     {
+      "name": "Sales enablement pages",
+      "desc": "Objection answers your team can send."
+     },
+     {
+      "name": "Social posts",
+      "desc": "Posts that bring people back to the guide."
+     },
+     {
+      "name": "Follow-up emails",
+      "desc": "Content for attendees and no-shows."
+     }
+    ],
+    "pull_title": "What we pull out of a webinar"
+   },
+   "fr": {
+    "pull": [
+     "La méthode ou le cadre que vous présentez",
+     "Chaque question du public, mot pour mot",
+     "Les objections et votre façon d'y répondre",
+     "Les données et exemples de vos slides",
+     "Les moments de démo qui expliquent votre produit"
+    ],
+    "becomes": [
+     {
+      "name": "Article pilier",
+      "desc": "La présentation sous forme de guide structuré."
+     },
+     {
+      "name": "Cluster FAQ",
+      "desc": "Construit à partir des questions du live, avec les mots de vos acheteurs."
+     },
+     {
+      "name": "Page comparative",
+      "desc": "Votre approche comparée aux alternatives évoquées."
+     },
+     {
+      "name": "Pages pour la vente",
+      "desc": "Des réponses aux objections que votre équipe peut envoyer."
+     },
+     {
+      "name": "Posts sociaux",
+      "desc": "Des posts qui ramènent vers le guide."
+     },
+     {
+      "name": "E-mails de suivi",
+      "desc": "Des contenus pour les participants et les absents."
+     }
+    ],
+    "pull_title": "Ce que nous tirons d'un webinaire"
+   }
+  }
+ ]
+}

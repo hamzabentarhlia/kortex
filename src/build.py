@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+import unicodedata
 import urllib.parse
 from pathlib import Path
 
@@ -554,6 +555,12 @@ CHECKLIST_FORM = {
 }
 
 
+CK_TEXT = {
+    "en": {"tick": "Tick what is already true on your site", "score": "{n} of {t} checks in place", "reset": "Start again", "b1": "Many gaps. A strategy call turns this into an order of work.", "b2": "A solid base with gaps. The AI Citation Audit shows which ones cost you citations.", "b3": "Most of it is in place. The audit tests whether engines cite you.", "c1": "Book a strategy call", "c2": "See the AI Citation Audit", "note": "Ticks stay in this tab and are not sent anywhere."},
+    "fr": {"tick": "Cochez ce qui est déjà vrai sur votre site", "score": "{n} vérifications sur {t} en place", "reset": "Recommencer", "b1": "Beaucoup d'écarts. Un appel stratégique en fait un ordre de travail.", "b2": "Une base solide avec des écarts. L'audit de citations IA montre lesquels vous coûtent des citations.", "b3": "L'essentiel est en place. L'audit teste si les moteurs vous citent.", "c1": "Réserver un appel stratégique", "c2": "Voir l'audit de citations IA", "note": "Les cases restent dans cet onglet et ne sont envoyées nulle part."},
+}
+
+
 def checklist_items(lang):
     code = lang if lang in ("en", "fr") else "en"
     n = 0
@@ -566,7 +573,8 @@ def checklist_items(lang):
             n += 1
             items.append(f'<li><span class="ck-n">{n}</span><span>{html.escape(c[code]["title"])}</span></li>')
         out.append(f'<section class="glass card ck-group" aria-labelledby="ck-{group["id"]}"><h3 id="ck-{group["id"]}">{html.escape(group[code])}</h3><ol class="ck-list" start="{n - len(items) + 1}">{"".join(items)}</ol></section>')
-    return f'<div class="grid grid-2 ck-grid">{"".join(out)}</div>'
+    i18n = html.escape(json.dumps(CK_TEXT[code], ensure_ascii=False))
+    return f'<div class="ck" data-module="checks" data-ix="checks" data-i18n="{i18n}" data-audit="{url(lang, "audit")}" data-book="{book_href(lang)}"><div class="grid grid-2 ck-grid">{"".join(out)}</div></div>'
 
 
 def checklist_form(lang, place):
@@ -605,7 +613,7 @@ def proof_log(lang):
     )
     return (
         f'<div class="tbl-wrap"><table class="tbl proof-log"><caption class="visually-hidden">{t["caption"]}</caption>'
-        f'<thead><tr><th scope="col">{t["date"]}</th><th scope="col">{t["engine"]}</th><th scope="col">{t["question"]}</th><th scope="col">{t["named"]}</th><th scope="col">{t["cited"]}</th><th scope="col">{t["others"]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+        f'<thead><tr><th scope="col">{t["date"]}</th><th scope="col">{t["engine"]}</th><th scope="col">{t["question"]}</th><th scope="col">{t["named"]}</th><th scope="col">{t["cited"]}</th><th scope="col">{t["others"]}</th></tr></thead><tbody class="reveal-group">{rows}</tbody></table></div>'
     )
 
 
@@ -621,7 +629,7 @@ def proof_changelog(lang):
     t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
     code = lang if lang in ("en", "fr") else "en"
     rows = "".join(f'<tr><td>{html.escape(c["date"])}</td><td>{html.escape(c[code])}</td></tr>' for c in sorted(PROOF["changelog"], key=lambda c: c["date"], reverse=True))
-    return f'<div class="tbl-wrap"><table class="tbl"><caption class="visually-hidden">Changelog</caption><thead><tr><th scope="col">{t["changes"]}</th><th scope="col">{t["change"]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+    return f'<div class="tbl-wrap"><table class="tbl"><caption class="visually-hidden">Changelog</caption><thead><tr><th scope="col">{t["changes"]}</th><th scope="col">{t["change"]}</th></tr></thead><tbody class="reveal-group">{rows}</tbody></table></div>'
 
 
 def case_studies(lang):
@@ -698,7 +706,7 @@ def demo_block(lang):
     line_h = '<svg class="demo-line demo-line-h" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="100" y2="1" pathLength="1"/></svg>'
     line_v = '<svg class="demo-line demo-line-v" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="100" pathLength="1"/></svg>'
     return (
-        f'<section class="section section-tint" data-ix="demo" aria-labelledby="demo-title"><div class="wrap">'
+        f'<section class="section section-tint" data-ix="demo" data-nav="{"Démo" if lang == "fr" else "Demo"}" aria-labelledby="demo-title"><div class="wrap">'
         f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="demo-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
         f'<div class="demo glass" data-module="demo" data-lang="{lang}" data-state="done" data-run-label="{t["run"]}" data-replay-label="{t["replay"]}" data-done="{t["done"]}">'
         f'<div class="demo-top"><fieldset class="demo-sources"><legend class="visually-hidden">{t["choose"]}</legend>{chips}</fieldset><span class="demo-tag">{t["example"]}</span></div>'
@@ -1078,11 +1086,237 @@ def labnotes_block(lang):
     if not cards:
         return ""
     return (
-        f'<section class="section" aria-labelledby="labnotes-title"><div class="wrap">'
+        f'<section class="section" data-nav="{"Carnet" if lang == "fr" else "Lab notes"}" aria-labelledby="labnotes-title"><div class="wrap">'
         f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="labnotes-title">{t["title"]}</h2></div>'
         f'<div class="labnotes reveal-group">{cards}</div>'
         f'<p style="margin-top:22px"><a class="text-link" href="{url(lang, "blog")}">{t["all"]}</a></p></div></section>'
     )
+
+GLOSS_EXTRA = json.loads((DATA_DIR / "glossary-extra.json").read_text(encoding="utf-8"))
+TAXONOMY = json.loads((DATA_DIR / "taxonomy.json").read_text(encoding="utf-8"))
+SOURCE_MIX = json.loads((DATA_DIR / "source-mix.json").read_text(encoding="utf-8"))
+
+BX_TEXT = {
+    "en": {"cats": "Categories", "all": "All", "search": "Search the articles", "ph": "Type a word or a question", "none": "No article matches that search.", "count": "{n} articles", "new": "New", "updated": "Updated", "featured": "Latest", "found": "{n} found"},
+    "fr": {"cats": "Catégories", "all": "Tous", "search": "Rechercher dans les articles", "ph": "Tapez un mot ou une question", "none": "Aucun article ne correspond à cette recherche.", "count": "{n} articles", "new": "Nouveau", "updated": "Mis à jour", "featured": "Dernier article", "found": "{n} trouvés"},
+}
+
+
+def days_since(iso):
+    y, m, d = (int(x) for x in iso.split("-"))
+    return (datetime.date.today() - datetime.date(y, m, d)).days
+
+
+def post_badge(lang, meta):
+    t = BX_TEXT[lang]
+    stamp = meta.get("modified", meta.get("date", ""))
+    if not stamp:
+        return ""
+    if days_since(meta.get("date", stamp)) <= 14:
+        return f'<span class="bx-badge is-new">{t["new"]}</span>'
+    return f'<span class="bx-badge">{t["updated"]} {human_date(lang, stamp)}</span>'
+
+
+def blog_posts(lang):
+    return [(pid, meta, body) for pid, meta, body in children(lang, "blog")]
+
+
+def blog_index(lang):
+    code = lang if lang in ("en", "fr") else "en"
+    t, lt = BX_TEXT[code], LIST_TEXT[lang]
+    posts = blog_posts(lang)
+    if not posts:
+        return ""
+    cats = TAXONOMY["categories"]
+
+    def card(pid, meta, body, feature=False):
+        slug = pid.split("/", 1)[1]
+        cat = TAXONOMY["posts"].get(slug, "systems")
+        title = strip_tags(meta.get("h1", meta["title"]))
+        summary = meta.get("summary", meta["description"])
+        hay = html.escape((title + " " + summary).lower(), quote=True)
+        cls = "glass card list-card bx-card" + (" bx-feature" if feature else "")
+        return (
+            f'<a class="{cls}" href="{url(lang, pid)}" data-cat="{cat}" data-hay="{hay}">'
+            f'<div class="card-cover" data-anim>{art.cover_svg(pid)}</div>'
+            f'<span class="kicker">{cats[cat][code]}{" · " + t["featured"] if feature else ""}</span><h3>{title}</h3><p>{summary}</p>'
+            f'<p class="card-meta">{human_date(lang, meta["date"])} · {reading_time(body)} {lt["min"]} {post_badge(code, meta)}</p>'
+            f'<span class="card-link">{lt["read"]}{icon("arrow")}</span></a>'
+        )
+
+    first = posts[0]
+    chips = "".join(
+        f'<a class="bx-chip" href="#cat-{cid}" data-cat="{cid}">{c[code]} <span>{sum(1 for p in posts if TAXONOMY["posts"].get(p[0].split("/", 1)[1], "systems") == cid)}</span></a>'
+        for cid, c in cats.items()
+    )
+    sections = []
+    for cid, c in cats.items():
+        items = [p for p in posts if p is not first and TAXONOMY["posts"].get(p[0].split("/", 1)[1], "systems") == cid]
+        first_in = TAXONOMY["posts"].get(first[0].split("/", 1)[1], "systems") == cid
+        if not items and not first_in:
+            continue
+        sections.append(f'<section class="bx-cat" id="cat-{cid}" data-cat="{cid}" aria-labelledby="cat-{cid}-t"><h2 id="cat-{cid}-t" class="bx-h">{c[code]}</h2><div class="grid grid-3">{"".join(card(*p) for p in items)}</div></section>')
+    i18n = html.escape(json.dumps({"all": t["all"], "none": t["none"], "found": t["found"]}, ensure_ascii=False))
+    return (
+        f'<div class="bx" data-ix="bx" data-module="blogidx" data-index="/assets/data/blog-index-{code}.json" data-i18n="{i18n}">'
+        f'<div class="bx-tools"><nav class="bx-chips" aria-label="{t["cats"]}">{chips}</nav>'
+        f'<div class="bx-search"><label for="bx-q">{t["search"]}</label><input id="bx-q" type="search" autocomplete="off" placeholder="{t["ph"]}"></div></div>'
+        f'<p class="bx-status" role="status" aria-live="polite"></p>'
+        f'<div class="bx-featured reveal">{card(*first, feature=True)}</div>'
+        f'{"".join(sections)}<p class="bx-none" hidden>{t["none"]}</p></div>'
+    )
+
+
+def blog_index_json(lang):
+    code = lang if lang in ("en", "fr") else "en"
+    rows = []
+    for pid, meta, body in blog_posts(lang):
+        slug = pid.split("/", 1)[1]
+        rows.append({"u": url(lang, pid), "t": strip_tags(meta.get("h1", meta["title"])), "d": strip_tags(meta.get("summary", meta["description"])), "c": TAXONOMY["posts"].get(slug, "systems")})
+    return json.dumps(rows, ensure_ascii=False, separators=(",", ":"))
+
+
+GL_TEXT = {
+    "en": {"rail": "Jump to a letter", "why": "Why it matters for citations", "flip": "Show why it matters for citations", "back": "Back to the definition", "related": "How the terms connect", "map": "Terms linked to"},
+    "fr": {"rail": "Aller à une lettre", "why": "Pourquoi cela compte pour les citations", "flip": "Voir pourquoi cela compte pour les citations", "back": "Revenir à la définition", "related": "Comment les termes s'articulent", "map": "Termes liés à"},
+}
+
+
+def first_letter(title):
+    plain = unicodedata.normalize("NFD", strip_tags(title)).strip()
+    for ch in plain:
+        if ch.isalpha():
+            return ch.upper()
+    return "#"
+
+
+def gloss_terms(lang):
+    return sorted(children(lang, "glossary"), key=lambda x: unicodedata.normalize("NFD", strip_tags(x[1].get("h1", x[1]["title"]))).lower())
+
+
+def glossary_index(lang):
+    if lang not in GL_TEXT:
+        return ""
+    t = GL_TEXT[lang]
+    terms = gloss_terms(lang)
+    groups = {}
+    for pid, meta, body in terms:
+        title = strip_tags(meta.get("h1", meta["title"]))
+        groups.setdefault(first_letter(title), []).append((pid, meta, title))
+    rail = "".join(f'<a href="#letter-{l}" data-letter="{l}">{l}</a>' for l in groups)
+    sections = []
+    for letter, items in groups.items():
+        cards = []
+        for pid, meta, title in items:
+            slug = pid.split("/", 1)[1]
+            why = GLOSS_EXTRA.get(slug, {}).get(lang, "")
+            summary = meta.get("summary", meta["description"])
+            back = f'<span class="kicker">{t["why"]}</span><p>{why}</p>' if why else ""
+            cards.append(
+                f'<article class="glass card gt"><div class="gt-faces"><div class="gt-face gt-front"><h3><a href="{url(lang, pid)}">{title}</a></h3><p>{summary}</p></div>'
+                f'<div class="gt-face gt-back">{back}<a class="card-link" href="{url(lang, pid)}">{LIST_TEXT[lang]["read"]}{icon("arrow")}</a></div></div></article>'
+            )
+        sections.append(f'<section class="gl-letter" id="letter-{letter}" data-letter="{letter}" aria-labelledby="letter-{letter}-t"><h2 id="letter-{letter}-t" class="gl-l">{letter}</h2><div class="grid grid-3 glossary-grid">{"".join(cards)}</div></section>')
+    i18n = html.escape(json.dumps({"flip": t["flip"], "back": t["back"]}, ensure_ascii=False))
+    return f'<div class="gl" data-ix="gl" data-module="glossary" data-i18n="{i18n}"><nav class="gl-rail" aria-label="{t["rail"]}">{rail}</nav><div class="gl-body">{"".join(sections)}</div></div>'
+
+
+def related_graph(lang, pid):
+    if lang not in GL_TEXT or not pid.startswith("glossary/"):
+        return ""
+    slug = pid.split("/", 1)[1]
+    rel = [r for r in GLOSS_EXTRA.get(slug, {}).get("related", []) if exists(lang, "glossary/" + r)][:4]
+    if not rel:
+        return ""
+    t = GL_TEXT[lang]
+
+    def label(p):
+        meta, _ = parse_page(source_path(lang, p))
+        return strip_tags(meta.get("h1", meta["title"]))
+
+    def lines(text, width=19):
+        words, rows, cur = text.split(), [], ""
+        for w in words:
+            if len(cur) + len(w) + 1 > width and cur:
+                rows.append(cur)
+                cur = w
+            else:
+                cur = (cur + " " + w).strip()
+        rows.append(cur)
+        return rows[:3]
+
+    def node(cx, cy, text, href=None, cls=""):
+        rows = lines(text)
+        h = 22 + 16 * len(rows)
+        tspans = "".join(f'<tspan x="{cx}" dy="{16 if i else 0}">{html.escape(r)}</tspan>' for i, r in enumerate(rows))
+        ty = cy - (len(rows) - 1) * 8 + 5
+        body = f'<rect x="{cx - 82}" y="{cy - h / 2:.0f}" width="164" height="{h}" rx="14"/><text x="{cx}" y="{ty:.0f}" text-anchor="middle">{tspans}</text>'
+        if href:
+            return f'<a class="rg-n {cls}" href="{href}">{body}</a>'
+        return f'<g class="rg-c">{body}</g>'
+
+    cx, cy = 300, 150
+    pos = [(95, 54), (505, 54), (95, 246), (505, 246)][: len(rel)]
+    edges = "".join(f'<line class="rg-e e{i}" x1="{cx}" y1="{cy}" x2="{x}" y2="{y}"/>' for i, (x, y) in enumerate(pos))
+    nodes = "".join(node(x, y, label("glossary/" + r), url(lang, "glossary/" + r), f"n{i}") for i, ((x, y), r) in enumerate(zip(pos, rel)))
+    here = label(pid)
+    lis = "".join(f'<li><a href="{url(lang, "glossary/" + r)}">{label("glossary/" + r)}</a></li>' for r in rel)
+    return (
+        f'<section class="rg-wrap" data-ix="rg" aria-labelledby="rg-title"><h2 id="rg-title">{t["related"]}</h2>'
+        f'<div class="rg"><svg viewBox="0 0 600 300" role="group" aria-label="{t["related"]}" focusable="false">{edges}{node(cx, cy, here)}{nodes}</svg></div>'
+        f'<ul class="rg-list">{lis}</ul></section>'
+    )
+
+
+MIX_TEXT = {
+    "en": {"title": "Pick the source you have", "lead": "The same pipeline reads each source differently. Choose one to see what we pull out of it and what it becomes.", "pull": "What we pull out", "becomes": "What it becomes", "more": "See the full page", "label": "Source type"},
+    "fr": {"title": "Choisissez la source que vous avez", "lead": "Le même pipeline lit chaque source différemment. Choisissez-en une pour voir ce que nous en tirons et ce qu'elle devient.", "pull": "Ce que nous en tirons", "becomes": "Ce qu'elle devient", "more": "Voir la page complète", "label": "Type de source"},
+}
+MIX_LABEL = {"en": {"blog": "Blog post", "video": "YouTube video", "podcast": "Podcast", "webinar": "Webinar"}, "fr": {"blog": "Article de blog", "video": "Vidéo YouTube", "podcast": "Podcast", "webinar": "Webinaire"}}
+
+
+def mix_block(lang):
+    if lang not in MIX_TEXT:
+        return ""
+    t = MIX_TEXT[lang]
+    chips, panels = [], []
+    for i, s in enumerate(SOURCE_MIX["sources"]):
+        sid = s["id"]
+        d = s[lang]
+        chips.append(f'<label class="demo-chip"><input type="radio" name="mix-source" value="{sid}"{" checked" if i == 0 else ""}><span>{MIX_LABEL[lang][sid]}</span></label>')
+        pulls = "".join(f"<li>{icon('check')}<span>{html.escape(html.unescape(x))}</span></li>" for x in d["pull"])
+        becomes = "".join(f'<li><strong>{html.escape(html.unescape(b["name"]))}</strong><span>{html.escape(html.unescape(b["desc"]))}</span></li>' for b in d["becomes"])
+        more = f'<a class="text-link" href="{url(lang, s["page"])}">{t["more"]}</a>' if exists(lang, s["page"]) else ""
+        panels.append(
+            f'<div class="mix-panel" data-panel="{sid}"><h3 class="mix-h">{MIX_LABEL[lang][sid]}</h3><div class="mix-cols"><div><h4>{t["pull"]}</h4><ul class="checklist">{pulls}</ul></div>'
+            f'<div><h4>{t["becomes"]}</h4><ul class="mix-becomes">{becomes}</ul></div></div><p>{more}</p></div>'
+        )
+    return (
+        f'<section class="section" data-ix="mix" aria-labelledby="mix-title"><div class="wrap"><div class="section-head"><span class="eyebrow">{t["label"]}</span><h2 id="mix-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
+        f'<div class="mix glass" data-module="mix"><fieldset class="demo-sources mix-chips"><legend class="visually-hidden">{t["label"]}</legend>{"".join(chips)}</fieldset><div class="mix-panels">{"".join(panels)}</div></div></div></section>'
+    )
+
+
+def post_nav(lang, pid):
+    if not pid.startswith("blog/") or lang not in ("en", "fr"):
+        return ""
+    posts = blog_posts(lang)
+    ids = [p[0] for p in posts]
+    if pid not in ids:
+        return ""
+    i = ids.index(pid)
+    t = {"en": ("Newer", "Older"), "fr": ("Plus récent", "Plus ancien")}[lang]
+
+    def tile(p, label, cls):
+        slug = p[0].split("/", 1)[1]
+        return f'<a class="pn {cls}" href="{url(lang, p[0])}"><span class="pn-cover" aria-hidden="true">{art.cover_svg(p[0])}</span><span class="pn-t"><span class="kicker">{label}</span><strong>{strip_tags(p[1].get("h1", p[1]["title"]))}</strong></span></a>'
+
+    newer = tile(posts[i - 1], t[0], "pn-prev") if i > 0 else ""
+    older = tile(posts[i + 1], t[1], "pn-next") if i + 1 < len(posts) else ""
+    if not (newer or older):
+        return ""
+    return f'<nav class="post-nav" aria-label="{t[0]} / {t[1]}">{newer}{older}</nav>'
+
 
 
 def resolve(body, lang):
@@ -1110,6 +1344,7 @@ def resolve(body, lang):
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
     body = body.replace("{{demo}}", demo_block(lang))
+    body = body.replace("{{blogindex}}", blog_index(lang)).replace("{{glossindex}}", glossary_index(lang)).replace("{{mix}}", mix_block(lang))
     body = body.replace("{{stack}}", stack_block(lang)).replace("{{labnotes}}", labnotes_block(lang))
     body = body.replace("{{teaser}}", teaser_block(lang, "teaser"))
     body = body.replace("{{calc}}", calc_block(lang))
@@ -1218,7 +1453,9 @@ def article_wrap(lang, pid, meta, body):
 </div></header>
 <div class="wrap narrow article-body prose"{' data-module="article"' if hub in ("blog", "teardowns") else ""}>
 {article_cta(lang, pid, body)}
+{related_graph(lang, pid)}
 {newsletter_block(lang, pid, "post") if hub == "blog" else ""}
+{post_nav(lang, pid)}
 </div>
 </article>
 {related}'''
@@ -1377,7 +1614,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
     hreflang = "".join(f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}">' for l in alts)
     if "en" in alts:
         hreflang += f'<link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}">'
-    robots = '<meta name="robots" content="noindex, follow">' if meta.get("noindex") else ""
+    robots = ('<meta name="robots" content="noindex, nofollow">' if pid == "login" else '<meta name="robots" content="noindex, follow">') if meta.get("noindex") else ""
     fonts = ["alexandria-arabic"] if lang == "ar" else ["archivo-display", "inter"]
     preload = "".join(f'<link rel="preload" href="/assets/fonts/{f}.woff2" as="font" type="font/woff2" crossorigin>' for f in fonts)
     og_alt = "".join(f'<meta property="og:locale:alternate" content="{LOCALE[l]}">' for l in alts if l != lang)
@@ -1491,6 +1728,8 @@ HERO_KINDS = {"split", "stage", "backdrop", "editorial"}
 
 def decorate(body, pid, meta, lang):
     body = re.sub(r"\{\{v:([a-z0-9-]+)\}\}", lambda m: visuals.render(m.group(1), lang), body)
+    if pid.startswith("compare/") and lang in ("en", "fr"):
+        body = body.replace('<div class="vs">', '<div class="vs" data-module="verdict" data-ix="verdict" data-lang="' + lang + '">', 1)
     vis = meta.get("visual", "")
     inline = ""
     if vis.startswith("#"):
@@ -1763,7 +2002,7 @@ def llms_txt():
 def robots_txt():
     bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot", "Claude-SearchBot", "Google-Extended", "Applebot-Extended", "CCBot"]
     rules = "\n".join(f"User-agent: {b}\nAllow: /\n" for b in bots)
-    return f"User-agent: *\nAllow: /\nDisallow: /login/\nDisallow: /fr/login/\nDisallow: /ar/login/\n\n{rules}\nSitemap: {DOMAIN}/sitemap.xml\n"
+    return f"User-agent: *\nAllow: /\n\n{rules}\nSitemap: {DOMAIN}/sitemap.xml\n"
 
 
 def main():
@@ -1781,6 +2020,8 @@ def main():
         (OUT / "assets" / "js" / mod.name).write_text(mod.read_text(encoding="utf-8"), encoding="utf-8")
     data_out = OUT / "assets" / "data"
     data_out.mkdir(parents=True, exist_ok=True)
+    for _l in ("en", "fr"):
+        (data_out / f"blog-index-{_l}.json").write_text(blog_index_json(_l), encoding="utf-8")
     (data_out / "demo.json").write_text(json.dumps(DEMO, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     css_v, js_v = asset_version(css_out), asset_version(js_out)
     built = 0

@@ -1,0 +1,14 @@
+.ck-row{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.ck-row input{flex:0 0 auto;width:22px;height:22px;margin:2px 0 0;accent-color:var(--text);cursor:pointer}
+.ck-row input:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px}
+.ck-row:has(input:checked)>span:not(.ck-n){color:var(--text-3);text-decoration:line-through;text-decoration-color:var(--line-strong)}
+.ck-score{position:sticky;bottom:14px;z-index:5;display:grid;gap:8px;margin-top:22px;padding:18px 22px}
+.ck-tick{margin:0;font:600 12px var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.ck-count{margin:0;font:700 22px var(--ff-display)}
+.ck-bar{height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.ck-bar i{display:block;height:100%;background:var(--text);transform-origin:left;transform:scaleX(0);transition:transform var(--dur-base) var(--ease-out)}
+.ck-advice{margin:0;color:var(--text-2)}
+.ck-cta{margin:0}
+.ck-note{margin:0;color:var(--text-3);font-size:13px}
+.ck-reset{justify-self:start}
+@media (prefers-reduced-motion:reduce){.ck-bar i{transition:none}}

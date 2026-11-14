@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /login/
-Disallow: /fr/login/
-Disallow: /ar/login/
 
 User-agent: GPTBot
 Allow: /

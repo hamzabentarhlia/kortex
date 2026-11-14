@@ -1,0 +1,26 @@
+.bx-tools{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 28px;margin-bottom:26px}
+.bx-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bx-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--text-2);font:600 14.5px var(--ff-body);text-decoration:none;cursor:pointer;transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast),color var(--dur-fast)}
+.bx-chip span{font:500 12px var(--ff-mono);color:var(--text-3)}
+.bx-chip:hover{color:var(--text);border-color:var(--text-3)}
+.bx-chip[aria-pressed=true]{background:var(--text);border-color:var(--text);color:var(--bg)}
+.bx-chip[aria-pressed=true] span{color:inherit;opacity:.7}
+.bx-chip:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px}
+.bx-search{display:none}
+.js .bx-search{display:grid;gap:6px;width:min(100%,340px)}
+.bx-search label{font:600 12px var(--ff-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+.bx-search input{height:48px;padding:0 18px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--text);font:500 15.5px var(--ff-body)}
+.bx-search input:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px}
+.bx-status{min-height:22px;margin:0 0 10px;color:var(--text-3);font:500 13.5px var(--ff-mono)}
+.bx-h{margin:46px 0 18px;font-size:clamp(22px,2.4vw,30px)}
+.bx-badge{display:inline-block;margin-inline-start:8px;padding:2px 10px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);color:var(--text-3);font:600 11.5px var(--ff-mono);letter-spacing:.04em}
+.bx-badge.is-new{border-color:var(--text);color:var(--text)}
+.bx-card[hidden],.bx-cat[hidden],.bx-featured[hidden]{display:none}
+.bx-feature h3{font-size:clamp(22px,2.6vw,30px);line-height:1.2}
+@media (min-width:900px){
+.bx-feature{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto auto auto 1fr;column-gap:36px;align-items:start;padding:28px}
+.bx-feature .card-cover{grid-row:1/6;margin:0;border:1px solid var(--line);border-radius:var(--radius-sm);aspect-ratio:16/10;height:100%}
+.bx-feature>:not(.card-cover){grid-column:2}
+}
+.bx-featured.reveal{margin-bottom:8px}
+.bx-none{margin-top:30px;color:var(--text-2)}

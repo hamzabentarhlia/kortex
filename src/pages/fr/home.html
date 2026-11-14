@@ -17,6 +17,7 @@ schema: person, service
 <div class="hero-visual">{{v:home-pipeline}}</div>
 </div>
 </section>
+<nav class="homenav" data-module="homenav" data-ix="hn" aria-label="Sections de la page"></nav>
 {{demo}}
 
 <section class="section engines-sec" aria-label="Les moteurs IA pour lesquels nous écrivons" style="padding:8px 0 24px">
@@ -55,14 +56,14 @@ schema: person, service
 
 
 
-<section class="section section-tint" aria-labelledby="how-title">
+<section class="section section-tint" aria-labelledby="how-title" data-nav="Méthode">
 <div class="wrap">
 <div class="section-head"><span class="eyebrow">Une source, un mois</span><h2 id="how-title">À quoi ressemble un mois</h2><p>Voici un mois d'exemple avec l'offre SWARM. Votre source arrive le premier jour, les contenus sont livrés en cinq jours ouvrés, puis ils sont publiés à un rythme régulier pendant que nous suivons ce que citent les moteurs IA.</p></div>
 {{v:home-month}}
 <div class="hero-actions vx-actions"><a class="btn btn-primary" href="@@book" data-track="home-month-book">Réserver un appel stratégique{{icon:arrow|flip}}</a><!--if:how-it-works--><a class="btn btn-ghost" href="@how-it-works" data-track="home-method">Voir la méthode complète</a><!--endif--></div>
 </div>
 </section>
-<section class="section" aria-labelledby="samples-title">
+<section class="section" aria-labelledby="samples-title" data-nav="Exemples">
 <div class="wrap">
 <div class="section-head"><span class="eyebrow">Depuis une seule source</span><h2 id="samples-title">Ce que vous recevez concrètement</h2><p>Cinq des contenus issus d'une source d'exemple. Chaque affirmation renvoie à un passage précis de l'original.</p></div>
 {{v:samples-deliverables}}
@@ -75,7 +76,7 @@ schema: person, service
 </div>
 </section>
 
-<section class="section" aria-labelledby="trust-title">
+<section class="section" aria-labelledby="trust-title" data-nav="Preuves">
 <div class="wrap">
 <div class="section-head"><span class="eyebrow">Du contenu IA sans le spam</span><h2 id="trust-title">Nous extrayons votre expertise. Nous ne l'inventons jamais.</h2><p>Le contenu IA générique se ressemble parce qu'il ne vient de nulle part. Le nôtre part de vos propres mots : chaque affirmation peut être rattachée à ce que vous avez réellement dit ou écrit.</p></div>
 <div class="compare">
@@ -133,7 +134,7 @@ schema: person, service
 </section>
 
 {{teaser}}
-<section class="section" aria-labelledby="plans-title">
+<section class="section" aria-labelledby="plans-title" data-nav="Offres">
 <div class="wrap">
 <div class="section-head center"><span class="eyebrow">Offres</span><h2 id="plans-title">Choisissez le rythme qui correspond à votre volume</h2><p>Chaque offre utilise le même pipeline. Ce qui change : le nombre de sources traitées, l'étendue des contenus et la proximité de l'accompagnement.</p></div>
 <div class="tiers reveal-group">
@@ -152,7 +153,7 @@ schema: person, service
 </div>
 </section>
 
-<section class="section section-tint" aria-labelledby="founder-title">
+<section class="section section-tint" aria-labelledby="founder-title" data-nav="Fondateur">
 <div class="wrap">
 <div class="glass founder reveal">
 <div class="photo-glow"><div class="founder-photo">{{photo:portrait}}</div></div>
@@ -163,7 +164,7 @@ schema: person, service
 </div>
 </section>
 
-<section class="section" aria-labelledby="faq-title">
+<section class="section" aria-labelledby="faq-title" data-nav="FAQ">
 <div class="wrap">
 <div class="section-head center"><span class="eyebrow">Questions</span><h2 id="faq-title">Ce que l'on nous demande avant un appel</h2></div>
 <div class="faq center">

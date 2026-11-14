@@ -302,3 +302,24 @@
 .blog-pin{font-size:11px}.blog-pin.is-b{inset-inline-start:auto;inset-inline-end:4px}
 }
 :root[lang=ar] .blog-page p{font-style:normal}
+.prose blockquote.pull{margin:2em 0;padding:6px 0 6px 24px;border-inline-start:3px solid var(--text);font:600 clamp(20px,2.4vw,27px)/1.35 var(--ff-display);color:var(--text)}
+.prose blockquote.pull cite{display:block;margin-top:10px;font:500 13px var(--ff-mono);font-style:normal;letter-spacing:.06em;color:var(--text-3)}
+.prose details.aside{margin:1.8em 0;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+.prose details.aside summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px;padding:12px 18px;cursor:pointer;list-style:none;font-weight:600}
+.prose details.aside summary::-webkit-details-marker{display:none}
+.prose details.aside summary::after{content:"+";font:600 20px var(--ff-mono);color:var(--text-3);transition:transform var(--dur-base) var(--ease-out)}
+.prose details.aside[open] summary::after{transform:rotate(45deg)}
+.prose details.aside>div{padding:0 18px 16px;color:var(--text-2)}
+.prose details.aside>div>p:first-child{margin-top:0}
+.post-nav{display:grid;gap:14px;margin-top:52px}
+@media (min-width:760px){.post-nav{grid-template-columns:1fr 1fr}.post-nav .pn-next:only-child{grid-column:2}}
+.pn{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--text);text-decoration:none;transition:border-color var(--dur-fast),background var(--dur-fast)}
+.pn:hover{border-color:var(--text-3);background:var(--surface-2)}
+.pn-cover{display:block;aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--line)}
+.pn-cover .m-art{height:100%;width:100%;transition:transform var(--dur-slow) var(--ease-out)}
+.pn:hover .pn-cover .m-art{transform:scale(1.08)}
+.pn-t{display:grid;gap:4px}
+.pn-t strong{font-size:16px;line-height:1.3}
+.js .post-nav .pn-cover{clip-path:inset(0 100% 0 0);transition:clip-path var(--dur-slow) var(--ease-out)}
+.js .post-nav.is-in .pn-cover{clip-path:inset(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.js .post-nav .pn-cover{clip-path:none;transition:none}.pn-cover .m-art{transition:none}}
