@@ -1780,7 +1780,7 @@ VCSS = {}
 
 def visual_css(body, pid=""):
     used = visuals.modules_in(body)
-    if pid.startswith("blog/") and "blog" not in used:
+    if (pid.startswith("blog/") or pid.startswith("teardowns/")) and "blog" not in used:
         used = sorted(used + ["blog"])
     used = sorted(set(used + [k for k in ("ix-" + m for m in re.findall(r'data-ix="([a-z]+)"', body)) if k in VCSS]))
     if not used:
