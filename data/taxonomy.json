@@ -1,0 +1,30 @@
+{
+  "categories": {
+    "strategy": {"en": "Strategy", "fr": "Stratégie"},
+    "technical": {"en": "Technical", "fr": "Technique"},
+    "measurement": {"en": "Measurement", "fr": "Mesure"},
+    "systems": {"en": "Content systems", "fr": "Systèmes de contenu"}
+  },
+  "posts": {
+    "answer-engine-visibility-guide": "technical",
+    "b2b-linkedin-content-dies": "strategy",
+    "category-creation-ai-search": "strategy",
+    "content-audit-ai-retrieval": "measurement",
+    "entity-first-content-architecture": "technical",
+    "geo-vs-seo-for-b2b": "strategy",
+    "get-cited-by-chatgpt-perplexity-gemini": "technical",
+    "llms-txt-what-to-do": "technical",
+    "measure-ai-citations": "measurement",
+    "new-b2b-content-stack": "systems",
+    "one-video-authority-system": "systems",
+    "schema-markup-ai-engines-read": "technical",
+    "stop-ranking-start-dominating": "strategy",
+    "webinar-to-content-system": "systems",
+    "entity-seo-for-founders": "technical",
+    "agency-vs-in-house-vs-ai-studio": "strategy",
+    "repurposing-mistakes-that-kill-authority": "systems",
+    "human-qa-layer": "systems",
+    "podcast-to-authority": "systems",
+    "geo-in-french-and-arabic": "technical"
+  }
+}

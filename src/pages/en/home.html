@@ -17,6 +17,7 @@ schema: person, service
 <div class="hero-visual">{{v:home-pipeline}}</div>
 </div>
 </section>
+<nav class="homenav" data-module="homenav" data-ix="hn" aria-label="Sections"></nav>
 {{demo}}
 
 <section class="section engines-sec" aria-label="AI engines we write for" style="padding:8px 0 24px">
@@ -63,14 +64,14 @@ schema: person, service
 
 
 
-<section class="section section-tint" aria-labelledby="how-title">
+<section class="section section-tint" aria-labelledby="how-title" data-nav="Method">
 <div class="wrap">
 <div class="section-head"><span class="eyebrow">One source, one month</span><h2 id="how-title">What a month looks like</h2><p>Here is an example month on the SWARM plan. Your source arrives on day one, the assets are delivered within five business days, then they go out on a steady schedule while we track what AI engines cite.</p></div>
 {{v:home-month}}
 <div class="hero-actions vx-actions"><a class="btn btn-primary" href="@@book" data-track="home-month-book">Book a strategy call{{icon:arrow|flip}}</a><!--if:how-it-works--><a class="btn btn-ghost" href="@how-it-works" data-track="home-method">See the full method</a><!--endif--></div>
 </div>
 </section>
-<section class="section" aria-labelledby="samples-title">
+<section class="section" aria-labelledby="samples-title" data-nav="Samples">
 <div class="wrap">
 <div class="section-head"><span class="eyebrow">From one source</span><h2 id="samples-title">What you actually receive</h2><p>Five of the assets from one example source. Every claim in them can be traced back to a moment in the original.</p></div>
 {{v:samples-deliverables}}
@@ -83,7 +84,7 @@ schema: person, service
 </div>
 </section>
 
-<section class="section" aria-labelledby="trust-title">
+<section class="section" aria-labelledby="trust-title" data-nav="Proof">
 <div class="wrap">
 <div class="section-head">
 <span class="eyebrow">AI content without the spam</span>
@@ -189,7 +190,7 @@ schema: person, service
 </section>
 
 {{teaser}}
-<section class="section" aria-labelledby="plans-title">
+<section class="section" aria-labelledby="plans-title" data-nav="Plans">
 <div class="wrap">
 <div class="section-head center">
 <span class="eyebrow">Plans</span>
@@ -248,7 +249,7 @@ schema: person, service
 </div>
 </section>
 
-<section class="section section-tint" aria-labelledby="founder-title">
+<section class="section section-tint" aria-labelledby="founder-title" data-nav="Founder">
 <div class="wrap">
 <div class="glass founder reveal">
 <div class="photo-glow"><div class="founder-photo">{{photo:portrait}}</div></div>
@@ -265,7 +266,7 @@ schema: person, service
 </div>
 </section>
 
-<section class="section" aria-labelledby="faq-title">
+<section class="section" aria-labelledby="faq-title" data-nav="FAQ">
 <div class="wrap">
 <div class="section-head center">
 <span class="eyebrow">Questions</span>

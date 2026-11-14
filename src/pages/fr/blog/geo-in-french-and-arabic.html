@@ -1,0 +1,69 @@
+title: Le GEO en français et en arabe : être cité hors de l'anglais | KORTEX
+description: Comment rendre un site citable en français et en arabe : URL séparées, hreflang correct, rédaction native plutôt que traduction automatique, entités stables et mesure par langue.
+h1: Le GEO en français et en arabe : être cité dans la langue où votre acheteur pose sa question
+summary: Comment rendre un site citable en français et en arabe : URL séparées, hreflang correct, rédaction native plutôt que traduction automatique, noms d'entités stables et mesure par langue.
+kind: article
+kicker: Article
+date: 2026-11-14
+modified: 2026-11-14
+in_short: Les acheteurs posent de longues questions aux assistants dans leur langue : un site qui n'existe qu'en anglais est invisible pour ces questions. Donnez à chaque langue ses propres URL, reliez-les par des annotations hreflang réciproques, rédigez chaque version nativement au lieu de traduire mécaniquement, gardez des noms d'entités stables d'un alphabet à l'autre et mesurez chaque langue séparément. Google indique que les versions localisées ne sont pas des doublons quand le contenu principal est réellement traduit.
+---
+<div id="essentiel">
+<span>L'essentiel à retenir</span>
+<ul>
+<li>Testez vous-même les questions en français et en arabe. Les résultats en anglais ne disent rien de ce qu'on répond à un acheteur francophone ou arabophone.</li>
+<li>Google recommande une URL différente pour chaque version linguistique et précise que chaque version doit se lister elle-même et toutes les autres dans ses annotations hreflang.</li>
+<li>Google détermine la langue d'une page d'après son contenu visible, pas d'après l'attribut <code>lang</code>. Utilisez une seule langue par page.</li>
+<li>Ne redirigez pas automatiquement les visiteurs selon la langue. Proposez des liens visibles vers les autres versions.</li>
+<li>Une traduction automatique publiée sans relecture est un risque : Google cite la traduction automatisée parmi les moyens de générer du contenu à grande échelle sans valeur.</li>
+</ul>
+</div>
+<h2>Les acheteurs posent leurs questions dans leur langue</h2>
+<p>Un acheteur francophone à Casablanca, à Lyon ou à Montréal tape la longue question en français. Un acheteur arabophone la tape en arabe, ou dans un mélange de langues. L'assistant répond à partir des sources qu'il peut récupérer dans cette langue : la liste restreinte que lit l'acheteur dépend donc des sites qui ont quelque chose à dire dans cette langue. Un site avec un excellent blog en anglais et aucune page en français ou en arabe est, pour ces questions, absent.</p>
+<p>Avant toute décision, mesurez l'écart. Prenez vos dix questions d'acheteur essentielles, rédigez-les nativement dans chaque langue et lancez-les dans les moteurs que vos acheteurs utilisent. Consignez qui est cité, comme décrit dans <a href="@blog/measure-ai-citations">comment mesurer les citations d'IA</a>. Le résultat est votre propre point de départ, et il risque de différer de celui de l'anglais.</p>
+<h2>URL séparées et hreflang réciproque</h2>
+<p>Le guide de Google sur les sites multilingues recommande d'utiliser une URL différente pour chaque version linguistique plutôt que de changer la langue d'une page par cookies ou par les réglages du navigateur. Il demande ensuite de signaler les versions à Google par des annotations hreflang. Les règles qui causent le plus d'erreurs sont courtes.</p>
+<div class="table-wrap"><table>
+<caption>Les règles hreflang de la documentation de Google, et comment les vérifier</caption>
+<thead><tr><th scope="col">Règle</th><th scope="col">Ce que cela signifie</th><th scope="col">Comment vérifier</th></tr></thead>
+<tbody>
+<tr><td>Chaque version se liste elle-même et toutes les autres</td><td>L'ensemble des liens est identique sur chaque version</td><td>Affichez le code source des pages française et arabe et comparez les ensembles</td></tr>
+<tr><td>Les liens doivent être réciproques</td><td>Si deux pages ne se renvoient pas l'une à l'autre, les balises sont ignorées</td><td>Suivez chaque alternative et confirmez qu'elle renvoie à la page d'origine</td></tr>
+<tr><td>Utilisez des URL complètes</td><td>Incluez https et le domaine</td><td>Aucun chemin relatif dans les annotations</td></tr>
+<tr><td>Ajoutez x-default en repli</td><td>Il correspond à toute langue non listée</td><td>Un seul x-default par ensemble, en général le sélecteur de langue ou la version principale</td></tr>
+<tr><td>Choisissez une seule méthode</td><td>Balises HTML, en-têtes HTTP et sitemap sont équivalents</td><td>N'entretenez pas les trois</td></tr>
+</tbody>
+</table></div>
+<p>Notre propre sitemap porte les annotations pour l'anglais, le français, l'arabe et <code>x-default</code> sur chaque page qui existe dans les trois langues, et une page qui existe dans moins de langues ne liste que celles qu'elle a. Google indique qu'on peut omettre certaines langues sur certaines pages tant que les versions qui existent se renvoient l'une à l'autre. Le but du contrôle est de repérer l'échec silencieux : la page française pointe vers l'anglais, l'anglais ne pointe pas en retour, et les balises sont ignorées.</p>
+<h2>Rédiger nativement, ne pas traduire mécaniquement</h2>
+<p>L'échec courant est une traduction qui garde les mots et perd la façon dont un acheteur poserait la question. En anglais, la question est « which approach to supplier risk works for a mid-size manufacturer ». Personne n'écrit l'équivalent français ou arabe de cette façon, et une traduction littérale produit une page qui répond à une question que personne ne pose.</p>
+<p>Notre pratique est d'écrire d'abord l'anglais, puis de réécrire chaque langue nativement, en partant des questions telles qu'un locuteur natif les poserait. Pour le français, cela veut dire s'adresser au lecteur par « vous » et éviter les constructions de phrase anglaises. Pour l'arabe, cela veut dire choisir un registre adapté au public et vérifier que les termes techniques sont ceux que les praticiens utilisent.</p>
+<blockquote class="pull reveal">Une traduction répond à la question en anglais. Une page native répond à celle que l'acheteur pose vraiment.</blockquote>
+<p>Il y a aussi une raison de politique. Google cite « les transformations automatisées comme la synonymisation, la traduction ou d'autres techniques d'obfuscation » parmi les moyens de générer du contenu à grande échelle sans apporter de valeur aux utilisateurs. Les versions localisées ne sont pas des doublons quand le contenu principal est traduit : une vraie traduction ne pose donc pas de problème. C'est le passage automatique sans relecture qui porte le risque, et <a href="@blog/human-qa-layer">la couche de contrôle humain</a> est notre réponse.</p>
+<h2>Une langue par page</h2>
+<p>Google détermine la langue d'une page d'après le contenu visible et n'utilise pas les informations de langue au niveau du code, comme l'attribut <code>lang</code>. Il conseille d'utiliser une seule langue pour le contenu et la navigation de chaque page, et d'éviter les traductions côte à côte. Traduire seulement la navigation et le pied de page en laissant le corps dans une seule langue peut créer une mauvaise expérience, car la page mélange alors les langues.</p>
+<p>Gardez tout de même l'attribut <code>lang</code> correct, car les navigateurs et les lecteurs d'écran l'utilisent, et définissez <code>dir="rtl"</code> sur les pages arabes.</p>
+<details class="aside"><summary>Les noms latins dans un texte arabe</summary><div><p>Des noms de marque comme KORTEX, n8n ou Odoo apparaissent en alphabet latin dans des phrases de droite à gauche. Sans isolation, la ponctuation et les mots voisins peuvent se réordonner autour d'eux. Entourer chaque séquence latine d'un élément <code>bdi</code> la garde intacte, et conserver la même orthographe latine dans toutes les langues préserve l'entité. Nous l'appliquons sur <a href="@about">nos pages arabes</a>.</p></div></details>
+<h2>Garder des entités stables d'un alphabet à l'autre</h2>
+<p>Une <a href="@glossary/entity">entité</a> doit rester reconnaissable d'une langue à l'autre. Gardez le nom de l'entreprise dans la même orthographe latine partout, même à l'intérieur d'un texte arabe. Gardez le nom du fondateur sous une seule translittération par alphabet et utilisez-la sur chaque page. Définissez une fois par langue les termes clés de votre méthode, dans une entrée de glossaire, pour que les versions française et arabe pointent vers le même concept et non vers trois concepts différents. Le raisonnement est dans <a href="@blog/entity-seo-for-founders">le SEO des entités pour fondateurs</a>.</p>
+<h2>Un exemple concret, inventé pour illustrer</h2>
+<p>C'est un <strong>exemple</strong>, pas un résultat client. Un éditeur de logiciels de risque fournisseur a un site en anglais et veut toucher des acheteurs au Maroc et en France. Il rédige ses dix questions essentielles nativement en français, par exemple « à quelle fréquence faut-il revoir ses fournisseurs » et « audit annuel ou suivi continu », et en arabe, puis les lance dans les moteurs que ses acheteurs utilisent. En français, deux concurrents sont cités et lui non. En arabe, aucune source du secteur n'est citée, seulement des pages généralistes.</p>
+<p>Le plan découle de ce journal. Pour le français, il publie des versions natives de ses deux meilleurs articles anglais, sur leurs propres URL, avec des annotations réciproques. Pour l'arabe, il commence par un glossaire des cinq termes que les acheteurs emploient, chacun défini une fois, car l'écart tient à l'absence de toute source solide. Trois essais mensuels plus tard, il lit la tendance, pas le premier résultat.</p>
+<h2>Laissez les gens choisir, ne choisissez pas pour eux</h2>
+<p>Google déconseille de rediriger automatiquement les utilisateurs d'une version linguistique vers une autre, par exemple sur une supposition quant à leur langue. De telles redirections peuvent empêcher les utilisateurs et les moteurs de voir toutes les versions. Proposez des liens visibles entre les versions sur chaque page, et utilisez l'annotation <code>x-default</code> pour une page qui sert de sélecteur de langue.</p>
+<h2>Mesurer chaque langue séparément</h2>
+<p>Lancez les dix questions dans chaque langue chaque mois et tenez un journal par langue. Comparez les taux de citation par langue et par moteur. Si le taux français est nul et que le taux anglais ne l'est pas, les causes probables sont celles de cet article : pas de page, une page qui ne répond pas à la question native, un hreflang manquant, ou une page non indexée. La <a href="@checklist">checklist d'audit GEO</a> couvre les contrôles d'indexation, de sitemap et de données structurées, qui s'appliquent de la même façon à chaque version linguistique.</p>
+<p>À lire aussi : <a href="@glossary/hreflang">hreflang</a> et <a href="@blog/repurposing-mistakes-that-kill-authority">les erreurs de réutilisation</a>.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/specialty/international/localized-versions" rel="noopener">Tell Google about localized versions of your page, Google Search Central</a> : hreflang réciproque, x-default, méthodes d'implémentation équivalentes, les pages traduites ne sont pas des doublons.</li>
+<li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites" rel="noopener">Managing multi-regional and multilingual sites, Google Search Central</a> : URL séparées, une langue par page, éviter les redirections automatiques.</li>
+<li><a href="https://developers.google.com/search/docs/essentials/spam-policies" rel="noopener">Spam policies for Google web search, Google Search Central</a> : spam de contenu à grande échelle et traduction automatisée.</li>
+</ul>
+<h2 id="faq">Questions fréquentes sur le GEO en français et en arabe</h2><div><details><summary>Ai-je besoin de pages séparées pour chaque langue ?</summary><div><p>Oui. Google recommande une URL différente pour chaque version linguistique, avec des annotations hreflang qui les relient, plutôt que de changer la langue d'une page par cookies ou par les réglages du navigateur.</p></div></details><details><summary>Un contenu traduit est-il traité comme un doublon ?</summary><div><p>Google indique que les versions localisées ne sont considérées comme des doublons que si le contenu principal reste non traduit.</p></div></details><details><summary>L'attribut lang indique-t-il la langue de la page à Google ?</summary><div><p>Non. Google détermine la langue d'après le contenu visible. Gardez l'attribut correct pour les navigateurs et les lecteurs d'écran, et écrivez une seule langue par page.</p></div></details><details><summary>Puis-je utiliser la traduction automatique ?</summary><div><p>Comme premier jet suivi d'une relecture native, oui. Publiée sans relecture, elle risque de produire des pages sans valeur, que la politique de Google contre le spam traite dans certains cas comme du contenu à grande échelle.</p></div></details><details><summary>Dois-je rediriger automatiquement les visiteurs vers leur langue ?</summary><div><p>Google le déconseille. Proposez des liens visibles vers les autres versions et laissez le visiteur choisir.</p></div></details><details><summary>Mes pages en français et en arabe seront-elles citées par les moteurs d'IA ?</summary><div><p>Nous ne pouvons pas le promettre. Lancez vos questions essentielles dans chaque langue chaque mois et consignez les résultats pour voir où vous en êtes.</p></div></details></div>
+<div id="cta">
+<p>Audit</p>
+<h2>Vous voulez que vos questions en français et en arabe soient testées ?</h2>
+<p>L'audit de citations IA teste votre marque sur 40 questions d'acheteurs. Dites-nous pendant l'appel dans quelles langues vos acheteurs posent leurs questions.</p>
+<a href="@contact">Réserver un appel stratégique</a>
+</div>

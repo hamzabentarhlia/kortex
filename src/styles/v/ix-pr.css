@@ -1,0 +1,7 @@
+.pr-diff{display:none;margin-bottom:14px}
+.js .pr-diff{display:inline-flex}
+.pr-diff[aria-pressed=true]{background:var(--surface-2);border-color:var(--text-3);color:var(--text)}
+.tbl.is-diff tbody tr[data-same]{opacity:.42}
+.tbl.is-diff tbody tr:not([data-same]):not(.row-group) td{background:var(--surface-2);font-weight:600}
+.tbl tbody tr{transition:opacity var(--dur-base) var(--ease-out)}
+@media (prefers-reduced-motion:reduce){.tbl tbody tr{transition:none}}

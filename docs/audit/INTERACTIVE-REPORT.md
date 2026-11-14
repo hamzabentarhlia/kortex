@@ -15,7 +15,7 @@ Run against the built site on a local gzip-enabled server, Chromium via Playwrig
 | Stack strip (marquee) | home | Static row of chips. |
 | Lab notes strip | home | Static cards, built from the three latest dated articles and teardowns. |
 
-Motion items already shipped before this mission and left as they were: scroll reveals, counters, link underline draw, nav indicator, magnetic buttons, cursor glow, view transitions. Changed in this mission: plan-card tilt to 4 degrees, dividers to ink at 14 percent, theme toggle morph at 240 ms with a 240 ms colour cross-fade, FAQ open and close animation, footer wordmark at 6 percent.
+Motion items already shipped before this mission and left as they were: scroll reveals, counters, link underline draw, nav indicator, magnetic buttons, cursor glow, view transitions. Changed in this mission: plan-card tilt to 4 degrees, dividers to ink at 14 percent, theme toggle morph at 240 ms with a 240 ms colour cross-fade, FAQ open and close animation.
 
 ## Calculator test cases
 

@@ -1,0 +1,26 @@
+.gl-rail{position:sticky;top:84px;z-index:6;display:flex;gap:2px;margin:0 0 28px;padding:6px;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);backdrop-filter:blur(8px);scrollbar-width:none}
+.gl-rail::-webkit-scrollbar{display:none}
+.gl-rail a{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:var(--text-2);font:700 14px var(--ff-mono);text-decoration:none;transition:background var(--dur-fast),color var(--dur-fast)}
+.gl-rail a:hover{background:var(--surface-2);color:var(--text)}
+.gl-rail a[aria-current=true]{background:var(--text);color:var(--bg)}
+.gl-rail a:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+.gl-letter{scroll-margin-top:150px;margin-bottom:34px}
+.gl-l{margin:0 0 14px;font:800 clamp(38px,5vw,56px)/1 var(--ff-display);color:var(--text);opacity:.18}
+.gt{position:relative;padding:0;perspective:1000px}
+.gt-face{display:flex;flex-direction:column;gap:10px;padding:24px}
+.gt-js .gt-faces{display:grid}
+.gt-js .gt-face{grid-area:1/1;padding-bottom:58px}
+.gt-front h3{font-size:18px;margin:0}
+.gt-front h3 a{color:var(--text);text-decoration:none}
+.gt-front h3 a::after{content:none}
+.gt-front p,.gt-back p{margin:0;color:var(--text-2)}
+.gt-back .card-link{margin-top:auto}
+.gt-js .gt-faces{transform-style:preserve-3d;transition:transform var(--dur-slow) var(--ease-out)}
+.gt-js .gt-face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.gt-js .gt-back{transform:rotateY(180deg)}
+.gt-js .gt.is-flipped .gt-faces{transform:rotateY(180deg)}
+.gt-flip{position:absolute;inset-block-end:12px;inset-inline-end:12px;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface-2);color:var(--text-2);cursor:pointer}
+.gt-flip svg{width:18px;height:18px}
+.gt-flip:hover{color:var(--text)}
+.gt-flip:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.gt-js .gt-faces{transition:none}}

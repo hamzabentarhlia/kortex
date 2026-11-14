@@ -1,0 +1,69 @@
+title: GEO in French and Arabic: how to be cited outside English | KORTEX
+description: How to make a site citable in French and Arabic: separate URLs, correct hreflang, native writing instead of machine translation, stable entities and per-language measurement.
+h1: GEO in French and Arabic: be cited in the language your buyer asks in
+summary: How to make a site citable in French and Arabic: separate URLs, correct hreflang, native writing instead of machine translation, stable entity names and per-language measurement.
+kind: article
+kicker: Article
+date: 2026-11-14
+modified: 2026-11-14
+in_short: Buyers put long questions to assistants in their own language, so a site that exists only in English is invisible to those questions. Give each language its own URLs, link them with reciprocal hreflang annotations, write each version natively instead of translating mechanically, keep entity names stable across scripts, and measure each language separately. Google says localized versions are not duplicates when the main content is actually translated.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>Test the questions in French and Arabic yourself. English results say nothing about what a French or Arabic buyer is told.</li>
+<li>Google recommends a different URL for each language version and says each version must list itself and every other version in its hreflang annotations.</li>
+<li>Google works out a page's language from its visible content, not from the <code>lang</code> attribute. Use one language per page.</li>
+<li>Do not redirect visitors automatically by language. Offer visible links to the other versions.</li>
+<li>Machine translation published without review is a risk: Google lists automated translation among the ways scaled content is generated without value.</li>
+</ul>
+</div>
+<h2>Buyers ask in their own language</h2>
+<p>A French-speaking buyer in Casablanca, Lyon or Montreal types the long question in French. An Arabic-speaking buyer types it in Arabic, or in a mix of languages. The assistant answers from sources it can retrieve in that language, so the shortlist the buyer reads depends on which sites have something to say in it. A site with an excellent English blog and no French or Arabic pages is, for these questions, absent.</p>
+<p>Before any decision, measure the gap. Take your ten core buyer questions, write them natively in each language, and run them in the engines your buyers use. Log who is cited, as described in <a href="@blog/measure-ai-citations">how to measure AI citations</a>. The result is your own baseline, and it is likely to differ from English.</p>
+<h2>Separate URLs and reciprocal hreflang</h2>
+<p>Google's guidance on multilingual sites recommends using a different URL for each language version rather than using cookies or browser settings to change the language of a page. It then asks you to tell Google about the versions with hreflang annotations. The rules that cause most errors are short.</p>
+<div class="table-wrap"><table>
+<caption>Hreflang rules from Google's documentation, and how to check them</caption>
+<thead><tr><th scope="col">Rule</th><th scope="col">What it means</th><th scope="col">How to check</th></tr></thead>
+<tbody>
+<tr><td>Each version lists itself and all others</td><td>The set of links is identical on every version</td><td>View source on the French and Arabic pages and compare the sets</td></tr>
+<tr><td>Links must be reciprocal</td><td>If two pages do not point to each other, the tags are ignored</td><td>Follow each alternate and confirm it points back</td></tr>
+<tr><td>Use fully qualified URLs</td><td>Include https and the domain</td><td>No relative paths in the annotations</td></tr>
+<tr><td>Add x-default as a fallback</td><td>It matches any language not listed</td><td>One x-default per set, usually the language selector or main version</td></tr>
+<tr><td>Pick one method</td><td>HTML tags, HTTP headers and sitemap are equivalent</td><td>Do not maintain all three</td></tr>
+</tbody>
+</table></div>
+<p>Our own sitemap carries the annotations for English, French, Arabic and <code>x-default</code> on every page that exists in all three, and a page that exists in fewer languages lists only the ones it has. Google says it is acceptable to omit some languages on some pages as long as the versions that do exist point to each other. The point of the check is to catch the quiet failure, where the French page points to English and English does not point back, and the tags are ignored.</p>
+<h2>Write natively, do not translate mechanically</h2>
+<p>A translation that preserves words and loses the way a buyer would ask is the common failure. The question in English is "which approach to supplier risk works for a mid-size manufacturer". Nobody writes the French or Arabic equivalent that way, and a literal translation produces a page that answers a question nobody asks.</p>
+<p>Our practice is to write the English first and then rewrite each language natively, starting from the questions as a native speaker would put them. For French that means writing to the reader as <em>vous</em> and avoiding English sentence structures. For Arabic it means choosing a register that fits the audience, and checking that technical terms are the ones practitioners use.</p>
+<blockquote class="pull reveal">A translation answers the English question. A native page answers the one the buyer actually asks.</blockquote>
+<p>There is also a policy reason. Google lists "automated transformations like synonymizing, translating, or other obfuscation techniques" among the ways scaled content is generated where little value is provided to users. Localized versions are not duplicates when the main content is translated, so a real translation is fine. A machine pass with no review is the part that carries the risk, and <a href="@blog/human-qa-layer">the human QA layer</a> is how we address it.</p>
+<h2>One language per page</h2>
+<p>Google determines the language of a page from the visible content and does not use code-level language information such as the <code>lang</code> attribute. It advises using a single language for content and navigation on each page and avoiding side-by-side translations. Translating only the navigation and footer while leaving the body in one language can create a bad experience, because the page then mixes languages.</p>
+<p>Keep the <code>lang</code> attribute correct anyway, because browsers and screen readers use it, and set <code>dir="rtl"</code> on Arabic pages.</p>
+<details class="aside"><summary>Latin names inside Arabic text</summary><div><p>Brand names such as KORTEX, n8n or Odoo appear in Latin script inside right-to-left sentences. Without isolation, punctuation and neighbouring words can reorder around them. Wrapping each Latin run in a <code>bdi</code> element keeps it intact, and keeping the same Latin spelling in every language preserves the entity. We apply this on <a href="@about">our Arabic pages</a>.</p></div></details>
+<h2>Keep entities stable across scripts</h2>
+<p>An <a href="@glossary/entity">entity</a> has to stay recognizable across languages. Keep the company name in the same Latin spelling everywhere, even inside Arabic text. Keep the founder's name in one transliteration per script and use it on every page. Define the key terms of your method once per language, in a glossary entry, so the French and Arabic versions point at the same concept and not at three different ones. The reasoning is in <a href="@blog/entity-seo-for-founders">entity SEO for founders</a>.</p>
+<h2>A worked example, invented for illustration</h2>
+<p>This is an <strong>Example</strong>, not a client result. A supplier-risk software company has an English site and wants to reach buyers in Morocco and France. It writes its ten core questions natively in French, for example "à quelle fréquence faut-il revoir ses fournisseurs" and "audit annuel ou suivi continu", and in Arabic, and runs them in the engines its buyers use. In French, two competitors are cited and the company is not. In Arabic, no sources in the sector are cited at all, only general pages.</p>
+<p>The plan follows from that log. For French it publishes native versions of its two best English articles at their own URLs with reciprocal annotations. For Arabic it starts with a glossary of the five terms buyers use, each defined once, because the gap there is an absence of any strong source. Three monthly runs later it reads the trend, not the first result.</p>
+<h2>Let people choose, do not choose for them</h2>
+<p>Google advises against automatically redirecting users from one language version to another, for example on a guess about their language. Such redirects can prevent users and search engines from seeing all versions. Offer visible links between the versions on every page, and use the <code>x-default</code> annotation for a page that serves as the language selector.</p>
+<h2>Measure each language separately</h2>
+<p>Run the ten questions in each language monthly and keep one log per language. Compare citation rates by language and by engine. If the French rate is zero and the English rate is not, the likely causes are the ones in this article: no page, a page that does not answer the native question, missing hreflang, or a page that is not indexed. The <a href="@checklist">GEO Audit Checklist</a> covers indexing, sitemap and structured data checks, which apply to each language version in the same way.</p>
+<p>Related: <a href="@glossary/hreflang">hreflang</a> and <a href="@blog/repurposing-mistakes-that-kill-authority">repurposing mistakes</a>.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/specialty/international/localized-versions" rel="noopener">Tell Google about localized versions of your page, Google Search Central</a>: reciprocal hreflang, x-default, equivalent implementation methods, translated pages are not duplicates.</li>
+<li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites" rel="noopener">Managing multi-regional and multilingual sites, Google Search Central</a>: separate URLs, one language per page, avoiding automatic redirects.</li>
+<li><a href="https://developers.google.com/search/docs/essentials/spam-policies" rel="noopener">Spam policies for Google web search, Google Search Central</a>: scaled content abuse and automated translation.</li>
+</ul>
+<h2 id="faq">Common questions about GEO in French and Arabic</h2><div><details><summary>Do I need separate pages for each language?</summary><div><p>Yes. Google recommends a different URL for each language version, with hreflang annotations linking them, instead of changing the language of a page with cookies or browser settings.</p></div></details><details><summary>Is translated content treated as duplicate content?</summary><div><p>Google says localized versions are only considered duplicates if the main content stays untranslated.</p></div></details><details><summary>Does the lang attribute tell Google the page language?</summary><div><p>No. Google determines language from the visible content. Keep the attribute correct for browsers and screen readers, and write one language per page.</p></div></details><details><summary>Can I use machine translation?</summary><div><p>As a first pass followed by a native review, yes. Published without review it risks low-value pages, which Google's spam policy treats as scaled content abuse in some cases.</p></div></details><details><summary>Should I redirect visitors to their language automatically?</summary><div><p>Google advises against it. Give visible links to the other versions and let the visitor choose.</p></div></details><details><summary>Will French and Arabic pages be cited by AI engines?</summary><div><p>We cannot promise it. Run your core questions in each language monthly and log the results to see where you stand.</p></div></details></div>
+<div id="cta">
+<p>Audit</p>
+<h2>Want your French and Arabic questions tested?</h2>
+<p>The AI Citation Audit tests your brand on 40 buyer questions. Tell us on the call which languages your buyers ask in.</p>
+<a href="@contact">Book a strategy call</a>
+</div>

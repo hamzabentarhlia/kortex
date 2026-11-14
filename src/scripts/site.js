@@ -327,8 +327,10 @@ function initSlide() {
 }
 
 function initThanks() {
-  const block = document.querySelector('[data-thanks-block=checklist]');
-  if (block && new URLSearchParams(location.search).get('f') === 'checklist') block.hidden = false;
+  const from = new URLSearchParams(location.search).get('f');
+  document.querySelectorAll('[data-thanks-block]').forEach((block) => {
+    if (block.dataset.thanksBlock === from) block.hidden = false;
+  });
 }
 
 function initConsent() {

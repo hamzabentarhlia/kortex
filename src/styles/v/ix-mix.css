@@ -1,0 +1,23 @@
+.mix{padding:clamp(20px,3vw,32px)}
+.mix-chips{display:flex;flex-wrap:wrap;gap:8px;min-width:0;margin:0 0 22px;padding:0;border:0}
+.mix-chips .demo-chip{position:relative;cursor:pointer}
+.mix-chips .demo-chip input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.mix-chips .demo-chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--text-2);font-weight:600;font-size:14.5px;transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast),color var(--dur-fast)}
+.mix-chips .demo-chip input:checked+span{background:var(--surface-2);color:var(--text);border-color:var(--text-3)}
+.mix-chips .demo-chip input:focus-visible+span{outline:2px solid var(--accent-text);outline-offset:3px}
+.mix-chips{display:none}
+.mix-js .mix-chips{display:flex}
+.mix-panel{padding:20px 0;border-top:1px solid var(--line)}
+.mix-panel:first-child{border-top:0}
+.mix-js .mix-panel{border-top:0;padding-top:0;animation:mixin var(--dur-base) var(--ease-out)}
+.mix-js .mix-h{display:none}
+.mix-h{margin:0 0 14px;font-size:18px}
+.mix-cols{display:grid;gap:26px}
+@media (min-width:860px){.mix-cols{grid-template-columns:1fr 1fr;gap:44px}}
+.mix h4{margin:0 0 12px;font:600 12px var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.mix-becomes{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.mix-becomes li{display:grid;gap:2px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+.mix-becomes strong{color:var(--text)}
+.mix-becomes span{color:var(--text-2);font-size:15px}
+@keyframes mixin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.mix-js .mix-panel{animation:none}}

@@ -1,0 +1,11 @@
+.fl{position:relative}
+.js .fl label{position:absolute;inset-inline-start:17px;top:17px;z-index:1;margin:0;color:var(--text-3);font-size:16px;pointer-events:none;transform-origin:left top;transition:transform var(--dur-fast) var(--ease-out),color var(--dur-fast)}
+:root[dir=rtl] .js .fl label{transform-origin:right top}
+.js .fl input,.js .fl textarea{padding-top:24px}
+.js .fl.is-filled label,.js .fl:focus-within label{transform:translateY(-11px) scale(.78);color:var(--text-2)}
+.js .fl input::placeholder{color:transparent}
+.js .fl:focus-within input::placeholder{color:var(--text-3)}
+.js .fl .opt{display:none}
+.ff-msg{margin:6px 2px 0;color:var(--accent-text);font-size:14px;font-weight:600}
+.fl input[aria-invalid=true],.fl textarea[aria-invalid=true]{border-color:var(--accent-text)}
+@media (prefers-reduced-motion:reduce){.js .fl label{transition:none}}

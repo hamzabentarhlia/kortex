@@ -1,0 +1,4 @@
+.notfound{position:relative;overflow:hidden;min-height:min(78vh,720px);display:grid;align-items:center}
+.notfound>.wrap{position:relative;z-index:1}
+.notfound .kx-field{opacity:1;-webkit-mask-image:none;mask-image:none}
+.notfound h1{text-wrap:balance}
