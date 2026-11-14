@@ -542,7 +542,7 @@ def footer(lang):
 {"".join(cols)}
 </div>
 <div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
-<div class="footer-mark reveal" aria-hidden="true">KORTEX</div>
+<div class="footer-mark reveal" aria-hidden="true"></div>
 </div>
 </footer>'''
 
@@ -696,8 +696,8 @@ def demo_block(lang):
             f'<li><details class="dc"{" open" if k == 0 else ""} data-key="{key}"><summary><span class="dc-name">{html.escape(DEMO["labels"][lang][key])}</span>{badge}</summary>'
             f'<p class="dc-body{mono}">{html.escape(first["cards"][lang][key])}</p></details></li>'
         )
-    line_h = '<svg class="demo-line demo-line-h" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="100" y2="1" pathLength="1" vector-effect="non-scaling-stroke"/></svg>'
-    line_v = '<svg class="demo-line demo-line-v" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="100" pathLength="1" vector-effect="non-scaling-stroke"/></svg>'
+    line_h = '<svg class="demo-line demo-line-h" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="100" y2="1" pathLength="1"/></svg>'
+    line_v = '<svg class="demo-line demo-line-v" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="100" pathLength="1"/></svg>'
     return (
         f'<section class="section section-tint" data-ix="demo" aria-labelledby="demo-title"><div class="wrap">'
         f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="demo-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
