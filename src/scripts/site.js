@@ -22,6 +22,20 @@ function redirectLegacyPage() {
   if (target) location.replace(target + location.search);
 }
 
+window.kxTrack = (name, props) => track(name, props);
+
+function initModules() {
+  const els = [...document.querySelectorAll('[data-module]')];
+  if (!els.length) return;
+  const v = new URL(import.meta.url).search;
+  const load = (el) => import('/assets/js/' + el.dataset.module + '.js' + v).then((m) => m.init(el)).catch(() => { });
+  if (!('IntersectionObserver' in window)) { els.forEach(load); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) { io.unobserve(en.target); load(en.target); } });
+  }, { rootMargin: '300px' });
+  els.forEach((el) => io.observe(el));
+}
+
 function currentTheme() {
   const set = root.dataset.theme;
   if (set) return set;
@@ -662,6 +676,7 @@ initScroll();
 initPipeline();
 initFinder();
 initSlide();
+initModules();
 initThanks();
 const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
 [initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx].forEach((fn) => idle(() => fn()));

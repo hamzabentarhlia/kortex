@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+import urllib.parse
 from pathlib import Path
 
 import art
@@ -24,6 +25,8 @@ GA_ID = "G-4440VPDMPW"
 CAL_LINK = "hamza-bentarhlia"
 CAL_URL = "https://cal.com/" + CAL_LINK
 SITE = json.loads((Path(__file__).resolve().parent.parent / "data" / "site.json").read_text(encoding="utf-8"))
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+DEMO = json.loads((DATA_DIR / "demo.json").read_text(encoding="utf-8"))
 PAGECLIP = "https://send.pageclip.co/"
 CONTACT_ACTION = PAGECLIP + SITE["contactFormKey"]
 LEADS_ACTION = PAGECLIP + (SITE["leadsFormKey"] or SITE["contactFormKey"])
@@ -633,6 +636,189 @@ def case_studies(lang):
     return "".join(out)
 
 
+DEMO_TEXT = {
+    "en": {
+        "eyebrow": "See it run",
+        "title": "Watch one source become ten assets",
+        "lead": "Pick a sample source and run the pipeline. Everything here is example content, so you can see the stages and the output without sending us anything.",
+        "choose": "Choose a sample source",
+        "run": "Run the pipeline",
+        "replay": "Replay",
+        "caption": "Sample run with example content",
+        "example": "Example",
+        "count": "10 assets from one source, the size of a GHOST month. SWARM runs 20 to 24 per source.",
+        "done": "Run complete. 10 assets ready for review.",
+        "assets": "Assets from this source",
+        "stages": "Pipeline stages",
+        "open": "Open an asset to read an example excerpt",
+    },
+    "fr": {
+        "eyebrow": "Voyez-le tourner",
+        "title": "Regardez une source devenir dix contenus",
+        "lead": "Choisissez une source d'exemple et lancez la chaîne. Tout ici est du contenu d'exemple : vous voyez les étapes et le résultat sans rien nous envoyer.",
+        "choose": "Choisir une source d'exemple",
+        "run": "Lancer la chaîne",
+        "replay": "Rejouer",
+        "caption": "Essai avec du contenu d'exemple",
+        "example": "Exemple",
+        "count": "10 contenus à partir d'une source, la taille d'un mois GHOST. SWARM en produit 20 à 24 par source.",
+        "done": "Essai terminé. 10 contenus prêts pour la relecture.",
+        "assets": "Contenus issus de cette source",
+        "stages": "Étapes de la chaîne",
+        "open": "Ouvrez un contenu pour lire un extrait d'exemple",
+    },
+}
+
+
+def demo_block(lang):
+    if lang not in DEMO_TEXT:
+        return ""
+    t = DEMO_TEXT[lang]
+    first = DEMO["sources"][0]
+    chips = "".join(
+        f'<label class="demo-chip"><input type="radio" name="demo-source" value="{src["id"]}"{" checked" if i == 0 else ""}><span>{icon(src["icon"])}{html.escape(src[lang]["label"])}</span></label>'
+        for i, src in enumerate(DEMO["sources"])
+    )
+    stages = "".join(
+        f'<li class="ds" data-i="{i}"><span class="ds-dot" aria-hidden="true"></span><span class="ds-name">{html.escape(n)}</span><span class="ds-log">{html.escape(first["logs"][lang][i])}</span></li>'
+        for i, n in enumerate(DEMO["stages"][lang])
+    )
+    cards = []
+    for k, key in enumerate(DEMO["labels"][lang]):
+        n = DEMO["counts"][key]
+        badge = f'<span class="dc-n">x{n}</span>' if n > 1 else ""
+        mono = " dc-mono" if key == "schema" else ""
+        cards.append(
+            f'<li><details class="dc"{" open" if k == 0 else ""} data-key="{key}"><summary><span class="dc-name">{html.escape(DEMO["labels"][lang][key])}</span>{badge}</summary>'
+            f'<p class="dc-body{mono}">{html.escape(first["cards"][lang][key])}</p></details></li>'
+        )
+    line_h = '<svg class="demo-line demo-line-h" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="100" y2="1" pathLength="1" vector-effect="non-scaling-stroke"/></svg>'
+    line_v = '<svg class="demo-line demo-line-v" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="100" pathLength="1" vector-effect="non-scaling-stroke"/></svg>'
+    return (
+        f'<section class="section section-tint" data-ix="demo" aria-labelledby="demo-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="demo-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
+        f'<div class="demo glass" data-module="demo" data-lang="{lang}" data-state="done" data-run-label="{t["run"]}" data-replay-label="{t["replay"]}" data-done="{t["done"]}">'
+        f'<div class="demo-top"><fieldset class="demo-sources"><legend class="visually-hidden">{t["choose"]}</legend>{chips}</fieldset><span class="demo-tag">{t["example"]}</span></div>'
+        f'<div class="demo-src"><strong data-demo-title>{html.escape(first[lang]["title"])}</strong><span data-demo-meta>{html.escape(first[lang]["meta"])}</span><p data-demo-desc>{html.escape(first[lang]["desc"])}</p></div>'
+        f'<div class="demo-bar"><button class="btn btn-primary demo-run" type="button" data-demo-run data-cta="demo-run">{t["run"]}</button><p class="demo-caption">{t["caption"]}</p></div>'
+        f'<div class="demo-flow" role="group" aria-label="{t["stages"]}">{line_h}{line_v}<ol class="demo-stages">{stages}</ol></div>'
+        f'<h3 class="demo-h">{t["assets"]}</h3><ul class="demo-cards" aria-label="{t["open"]}">{"".join(cards)}</ul>'
+        f'<p class="demo-count">{t["count"]}</p><p class="visually-hidden" role="status" aria-live="polite" data-demo-status></p>'
+        f'</div></div></section>'
+    )
+
+
+CALC_TEXT = {
+    "en": {
+        "eyebrow": "Your numbers",
+        "title": "Compare what you spend with what KORTEX costs",
+        "lead": "Move the sliders to match how you work today. The numbers update as you go, and nothing leaves this page.",
+        "assets": "Assets you need per month",
+        "rate": "What you pay per asset today",
+        "hours": "Hours you spend on content each week",
+        "value": "Value of your time",
+        "per_hour": "per hour",
+        "current": "Your current monthly cost",
+        "kortex": "KORTEX plan for that volume",
+        "production": "Production",
+        "time": "your time",
+        "from": "from",
+        "per_month": "per month",
+        "verdict_more": "At your volume, {plan} costs more than your current spend. It wins on consistency and citations, not on price.",
+        "verdict_less": "At your volume, {plan} costs about {diff} less than your current spend.",
+        "verdict_titan": "At your volume, TITAN starts at {price}. Scope and price are set together on a call.",
+        "note": "Price does not capture assets built to be cited, with schema, interlinking and a human editor.",
+        "fit": "Which plan fits: up to 10 assets a month maps to GHOST, 11 to 24 to SWARM, and 25 or more to TITAN.",
+        "book": "Book a strategy call",
+        "perasset": {"GHOST": "10 assets, about €250 each.", "SWARM": "20 to 24 assets, about €230 to €275 each.", "TITAN": "28 or more assets per source, two or more sources, about €215 each or less."},
+        "price_note": "Rates and hours are your own inputs. This compares budgets, not identical output.",
+        "plan_msg": "Plan from the calculator",
+    },
+    "fr": {
+        "eyebrow": "Vos chiffres",
+        "title": "Comparez ce que vous dépensez avec ce que coûte KORTEX",
+        "lead": "Réglez les curseurs selon votre façon de travailler aujourd'hui. Les chiffres se mettent à jour en direct, et rien ne quitte cette page.",
+        "assets": "Contenus dont vous avez besoin par mois",
+        "rate": "Ce que vous payez par contenu aujourd'hui",
+        "hours": "Heures que vous passez sur le contenu chaque semaine",
+        "value": "Valeur de votre temps",
+        "per_hour": "de l'heure",
+        "current": "Votre coût mensuel actuel",
+        "kortex": "L'offre KORTEX pour ce volume",
+        "production": "Production",
+        "time": "votre temps",
+        "from": "dès",
+        "per_month": "par mois",
+        "verdict_more": "À votre volume, {plan} coûte plus que votre dépense actuelle. Elle l'emporte sur la régularité et les citations, pas sur le prix.",
+        "verdict_less": "À votre volume, {plan} coûte environ {diff} de moins que votre dépense actuelle.",
+        "verdict_titan": "À votre volume, TITAN démarre à {price}. Le périmètre et le prix se fixent ensemble lors d'un appel.",
+        "note": "Le prix ne mesure pas des contenus conçus pour être cités, avec schema, maillage interne et une relecture humaine.",
+        "fit": "Quelle offre convient : jusqu'à 10 contenus par mois correspond à GHOST, 11 à 24 à SWARM, et 25 ou plus à TITAN.",
+        "book": "Réserver un appel stratégique",
+        "perasset": {"GHOST": "10 contenus, environ 250 € chacun.", "SWARM": "20 à 24 contenus, environ 230 à 275 € chacun.", "TITAN": "28 contenus ou plus par source, deux sources ou plus, environ 215 € chacun ou moins."},
+        "price_note": "Les tarifs et les heures sont vos propres données. Cela compare des budgets, pas des livrables identiques.",
+        "plan_msg": "Offre issue du calculateur",
+    },
+}
+CALC_DEFAULTS = {"assets": 12, "rate": 250, "hours": 4, "value": 60}
+CALC_PLANS = {"GHOST": 2500, "SWARM": 5500, "TITAN": 12000}
+
+
+def calc_plan(assets):
+    return "GHOST" if assets <= 10 else "SWARM" if assets <= 24 else "TITAN"
+
+
+def calc_money(lang, n):
+    digits = f"{int(n):,}"
+    if lang == "fr":
+        return digits.replace(",", " ") + " €"
+    return "€" + digits
+
+
+def calc_numbers(assets, rate, hours, value):
+    production = assets * rate
+    own_time = int(hours * 52 / 12 * value + 0.5)
+    return production, own_time, production + own_time
+
+
+def calc_block(lang):
+    if lang not in CALC_TEXT:
+        return ""
+    t = CALC_TEXT[lang]
+    d = CALC_DEFAULTS
+    production, own_time, current = calc_numbers(d["assets"], d["rate"], d["hours"], d["value"])
+    plan = calc_plan(d["assets"])
+    price = CALC_PLANS[plan]
+    m = lambda n: calc_money(lang, n)
+    if plan == "TITAN":
+        verdict = t["verdict_titan"].format(price=m(price))
+    elif price > current:
+        verdict = t["verdict_more"].format(plan=plan)
+    else:
+        verdict = t["verdict_less"].format(plan=plan, diff=m(current - price))
+    options = "".join(f'<option value="{v}"{" selected" if v == d["value"] else ""}>{m(v)} {t["per_hour"]}</option>' for v in (30, 60, 100))
+    notes = urllib.parse.quote(f'{t["plan_msg"]}: {plan}')
+    book = f'{CAL_URL}?lng={lang}&notes={notes}'
+    return (
+        f'<section class="section" data-ix="calc" aria-labelledby="calc2-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="calc2-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
+        f'<div class="calc2 glass" data-module="calc" data-lang="{lang}" data-book="{CAL_URL}?lng={lang}" data-from="{t["from"]}" data-plan-msg="{t["plan_msg"]}" data-i18n="{html.escape(json.dumps({k: t[k] for k in ("verdict_more", "verdict_less", "verdict_titan", "perasset")}, ensure_ascii=False))}">'
+        f'<form class="calc2-form" onsubmit="return false">'
+        f'<div class="cf"><label for="cx-assets">{t["assets"]}</label><output for="cx-assets" data-out="assets">{d["assets"]}</output><input id="cx-assets" type="range" min="4" max="40" step="1" value="{d["assets"]}" data-key="assets"></div>'
+        f'<div class="cf"><label for="cx-rate">{t["rate"]}</label><output for="cx-rate" data-out="rate">{m(d["rate"])}</output><input id="cx-rate" type="range" min="50" max="600" step="10" value="{d["rate"]}" data-key="rate"></div>'
+        f'<div class="cf"><label for="cx-hours">{t["hours"]}</label><output for="cx-hours" data-out="hours">{d["hours"]}</output><input id="cx-hours" type="range" min="0" max="20" step="1" value="{d["hours"]}" data-key="hours"></div>'
+        f'<div class="cf cf-select"><label for="cx-value">{t["value"]}</label><select id="cx-value" data-key="value">{options}</select></div>'
+        f'</form>'
+        f'<div class="calc2-out" aria-live="polite" aria-atomic="true">'
+        f'<div class="co-grid"><div class="co-col"><h3>{t["current"]}</h3><p class="co-big" data-current>{m(current)}</p><p class="co-sub">{t["production"]} <span data-production>{m(production)}</span>, {t["time"]} <span data-time>{m(own_time)}</span></p></div>'
+        f'<div class="co-col"><h3>{t["kortex"]}</h3><p class="co-big"><span class="co-from" data-from-label{" hidden" if plan != "TITAN" else ""}>{t["from"]} </span><span data-plan-price>{m(price)}</span></p><p class="co-sub"><strong data-plan-name>{plan}</strong> {t["per_month"]}. <span data-perasset>{t["perasset"][plan]}</span></p></div></div>'
+        f'<p class="co-verdict" data-verdict>{verdict}</p>'
+        f'<p class="co-note">{t["note"]}</p><p class="co-note" data-fit>{t["fit"]}</p><p class="co-note">{t["price_note"]}</p>'
+        f'<a class="btn btn-primary" href="{book}" {BOOK_ATTRS} data-cta="calc" data-calc-book>{t["book"]}{icon("arrow", "flip")}</a>'
+        f'</div></div></div></section>'
+    )
+
+
 NL_COUNTER = [0]
 
 
@@ -785,6 +971,8 @@ def resolve(body, lang):
     body = body.replace("@@email", EMAIL)
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
+    body = body.replace("{{demo}}", demo_block(lang))
+    body = body.replace("{{calc}}", calc_block(lang))
     body = body.replace("{{checklist_items}}", checklist_items(lang))
     body = body.replace("{{proof_log}}", proof_log(lang)).replace("{{proof_screens}}", proof_screens(lang)).replace("{{proof_changelog}}", proof_changelog(lang)).replace("{{case_studies}}", case_studies(lang))
     body = body.replace("{{checklist_form_top}}", checklist_form(lang, "top")).replace("{{checklist_form_bottom}}", checklist_form(lang, "bottom"))
@@ -1215,6 +1403,7 @@ def visual_css(body, pid=""):
     used = visuals.modules_in(body)
     if pid.startswith("blog/") and "blog" not in used:
         used = sorted(used + ["blog"])
+    used = sorted(set(used + [k for k in ("ix-" + m for m in re.findall(r'data-ix="([a-z]+)"', body)) if k in VCSS]))
     if not used:
         return ""
     return VCSS["kit"] + "".join(VCSS.get(n, "") for n in used)
@@ -1448,6 +1637,11 @@ def main():
     js_out = OUT / "assets" / "js" / "site.js"
     js_out.parent.mkdir(parents=True, exist_ok=True)
     js_out.write_text((SRC / "scripts" / "site.js").read_text(encoding="utf-8"), encoding="utf-8")
+    for mod in sorted((SRC / "scripts" / "modules").glob("*.js")):
+        (OUT / "assets" / "js" / mod.name).write_text(mod.read_text(encoding="utf-8"), encoding="utf-8")
+    data_out = OUT / "assets" / "data"
+    data_out.mkdir(parents=True, exist_ok=True)
+    (data_out / "demo.json").write_text(json.dumps(DEMO, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     css_v, js_v = asset_version(css_out), asset_version(js_out)
     built = 0
     for pid in PAGES:
