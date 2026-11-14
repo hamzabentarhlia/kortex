@@ -24,9 +24,9 @@ const required = {
   FAQPage: ['mainEntity'],
   BreadcrumbList: ['itemListElement'],
   Service: ['name', 'provider'],
-  Offer: ['priceCurrency', 'priceSpecification'],
+  Offer: ['priceCurrency'],
   DefinedTerm: ['name', 'description'],
-  DefinedTermSet: ['name'],
+  DefinedTermSet: ['name', 'hasDefinedTerm'],
   SoftwareApplication: ['name'],
 };
 
@@ -52,7 +52,7 @@ for (const page of pages) {
   const html = readFileSync(page, 'utf8');
   if (/http-equiv="refresh"/.test(html)) continue;
   const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
-  const visibleQuestions = [...html.matchAll(/<details class="faq-item"[^>]*>\s*<summary>([\s\S]*?)<\/summary>/g)].map((m) => plain(m[1]));
+  const visibleQuestions = [...html.matchAll(/<details(?: class="faq-item")?>\s*<summary>([\s\S]*?)<\/summary>/g)].map((m) => plain(m[1]));
   let hasFaqSchema = false;
   for (const match of scripts) {
     blocks += 1;
@@ -69,6 +69,7 @@ for (const page of pages) {
         for (const key of required[type] || []) {
           if (node[key] === undefined || node[key] === '') fail(page, `${type} is missing ${key}`);
         }
+        if (type === 'Offer' && node.price === undefined && !node.priceSpecification) fail(page, 'Offer needs price or priceSpecification');
         if (type === 'FAQPage') {
           hasFaqSchema = true;
           const schemaQuestions = node.mainEntity.map((q) => q.name);

@@ -14,6 +14,9 @@ Founder: Hamza Bentarhlia. Contact: contact@kortexlab.me. Book a strategy call: 
 - [KORTEX: GEO, SEO and content studio](https://www.kortexlab.me/): KORTEX turns one blog post, video, podcast or webinar into assets that ChatGPT, Perplexity, Gemini and Google AI Overviews cite and search ranks.
 - [How KORTEX works](https://www.kortexlab.me/how-it-works/): The KORTEX method in plain language: we extract expertise from your source, structure it, produce assets, review them with a person and measure citations.
 - [Pricing](https://www.kortexlab.me/pricing/): KORTEX plans: GHOST €2,500, SWARM €5,500 and TITAN from €12,000 per month. A monthly citation check in every plan, no setup fees, 30 days' notice.
+- [AI Citation Audit](https://www.kortexlab.me/audit/): A €490 audit that tests your brand on 40 real buyer questions in ChatGPT, Perplexity, Gemini and Google AI Overviews. Delivered in 5 business days.
+- [The GEO Audit Checklist](https://www.kortexlab.me/checklist/): The 27 checks we run before any engagement, across access, pages, entity and trust, structured data and measurement. Read the list, get the PDF.
+- [Citation log](https://www.kortexlab.me/proof/): Our own AI citation log: the 40-question method, a dated results table and a changelog of what we changed on kortexlab.me. Published as we run it.
 - [Solutions](https://www.kortexlab.me/solutions/): KORTEX works for B2B companies, creators and e-commerce brands, starting from a blog post, video, podcast or webinar. Find the entry point that fits you.
 - [GEO for B2B companies](https://www.kortexlab.me/solutions/b2b/): For SaaS, consulting, agencies and industrial firms. KORTEX turns your expertise into content that AI engines cite while buyers build their shortlist.
 - [GEO for creators and experts](https://www.kortexlab.me/solutions/creators/): For YouTubers, podcasters, coaches and speakers. KORTEX turns each episode into articles, FAQs and posts AI engines quote long after release day.

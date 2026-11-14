@@ -63,8 +63,8 @@ a.glass:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 @media (min-width:860px){.founder{grid-template-columns:260px 1fr;gap:56px}}
 .founder-photo{display:grid;place-items:center;aspect-ratio:1;width:100%;max-width:220px;border:1px solid var(--chip-line);border-radius:24px;background:radial-gradient(circle at 30% 20%,var(--glow-3),transparent 60%),radial-gradient(circle at 80% 90%,var(--glow-1),transparent 60%),var(--surface-solid);font:800 54px/1 var(--ff-display);color:var(--accent-text);letter-spacing:.04em}
 .founder-photo img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
-.founder blockquote{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.55;color:var(--text)}
-.founder blockquote p+p{margin-top:.8em}
+.founder blockquote,.founder .founder-copy{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.55;color:var(--text)}
+.founder blockquote p+p,.founder .founder-copy p+p{margin-top:.8em}
 .founder-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:22px;color:var(--text-3);font-size:14.5px}
 .founder-meta strong{color:var(--text);font-size:16px}
 
@@ -435,3 +435,44 @@ main{overflow-x:clip}
 
 body{transition:background-color var(--dur-base,360ms) ease,color var(--dur-base,360ms) ease}
 @media (prefers-reduced-motion:reduce){body{transition:none}}
+.nl-block{display:grid;gap:18px 32px;align-items:center;padding:clamp(22px,4vw,34px);margin-top:44px}
+@media (min-width:900px){.nl-block{grid-template-columns:1.1fr 1fr}}
+.nl-copy h2{font:800 clamp(20px,2.4vw,26px)/1.2 var(--ff-display);margin:0 0 8px}
+.nl-copy p{margin:0;color:var(--text-2);font-size:15.5px}
+.nl-form{display:grid;gap:10px}
+.nl-row{display:flex;gap:10px;flex-wrap:wrap}
+.nl-row input[type=email]{flex:1 1 220px;min-height:48px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface-solid);color:var(--text);font:inherit}
+.nl-row input[type=email]:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+.nl-row .btn{min-height:48px}
+.nl-status{margin:0;font-size:14.5px;color:var(--text-2)}
+.nl-status.is-error{color:var(--accent-text)}
+.nl-status[hidden]{display:none}
+.footer-nl .nl-block{margin-top:0;margin-bottom:44px}
+.nl-slide{position:fixed;inset-inline-end:24px;bottom:24px;z-index:55;width:min(380px,calc(100vw - 48px));padding:22px;background:var(--surface-solid);box-shadow:0 24px 60px -24px rgb(0 0 0/.55);transform:translateY(24px);opacity:0;transition:transform var(--dur-base,360ms) var(--ease),opacity var(--dur-base,360ms)}
+.nl-slide.is-in{transform:none;opacity:1}
+.nl-slide[hidden]{display:none}
+.nl-slide h2{font:800 18px/1.25 var(--ff-display);margin:0 0 8px;padding-inline-end:36px}
+.nl-slide p{margin:0 0 14px;color:var(--text-2);font-size:14.5px}
+.nl-close{position:absolute;inset-block-start:10px;inset-inline-end:10px;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--text-2);cursor:pointer}
+.nl-close svg{width:18px;height:18px}
+@media (max-width:899px){.nl-slide{display:none!important}}
+@media (prefers-reduced-motion:reduce){.nl-slide{transition:none}}
+.ck-grid{align-items:start}
+.ck-group h3{font:800 18px var(--ff-display);margin:0 0 14px}
+.ck-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ck-list li{display:flex;gap:12px;align-items:flex-start;color:var(--text-2);font-size:15.5px;line-height:1.5}
+.ck-n{flex:0 0 28px;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--chip-bg);color:var(--accent-text);font:700 13px var(--ff-mono)}
+.cta-second{margin:14px 0 0}
+.audit-pay .btn{margin-bottom:12px}
+.tier-per{margin:10px 0 0;font-size:14px;color:var(--text-2)}
+.tier-per strong{color:var(--text)}
+.finder fieldset+fieldset{margin-top:14px}
+.finder-rules{margin:14px 0 0;padding-inline-start:20px;font-size:14px;color:var(--text-2)}
+.js .finder-rules{display:none}
+.finder-book{margin-top:14px}
+.risk-grid{display:grid;gap:14px}
+@media (min-width:760px){.risk-grid{grid-template-columns:repeat(3,1fr)}}
+.risk-grid .card p{margin:0}
+.proof-log td,.proof-log th{white-space:normal}
+.finder .finder-book{width:max-content;justify-self:start;display:inline-flex;justify-content:center;margin-top:16px;padding-inline:26px;white-space:nowrap}
+.tier-per{margin:16px 0 18px}

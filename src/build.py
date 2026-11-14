@@ -23,6 +23,10 @@ LINKEDIN = "https://www.linkedin.com/in/hamza-bentarhlia/"
 GA_ID = "G-4440VPDMPW"
 CAL_LINK = "hamza-bentarhlia"
 CAL_URL = "https://cal.com/" + CAL_LINK
+SITE = json.loads((Path(__file__).resolve().parent.parent / "data" / "site.json").read_text(encoding="utf-8"))
+PAGECLIP = "https://send.pageclip.co/"
+CONTACT_ACTION = PAGECLIP + SITE["contactFormKey"]
+LEADS_ACTION = PAGECLIP + (SITE["leadsFormKey"] or SITE["contactFormKey"])
 INDEXNOW_KEY = "6f1c9b2e8a4d47f3b0e5c7a19d2f4e83"
 BUILD_DATE = "2026-10-18"
 
@@ -38,6 +42,11 @@ PAGES = {
     "from-podcast": "/solutions/from-a-podcast/",
     "from-webinar": "/solutions/from-a-webinar/",
     "pricing": "/pricing/",
+    "audit": "/audit/",
+    "checklist": "/checklist/",
+    "proof": "/proof/",
+    "thanks": "/thanks/",
+    "thanks-audit": "/thanks-audit/",
     "about": "/about/",
     "compare": "/compare/",
     "case-studies": "/case-studies/",
@@ -107,7 +116,26 @@ UI = {
         "cta_terms": "No setup fees. No commitment.",
         "home_crumb": "Home",
         "photo_alt": "Hamza Bentarhlia, founder of KORTEX",
-        "book_note": "30 minutes, no pressure. You leave with a clear view of where AI engines mention your field.",
+        "book_note": "30 minutes, no deck, you leave with three fixes whether we work together or not.",
+        "audit": "AI Citation Audit",
+        "checklist": "GEO Audit Checklist",
+        "proof": "Citation log",
+        "audit_cta": "Get the AI Citation Audit, €490",
+        "audit_cta_short": "AI Citation Audit, €490",
+        "audit_note": "Credited in full against your first month on any plan.",
+        "post_kicker": "Next step",
+        "post_audit_title": "Want this tested on your own site?",
+        "post_audit_text": "The AI Citation Audit tests your brand on 40 buyer questions in four engines and tells you what to fix first. 490 euros, five business days, credited against your first month.",
+        "post_call_title": "Want this applied to your own expertise?",
+        "post_call_text": "Book a 30-minute call. We look at where AI engines mention your field today and what it would take for them to mention you.",
+        "nl_title": "One GEO teardown, twice a month",
+        "nl_text": "One teardown of how a real page gets cited in AI answers, and what changed in AI search. Twice a month, no filler.",
+        "nl_label": "Work email",
+        "nl_btn": "Subscribe",
+        "nl_ok": "You are on the list. Check your inbox to confirm.",
+        "nl_err": "That did not send. Check your connection and try again.",
+        "nl_close": "Close",
+        "nl_slide_title": "Get the next teardown",
     },
     "fr": {
         "skip": "Aller au contenu principal",
@@ -156,7 +184,26 @@ UI = {
         "cta_terms": "Sans frais d'installation. Sans engagement.",
         "home_crumb": "Accueil",
         "photo_alt": "Hamza Bentarhlia, fondateur de KORTEX",
-        "book_note": "30 minutes, sans pression. Vous repartez avec une vision claire de la place de votre domaine dans les réponses IA.",
+        "book_note": "30 minutes, sans présentation, vous repartez avec trois corrections concrètes, que nous travaillions ensemble ou non.",
+        "audit": "Audit de citations IA",
+        "checklist": "Checklist d'audit GEO",
+        "proof": "Journal des citations",
+        "audit_cta": "Commander l'audit de citations IA, 490 €",
+        "audit_cta_short": "Audit de citations IA, 490 €",
+        "audit_note": "Déduit en totalité de votre premier mois, quelle que soit l'offre.",
+        "post_kicker": "Étape suivante",
+        "post_audit_title": "Envie de le tester sur votre propre site ?",
+        "post_audit_text": "L'audit de citations IA teste votre marque sur 40 questions d'acheteurs dans quatre moteurs et vous dit quoi corriger en premier. 490 euros, cinq jours ouvrés, déduits de votre premier mois.",
+        "post_call_title": "Envie de l'appliquer à votre propre expertise ?",
+        "post_call_text": "Réservez un appel de 30 minutes. Nous regardons où les moteurs d'IA parlent aujourd'hui de votre domaine et ce qu'il faudrait pour qu'ils parlent de vous.",
+        "nl_title": "Une analyse GEO, deux fois par mois",
+        "nl_text": "L'analyse d'une vraie page citée dans les réponses d'IA, et ce qui a changé dans la recherche IA. Deux fois par mois, sans remplissage.",
+        "nl_label": "E-mail professionnel",
+        "nl_btn": "S'abonner",
+        "nl_ok": "Vous êtes inscrit. Vérifiez votre boîte de réception pour confirmer.",
+        "nl_err": "L'envoi a échoué. Vérifiez votre connexion et réessayez.",
+        "nl_close": "Fermer",
+        "nl_slide_title": "Recevoir la prochaine analyse",
     },
     "ar": {
         "skip": "الانتقال إلى المحتوى الرئيسي",
@@ -205,7 +252,20 @@ UI = {
         "cta_terms": "بدون رسوم إعداد. بدون التزام.",
         "home_crumb": "الرئيسية",
         "photo_alt": "حمزة بنتغليا، مؤسس KORTEX",
-        "book_note": "30 دقيقة ودون أي ضغط. تخرج بصورة واضحة عن المواضع التي تذكر فيها محركات الذكاء الاصطناعي مجالك.",
+        "book_note": "30 دقيقة دون عرض تقديمي، وتخرج بثلاثة إصلاحات سواء عملنا معا أم لا.",
+        "post_kicker": "الخطوة التالية",
+        "post_audit_title": "هل تريد تجربة هذا على موقعك؟",
+        "post_audit_text": "يختبر تدقيق الاستشهادات علامتك على 40 سؤالا من أسئلة المشترين في أربعة محركات ويخبرك بما تصلحه أولا.",
+        "post_call_title": "هل تريد تطبيق هذا على خبرتك؟",
+        "post_call_text": "احجز مكالمة من 30 دقيقة. نرى أين تذكر محركات الذكاء الاصطناعي مجالك اليوم، وما الذي يلزم لتذكرك.",
+        "nl_title": "تحليل واحد لـ GEO، مرتين في الشهر",
+        "nl_text": "تحليل لصفحة حقيقية يُستشهد بها في إجابات الذكاء الاصطناعي، وما تغيّر في البحث بالذكاء الاصطناعي. مرتين في الشهر، دون حشو.",
+        "nl_label": "البريد المهني",
+        "nl_btn": "اشترك",
+        "nl_ok": "تم تسجيلك. تحقق من بريدك لتأكيد الاشتراك.",
+        "nl_err": "لم يُرسل الطلب. تحقق من اتصالك وحاول مرة أخرى.",
+        "nl_close": "إغلاق",
+        "nl_slide_title": "احصل على التحليل القادم",
     },
 }
 
@@ -339,9 +399,15 @@ def dropdown(lang, key, label, groups, current):
     links = menu_links(lang, groups, current)
     if not links:
         return ""
+    menu = f'<div class="nav-menu" id="menu-{key}" hidden>{links}</div>'
+    if exists(lang, key):
+        cur = ' aria-current="page"' if current == key else ""
+        return (
+            f'<li class="nav-split"><a class="nav-link" href="{url(lang, key)}"{cur}>{label}</a>'
+            f'<button class="nav-caret" type="button" aria-expanded="false" aria-controls="menu-{key}" data-menu-toggle aria-label="{label}">{icon("chevron")}</button>{menu}</li>'
+        )
     return (
-        f'<li><button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-{key}" data-menu-toggle>{label}{icon("chevron")}</button>'
-        f'<div class="nav-menu" id="menu-{key}" hidden>{links}</div></li>'
+        f'<li><button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-{key}" data-menu-toggle>{label}{icon("chevron")}</button>{menu}</li>'
     )
 
 
@@ -417,7 +483,7 @@ def book_href(lang):
 
 
 def book_bar(lang, pid):
-    if pid in ("contact", "login", "404", "privacy", "terms", "cookies"):
+    if pid in ("contact", "login", "404", "privacy", "terms", "cookies", "thanks", "thanks-audit"):
         return ""
     t = UI[lang]
     return f'<div class="book-bar" data-bookbar><span>{t["book_bar"]}</span><a class="btn btn-primary btn-sm" href="{book_href(lang)}" {BOOK_ATTRS} data-track="bar-book">{t["book"]}</a></div>'
@@ -454,7 +520,7 @@ def footer(lang):
 
     tup = lambda pid: t[pid][0]
     cols = [
-        col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("security", t["security"])]),
+        col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("audit", t.get("audit", "")), ("checklist", t.get("checklist", "")), ("proof", t.get("proof", "")), ("security", t["security"])]),
         col(t["col_solutions"], [(p, tup(p)) for p in ["b2b", "creators", "ecommerce", "from-blog", "from-youtube", "from-podcast", "from-webinar"]]),
         col(t["col_resources"], [("resources", t["resources"]), ("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
         col(t["col_company"], [("about", t["about"]), ("contact", t["contact"]), ("login", t["login"])]),
@@ -462,6 +528,7 @@ def footer(lang):
     legal = "".join(f'<a href="{url(lang, p)}">{t[p]}</a>' for p in ["privacy", "terms", "cookies"] if exists(lang, p))
     return f'''<footer class="site-footer">
 <div class="wrap">
+<div class="footer-nl">{newsletter_block(lang, "footer", "footer")}</div>
 <div class="footer-grid">
 <div class="footer-brand"><a class="brand" href="{url(lang, "home")}">{LOGO}<span>KORTEX</span></a><p>{t["footer_blurb"]}</p><p>{t["footer_place"]}</p>
 <p><a class="text-link" href="mailto:{EMAIL}">{EMAIL}</a></p>
@@ -473,9 +540,215 @@ def footer(lang):
 </footer>'''
 
 
+
+CHECKLIST = json.loads((Path(__file__).resolve().parent.parent / "data" / "checklist.json").read_text(encoding="utf-8"))
+CHECKLIST_FORM = {
+    "en": {"label": "Work email", "btn": "Send me the checklist", "note": "One email with the PDF link, then the twice-monthly teardown. Unsubscribe any time.", "err": "That did not send. Check your connection and try again."},
+    "fr": {"label": "E-mail professionnel", "btn": "Recevoir la checklist", "note": "Un e-mail avec le lien du PDF, puis l'analyse bimensuelle. Désinscription à tout moment.", "err": "L'envoi a échoué. Vérifiez votre connexion et réessayez."},
+}
+
+
+def checklist_items(lang):
+    code = lang if lang in ("en", "fr") else "en"
+    n = 0
+    out = []
+    for group in CHECKLIST["groups"]:
+        items = []
+        for c in CHECKLIST["checks"]:
+            if c["group"] != group["id"]:
+                continue
+            n += 1
+            items.append(f'<li><span class="ck-n">{n}</span><span>{html.escape(c[code]["title"])}</span></li>')
+        out.append(f'<section class="glass card ck-group" aria-labelledby="ck-{group["id"]}"><h3 id="ck-{group["id"]}">{html.escape(group[code])}</h3><ol class="ck-list" start="{n - len(items) + 1}">{"".join(items)}</ol></section>')
+    return f'<div class="grid grid-2 ck-grid">{"".join(out)}</div>'
+
+
+def checklist_form(lang, place):
+    code = lang if lang in ("en", "fr") else "en"
+    f = CHECKLIST_FORM[code]
+    NL_COUNTER[0] += 1
+    fid = f"ck-{NL_COUNTER[0]}"
+    thanks = url(lang, "thanks") + "?f=checklist"
+    return (
+        f'<form class="nl-form ck-form pageclip-form" action="{LEADS_ACTION}" method="post" data-lead-form data-form-name="checklist" data-track-form="checklist" data-thanks="{thanks}">'
+        f'{lead_fields("checklist", lang, "checklist")}'
+        f'<label class="visually-hidden" for="{fid}">{f["label"]}</label>'
+        f'<div class="nl-row"><input id="{fid}" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="{f["label"]}">'
+        f'<button class="btn btn-primary pageclip-form__submit" type="submit" data-cta="checklist-{place}">{f["btn"]}</button></div>'
+        f'<p class="form-note">{f["note"]}</p>'
+        f'<p class="nl-status is-error" data-form-error hidden role="alert">{f["err"]}</p></form>'
+    )
+
+
+PROOF = json.loads((Path(__file__).resolve().parent.parent / "data" / "citations.json").read_text(encoding="utf-8"))
+CASES = json.loads((Path(__file__).resolve().parent.parent / "data" / "case-studies.json").read_text(encoding="utf-8"))
+PROOF_TEXT = {
+    "en": {"date": "Date", "engine": "Engine and surface", "question": "Question", "named": "Named", "cited": "Cited", "others": "Others cited", "yes": "Yes", "no": "No", "none": "The first dated run has not been published yet. When it is, the full results land here: every question, every engine, what we found and what we changed.", "caption": "Citation log for kortexlab.me", "changes": "Date", "change": "What changed", "case_none": "No case study is published yet. This page is the layout future case studies will use, and it stays out of the sitemap and the navigation until a real one exists.", "challenge": "Challenge", "approach": "Approach", "results": "Results", "quote": "In the client's words", "asof": "Measured"},
+    "fr": {"date": "Date", "engine": "Moteur et interface", "question": "Question", "named": "Nommé", "cited": "Cité", "others": "Autres cités", "yes": "Oui", "no": "Non", "none": "La première série datée n'est pas encore publiée. Quand elle le sera, les résultats complets arriveront ici : chaque question, chaque moteur, ce que nous avons trouvé et ce que nous avons changé.", "caption": "Journal des citations de kortexlab.me", "changes": "Date", "change": "Ce qui a changé", "case_none": "Aucune étude de cas n'est encore publiée. Cette page est la mise en page que les futures études de cas utiliseront, et elle reste hors du sitemap et de la navigation tant qu'une vraie étude n'existe pas.", "challenge": "Enjeu", "approach": "Approche", "results": "Résultats", "quote": "Dans les mots du client", "asof": "Mesuré"},
+}
+
+
+def proof_log(lang):
+    t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
+    runs = PROOF["runs"]
+    if not runs:
+        return f'<div class="glass card"><p>{t["none"]}</p></div>'
+    rows = "".join(
+        f'<tr><td>{html.escape(r["date"])}</td><td>{html.escape(r["engine"])}</td><td>{html.escape(r["question"])}</td><td>{t["yes"] if r["named"] else t["no"]}</td><td>{t["yes"] if r["cited"] else t["no"]}</td><td>{html.escape(r.get("others", ""))}</td></tr>'
+        for r in runs
+    )
+    return (
+        f'<div class="tbl-wrap"><table class="tbl proof-log"><caption class="visually-hidden">{t["caption"]}</caption>'
+        f'<thead><tr><th scope="col">{t["date"]}</th><th scope="col">{t["engine"]}</th><th scope="col">{t["question"]}</th><th scope="col">{t["named"]}</th><th scope="col">{t["cited"]}</th><th scope="col">{t["others"]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+    )
+
+
+def proof_screens(lang):
+    shots = [r for r in PROOF["runs"] if r.get("screenshot")]
+    if not shots:
+        return ""
+    figs = "".join(f'<figure class="glass card" style="margin:0"><img src="{html.escape(r["screenshot"])}" alt="{html.escape(r["engine"] + " , " + r["date"])}" loading="lazy" width="640" height="400"><figcaption class="vx-caption">{html.escape(r["engine"])}, {html.escape(r["date"])}</figcaption></figure>' for r in shots)
+    return f'<div class="grid grid-2">{figs}</div>'
+
+
+def proof_changelog(lang):
+    t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
+    code = lang if lang in ("en", "fr") else "en"
+    rows = "".join(f'<tr><td>{html.escape(c["date"])}</td><td>{html.escape(c[code])}</td></tr>' for c in sorted(PROOF["changelog"], key=lambda c: c["date"], reverse=True))
+    return f'<div class="tbl-wrap"><table class="tbl"><caption class="visually-hidden">Changelog</caption><thead><tr><th scope="col">{t["changes"]}</th><th scope="col">{t["change"]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+
+
+def case_studies(lang):
+    t = PROOF_TEXT.get(lang, PROOF_TEXT["en"])
+    if not CASES:
+        return f'<div class="glass card"><p>{t["case_none"]}</p></div>'
+    out = []
+    for c in CASES:
+        results = "".join(f'<li>{icon("check")}<span><strong>{html.escape(r["metric"])}</strong> {html.escape(r["value"])} <small>{t["asof"]} {html.escape(r["date"])}</small></span></li>' for r in c["results"])
+        quote = f'<blockquote class="glass card"><p>{html.escape(c["quote"]["text"])}</p><footer>{html.escape(c["quote"]["by"])}</footer></blockquote>' if c.get("quote") else ""
+        out.append(
+            f'<article class="glass card"><h2>{html.escape(c["title"])}</h2><h3>{t["challenge"]}</h3><p>{html.escape(c["challenge"])}</p>'
+            f'<h3>{t["approach"]}</h3><p>{html.escape(c["approach"])}</p><h3>{t["results"]}</h3><ul class="checklist">{results}</ul>{quote}</article>'
+        )
+    return "".join(out)
+
+
+NL_COUNTER = [0]
+
+
+def lead_fields(form_name, lang, pid):
+    return (
+        f'<input type="hidden" name="form" value="{form_name}"><input type="hidden" name="source" value="{pid}"><input type="hidden" name="language" value="{lang}">'
+        '<input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">'
+    )
+
+
+def newsletter_form(lang, pid, place):
+    t = UI[lang]
+    NL_COUNTER[0] += 1
+    fid = f"nl-{NL_COUNTER[0]}"
+    return (
+        f'<form class="nl-form pageclip-form" action="{LEADS_ACTION}" method="post" data-lead-form data-form-name="newsletter" data-track-form="newsletter">'
+        f'{lead_fields("newsletter", lang, pid)}'
+        f'<label class="visually-hidden" for="{fid}">{t["nl_label"]}</label>'
+        f'<div class="nl-row"><input id="{fid}" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="{t["nl_label"]}">'
+        f'<button class="btn btn-primary pageclip-form__submit" type="submit" data-cta="newsletter-{place}">{t["nl_btn"]}</button></div>'
+        f'<p class="nl-status" data-form-ok hidden role="status">{t["nl_ok"]}</p>'
+        f'<p class="nl-status is-error" data-form-error hidden role="alert">{t["nl_err"]}</p>'
+        '</form>'
+    )
+
+
+def newsletter_block(lang, pid, place):
+    t = UI[lang]
+    inner = f'<div class="nl-copy"><h2 id="nl-title-{place}">{t["nl_title"]}</h2><p>{t["nl_text"]}</p></div>{newsletter_form(lang, pid, place)}'
+    if place == "footer":
+        return f'<div class="nl-block glass">{inner}</div>'
+    return f'<section class="nl-block glass" aria-labelledby="nl-title-{place}">{inner}</section>'
+
+
+def newsletter_slide(lang, pid):
+    t = UI[lang]
+    return (
+        f'<aside class="nl-slide glass" data-slide hidden aria-labelledby="nl-slide-title"><button class="nl-close" type="button" data-slide-close aria-label="{t["nl_close"]}">{icon("x")}</button>'
+        f'<h2 id="nl-slide-title">{t["nl_slide_title"]}</h2><p>{t["nl_text"]}</p>{newsletter_form(lang, pid, "slide")}</aside>'
+    )
+
+
+AUDIT_FORM = {
+    "en": {"name": "Name", "company": "Company", "site": "Website or content link", "email": "Work email", "send": "Request the audit", "note": "Payment is taken after a short fit check, not before.", "ok": "Request received.", "err": "That did not send. Check your connection and try again.", "pay": "Pay and start the audit"},
+    "fr": {"name": "Nom", "company": "Entreprise", "site": "Site ou lien de contenu", "email": "E-mail professionnel", "send": "Demander l'audit", "note": "Le paiement intervient après un court échange pour vérifier l'adéquation, pas avant.", "ok": "Demande reçue.", "err": "L'envoi a échoué. Vérifiez votre connexion et réessayez.", "pay": "Payer et lancer l'audit"},
+}
+
+
+def audit_request(lang):
+    f = AUDIT_FORM.get(lang, AUDIT_FORM["en"])
+    if SITE["stripeAuditUrl"]:
+        return f'<div class="audit-pay"><a class="btn btn-primary" href="{SITE["stripeAuditUrl"]}" rel="noopener" data-cta="audit-pay" data-audit-pay>{f["pay"]}{icon("arrow", "flip")}</a><p class="form-note">{UI.get(lang, UI["en"]).get("audit_note", UI["en"]["audit_note"])}</p></div>'
+    return (
+        f'<form class="form pageclip-form" action="{CONTACT_ACTION}" method="post" data-lead-form data-form-name="audit" data-track-form="audit" data-thanks="{url(lang, "thanks-audit")}">'
+        f'{lead_fields("audit", lang, "audit")}'
+        f'<div class="form-row"><div class="field"><label for="a-name">{f["name"]}</label><input id="a-name" name="name" type="text" required autocomplete="name"></div>'
+        f'<div class="field"><label for="a-company">{f["company"]}</label><input id="a-company" name="company" type="text" required autocomplete="organization"></div></div>'
+        f'<div class="form-row"><div class="field"><label for="a-site">{f["site"]}</label><input id="a-site" name="website" type="url" required inputmode="url" placeholder="https://"></div>'
+        f'<div class="field"><label for="a-email">{f["email"]}</label><input id="a-email" name="email" type="email" required autocomplete="email"></div></div>'
+        f'<button class="btn btn-primary pageclip-form__submit" type="submit" data-cta="audit-request">{f["send"]}{icon("arrow", "flip")}</button>'
+        f'<p class="form-note">{f["note"]} {UI.get(lang, UI["en"]).get("audit_note", UI["en"]["audit_note"])}</p>'
+        f'<p class="form-status is-error" data-form-error hidden role="alert">{f["err"]}</p></form>'
+    )
+
+
+def tag_ctas(page, pid):
+    counter = [0]
+    medium = pid.replace("/", "-")
+
+    def one(m):
+        attrs = m.group(1)
+        is_cal = f'href="{CAL_URL}' in attrs
+        is_btn = bool(re.search(r'class="[^"]*\bbtn\b', attrs))
+        if not (is_cal or is_btn):
+            return m.group(0)
+        track = re.search(r'data-track="([^"]+)"', attrs)
+        existing = re.search(r'data-cta="([^"]+)"', attrs)
+        if existing:
+            cta = existing.group(1)
+        else:
+            counter[0] += 1
+            cta = track.group(1) if track else f"{medium}-cta{counter[0]}"
+            attrs += f' data-cta="{cta}"'
+        if is_cal and "utm_source" not in attrs:
+            attrs = re.sub(r'href="(' + re.escape(CAL_URL) + r'[^"]*)"', lambda h: f'href="{h.group(1)}&amp;utm_source=site&amp;utm_medium={medium}&amp;utm_campaign={cta}"' if "?" in h.group(1) else f'href="{h.group(1)}?utm_source=site&amp;utm_medium={medium}&amp;utm_campaign={cta}"', attrs, count=1)
+        return f"<a{attrs}>"
+
+    return re.sub(r"<a\b([^>]*)>", one, page)
+
+
+def article_cta(lang, pid, body):
+    if not pid.startswith("blog/"):
+        return body
+    slug = pid.split("/", 1)[1]
+    t = UI[lang]
+    audit = slug in AUDIT_POSTS and exists(lang, "audit")
+    if '<div id="cta">' not in body:
+        if audit:
+            block = f'<div id="cta"><p>{t["post_kicker"]}</p><h2>{t["post_audit_title"]}</h2><p>{t["post_audit_text"]}</p><a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><p class="cta-second"><a class="text-link" href="@@book" data-cta="post-book">{t["book"]}</a></p></div>'
+        else:
+            block = f'<div id="cta"><p>{t["post_kicker"]}</p><h2>{t["post_call_title"]}</h2><p>{t["post_call_text"]}</p><a href="@@book" data-cta="post-book">{t["book"]}</a></div>'
+        return body.rstrip() + "\n" + block
+    contact = r'<a href="@contact">[^<]*</a>'
+    if audit:
+        replacement = f'<a href="@audit" data-cta="post-audit">{t["audit_cta"]}</a><a href="@@book" data-cta="post-book">{t["book"]}</a>'
+    else:
+        replacement = f'<a href="@@book" data-cta="post-book">{t["book"]}</a>'
+    return re.sub(contact, replacement, body, count=1)
+
+
+AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide"}
+
+
 def cta_band(lang):
     t = UI[lang]
-    second = f'<a class="btn btn-ghost" href="{url(lang, "pricing")}" data-track="band-pricing">{t["see_pricing"]}</a>' if exists(lang, "pricing") else ""
+    second = f'<a class="btn btn-ghost" href="{url(lang, "audit")}" data-track="band-audit">{t["audit_cta"]}</a>' if exists(lang, "audit") else (f'<a class="btn btn-ghost" href="{url(lang, "pricing")}" data-track="band-pricing">{t["see_pricing"]}</a>' if exists(lang, "pricing") else "")
     return f'''<section class="cta-band" aria-labelledby="cta-band-title">
 <div class="wrap">
 <span class="eyebrow">{t["cta_kicker"]}</span>
@@ -510,6 +783,12 @@ def resolve(body, lang):
     body = body.replace("@@book", book_href(lang))
     body = re.sub(r"\{\{photo:([a-z]+)(\|eager)?\}\}", lambda m: photo(lang, m.group(1), bool(m.group(2))), body)
     body = body.replace("@@email", EMAIL)
+    body = body.replace("{{audit_request}}", audit_request(lang))
+    body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
+    body = body.replace("{{checklist_items}}", checklist_items(lang))
+    body = body.replace("{{proof_log}}", proof_log(lang)).replace("{{proof_screens}}", proof_screens(lang)).replace("{{proof_changelog}}", proof_changelog(lang)).replace("{{case_studies}}", case_studies(lang))
+    body = body.replace("{{checklist_form_top}}", checklist_form(lang, "top")).replace("{{checklist_form_bottom}}", checklist_form(lang, "bottom"))
+    body = body.replace("@@contact_action", CONTACT_ACTION).replace("@@leads_action", LEADS_ACTION)
     body = body.replace("@@linkedin", LINKEDIN)
     body = re.sub(r"\{\{icon:([a-z]+)(?:\|([a-z -]+))?\}\}", lambda m: icon(m.group(1), m.group(2) or ""), body)
     body = body.replace("{{cta_band}}", cta_band(lang))
@@ -610,7 +889,8 @@ def article_wrap(lang, pid, meta, body):
 {short}
 </div></header>
 <div class="wrap narrow article-body prose">
-{body}
+{article_cta(lang, pid, body)}
+{newsletter_block(lang, pid, "post") if hub == "blog" else ""}
 </div>
 </article>
 {related}'''
@@ -621,7 +901,7 @@ def strip_tags(s):
 
 
 def faq_entities(body):
-    items = re.findall(r'<details class="faq-item"[^>]*>\s*<summary>(.*?)</summary>\s*<div class="faq-a">(.*?)</div>\s*</details>', body, flags=re.S)
+    items = re.findall(r'<details(?: class="faq-item")?>\s*<summary>(.*?)</summary>\s*<div(?: class="faq-a")?>(.*?)</div>\s*</details>', body, flags=re.S)
     return [
         {"@type": "Question", "name": strip_tags(q), "acceptedAnswer": {"@type": "Answer", "text": strip_tags(a)}}
         for q, a in items
@@ -691,6 +971,24 @@ def schema(lang, pid, meta, body):
             "sameAs": [LINKEDIN],
             "knowsAbout": ["Customer retention", "Business intelligence", "Automation", "Generative Engine Optimization"],
         })
+    if "audit" in extras:
+        graph.append({
+            "@type": "Service",
+            "@id": page_url + "#service",
+            "name": "AI Citation Audit",
+            "serviceType": "Generative Engine Optimization audit",
+            "description": meta["description"],
+            "provider": {"@id": org_id},
+            "areaServed": "Worldwide",
+            "offers": {
+                "@type": "Offer",
+                "name": "AI Citation Audit",
+                "price": str(SITE["auditPriceEur"]),
+                "priceCurrency": "EUR",
+                "url": page_url,
+                "availability": "https://schema.org/InStock",
+            },
+        })
     if "service" in extras:
         offers = [
             ("GHOST", "2500", "1 source per month, 10 assets per source, monthly citation check on 10 buyer questions, editorial review, delivery in 5 business days."),
@@ -728,8 +1026,18 @@ def schema(lang, pid, meta, body):
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
             "image": DOMAIN + og_image(lang, pid, meta),
         })
+    if pid == "glossary":
+        terms = children(lang, "glossary")
+        graph.append({
+            "@type": "DefinedTermSet",
+            "@id": page_url + "#termset",
+            "name": strip_tags(meta.get("h1", meta["title"])),
+            "url": page_url,
+            "inLanguage": lang,
+            "hasDefinedTerm": [{"@type": "DefinedTerm", "name": strip_tags(m.get("h1", m["title"])), "description": strip_tags(m.get("in_short") or m["description"]), "url": abs_url(lang, p)} for p, m, _ in terms],
+        })
     if meta.get("kind") == "term":
-        graph.append({"@type": "DefinedTerm", "name": strip_tags(meta.get("h1", meta["title"])), "description": meta["description"], "inDefinedTermSet": abs_url(lang, "glossary"), "url": page_url})
+        graph.append({"@type": "DefinedTerm", "name": strip_tags(meta.get("h1", meta["title"])), "description": meta["description"], "inDefinedTermSet": abs_url(lang, "glossary") + "#termset", "url": page_url})
     faqs = faq_entities(body)
     if faqs:
         graph.append({"@type": "FAQPage", "@id": page_url + "#faq", "mainEntity": faqs})
@@ -947,6 +1255,8 @@ def render(lang, pid, critical, css_v, js_v):
         meta = {k: fr_typo(v) for k, v in meta.items()}
     if meta.get("kind") in ("article", "term"):
         body = article_wrap(lang, pid, meta, body)
+    if pid == "blog":
+        body = body + newsletter_block(lang, pid, "index")
     body = resolve(body, lang)
     direction = ' dir="rtl"' if lang == "ar" else ""
     band = "" if meta.get("band") == "no" else cta_band(lang)
@@ -965,12 +1275,14 @@ def render(lang, pid, critical, css_v, js_v):
 {band}
 </main>
 {book_bar(lang, pid)}
+{newsletter_slide(lang, pid) if pid.startswith("blog/") else ""}
 {footer(lang)}
 {consent_banner(lang)}
 {ANALYTICS}
 </body>
 </html>
 '''
+    page = tag_ctas(page, pid)
     if lang == "ar":
         start = page.find("<body>")
         head_part = re.sub(r'(<script type="application/ld\+json">)(.*?)(</script>)', lambda m: m.group(1) + ar_latin_plain(m.group(2)) + m.group(3), page[:start], flags=re.S)
@@ -1106,7 +1418,7 @@ def llms_txt():
         "",
         "## Key pages",
     ]
-    for pid in ["home", "how-it-works", "pricing", "solutions", "b2b", "creators", "ecommerce", "resources", "compare", "glossary", "blog", "about", "contact"]:
+    for pid in ["home", "how-it-works", "pricing", "audit", "checklist", "proof", "solutions", "b2b", "creators", "ecommerce", "resources", "compare", "glossary", "blog", "about", "contact"]:
         if exists("en", pid):
             meta, _ = parse_page(source_path("en", pid))
             lines.append(f"- [{strip_tags(meta.get('h1', meta['title']))}]({abs_url('en', pid)}): {meta['description']}")
