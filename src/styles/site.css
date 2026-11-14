@@ -489,10 +489,6 @@ body{transition:background-color 240ms ease,color 240ms ease}
 .faq details::details-content{block-size:0;overflow:clip;transition:block-size var(--dur-base) var(--ease-out),content-visibility var(--dur-base) allow-discrete}
 .faq details[open]::details-content{block-size:auto}
 @media (prefers-reduced-motion:reduce){.faq details::details-content{transition:none}}
-.footer-mark{display:block;margin:28px 0 0;font:800 clamp(64px,17vw,260px)/.9 var(--ff-display);letter-spacing:.04em;text-align:center;color:var(--text);opacity:.06;user-select:none;pointer-events:none;overflow:hidden}
-.footer-mark::before{content:"KORTEX"}
-.footer-mark.reveal{transform:translateY(8px)}
-.footer-mark.reveal.is-in{transform:none}
 .read-progress{position:fixed;inset-block-start:0;inset-inline:0;z-index:90;height:3px;pointer-events:none}
 .read-progress i{display:block;height:100%;background:var(--text);transform:scaleX(0);transform-origin:left}
 :root[dir=rtl] .read-progress i{transform-origin:right}

@@ -542,7 +542,6 @@ def footer(lang):
 {"".join(cols)}
 </div>
 <div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
-<div class="footer-mark reveal" aria-hidden="true"></div>
 </div>
 </footer>'''
 
