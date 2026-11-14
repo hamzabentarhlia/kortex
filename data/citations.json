@@ -1,8 +1,25 @@
 {
   "runs": [],
   "changelog": [
-    {"date": "2026-11-13", "en": "Added the AI Citation Audit, the GEO Audit Checklist and this log.", "fr": "Ajout de l'audit de citations IA, de la checklist d'audit GEO et de ce journal."},
-    {"date": "2026-11-08", "en": "Published six sourced articles on AI search, three glossary terms and a resources hub. Each article lists the sources we opened.", "fr": "Publication de six articles sourcés sur la recherche IA, de trois termes de glossaire et d'un hub de ressources. Chaque article liste les sources que nous avons ouvertes."},
-    {"date": "2026-11-08", "en": "Fixed slashless addresses such as /blog and /contact that returned redirect pages marked noindex. They now redirect with a real 301 to the full page.", "fr": "Correction des adresses sans barre finale comme /blog et /contact, qui renvoyaient des pages de redirection en noindex. Elles redirigent désormais par un vrai 301 vers la page complète."}
+    {
+      "date": "2026-11-14",
+      "en": "Added the first teardown, of our own pricing page, with real screenshots and the counts behind it. Added the pipeline demo on the home page and the cost calculator on the pricing page.",
+      "fr": "Ajout de la première analyse, celle de notre propre page de tarifs, avec de vraies captures et les chiffres qui la fondent. Ajout de la démo du pipeline sur la page d'accueil et du calculateur de coût sur la page de tarifs."
+    },
+    {
+      "date": "2026-11-13",
+      "en": "Added the AI Citation Audit, the GEO Audit Checklist and this log.",
+      "fr": "Ajout de l'audit de citations IA, de la checklist d'audit GEO et de ce journal."
+    },
+    {
+      "date": "2026-11-08",
+      "en": "Published six sourced articles on AI search, three glossary terms and a resources hub. Each article lists the sources we opened.",
+      "fr": "Publication de six articles sourcés sur la recherche IA, de trois termes de glossaire et d'un hub de ressources. Chaque article liste les sources que nous avons ouvertes."
+    },
+    {
+      "date": "2026-11-08",
+      "en": "Fixed slashless addresses such as /blog and /contact that returned redirect pages marked noindex. They now redirect with a real 301 to the full page.",
+      "fr": "Correction des adresses sans barre finale comme /blog et /contact, qui renvoyaient des pages de redirection en noindex. Elles redirigent désormais par un vrai 301 vers la page complète."
+    }
   ]
 }

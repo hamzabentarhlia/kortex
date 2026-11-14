@@ -1,0 +1,268 @@
+{
+ "stages": {
+  "en": [
+   "Extract",
+   "Structure",
+   "Produce",
+   "Human review",
+   "Publish"
+  ],
+  "fr": [
+   "Extraire",
+   "Structurer",
+   "Produire",
+   "Relecture humaine",
+   "Publier"
+  ]
+ },
+ "labels": {
+  "en": {
+   "article": "Article page",
+   "faq": "FAQ page",
+   "comparison": "Comparison page",
+   "linkedin": "LinkedIn posts",
+   "newsletter": "Newsletter",
+   "script": "Video script",
+   "glossary": "Glossary entry",
+   "schema": "Schema block"
+  },
+  "fr": {
+   "article": "Page article",
+   "faq": "Page FAQ",
+   "comparison": "Page comparatif",
+   "linkedin": "Posts LinkedIn",
+   "newsletter": "Newsletter",
+   "script": "Script vidéo",
+   "glossary": "Entrée de glossaire",
+   "schema": "Bloc schema"
+  }
+ },
+ "counts": {
+  "article": 1,
+  "faq": 1,
+  "comparison": 1,
+  "linkedin": 3,
+  "newsletter": 1,
+  "script": 1,
+  "glossary": 1,
+  "schema": 1
+ },
+ "sources": [
+  {
+   "id": "blog",
+   "icon": "doc",
+   "en": {
+    "label": "Blog post",
+    "title": "Why yearly supplier audits miss most risk events",
+    "meta": "8 min read",
+    "desc": "A founder article arguing that an audit shows one day, and payment delays show trouble months earlier."
+   },
+   "fr": {
+    "label": "Article de blog",
+    "title": "Pourquoi l'audit fournisseur annuel rate la plupart des incidents",
+    "meta": "8 min de lecture",
+    "desc": "Un article du fondateur : un audit montre un jour donné, les retards de paiement signalent un problème des mois plus tôt."
+   },
+   "logs": {
+    "en": [
+     "9 claims extracted, 4 sources kept",
+     "1 thesis, 3 supporting points, 6 buyer questions mapped",
+     "10 assets drafted from one outline",
+     "Every figure checked against the article",
+     "FAQ and article schema attached, internal links added"
+    ],
+    "fr": [
+     "9 affirmations extraites, 4 sources conservées",
+     "1 thèse, 3 arguments, 6 questions d'acheteurs reliées",
+     "10 contenus rédigés depuis un seul plan",
+     "Chaque chiffre vérifié par rapport à l'article",
+     "Schema FAQ et article ajoutés, liens internes posés"
+    ]
+   },
+   "cards": {
+    "en": {
+     "article": "Why yearly supplier audits miss most risk events. Short answer: an audit shows what was true on one day. Payment delays and order changes show trouble months earlier, so watch the signals between audits.",
+     "faq": "How often should suppliers be reviewed? Critical suppliers every month, the rest every quarter, with alerts in between. The audit stays, but it stops being the only check.",
+     "comparison": "Annual audit or continuous monitoring. The audit gives depth on one date. Monitoring gives early warning between dates. Most mid-size manufacturers need both, in that order of effort.",
+     "linkedin": "Three posts. 1: Your last audit was green and your supplier still failed. 2: Three signals that show up before an audit does. 3: What we check between audits, and why.",
+     "newsletter": "Subject: The gap between two audits. This month: why the riskiest period for a supplier is the one nobody checks, and the three signals to watch instead.",
+     "script": "0:00 Your last audit was green. Your supplier still failed. 0:06 Here is what the data showed three months before. 0:20 Watch these three signals instead.",
+     "glossary": "Leading risk signal. A change in a supplier's behavior, such as late payments or shrinking orders, that appears before a failure and can be tracked between audits.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"How often should suppliers be reviewed?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Critical suppliers every month, the rest every quarter, with alerts in between.\"}}]}"
+    },
+    "fr": {
+     "article": "Pourquoi l'audit fournisseur annuel rate la plupart des incidents. Réponse courte : un audit montre ce qui était vrai un jour donné. Les retards de paiement et les changements de commande signalent un problème des mois plus tôt.",
+     "faq": "À quelle fréquence revoir ses fournisseurs ? Les fournisseurs critiques chaque mois, les autres chaque trimestre, avec des alertes entre deux. L'audit reste, mais n'est plus le seul contrôle.",
+     "comparison": "Audit annuel ou suivi continu. L'audit donne de la profondeur à une date. Le suivi donne une alerte précoce entre deux dates. La plupart des industriels de taille moyenne ont besoin des deux, dans cet ordre d'effort.",
+     "linkedin": "Trois posts. 1 : Votre dernier audit était au vert et votre fournisseur a quand même lâché. 2 : Trois signaux qui apparaissent avant l'audit. 3 : Ce que nous contrôlons entre deux audits, et pourquoi.",
+     "newsletter": "Objet : L'angle mort entre deux audits. Ce mois-ci : pourquoi la période la plus risquée pour un fournisseur est celle que personne ne vérifie, et les trois signaux à suivre à la place.",
+     "script": "0:00 Votre dernier audit était au vert. Votre fournisseur a quand même lâché. 0:06 Voici ce que les données montraient trois mois avant. 0:20 Surveillez plutôt ces trois signaux.",
+     "glossary": "Signal de risque avancé. Un changement dans le comportement d'un fournisseur, comme des retards de paiement ou des commandes qui rétrécissent, qui apparaît avant une défaillance et peut être suivi entre deux audits.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"À quelle fréquence revoir ses fournisseurs ?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Les fournisseurs critiques chaque mois, les autres chaque trimestre, avec des alertes entre deux.\"}}]}"
+    }
+   }
+  },
+  {
+   "id": "video",
+   "icon": "play",
+   "en": {
+    "label": "YouTube video",
+    "title": "Supplier risk in 12 minutes: the three signals that show up first",
+    "meta": "12:40",
+    "desc": "A screen-share walkthrough of a real supplier watchlist and the three warning signs it catches."
+   },
+   "fr": {
+    "label": "Vidéo YouTube",
+    "title": "Le risque fournisseur en 12 minutes : les trois signaux qui apparaissent d'abord",
+    "meta": "12:40",
+    "desc": "Une démonstration à l'écran d'une vraie liste de surveillance fournisseurs et des trois signes d'alerte qu'elle détecte."
+   },
+   "logs": {
+    "en": [
+     "12 claims extracted, 3 timestamps kept",
+     "Transcript split into 3 signals and 5 buyer questions",
+     "10 assets drafted in the speaker's own terms",
+     "Quotes checked against the recording",
+     "FAQ schema attached, video linked from the article"
+    ],
+    "fr": [
+     "12 affirmations extraites, 3 repères de temps conservés",
+     "Transcription découpée en 3 signaux et 5 questions d'acheteurs",
+     "10 contenus rédigés avec les termes de l'intervenant",
+     "Citations vérifiées à l'écoute",
+     "Schema FAQ ajouté, vidéo reliée depuis l'article"
+    ]
+   },
+   "cards": {
+    "en": {
+     "article": "The three supplier risk signals that show up first. A written guide built from the video: late payments, shrinking order sizes and key staff leaving, each with what to check and when.",
+     "faq": "What are the first signs a supplier is in trouble? Late payments to their own vendors, orders that keep shrinking, and key people leaving. None of them needs an audit to spot.",
+     "comparison": "Spreadsheet watchlist or dedicated tool. A spreadsheet works for under a dozen suppliers. Past that, the tool pays for itself in missed signals, not in features.",
+     "linkedin": "Three posts. 1: The 40-second check that caught a supplier problem early. 2: Why we stopped trusting the green dashboard. 3: One signal worth adding to your watchlist today.",
+     "newsletter": "Subject: Three signals, twelve minutes. A short written version of the video, with the watchlist template described step by step and the one mistake teams repeat.",
+     "script": "0:00 Three signals show up before anything breaks. 0:09 First: late payments. 0:31 Here is the watchlist, and why it fits on one screen.",
+     "glossary": "Supplier watchlist. A short, regularly reviewed list of suppliers and the signals tracked for each, kept separate from the annual audit.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"What are the first signs a supplier is in trouble?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Late payments to their own vendors, orders that keep shrinking, and key people leaving.\"}}]}"
+    },
+    "fr": {
+     "article": "Les trois signaux de risque fournisseur qui apparaissent d'abord. Un guide écrit tiré de la vidéo : retards de paiement, commandes qui rétrécissent et départs de personnes clés, avec quoi vérifier et quand.",
+     "faq": "Quels sont les premiers signes qu'un fournisseur est en difficulté ? Des retards de paiement envers ses propres fournisseurs, des commandes qui rétrécissent et des départs de personnes clés. Aucun ne demande un audit pour être repéré.",
+     "comparison": "Tableur de suivi ou outil dédié. Un tableur suffit pour une douzaine de fournisseurs. Au-delà, l'outil se rentabilise par les signaux manqués, pas par ses fonctions.",
+     "linkedin": "Trois posts. 1 : Le contrôle de 40 secondes qui a fait repérer tôt un problème fournisseur. 2 : Pourquoi nous ne croyons plus au tableau de bord vert. 3 : Un signal à ajouter à votre liste de surveillance dès aujourd'hui.",
+     "newsletter": "Objet : Trois signaux, douze minutes. Une version écrite et courte de la vidéo, avec le modèle de liste de surveillance décrit pas à pas et l'erreur que les équipes répètent.",
+     "script": "0:00 Trois signaux apparaissent avant que quoi que ce soit ne casse. 0:09 Le premier : les retards de paiement. 0:31 Voici la liste de surveillance, et pourquoi elle tient sur un écran.",
+     "glossary": "Liste de surveillance fournisseurs. Une liste courte, revue régulièrement, des fournisseurs et des signaux suivis pour chacun, distincte de l'audit annuel.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Quels sont les premiers signes qu'un fournisseur est en difficulté ?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Des retards de paiement envers ses propres fournisseurs, des commandes qui rétrécissent et des départs de personnes clés.\"}}]}"
+    }
+   }
+  },
+  {
+   "id": "podcast",
+   "icon": "mic",
+   "en": {
+    "label": "Podcast",
+    "title": "Episode 41: What a supplier's late payments tell you",
+    "meta": "38 min",
+    "desc": "A conversation between a procurement lead and a founder about reading payment behavior as an early warning."
+   },
+   "fr": {
+    "label": "Podcast",
+    "title": "Épisode 41 : ce que disent les retards de paiement d'un fournisseur",
+    "meta": "38 min",
+    "desc": "Une conversation entre une responsable achats et un fondateur sur la lecture des retards de paiement comme alerte précoce."
+   },
+   "logs": {
+    "en": [
+     "14 claims extracted, 2 guest quotes flagged",
+     "Two voices separated, 4 themes and 7 buyer questions mapped",
+     "10 assets drafted, guest quotes kept verbatim",
+     "Quotes sent to the guest for approval",
+     "Show notes, FAQ and transcript page published"
+    ],
+    "fr": [
+     "14 affirmations extraites, 2 citations de l'invitée signalées",
+     "Deux voix séparées, 4 thèmes et 7 questions d'acheteurs reliés",
+     "10 contenus rédigés, citations de l'invitée conservées mot pour mot",
+     "Citations envoyées à l'invitée pour accord",
+     "Notes d'épisode, FAQ et page de transcription publiées"
+    ]
+   },
+   "cards": {
+    "en": {
+     "article": "What a supplier's late payments tell you. A written version of the conversation: why payment behavior moves before delivery does, and how a procurement team can read it without a new tool.",
+     "faq": "Why do late payments matter to a buyer? A supplier that pays its own vendors late is often short of cash. That strain tends to reach delivery weeks later.",
+     "comparison": "Reading payment data or waiting for the audit. Payment data is cheaper and earlier. The audit is deeper and slower. The episode argues for using the first to decide when to call for the second.",
+     "linkedin": "Three posts. 1: A guest quote on cash and delivery, verbatim. 2: The question every procurement lead should ask in a supplier call. 3: Episode 41 in one paragraph.",
+     "newsletter": "Subject: Episode 41, in writing. Five takeaways from the conversation on payment behavior, with the one question to ask in your next supplier review.",
+     "script": "0:00 A supplier that pays late is telling you something. 0:08 We asked a procurement lead what she does when she sees it. 0:25 Her answer took one sentence.",
+     "glossary": "Payment behavior. How promptly a company pays its own suppliers, used as a signal of its cash position and a possible early warning of delivery trouble.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Why do late payments matter to a buyer?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"A supplier that pays its own vendors late is often short of cash, and that strain tends to reach delivery weeks later.\"}}]}"
+    },
+    "fr": {
+     "article": "Ce que disent les retards de paiement d'un fournisseur. Une version écrite de la conversation : pourquoi le comportement de paiement bouge avant les livraisons, et comment une équipe achats peut le lire sans nouvel outil.",
+     "faq": "Pourquoi les retards de paiement comptent-ils pour un acheteur ? Un fournisseur qui paie ses propres fournisseurs en retard manque souvent de trésorerie. Cette tension atteint les livraisons quelques semaines plus tard.",
+     "comparison": "Lire les données de paiement ou attendre l'audit. Les données de paiement coûtent moins et arrivent plus tôt. L'audit est plus profond et plus lent. L'épisode plaide pour utiliser les premières pour décider quand demander le second.",
+     "linkedin": "Trois posts. 1 : Une citation de l'invitée sur la trésorerie et les livraisons, mot pour mot. 2 : La question que toute responsable achats devrait poser lors d'un appel fournisseur. 3 : L'épisode 41 en un paragraphe.",
+     "newsletter": "Objet : Épisode 41, par écrit. Cinq enseignements de la conversation sur le comportement de paiement, avec la question à poser à votre prochaine revue fournisseur.",
+     "script": "0:00 Un fournisseur qui paie en retard vous dit quelque chose. 0:08 Nous avons demandé à une responsable achats ce qu'elle fait quand elle le voit. 0:25 Sa réponse tenait en une phrase.",
+     "glossary": "Comportement de paiement. La rapidité avec laquelle une entreprise paie ses propres fournisseurs, utilisée comme signal de sa trésorerie et comme alerte possible d'un problème de livraison.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Pourquoi les retards de paiement comptent-ils pour un acheteur ?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Un fournisseur qui paie ses propres fournisseurs en retard manque souvent de trésorerie, et cette tension atteint les livraisons quelques semaines plus tard.\"}}]}"
+    }
+   }
+  },
+  {
+   "id": "webinar",
+   "icon": "screen",
+   "en": {
+    "label": "Webinar",
+    "title": "Live: building a supplier watchlist your team will actually use",
+    "meta": "52 min, with Q&A",
+    "desc": "A recorded session with slides, a live demo and twelve audience questions at the end."
+   },
+   "fr": {
+    "label": "Webinaire",
+    "title": "En direct : construire une liste de surveillance fournisseurs que votre équipe utilisera vraiment",
+    "meta": "52 min, avec questions-réponses",
+    "desc": "Une session enregistrée avec diapositives, démonstration en direct et douze questions du public à la fin."
+   },
+   "logs": {
+    "en": [
+     "18 claims extracted, 12 audience questions kept",
+     "Slides, demo and Q&A separated, 6 themes mapped",
+     "10 assets drafted, FAQ built from the live Q&A",
+     "Every answer checked against the recording",
+     "FAQ schema attached, recap page published"
+    ],
+    "fr": [
+     "18 affirmations extraites, 12 questions du public conservées",
+     "Diapositives, démo et questions séparées, 6 thèmes reliés",
+     "10 contenus rédigés, FAQ construite depuis les questions en direct",
+     "Chaque réponse vérifiée à l'écoute",
+     "Schema FAQ ajouté, page de synthèse publiée"
+    ]
+   },
+   "cards": {
+    "en": {
+     "article": "How to build a supplier watchlist your team will use. A written guide from the session: what goes on the list, who owns it, and the monthly rhythm that keeps it alive.",
+     "faq": "Who should own the supplier watchlist? One named person in procurement, with a monthly review slot. A list that belongs to everyone is read by nobody.",
+     "comparison": "Shared sheet or procurement platform. The sheet is faster to start and easier to abandon. The platform asks for more setup and rewards a team that already reviews monthly.",
+     "linkedin": "Three posts. 1: The best question from the live Q&A, answered in full. 2: Why most watchlists die in the second month. 3: The one-page version of the webinar.",
+     "newsletter": "Subject: Your watchlist, step by step. The webinar in six steps, plus the three audience questions we ran out of time to answer.",
+     "script": "0:00 Most supplier watchlists last six weeks. 0:07 Here is what the ones that survive have in common. 0:22 It is not the tool.",
+     "glossary": "Watchlist owner. The one named person responsible for keeping a supplier watchlist current and for running its monthly review.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Who should own the supplier watchlist?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"One named person in procurement, with a monthly review slot.\"}}]}"
+    },
+    "fr": {
+     "article": "Comment construire une liste de surveillance fournisseurs que votre équipe utilisera. Un guide écrit tiré de la session : ce qui figure sur la liste, qui en est responsable et le rythme mensuel qui la garde vivante.",
+     "faq": "Qui doit être responsable de la liste de surveillance fournisseurs ? Une personne nommée aux achats, avec un créneau de revue mensuel. Une liste qui appartient à tout le monde n'est lue par personne.",
+     "comparison": "Tableur partagé ou plateforme achats. Le tableur démarre plus vite et s'abandonne plus facilement. La plateforme demande plus de mise en place et récompense une équipe qui revoit déjà chaque mois.",
+     "linkedin": "Trois posts. 1 : La meilleure question du direct, avec sa réponse complète. 2 : Pourquoi la plupart des listes de surveillance meurent au deuxième mois. 3 : La version d'une page du webinaire.",
+     "newsletter": "Objet : Votre liste de surveillance, pas à pas. Le webinaire en six étapes, plus les trois questions du public auxquelles nous n'avons pas eu le temps de répondre.",
+     "script": "0:00 La plupart des listes de surveillance tiennent six semaines. 0:07 Voici ce que celles qui survivent ont en commun. 0:22 Ce n'est pas l'outil.",
+     "glossary": "Responsable de la liste de surveillance. La personne nommée chargée de tenir à jour une liste de surveillance fournisseurs et d'animer sa revue mensuelle.",
+     "schema": "{\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Qui doit être responsable de la liste de surveillance fournisseurs ?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Une personne nommée aux achats, avec un créneau de revue mensuel.\"}}]}"
+    }
+   }
+  }
+ ]
+}

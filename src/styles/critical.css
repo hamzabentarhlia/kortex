@@ -52,10 +52,13 @@ p{margin:0}
 .icon-btn{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid transparent;border-radius:50%;background:none;color:var(--text-2);cursor:pointer}
 .icon-btn:hover{color:var(--text);background:var(--surface-strong)}
 .icon-btn svg{width:19px;height:19px}
-.theme-icon-light{display:none}
-:root[data-theme=light] .theme-icon-light{display:block}
-:root[data-theme=light] .theme-icon-dark{display:none}
-@media (prefers-color-scheme:light){:root:not([data-theme]) .theme-icon-light{display:block}:root:not([data-theme]) .theme-icon-dark{display:none}}
+[data-theme-toggle]{position:relative}
+[data-theme-toggle] svg{position:absolute;inset:0;margin:auto;transition:transform 240ms var(--ease-out),opacity 240ms var(--ease-out)}
+.theme-icon-light{opacity:0;transform:rotate(-90deg) scale(.5)}
+:root[data-theme=light] .theme-icon-light{opacity:1;transform:none}
+:root[data-theme=light] .theme-icon-dark{opacity:0;transform:rotate(90deg) scale(.5)}
+@media (prefers-color-scheme:light){:root:not([data-theme]) .theme-icon-light{opacity:1;transform:none}:root:not([data-theme]) .theme-icon-dark{opacity:0;transform:rotate(90deg) scale(.5)}}
+@media (prefers-reduced-motion:reduce){[data-theme-toggle] svg{transition:none}}
 .lang-switch{position:relative}
 .lang-switch .nav-link{padding:0 10px;font-family:var(--ff-mono);font-size:12.5px;letter-spacing:.06em}
 .lang-switch .nav-menu{inset-inline-start:auto;inset-inline-end:0;min-width:170px}

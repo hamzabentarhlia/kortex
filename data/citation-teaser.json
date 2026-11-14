@@ -1,0 +1,248 @@
+{
+ "punchline": {
+  "en": "None of these citations have to be your competitor's. That is the work.",
+  "fr": "Aucune de ces citations n'a à être celle de votre concurrent. C'est tout le travail."
+ },
+ "entries": [
+  {
+   "qid": "saas-invoicing",
+   "lang": "en",
+   "industry": "b2b-saas",
+   "question": "What is the best invoicing software for a 15-person consultancy?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Software review sites",
+    "Vendor comparison pages",
+    "Accounting association guides"
+   ],
+   "summary": "The answer names a short list of tools and the trade-offs between them. Most of the sources are review sites and vendor comparison pages, with few independent guides."
+  },
+  {
+   "qid": "saas-invoicing",
+   "lang": "fr",
+   "industry": "b2b-saas",
+   "question": "Quel est le meilleur logiciel de facturation pour un cabinet de conseil de 15 personnes ?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Sites d'avis sur les logiciels",
+    "Pages comparatives d'éditeurs",
+    "Guides d'associations comptables"
+   ],
+   "summary": "La réponse nomme une courte liste d'outils et leurs compromis. La plupart des sources sont des sites d'avis et des pages comparatives d'éditeurs, avec peu de guides indépendants."
+  },
+  {
+   "qid": "saas-support",
+   "lang": "en",
+   "industry": "b2b-saas",
+   "question": "How do I choose a customer support platform for a growing B2B software company?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Vendor blogs",
+    "Software review sites",
+    "Community forum threads"
+   ],
+   "summary": "The answer lists the criteria that matter, such as integrations and pricing model, before naming tools. Vendor blogs supply most of the framework, and review sites supply the comparisons."
+  },
+  {
+   "qid": "saas-support",
+   "lang": "fr",
+   "industry": "b2b-saas",
+   "question": "Comment choisir une plateforme de support client pour un éditeur de logiciels B2B en croissance ?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Blogs d'éditeurs",
+    "Sites d'avis sur les logiciels",
+    "Fils de discussion de forums communautaires"
+   ],
+   "summary": "La réponse liste d'abord les critères qui comptent, comme les intégrations et le modèle de prix, avant de nommer des outils. Les blogs d'éditeurs fournissent l'essentiel du cadre, les sites d'avis les comparaisons."
+  },
+  {
+   "qid": "shop-shoes",
+   "lang": "en",
+   "industry": "e-commerce",
+   "question": "What are the best running shoes for flat feet?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Specialist running magazines",
+    "Retailer buying guides",
+    "Podiatry and health sites"
+   ],
+   "summary": "The answer groups shoes by the support they offer and cautions that fit varies by person. Sources are a mix of specialist magazines, large retailer guides and health information pages."
+  },
+  {
+   "qid": "shop-shoes",
+   "lang": "fr",
+   "industry": "e-commerce",
+   "question": "Quelles sont les meilleures chaussures de running pour les pieds plats ?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Magazines spécialisés en course à pied",
+    "Guides d'achat de détaillants",
+    "Sites de podologie et de santé"
+   ],
+   "summary": "La réponse regroupe les chaussures selon le soutien qu'elles offrent et rappelle que l'ajustement varie d'une personne à l'autre. Les sources mêlent magazines spécialisés, guides de grands détaillants et pages d'information santé."
+  },
+  {
+   "qid": "shop-grinder",
+   "lang": "en",
+   "industry": "e-commerce",
+   "question": "How do I choose a coffee grinder for pour-over?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Coffee specialist blogs",
+    "Retailer buying guides",
+    "Video review channels"
+   ],
+   "summary": "The answer explains burr type and grind consistency, then suggests a few models by budget. Specialist blogs carry the explanation, and retailer guides carry the product names."
+  },
+  {
+   "qid": "shop-grinder",
+   "lang": "fr",
+   "industry": "e-commerce",
+   "question": "Comment choisir un moulin à café pour le filtre ?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Blogs de spécialistes du café",
+    "Guides d'achat de détaillants",
+    "Chaînes de tests vidéo"
+   ],
+   "summary": "La réponse explique le type de meules et la régularité de mouture, puis propose quelques modèles selon le budget. Les blogs spécialisés portent l'explication, les guides de détaillants portent les noms de produits."
+  },
+  {
+   "qid": "agency-choose",
+   "lang": "en",
+   "industry": "agencies",
+   "question": "How do I choose a content marketing agency for a B2B company?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Agency blogs",
+    "Marketing industry publications",
+    "Review and directory sites"
+   ],
+   "summary": "The answer gives a checklist: experience in your sector, process, reporting and references. It draws mostly on agency blogs, so the criteria tend to favor agencies."
+  },
+  {
+   "qid": "agency-choose",
+   "lang": "fr",
+   "industry": "agencies",
+   "question": "Comment choisir une agence de marketing de contenu pour une entreprise B2B ?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Blogs d'agences",
+    "Publications du secteur marketing",
+    "Sites d'avis et annuaires"
+   ],
+   "summary": "La réponse donne une liste de contrôle : expérience dans votre secteur, méthode, reporting et références. Elle s'appuie surtout sur des blogs d'agences, donc les critères tendent à favoriser les agences."
+  },
+  {
+   "qid": "agency-proposal",
+   "lang": "en",
+   "industry": "agencies",
+   "question": "What should be in a website redesign proposal from an agency?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Agency blogs",
+    "Project management guides",
+    "Freelance marketplace resources"
+   ],
+   "summary": "The answer lists scope, timeline, deliverables, ownership and what is out of scope. Agency blogs and project guides supply most of it, with little from the buyer's side."
+  },
+  {
+   "qid": "agency-proposal",
+   "lang": "fr",
+   "industry": "agencies",
+   "question": "Que doit contenir la proposition d'une agence pour une refonte de site web ?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Blogs d'agences",
+    "Guides de gestion de projet",
+    "Ressources de places de marché freelance"
+   ],
+   "summary": "La réponse liste le périmètre, le calendrier, les livrables, la propriété et ce qui est exclu. Les blogs d'agences et les guides de projet fournissent l'essentiel, avec peu de point de vue de l'acheteur."
+  },
+  {
+   "qid": "local-plumber",
+   "lang": "en",
+   "industry": "local-services",
+   "question": "How do I choose a good emergency plumber near me?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Local business directories",
+    "Consumer advice sites",
+    "Map and review listings"
+   ],
+   "summary": "The answer tells the buyer to check licensing, reviews and call-out pricing, and names directory and review listings for the local part. Few individual company sites are cited."
+  },
+  {
+   "qid": "local-plumber",
+   "lang": "fr",
+   "industry": "local-services",
+   "question": "Comment choisir un bon plombier de dépannage près de chez moi ?",
+   "engine": "Perplexity",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Annuaires d'entreprises locales",
+    "Sites de conseils aux consommateurs",
+    "Fiches cartographiques et avis"
+   ],
+   "summary": "La réponse invite à vérifier la qualification, les avis et les tarifs de déplacement, et renvoie à des annuaires et fiches d'avis pour la partie locale. Peu de sites d'entreprises individuelles sont cités."
+  },
+  {
+   "qid": "local-roofer",
+   "lang": "en",
+   "industry": "local-services",
+   "question": "What should I ask a roofing contractor before hiring?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Consumer advice sites",
+    "Trade association pages",
+    "Home improvement publications"
+   ],
+   "summary": "The answer lists questions on insurance, warranty, materials and written quotes. Trade association pages and consumer advice sites are the usual sources."
+  },
+  {
+   "qid": "local-roofer",
+   "lang": "fr",
+   "industry": "local-services",
+   "question": "Que demander à un couvreur avant de l'engager ?",
+   "engine": "ChatGPT",
+   "dateChecked": "",
+   "verified": false,
+   "citedTypes": [
+    "Sites de conseils aux consommateurs",
+    "Pages d'associations professionnelles",
+    "Publications de bricolage et d'habitat"
+   ],
+   "summary": "La réponse liste des questions sur l'assurance, la garantie, les matériaux et les devis écrits. Les pages d'associations professionnelles et les sites de conseils aux consommateurs sont les sources habituelles."
+  }
+ ]
+}

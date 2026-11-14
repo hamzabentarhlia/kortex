@@ -1,0 +1,23 @@
+.calc2{display:grid;gap:28px;padding:clamp(18px,3vw,32px)}
+@media (min-width:980px){.calc2{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start}}
+.calc2-form{display:grid;gap:22px}
+.cf{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:baseline}
+.cf label{font-weight:600;font-size:15px;color:var(--text)}
+.cf output{font:600 16px var(--ff-mono);font-variant-numeric:tabular-nums;color:var(--text)}
+.cf input[type=range]{grid-column:1/-1;width:100%;min-height:44px;margin:0;accent-color:var(--text);cursor:pointer}
+.cf input[type=range]:focus-visible,.cf select:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px;border-radius:var(--radius-pill)}
+.cf-select{grid-template-columns:1fr}
+.cf select{min-height:48px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--surface-solid);color:var(--text);font:inherit}
+.calc2-out{display:grid;gap:14px}
+.co-grid{display:grid;gap:12px}
+@media (min-width:560px){.co-grid{grid-template-columns:1fr 1fr}}
+.co-col{padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface-2)}
+.co-col h3{margin:0 0 8px;font:600 12px/1.4 var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.co-big{margin:0;font:800 clamp(26px,3.4vw,36px)/1.15 var(--ff-display);font-variant-numeric:tabular-nums;color:var(--text)}
+.co-from{font:500 15px var(--ff-body);color:var(--text-2)}
+.co-sub{margin:8px 0 0;color:var(--text-2);font-size:14px;line-height:1.5}
+.co-sub strong{color:var(--text)}
+.co-verdict{margin:0;padding:14px 16px;border:1px solid var(--line-strong);border-inline-start:3px solid var(--text);border-radius:var(--radius-sm);background:var(--surface-solid);color:var(--text);font-weight:600;font-size:16px;line-height:1.5}
+.co-note{margin:0;color:var(--text-2);font-size:14px;line-height:1.55}
+.calc2-out .btn{justify-self:start;margin-top:6px}
+@media (prefers-reduced-motion:reduce){.calc2 *{transition:none!important;animation:none!important}}
