@@ -1,0 +1,77 @@
+title: Analyse : notre propre page de tarifs, lue sans JavaScript | KORTEX
+description: Nous avons récupéré notre page /pricing/ comme le fait un robot et compté ce qu'elle contient : mots, titres, données structurées, FAQ, prix. Ce qui fonctionne, ce qui manque, ce que nous changeons d'abord.
+h1: Analyse : notre propre page de tarifs, lue sans JavaScript
+summary: Nous avons récupéré notre page de tarifs comme le fait un robot et compté ce qu'elle contient. Ce qui fonctionne, ce qu'un acheteur ne trouverait pas, et les trois changements que nous faisons d'abord.
+kind: article
+kicker: Analyse
+date: 2026-11-14
+modified: 2026-11-14
+in_short: Notre page de tarifs place les prix dans les 300 premiers mots, garde son calculateur lisible sans scripts et aligne le balisage de sa FAQ sur le texte visible. Elle ne dit rien de la TVA, ne renvoie vers aucune preuve, et met 2 061 mots à dire ce qu'un acheteur veut en quelques lignes. C'est la première analyse, et nous avons choisi notre propre page pour que personne d'autre ne serve d'exemple.
+---
+<div id="takeaways">
+<span>Points clés</span>
+<ul>
+<li>Lue sans scripts, la page montre toujours les prix des offres, le calculateur avec ses valeurs par défaut et les six réponses de la FAQ.</li>
+<li>Le premier prix apparaît vers le 300e mot d'une page de 2 061 mots. L'acheteur qui demande « combien ça coûte » a sa réponse, mais pas en haut.</li>
+<li>Rien sur la page ne dit si les prix s'entendent avec ou sans TVA. C'est une question d'acheteur à laquelle la page ne répond pas.</li>
+<li>La page renvoie vers l'audit et vers le fonctionnement, mais vers aucune page de preuve. Une affirmation de qualité sans rien à vérifier pèse moins qu'une avec un lien.</li>
+<li>Les données structurées correspondent au texte visible : Service, FAQPage, BreadcrumbList. C'est de l'hygiène, pas une tactique de classement.</li>
+</ul>
+</div>
+<h2>Pourquoi notre propre page</h2>
+<p>Analyser la page d'un autre suppose son accord, et nous n'avons demandé à personne. La première analyse porte donc sur la nôtre. La règle est la même pour toutes : récupérer la page sans scripts, compter ce qui s'y trouve, poser les questions qu'un acheteur poserait et noter ce qu'il faut changer.</p>
+<p>La page, c'est <a href="@pricing">la page de tarifs</a>. Elle compte parce qu'un acheteur qui a entendu parler de KORTEX par un assistant y arrive souvent ensuite, et parce qu'elle porte le plus de chiffres du site.</p>
+<h2>Ce que reçoit un robot</h2>
+<p>Nous avons récupéré le HTML construit sans JavaScript et compté. Voici les chiffres, pour la page telle qu'elle était le 14 novembre 2026.</p>
+<div class="table-wrap"><table>
+<caption>Page de tarifs, récupérée sans JavaScript</caption>
+<thead><tr><th scope="col">Ce que nous avons compté</th><th scope="col">Résultat</th></tr></thead>
+<tbody>
+<tr><td>Poids du HTML</td><td>127 Ko, 24 Ko compressés</td></tr>
+<tr><td>Mots du contenu principal</td><td>2 061</td></tr>
+<tr><td>Titres de niveau 1</td><td>1 : « A month of content, one clear price » dans la version anglaise</td></tr>
+<tr><td>Entrées de FAQ visibles</td><td>6, toutes répondues dans le HTML</td></tr>
+<tr><td>Types de données structurées</td><td>Organization, WebSite, WebPage, BreadcrumbList, Service, FAQPage</td></tr>
+<tr><td>Position du premier prix dans le texte</td><td>Environ le mot 298</td></tr>
+<tr><td>Images sans texte alternatif</td><td>Aucune : la page n'a pas d'image de contenu</td></tr>
+<tr><td>Résultat par défaut du calculateur</td><td>Présent dans le HTML : 4 040 € de coût mensuel actuel, 5 500 € pour SWARM</td></tr>
+</tbody>
+</table></div>
+<h2>La même section, avec et sans scripts</h2>
+<p>Le calculateur est le seul bloc interactif de la page, donc le seul qui pourrait cacher du contenu à un robot. Ce n'est pas le cas. Les deux captures ci-dessous montrent la même section, avec JavaScript désactivé puis activé. Les chiffres sont identiques, car le résultat par défaut est écrit dans le HTML à la construction et le script ne prend la main qu'une fois la page chargée. Les captures sont celles de la version anglaise.</p>
+<figure><picture><source srcset="/assets/img/teardowns/pricing-calc-nojs.webp" type="image/webp"><img src="/assets/img/teardowns/pricing-calc-nojs.jpg" width="1200" height="566" loading="lazy" decoding="async" alt="Le calculateur de tarifs avec JavaScript désactivé : 12 contenus à 250 €, coût mensuel actuel de 4 040 €, SWARM à 5 500 €, avec le verdict en langage simple que SWARM coûte plus à ce volume."></picture><figcaption>Avec JavaScript désactivé : les valeurs par défaut et le verdict sont dans la page.</figcaption></figure>
+<figure><picture><source srcset="/assets/img/teardowns/pricing-calc-js.webp" type="image/webp"><img src="/assets/img/teardowns/pricing-calc-js.jpg" width="1200" height="566" loading="lazy" decoding="async" alt="Le même calculateur avec JavaScript activé, avec les mêmes valeurs et le même verdict, et des curseurs modifiables."></picture><figcaption>Avec JavaScript activé : les mêmes chiffres, avec des curseurs qui recalculent.</figcaption></figure>
+<h2>Ce qu'un acheteur demanderait, et si la page répond</h2>
+<div class="table-wrap"><table>
+<caption>Questions d'acheteur face à la page de tarifs</caption>
+<thead><tr><th scope="col">Question d'acheteur</th><th scope="col">Réponse sur la page</th></tr></thead>
+<tbody>
+<tr><td>Combien cela coûte-t-il par mois ?</td><td>Oui. Trois prix d'offres, le premier apparaissant vers le 300e mot</td></tr>
+<tr><td>Qu'obtient-on pour ce prix ?</td><td>Oui. Nombre de contenus par offre et un tableau comparatif</td></tr>
+<tr><td>Peut-on arrêter ?</td><td>Oui. Entrée de FAQ sur l'arrêt à tout moment</td></tr>
+<tr><td>À qui appartient le contenu ?</td><td>Oui. Entrée de FAQ sur la propriété</td></tr>
+<tr><td>Est-ce plus qu'un rédacteur indépendant ?</td><td>Oui. Entrée de FAQ et section comparative</td></tr>
+<tr><td>Les prix s'entendent-ils avec ou sans TVA ?</td><td>Non. La page ne mentionne pas la TVA</td></tr>
+<tr><td>Cela a-t-il fonctionné pour quelqu'un comme moi ?</td><td>Non. La page ne renvoie vers aucune page de preuve ou d'étude de cas</td></tr>
+</tbody>
+</table></div>
+<h2>Ce que nous changeons d'abord</h2>
+<ol>
+<li><strong>Ajouter la ligne sur la TVA.</strong> Une phrase sous les prix des offres et une entrée de FAQ, rédigées une fois les faits confirmés. C'est le changement le moins coûteux et il répond à une vraie question d'acheteur.</li>
+<li><strong>Relier la preuve.</strong> Renvoyer vers <a href="@proof">le journal des citations</a> depuis la section des offres. Le journal montre ce que nous avons mesuré, y compris là où rien n'a changé.</li>
+<li><strong>Remonter la réponse.</strong> Placer les trois prix dans un court résumé en haut, pour que les 100 premiers mots répondent à la première question. Les explications plus longues restent où elles sont.</li>
+</ol>
+<p>Nous n'avons pas encore fait ces changements. Cette page est datée, et quand ce sera fait, la prochaine analyse de ce site dira ce qui a changé et ce que nous avons mesuré ensuite.</p>
+<h2>Ce que cela ne montre pas</h2>
+<p>Une analyse lit une page. Elle ne dit pas si un assistant la cite. Pour cela, on pose les questions avec les mots de l'acheteur et on note ce qui revient : <a href="@blog/measure-ai-citations">comment mesurer les citations IA</a> décrit la méthode. Et comme l'indique la documentation de Google, aucun de ces balisages n'est une exigence pour ses fonctions d'IA, ce qui explique pourquoi nous les traitons comme de l'hygiène : <a href="@blog/schema-markup-ai-engines-read">le balisage schema, et ce qu'il ne fera pas</a>.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="@pricing">Page de tarifs KORTEX</a>, récupérée sans JavaScript le 14 novembre 2026.</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a> : aucun balisage spécial requis.</li>
+</ul>
+<div id="cta">
+<p>Audit</p>
+<h2>Vous voulez vos pages lues ainsi ?</h2>
+<p>L'audit de citations IA teste votre marque sur 40 questions d'acheteurs et montre qui est cité à votre place.</p>
+<a href="@audit">Voir l'audit</a>
+</div>

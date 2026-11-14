@@ -1,0 +1,77 @@
+title: Teardown: our own pricing page, read without JavaScript | KORTEX
+description: We fetched our own /pricing/ page the way a crawler does and counted what is there: words, headings, structured data, FAQ, prices. What works, what is missing, what we change first.
+h1: Teardown: our own pricing page, read without JavaScript
+summary: We fetched our own pricing page the way a crawler does and counted what is there. What works, what a buyer would still not find, and the three changes we make first.
+kind: article
+kicker: Teardown
+date: 2026-11-14
+modified: 2026-11-14
+in_short: Our pricing page puts prices in the first 300 words, keeps its calculator readable without scripts and matches its FAQ markup to the visible text. It says nothing about VAT, links to no proof, and takes 2,061 words to say what a buyer wants in a few. This is the first teardown, and we picked our own page so that nobody else is the example.
+---
+<div id="takeaways">
+<span>Key takeaways</span>
+<ul>
+<li>Read without scripts, the page still shows the plan prices, the calculator with its default numbers and all six FAQ answers.</li>
+<li>The first price appears about 300 words into a 2,061-word page. Buyers who ask "how much does it cost" get the answer, but not at the top.</li>
+<li>Nothing on the page says whether prices include VAT. That is a buyer question the page does not answer.</li>
+<li>The page links to the audit and to how it works, and to no proof page. A claim of quality with nothing to check is weaker than one with a link.</li>
+<li>Structured data matches the visible text: Service, FAQPage, BreadcrumbList. It is hygiene, not a ranking tactic.</li>
+</ul>
+</div>
+<h2>Why our own page</h2>
+<p>A teardown of someone else's page needs their agreement, and we have not asked anyone. So the first one is about ours. The rule is the same for every teardown: fetch the page without scripts, count what is there, ask the questions a buyer would ask, and write down what to change.</p>
+<p>The page is <a href="@pricing">the pricing page</a>. It matters because a buyer who has heard of KORTEX from an assistant often lands there next, and because it carries the most numbers on the site.</p>
+<h2>What a crawler receives</h2>
+<p>We fetched the built HTML with no JavaScript and counted. These are the figures, from the page as it stood on 14 November 2026.</p>
+<div class="table-wrap"><table>
+<caption>Pricing page, fetched without JavaScript</caption>
+<thead><tr><th scope="col">What we counted</th><th scope="col">Result</th></tr></thead>
+<tbody>
+<tr><td>HTML weight</td><td>127 KB, 24 KB compressed</td></tr>
+<tr><td>Words in the main content</td><td>2,061</td></tr>
+<tr><td>Level 1 headings</td><td>1: "A month of content, one clear price"</td></tr>
+<tr><td>Visible FAQ entries</td><td>6, all answered in the HTML</td></tr>
+<tr><td>Structured data types</td><td>Organization, WebSite, WebPage, BreadcrumbList, Service, FAQPage</td></tr>
+<tr><td>Position of the first price in the text</td><td>About word 298</td></tr>
+<tr><td>Images with missing alt text</td><td>None: the page has no content images</td></tr>
+<tr><td>Calculator default result</td><td>Present in the HTML: €4,040 current monthly cost, €5,500 for SWARM</td></tr>
+</tbody>
+</table></div>
+<h2>The same section, with and without scripts</h2>
+<p>The calculator is the only interactive block on the page, so it is the one that could hide content from a crawler. It does not. The two screenshots below are the same section, taken with JavaScript disabled and then enabled. The numbers match, because the default result is written into the HTML at build time and the script only takes over once the page loads.</p>
+<figure><picture><source srcset="/assets/img/teardowns/pricing-calc-nojs.webp" type="image/webp"><img src="/assets/img/teardowns/pricing-calc-nojs.jpg" width="1200" height="566" loading="lazy" decoding="async" alt="The pricing calculator with JavaScript disabled: 12 assets at €250, current monthly cost €4,040, SWARM at €5,500, with the plain-language verdict that SWARM costs more at this volume."></picture><figcaption>With JavaScript disabled: the default numbers and the verdict are in the page.</figcaption></figure>
+<figure><picture><source srcset="/assets/img/teardowns/pricing-calc-js.webp" type="image/webp"><img src="/assets/img/teardowns/pricing-calc-js.jpg" width="1200" height="566" loading="lazy" decoding="async" alt="The same pricing calculator with JavaScript enabled, showing the same default numbers and verdict, with sliders that can be changed."></picture><figcaption>With JavaScript enabled: the same numbers, now with sliders that recalculate.</figcaption></figure>
+<h2>What a buyer would ask, and whether the page answers</h2>
+<div class="table-wrap"><table>
+<caption>Buyer questions against the pricing page</caption>
+<thead><tr><th scope="col">Buyer question</th><th scope="col">Answered on the page</th></tr></thead>
+<tbody>
+<tr><td>How much does it cost per month?</td><td>Yes. Three plan prices, with the first appearing about 300 words in</td></tr>
+<tr><td>What do I get for that?</td><td>Yes. Asset counts per plan and a comparison table</td></tr>
+<tr><td>Can I stop?</td><td>Yes. FAQ entry on stopping at any time</td></tr>
+<tr><td>Who owns the content?</td><td>Yes. FAQ entry on ownership</td></tr>
+<tr><td>Is it more than a freelancer?</td><td>Yes. FAQ entry and a comparison section</td></tr>
+<tr><td>Are prices with or without VAT?</td><td>No. The page does not mention VAT</td></tr>
+<tr><td>Has it worked for someone like me?</td><td>No. The page links to no proof or case page</td></tr>
+</tbody>
+</table></div>
+<h2>What we change first</h2>
+<ol>
+<li><strong>Add the VAT line.</strong> One sentence under the plan prices and one FAQ entry, written once the facts are confirmed. It is the cheapest change and answers a real buyer question.</li>
+<li><strong>Link the proof.</strong> Point to <a href="@proof">the citation log</a> from the plans section. The log shows what we measured, including where nothing changed.</li>
+<li><strong>Move the answer up.</strong> Put the three plan prices in a short summary at the top, so the first 100 words answer the first question. The longer explanations stay where they are.</li>
+</ol>
+<p>We have not made these changes yet. This page is dated, and when we do, the next teardown on this site will say what changed and what we measured afterwards.</p>
+<h2>What this does not show</h2>
+<p>A teardown reads a page. It does not tell you whether an assistant cites it. For that you ask the questions, in the buyer's words, and log what comes back: <a href="@blog/measure-ai-citations">how to measure AI citations</a> describes the method. And as Google's own documentation says, none of this markup is a requirement for its AI features, which is why we treat it as hygiene: <a href="@blog/schema-markup-ai-engines-read">schema markup, and what it will not do</a>.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="@pricing">KORTEX pricing page</a>, fetched without JavaScript on 14 November 2026.</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">Optimizing your website for generative AI features on Google Search, Google Search Central</a>: no special markup required.</li>
+</ul>
+<div id="cta">
+<p>Audit</p>
+<h2>Want your pages read this way?</h2>
+<p>The AI Citation Audit tests your brand on 40 buyer questions and shows who is cited instead.</p>
+<a href="@audit">See the audit</a>
+</div>

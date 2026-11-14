@@ -57,6 +57,7 @@ PAGES = {
     "glossary": "/glossary/",
     "resources": "/resources/",
     "blog": "/blog/",
+    "teardowns": "/teardowns/",
     "contact": "/contact/",
     "privacy": "/legal/privacy/",
     "terms": "/legal/terms/",
@@ -82,6 +83,7 @@ UI = {
         "pricing": "Pricing",
         "resources": "Resources",
         "blog": "Blog",
+        "teardowns": "Teardowns",
         "glossary": "Glossary",
         "compare": "Comparisons",
         "about": "About",
@@ -150,6 +152,7 @@ UI = {
         "pricing": "Tarifs",
         "resources": "Ressources",
         "blog": "Blog",
+        "teardowns": "Analyses",
         "glossary": "Glossaire",
         "compare": "Comparatifs",
         "about": "À propos",
@@ -525,7 +528,7 @@ def footer(lang):
     cols = [
         col(t["col_product"], [("how-it-works", t["how"]), ("pricing", t["pricing"]), ("audit", t.get("audit", "")), ("checklist", t.get("checklist", "")), ("proof", t.get("proof", "")), ("security", t["security"])]),
         col(t["col_solutions"], [(p, tup(p)) for p in ["b2b", "creators", "ecommerce", "from-blog", "from-youtube", "from-podcast", "from-webinar"]]),
-        col(t["col_resources"], [("resources", t["resources"]), ("blog", t["blog"]), ("glossary", t["glossary"]), ("compare", t["compare"])]),
+        col(t["col_resources"], [("resources", t["resources"]), ("blog", t["blog"]), ("teardowns", t.get("teardowns", "")), ("glossary", t["glossary"]), ("compare", t["compare"])]),
         col(t["col_company"], [("about", t["about"]), ("contact", t["contact"]), ("login", t["login"])]),
     ]
     legal = "".join(f'<a href="{url(lang, p)}">{t[p]}</a>' for p in ["privacy", "terms", "cookies"] if exists(lang, p))
@@ -539,6 +542,7 @@ def footer(lang):
 {"".join(cols)}
 </div>
 <div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
+<div class="footer-mark reveal" aria-hidden="true">KORTEX</div>
 </div>
 </footer>'''
 
@@ -1031,6 +1035,56 @@ def cta_band(lang):
 </div>
 </section>'''
 
+STACK_TEXT = {
+    "en": {"eyebrow": "The stack", "title": "The tools that run the work", "text": "These are the tools behind the pipeline, the booking, the lead forms and the measurement on this site."},
+    "fr": {"eyebrow": "La pile technique", "title": "Les outils qui font tourner le travail", "text": "Ce sont les outils derrière le pipeline, la prise de rendez-vous, les formulaires et la mesure sur ce site."},
+}
+STACK_ITEMS = ["n8n", "Odoo", "Cal.com", "Pageclip", "Google Search Console", "Google Analytics 4", "IndexNow", "schema.org"]
+
+
+def stack_block(lang):
+    t = STACK_TEXT["fr" if lang == "fr" else "en"]
+    chips = "".join(f"<span>{n}</span>" for n in STACK_ITEMS)
+    label = ", ".join(STACK_ITEMS)
+    return (
+        f'<section class="section stack-strip" aria-labelledby="stack-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="stack-title">{t["title"]}</h2><p>{t["text"]}</p></div>'
+        f'<div class="stack-static">{chips}</div>'
+        f'<div class="marquee" data-anim role="img" aria-label="{label}"><div class="marquee-track"><div style="display:flex;gap:14px">{chips}</div><div style="display:flex;gap:14px" aria-hidden="true">{chips}</div></div></div>'
+        f'</div></section>'
+    )
+
+
+LAB_TEXT = {
+    "en": {"eyebrow": "Lab notes", "title": "What we published lately", "all": "All articles", "teardown": "Teardown", "article": "Article"},
+    "fr": {"eyebrow": "Carnet du labo", "title": "Nos dernières publications", "all": "Tous les articles", "teardown": "Analyse", "article": "Article"},
+}
+
+
+def labnotes_block(lang):
+    t = LAB_TEXT["fr" if lang == "fr" else "en"]
+    lt = LIST_TEXT[lang]
+    items = []
+    for hub in ("blog", "teardowns"):
+        if exists(lang, hub):
+            for pid, meta, body in children(lang, hub):
+                if meta.get("date"):
+                    items.append((meta["date"], pid, meta, body))
+    items.sort(key=lambda x: x[0], reverse=True)
+    cards = "".join(
+        f'<a class="glass card list-card" href="{url(lang, pid)}"><p class="card-meta">{t["teardown"] if pid.startswith("teardowns/") else t["article"]} · {human_date(lang, date)}</p>'
+        f'<h3>{strip_tags(meta.get("h1", meta["title"]))}</h3><p>{meta.get("summary", meta["description"])}</p><span class="card-link">{lt["read"]}{icon("arrow")}</span></a>'
+        for date, pid, meta, body in items[:3]
+    )
+    if not cards:
+        return ""
+    return (
+        f'<section class="section" aria-labelledby="labnotes-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="labnotes-title">{t["title"]}</h2></div>'
+        f'<div class="labnotes reveal-group">{cards}</div>'
+        f'<p style="margin-top:22px"><a class="text-link" href="{url(lang, "blog")}">{t["all"]}</a></p></div></section>'
+    )
+
 
 def resolve(body, lang):
     def block(m):
@@ -1057,6 +1111,7 @@ def resolve(body, lang):
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
     body = body.replace("{{demo}}", demo_block(lang))
+    body = body.replace("{{stack}}", stack_block(lang)).replace("{{labnotes}}", labnotes_block(lang))
     body = body.replace("{{teaser}}", teaser_block(lang, "teaser"))
     body = body.replace("{{calc}}", calc_block(lang))
     body = body.replace("{{checklist_items}}", checklist_items(lang))
@@ -1095,7 +1150,7 @@ def children(lang, hub):
         if pid.startswith(hub + "/") and exists(lang, pid):
             meta, body = parse_page(source_path(lang, pid))
             items.append((pid, meta, body))
-    if hub == "blog":
+    if hub in ("blog", "teardowns"):
         items.sort(key=lambda x: x[1].get("date", ""), reverse=True)
     else:
         items.sort(key=lambda x: strip_tags(x[1].get("h1", x[1]["title"])).lower())
@@ -1115,14 +1170,14 @@ def listing(lang, hub):
         kicker = meta.get("kicker", "")
         extra = f'<span class="kicker">{kicker}</span>' if kicker else ""
         foot = ""
-        if hub == "blog":
+        if hub in ("blog", "teardowns"):
             foot = f'<p class="card-meta">{human_date(lang, meta["date"])} · {reading_time(body)} {t["min"]}</p>'
         cover = f'<div class="card-cover" data-anim>{art.cover_svg(pid)}</div>' if hub == "blog" else ""
         cards.append(
             f'<a class="glass card list-card" href="{url(lang, pid)}">{cover}{extra}<h3>{strip_tags(title)}</h3><p>{summary}</p>{foot}'
             f'<span class="card-link">{t["read"]}{icon("arrow")}</span></a>'
         )
-    cls = "grid grid-3" if hub in ("blog", "compare") else "grid grid-3 glossary-grid"
+    cls = "grid grid-3" if hub in ("blog", "compare", "teardowns") else "grid grid-3 glossary-grid"
     return f'<div class="{cls}">{"".join(cards)}</div>'
 
 
@@ -1162,7 +1217,7 @@ def article_wrap(lang, pid, meta, body):
 {cover_block}
 {short}
 </div></header>
-<div class="wrap narrow article-body prose">
+<div class="wrap narrow article-body prose"{' data-module="article"' if hub in ("blog", "teardowns") else ""}>
 {article_cta(lang, pid, body)}
 {newsletter_block(lang, pid, "post") if hub == "blog" else ""}
 </div>
@@ -1289,7 +1344,7 @@ def schema(lang, pid, meta, body):
         })
     if (meta.get("kind") == "article" or "article" in meta.get("schema", "")) and meta.get("date"):
         graph.append({
-            "@type": "BlogPosting" if pid.startswith("blog/") else "Article",
+            "@type": "BlogPosting" if pid.startswith(("blog/", "teardowns/")) else "Article",
             "@id": page_url + "#article",
             "headline": strip_tags(meta.get("h1", meta["title"]))[:110],
             "description": meta["description"],
