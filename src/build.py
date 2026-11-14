@@ -819,6 +819,91 @@ def calc_block(lang):
     )
 
 
+TEASER = json.loads((DATA_DIR / "citation-teaser.json").read_text(encoding="utf-8"))
+TEASER_TEXT = {
+    "en": {
+        "eyebrow": "Citation teaser",
+        "title": "Ask the question your buyer asks",
+        "lead": "Pick a question a buyer in your market would type into an AI assistant. See what kinds of sources an answer draws on, and who tends to get cited.",
+        "label": "Pick a buyer question",
+        "placeholder": "Choose a question",
+        "you": "Buyer",
+        "assistant": "AI answer, summarized",
+        "sources": "Sources it draws on",
+        "checked": "Checked on {date} in {engine}. Sources are described by type, not by brand.",
+        "skip": "Show the full answer",
+        "industries": {"b2b-saas": "B2B software", "e-commerce": "E-commerce", "agencies": "Agencies", "local-services": "Local services"},
+        "form_title": "Get this run for your own brand",
+        "form_text": "Send your site and we run one buyer question for your market and send back who gets cited. Free, in 3 business days.",
+        "email": "Work email",
+        "site": "Website",
+        "send": "Send me my run",
+        "err": "That did not send. Check your connection and try again.",
+        "audit": "Need all 40 questions, faster? See the AI Citation Audit, 490 euros, 5 business days.",
+    },
+    "fr": {
+        "eyebrow": "Aperçu des citations",
+        "title": "Posez la question que pose votre acheteur",
+        "lead": "Choisissez une question qu'un acheteur de votre marché taperait dans un assistant IA. Voyez sur quels types de sources s'appuie une réponse, et qui tend à être cité.",
+        "label": "Choisir une question d'acheteur",
+        "placeholder": "Choisir une question",
+        "you": "Acheteur",
+        "assistant": "Réponse d'IA, résumée",
+        "sources": "Sources sur lesquelles elle s'appuie",
+        "checked": "Vérifié le {date} dans {engine}. Les sources sont décrites par type, pas par marque.",
+        "skip": "Afficher la réponse complète",
+        "industries": {"b2b-saas": "Logiciels B2B", "e-commerce": "E-commerce", "agencies": "Agences", "local-services": "Services locaux"},
+        "form_title": "Obtenez cet essai pour votre marque",
+        "form_text": "Envoyez votre site : nous lançons une question d'acheteur pour votre marché et nous vous renvoyons qui est cité. Gratuit, sous 3 jours ouvrés.",
+        "email": "E-mail professionnel",
+        "site": "Site web",
+        "send": "Recevoir mon essai",
+        "err": "L'envoi a échoué. Vérifiez votre connexion et réessayez.",
+        "audit": "Besoin des 40 questions, plus vite ? Voir l'audit de citations IA, 490 euros, 5 jours ouvrés.",
+    },
+}
+
+
+def teaser_block(lang, pid):
+    if not SITE.get("citationTeaser") or lang not in TEASER_TEXT:
+        return ""
+    entries = [e for e in TEASER["entries"] if e["lang"] == lang]
+    unverified = [e["qid"] for e in entries if not e.get("verified") or not e.get("dateChecked") or not e.get("engine")]
+    if unverified:
+        raise SystemExit("citationTeaser is on but these entries are not verified: " + ", ".join(unverified))
+    t = TEASER_TEXT[lang]
+    groups = {}
+    for e in entries:
+        groups.setdefault(e["industry"], []).append(e)
+    options = "".join(
+        f'<optgroup label="{html.escape(t["industries"][ind])}">' + "".join(f'<option value="{e["qid"]}">{html.escape(e["question"])}</option>' for e in items) + "</optgroup>"
+        for ind, items in groups.items()
+    )
+    static = "".join(
+        f'<div class="tz-item"><dt>{html.escape(e["question"])}</dt><dd><strong>{t["sources"]}:</strong> {html.escape(", ".join(e["citedTypes"]))}. {html.escape(e["summary"])}</dd></div>'
+        for e in entries
+    )
+    payload = json.dumps({"entries": entries, "punchline": TEASER["punchline"][lang], "text": {k: t[k] for k in ("you", "assistant", "sources", "checked", "skip")}}, ensure_ascii=False).replace("</", "<\\/")
+    NL_COUNTER[0] += 1
+    fid = f"tz-{NL_COUNTER[0]}"
+    audit = f'<a class="text-link" href="{url(lang, "audit")}" data-cta="teaser-audit">{t["audit"]}</a>' if exists(lang, "audit") else ""
+    return (
+        f'<section class="section" data-ix="teaser" aria-labelledby="tz-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="tz-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
+        f'<div class="tz glass" data-module="teaser" data-lang="{lang}"><script type="application/json" data-tz-data>{payload}</script>'
+        f'<div class="tz-ui"><label class="tz-label" for="tz-q">{t["label"]}</label><select id="tz-q" data-tz-select><option value="">{t["placeholder"]}</option>{options}</select>'
+        f'<div class="tz-pane" data-tz-pane aria-live="polite"></div></div>'
+        f'<dl class="tz-static">{static}</dl>'
+        f'<form class="tz-form pageclip-form" action="{LEADS_ACTION}" method="post" data-lead-form data-form-name="teaser" data-track-form="teaser">{lead_fields("teaser", lang, pid)}'
+        f'<h3>{t["form_title"]}</h3><p>{t["form_text"]}</p>'
+        f'<div class="nl-row"><label class="visually-hidden" for="{fid}-e">{t["email"]}</label><input id="{fid}-e" type="email" name="email" required autocomplete="email" placeholder="{t["email"]}">'
+        f'<label class="visually-hidden" for="{fid}-w">{t["site"]}</label><input id="{fid}-w" type="url" name="website" required inputmode="url" placeholder="{t["site"]} (https://)">'
+        f'<button class="btn btn-primary pageclip-form__submit" type="submit" data-cta="teaser-lead">{t["send"]}</button></div>'
+        f'<p class="nl-status" data-form-ok hidden role="status"></p><p class="nl-status is-error" data-form-error hidden role="alert">{t["err"]}</p></form>'
+        f'<p class="tz-audit">{audit}</p></div></div></section>'
+    )
+
+
 NL_COUNTER = [0]
 
 
@@ -972,6 +1057,7 @@ def resolve(body, lang):
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
     body = body.replace("{{demo}}", demo_block(lang))
+    body = body.replace("{{teaser}}", teaser_block(lang, "teaser"))
     body = body.replace("{{calc}}", calc_block(lang))
     body = body.replace("{{checklist_items}}", checklist_items(lang))
     body = body.replace("{{proof_log}}", proof_log(lang)).replace("{{proof_screens}}", proof_screens(lang)).replace("{{proof_changelog}}", proof_changelog(lang)).replace("{{case_studies}}", case_studies(lang))

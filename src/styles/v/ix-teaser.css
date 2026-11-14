@@ -1,0 +1,31 @@
+.tz{display:grid;gap:22px;padding:clamp(18px,3vw,32px)}
+.tz-ui{display:none;gap:14px}
+.js .tz-ui{display:grid}
+.js .tz-static{display:none}
+.tz-label{font-weight:600;font-size:15px;color:var(--text)}
+.tz select{width:100%;min-height:48px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--surface-solid);color:var(--text);font:inherit}
+.tz select:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px}
+.tz-static{display:grid;gap:14px;margin:0}
+.tz-item dt{font-weight:700;color:var(--text)}
+.tz-item dd{margin:4px 0 0;color:var(--text-2);font-size:15px}
+.tz-pane{display:grid;gap:12px;min-height:0}
+.tz-msg{display:grid;gap:6px;max-width:68ch;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-sm)}
+.tz-user{justify-self:end;background:var(--surface-2)}
+.tz-ai{background:var(--surface-solid)}
+.tz-who{font:600 11.5px/1.4 var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.tz-msg p{margin:0;color:var(--text-2);font-size:15.5px;line-height:1.55}
+.tz-msg p strong{color:var(--text)}
+.tz-typed{display:grid;gap:8px;animation:tzwipe 1.4s steps(28) forwards}
+.tz-caption{margin:0;color:var(--text-3);font-size:13px}
+.tz-punch{margin:0;font:700 clamp(18px,2.2vw,24px)/1.35 var(--ff-display);color:var(--text);animation:tzfade var(--dur-base) var(--ease-out) 1.5s both}
+.tz-skip{justify-self:start;padding:0;border:0;background:none;color:var(--text-2);font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px}
+.tz-pane.is-skipped .tz-typed,.tz-pane.is-skipped .tz-punch{animation:none}
+.tz-pane.is-skipped .tz-skip{display:none}
+@keyframes tzwipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes tzfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tz-form{display:grid;gap:12px;padding-top:6px;border-top:1px solid var(--line)}
+.tz-form h3{margin:12px 0 0;font:700 19px var(--ff-display)}
+.tz-form p{margin:0;color:var(--text-2);font-size:15px}
+.tz-form input{flex:1 1 220px;min-height:48px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface-solid);color:var(--text);font:inherit}
+.tz-audit{margin:0;font-size:15px}
+@media (prefers-reduced-motion:reduce){.tz-typed,.tz-punch{animation:none!important}}
