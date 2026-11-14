@@ -48,6 +48,31 @@ function syncThemeColor(theme) {
   document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => { meta.setAttribute('content', THEME_COLORS[theme]); });
 }
 
+function initHeadline() {
+  if (reduceMotion) return;
+  const h = document.querySelector('.hero h1.display');
+  if (!h || h.dataset.split) return;
+  h.dataset.split = '1';
+  let i = 0;
+  const walk = (node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part.trim()) { frag.append(part); return; }
+          const w = document.createElement('span');
+          w.className = 'hw';
+          w.style.setProperty('--w', String(i++));
+          w.textContent = part;
+          frag.append(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) walk(n);
+    });
+  };
+  walk(h);
+}
+
 function initTheme() {
   if (!root.dataset.theme) {
     const mq = window.matchMedia('(prefers-color-scheme: light)');
@@ -548,7 +573,8 @@ function initPointerFx() {
       const r = c.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
       c.style.setProperty('--mx', `${px * 100}%`); c.style.setProperty('--my', `${py * 100}%`);
-      c.style.transform = `perspective(900px) rotateX(${(0.5 - py) * 3}deg) rotateY(${(px - 0.5) * 3}deg)`;
+      const max = c.classList.contains('tier') ? 4 : 3;
+      c.style.transform = `perspective(900px) rotateX(${(0.5 - py) * max}deg) rotateY(${(px - 0.5) * max}deg)`;
     });
     c.addEventListener('pointerleave', () => { c.style.transform = ''; });
   });
@@ -677,6 +703,7 @@ initPipeline();
 initFinder();
 initSlide();
 initModules();
+initHeadline();
 initThanks();
 const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
 [initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx].forEach((fn) => idle(() => fn()));
