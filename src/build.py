@@ -17,7 +17,7 @@ OUT = SRC.parent
 DOMAIN = "https://www.kortexlab.me"
 LANGS = ["en", "fr", "ar"]
 PREFIX = {"en": "", "fr": "/fr", "ar": "/ar"}
-LOCALE = {"en": "en_US", "fr": "fr_FR", "ar": "ar_MA"}
+LOCALE = {"en": "en_US", "fr": "fr_FR", "ar": "ar_AR"}
 LANG_NAME = {"en": "English", "fr": "Français", "ar": "العربية"}
 LANG_SHORT = {"en": "EN", "fr": "FR", "ar": "AR"}
 LANG_ENGLISH = {"en": "English", "fr": "French", "ar": "Arabic"}
@@ -1770,7 +1770,7 @@ def schema(lang, pid, meta, body):
     faqs = faq_entities(body)
     if faqs:
         graph.append({"@type": "FAQPage", "@id": page_url + "#faq", "mainEntity": faqs})
-    return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    return "".join('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", **node}, ensure_ascii=False, separators=(",", ":")) + "</script>" for node in graph)
 
 
 def head(lang, pid, meta, body, critical, css_v, js_v):
@@ -1816,7 +1816,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <link rel="preload" href="/assets/css/site.css?v={css_v}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="/assets/css/site.css?v={css_v}"></noscript>
 <script type="module" src="/assets/js/site.js?v={js_v}"></script>
-{"" if pid == "404" else f'<script type="application/ld+json">{schema(lang, pid, meta, body)}</script>'}'''
+{"" if pid == "404" else schema(lang, pid, meta, body)}'''
 
 
 ANALYTICS = (
