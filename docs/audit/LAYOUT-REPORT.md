@@ -50,7 +50,7 @@ Screenshots at three scroll positions: `docs/audit/layout/rail-1440.webp` and `r
 ## 4. Theme bleed
 
 - Exactly one inverted band on each of the 139 indexed pages (counted in the built HTML), and the pricing test asserts it in both themes.
-- The only hard-coded dark values in the stylesheets are inside the band rule itself; `grep` for the navy hex values outside `tokens.css` returns that one rule and nothing else. `color-scheme: dark` appears only in that rule and in the dark token set.
+- The only hard-coded dark values in the stylesheets are the three band rules (the band's own token set and its two darker-ground rules for dark mode); `grep` for the navy hex values outside `tokens.css` returns those lines and nothing else. `color-scheme: dark` appears only in that rule and in the dark token set.
 - `scripts/audit-layout.mjs` visits 22 templates at five widths in both themes (220 captures) and flags any opaque surface larger than 2,500 px² outside the band that is dark in a light page or light in a dark page, skipping images, SVG and canvas. Result: 0 flags and 0 horizontal overflows.
 - I also looked at the contact sheets for both themes: no stray inverted card, input or strip.
 
