@@ -17,7 +17,7 @@ OUT = SRC.parent
 DOMAIN = "https://www.kortexlab.me"
 LANGS = ["en", "fr", "ar"]
 PREFIX = {"en": "", "fr": "/fr", "ar": "/ar"}
-LOCALE = {"en": "en_US", "fr": "fr_FR", "ar": "ar_MA"}
+LOCALE = {"en": "en_US", "fr": "fr_FR", "ar": "ar_AR"}
 LANG_NAME = {"en": "English", "fr": "Français", "ar": "العربية"}
 LANG_SHORT = {"en": "EN", "fr": "FR", "ar": "AR"}
 LANG_ENGLISH = {"en": "English", "fr": "French", "ar": "Arabic"}
@@ -561,8 +561,8 @@ def footer(lang, pid="home"):
 </div>
 <div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span>{footer_lang(lang, pid, t)}<nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
 </div>
-<div class="footer-mark reveal" aria-hidden="true"><svg viewBox="-12 0 1024 190" focusable="false"><text x="0" y="176" font-size="236" textLength="1000" lengthAdjust="spacingAndGlyphs">KORTEX</text></svg></div>
 <p class="footer-stack">{t["stack_line"]}</p>
+<div class="footer-mark reveal" aria-hidden="true" data-t="KORTEX"></div>
 </footer>'''
 
 
@@ -1443,6 +1443,7 @@ INVERT_SECTION = {
 
 def anatomy(body, pid):
     count = [0]
+    navmode = 'data-nav=' in body
     target = INVERT_SECTION.get(pid)
     found = [False]
 
@@ -1457,7 +1458,7 @@ def anatomy(body, pid):
             found[0] = True
         elif "band-invert" in cls:
             found[0] = True
-        if '<span class="eyebrow">' in inner:
+        if '<span class="eyebrow">' in inner and (not navmode or 'data-nav=' in attrs):
             count[0] += 1
             inner = inner.replace('<span class="eyebrow">', f'<span class="eyebrow"><span class="sx-n" aria-hidden="true">{count[0]:02d}</span>', 1)
         return f"<section{attrs}>{inner}</section>"
@@ -1770,7 +1771,7 @@ def schema(lang, pid, meta, body):
     faqs = faq_entities(body)
     if faqs:
         graph.append({"@type": "FAQPage", "@id": page_url + "#faq", "mainEntity": faqs})
-    return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    return "".join('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", **node}, ensure_ascii=False, separators=(",", ":")) + "</script>" for node in graph)
 
 
 def head(lang, pid, meta, body, critical, css_v, js_v):
@@ -1816,7 +1817,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <link rel="preload" href="/assets/css/site.css?v={css_v}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="/assets/css/site.css?v={css_v}"></noscript>
 <script type="module" src="/assets/js/site.js?v={js_v}"></script>
-{"" if pid == "404" else f'<script type="application/ld+json">{schema(lang, pid, meta, body)}</script>'}'''
+{"" if pid == "404" else schema(lang, pid, meta, body)}'''
 
 
 ANALYTICS = (

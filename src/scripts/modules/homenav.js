@@ -1,21 +1,25 @@
 export function init(nav) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const marked = [...document.querySelectorAll('main > section[data-nav]')];
-  const secs = marked.length ? marked : [...document.querySelectorAll('main > section[aria-labelledby]')].filter((s) => !s.classList.contains('hero') && !s.classList.contains('cta-band') && s.querySelector('h2')).slice(0, 8);
-  const hero = document.querySelector('main > .hero');
+  const indexed = [...document.querySelectorAll('main > section')].filter((s) => s.querySelector('.sx-n'));
+  const secs = marked.length ? marked : indexed.slice(0, 10);
   if (secs.length < 3) return;
+  const hero = document.querySelector('main > .hero');
+  const footer = document.querySelector('.site-footer');
   const list = document.createElement('ol');
   const items = secs.map((s, i) => {
     if (!s.id) s.id = 'sec-' + (i + 1);
-    const label = (s.dataset.nav || s.querySelector('h2').textContent).trim();
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = '#' + s.id;
     const dot = document.createElement('i');
-    const txt = document.createElement('span');
-    txt.textContent = label;
+    const n = document.createElement('b');
     const sx = s.querySelector('.sx-n');
-    if (sx) { const n = document.createElement('b'); n.textContent = sx.textContent; a.append(dot, n, txt); } else a.append(dot, txt);
+    n.textContent = sx ? sx.textContent : String(i + 1).padStart(2, '0');
+    const txt = document.createElement('span');
+    const eb = s.querySelector('.eyebrow');
+    txt.textContent = (s.dataset.nav || (eb ? eb.textContent.replace(/^\d+\s*\/?\s*/, '') : s.querySelector('h2').textContent)).trim();
+    a.append(dot, n, txt);
     li.append(a);
     list.append(li);
     a.addEventListener('click', (e) => {
@@ -26,9 +30,12 @@ export function init(nav) {
     return { s, a };
   });
   nav.append(list);
-  if (hero) {
-    new IntersectionObserver((es) => nav.classList.toggle('is-on', !es[0].isIntersecting && es[0].boundingClientRect.top < 0)).observe(hero);
-  } else nav.classList.add('is-on');
+  let past = !hero;
+  let atEnd = false;
+  const sync = () => nav.classList.toggle('is-on', past && !atEnd);
+  if (hero) new IntersectionObserver((es) => { past = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; sync(); }).observe(hero);
+  if (footer) new IntersectionObserver((es) => { atEnd = es[0].isIntersecting; sync(); }, { rootMargin: '0px 0px 0px 0px' }).observe(footer);
+  sync();
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
