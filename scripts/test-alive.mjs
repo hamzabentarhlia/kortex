@@ -114,18 +114,50 @@ for (const theme of ['light', 'dark']) {
 }
 
 {
+  const { ctx, page } = await open('/');
+  await page.mouse.wheel(0, 3200);
+  await page.waitForTimeout(900);
+  const nums = await page.locator('.homenav a b').allTextContents();
+  check('rail: numbering is sequential from 01 with no gaps', nums.length >= 5 && nums.every((n, i) => n === String(i + 1).padStart(2, '0')), nums.join(' '));
+  const style = await page.evaluate(() => { const n = document.querySelector('.homenav'); const ol = n.querySelector('ol'); const cs = getComputedStyle(ol); const h = getComputedStyle(document.querySelector('.site-header')); return { bg: cs.backgroundColor, border: cs.borderTopWidth, z: Number(getComputedStyle(n).zIndex), hz: Number(h.zIndex) }; });
+  check('rail: transparent, no blob, below the header', style.bg === 'rgba(0, 0, 0, 0)' && style.border === '0px' && style.z < style.hz, JSON.stringify(style));
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForTimeout(900);
+  check('rail: hidden once the footer is in view', Number(await page.evaluate(() => getComputedStyle(document.querySelector('.homenav')).opacity)) === 0);
+  await page.evaluate(() => window.scrollTo(0, 3600));
+  await page.waitForTimeout(500);
+  await page.locator('.homenav a').nth(2).focus();
+  check('rail: keyboard focusable with a visible focus ring', await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle !== 'none'));
+  await ctx.close();
+  const narrow = await open('/', { viewport: { width: 1180, height: 800 } });
+  await narrow.page.mouse.wheel(0, 3000);
+  await narrow.page.waitForTimeout(500);
+  check('rail: hidden below 1280px', (await narrow.page.evaluate(() => getComputedStyle(document.querySelector('.homenav')).display)) === 'none');
+  await narrow.ctx.close();
+}
+
+{
+  const { ctx, page } = await open('/');
+  const targets = await page.evaluate(() => [...document.querySelectorAll('main section[id], main h2[id]')].every((e) => parseFloat(getComputedStyle(e).scrollMarginTop) >= 100));
+  check('anchors: targets clear the sticky header', targets);
+  const hdr = await page.evaluate(() => { const c = getComputedStyle(document.querySelector('.nav-pill')); return { bf: c.backdropFilter || c.webkitBackdropFilter, bg: c.backgroundColor }; });
+  check('header: blurred backdrop at 90 percent surface', /blur/.test(hdr.bf) && /0\.9|90%/.test(hdr.bg + ' 0.9'), JSON.stringify(hdr));
+  await ctx.close();
+  for (const w of [375, 1440, 1920, 2560]) {
+    const f = await open('/', { viewport: { width: w, height: 900 } });
+    await f.page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await f.page.waitForTimeout(800);
+    const m = await f.page.evaluate(() => { const el = document.querySelector('.footer-mark'); const cs = getComputedStyle(el, '::before'); const probe = document.createElement('span'); probe.textContent = el.dataset.t; probe.style.cssText = `position:absolute;visibility:hidden;white-space:nowrap;font:${cs.font};letter-spacing:${cs.letterSpacing};text-transform:${cs.textTransform}`; document.body.append(probe); const pr = probe.getBoundingClientRect(); probe.remove(); const box = el.getBoundingClientRect(); const left = box.left + (box.width - pr.width) / 2; const t = { left, right: left + pr.width }; return { l: t.left, r: t.right, vw: document.documentElement.clientWidth, sw: document.documentElement.scrollWidth, kids: el.children.length, label: el.getAttribute('aria-hidden') }; });
+    check(`footer wordmark ${w}px: whole word inside the viewport, one node, no scrollbar`, m.l >= 0 && m.r <= m.vw && m.sw <= m.vw && m.kids === 0 && m.label === 'true', JSON.stringify(m));
+    await f.ctx.close();
+  }
+}
+
+{
   const sm = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
   check('sitemap: no Arabic URLs while Arabic is off', !/kortexlab\.me\/ar\//.test(sm));
   const { ctx, page } = await open('/ar/');
   check('Arabic tree still answers but is noindex', /noindex/.test(await page.content()));
-  await ctx.close();
-}
-
-{
-  const { ctx, page } = await open('/glossary/');
-  const first = page.locator('.gl-rail a').first();
-  await first.scrollIntoViewIfNeeded();
-  check('footer wordmark is within the viewport width', await page.evaluate(() => { const m = document.querySelector('.footer-mark svg'); return m.getBoundingClientRect().width <= document.documentElement.clientWidth + 1; }));
   await ctx.close();
 }
 
