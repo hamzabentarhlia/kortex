@@ -14,7 +14,8 @@ export function init(nav) {
     const dot = document.createElement('i');
     const txt = document.createElement('span');
     txt.textContent = label;
-    a.append(dot, txt);
+    const sx = s.querySelector('.sx-n');
+    if (sx) { const n = document.createElement('b'); n.textContent = sx.textContent; a.append(dot, n, txt); } else a.append(dot, txt);
     li.append(a);
     list.append(li);
     a.addEventListener('click', (e) => {

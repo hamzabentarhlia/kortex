@@ -16,14 +16,15 @@ const walk = (dir) => {
 walk(root);
 
 const required = {
-  Organization: ['name', 'url'],
+  Organization: ['name', 'url', 'logo', 'sameAs'],
   WebSite: ['name', 'url'],
-  Person: ['name'],
+  Person: ['name', 'jobTitle'],
   BlogPosting: ['headline', 'datePublished', 'author', 'publisher', 'mainEntityOfPage', 'inLanguage'],
   Article: ['headline', 'datePublished', 'author', 'publisher'],
   FAQPage: ['mainEntity'],
   BreadcrumbList: ['itemListElement'],
-  Service: ['name', 'provider'],
+  Service: ['name', 'provider', 'offers'],
+  CollectionPage: ['name', 'url'],
   Offer: ['priceCurrency'],
   DefinedTerm: ['name', 'description'],
   DefinedTermSet: ['name', 'hasDefinedTerm'],
@@ -41,6 +42,8 @@ const flatten = (node, out = []) => {
   return out;
 };
 
+const collections = new Set(['blog', 'glossary', 'compare', 'solutions', 'teardowns', 'resources', 'case-studies']);
+const prices = { '/pricing/': ['2500', '5500', '12000'], '/': ['2500', '5500', '12000'], '/audit/': ['490'] };
 let errors = 0;
 let blocks = 0;
 const fail = (page, message) => {
@@ -54,6 +57,8 @@ for (const page of pages) {
   const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   const visibleQuestions = [...html.matchAll(/<details(?: class="faq-item")?>\s*<summary>([\s\S]*?)<\/summary>/g)].map((m) => plain(m[1]));
   let hasFaqSchema = false;
+  const found = new Set();
+  const offerPrices = new Set();
   for (const match of scripts) {
     blocks += 1;
     let data;
@@ -65,6 +70,8 @@ for (const page of pages) {
     }
     for (const node of flatten(data)) {
       const types = [].concat(node['@type']);
+      types.forEach((t) => found.add(t));
+      if (types.includes('Offer')) offerPrices.add(String(node.price ?? node.priceSpecification?.price));
       for (const type of types) {
         for (const key of required[type] || []) {
           if (node[key] === undefined || node[key] === '') fail(page, `${type} is missing ${key}`);
@@ -82,6 +89,19 @@ for (const page of pages) {
     }
   }
   if (visibleQuestions.length && !hasFaqSchema) fail(page, 'visible FAQ without FAQPage schema');
+  if (/http-equiv="refresh"/.test(html) || !scripts.length) continue;
+  const rel = '/' + relative(root, page).replace(/index\.html$/, '').replace(/^fr\//, '');
+  const isFr = relative(root, page).startsWith('fr/');
+  const isAr = relative(root, page).startsWith('ar/');
+  if (isAr && /noindex/.test(html)) continue;
+  for (const t of ['Organization', 'WebSite', 'WebPage', 'BreadcrumbList']) if (!found.has(t) && rel !== '/404.html') fail(page, `missing ${t}`);
+  if (/^\/(blog|teardowns)\/[^/]+\/$/.test(rel) && !found.has('BlogPosting')) fail(page, 'article without BlogPosting');
+  if (/^\/glossary\/[^/]+\/$/.test(rel) && !found.has('DefinedTerm')) fail(page, 'term page without DefinedTerm');
+  if (rel === '/glossary/' && !found.has('DefinedTermSet')) fail(page, 'glossary hub without DefinedTermSet');
+  if (collections.has(rel.replace(/\//g, '')) && !found.has('CollectionPage')) fail(page, 'hub without CollectionPage');
+  if (rel === '/about/' && !found.has('Person')) fail(page, 'about page without Person');
+  if (rel === '/' && !found.has('Person')) fail(page, 'home without Person for the founder section');
+  if (prices[rel]) for (const price of prices[rel]) if (!offerPrices.has(price)) fail(page, `missing Offer with price ${price}`);
 }
 
 console.log(`${pages.length} pages, ${blocks} JSON-LD blocks, ${errors} errors`);

@@ -46,11 +46,19 @@ export function init(body) {
     ol.append(li);
     return a;
   });
+  const ind = document.createElement('span');
+  ind.className = 'toc-ind';
+  ind.setAttribute('aria-hidden', 'true');
+  ol.prepend(ind);
   nav.append(title, ol);
   body.append(nav);
 
   const setCurrent = (id) => links.forEach((a) => {
-    if (a.hash === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    if (a.hash === '#' + id) {
+      a.setAttribute('aria-current', 'true');
+      ind.style.height = a.offsetHeight + 'px';
+      ind.style.transform = 'translateY(' + a.parentElement.offsetTop + 'px)';
+    } else a.removeAttribute('aria-current');
   });
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => { if (en.isIntersecting) setCurrent(en.target.id); });

@@ -50,6 +50,15 @@ export function init(root) {
     memory[current] = true;
   };
 
+  const typeLog = (el, text) => {
+    if (reduce) return;
+    el.style.minHeight = el.offsetHeight + 'px';
+    el.textContent = '';
+    let i = 0;
+    const tick = () => { i += 2; el.textContent = text.slice(0, i); if (i < text.length) at(tick, 16); else el.textContent = text; };
+    tick();
+  };
+
   const play = () => {
     if (!data) return;
     track('demo_run', { source: current });
@@ -62,7 +71,10 @@ export function init(root) {
         stages.forEach((x, j) => { x.classList.toggle('is-active', j === i); if (j < i) x.classList.add('is-lit'); });
         stages[i].classList.add('is-lit');
         setProgress(i / (stages.length - 1));
-        status.textContent = stages[i].querySelector('.ds-name').textContent + '. ' + stages[i].querySelector('.ds-log').textContent;
+        const log = stages[i].querySelector('.ds-log');
+        const text = log.textContent;
+        status.textContent = stages[i].querySelector('.ds-name').textContent + '. ' + text;
+        typeLog(log, text);
       }, i * 600);
     });
     const dealStart = stages.length * 600;
@@ -88,5 +100,10 @@ export function init(root) {
     data = d;
     if (reduce) { final(); return; }
     idle();
+    let auto = true;
+    root.addEventListener('pointerdown', () => { auto = false; }, { once: true });
+    new IntersectionObserver((es, io) => {
+      if (es[0].isIntersecting && auto && root.dataset.state === 'idle') { io.disconnect(); play(); }
+    }, { threshold: 0.55 }).observe(root);
   }).catch(() => { root.dataset.state = 'done'; });
 }

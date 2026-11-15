@@ -48,31 +48,6 @@ function syncThemeColor(theme) {
   document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => { meta.setAttribute('content', THEME_COLORS[theme]); });
 }
 
-function initHeadline() {
-  if (reduceMotion) return;
-  const h = document.querySelector('.hero h1.display');
-  if (!h || h.dataset.split) return;
-  h.dataset.split = '1';
-  let i = 0;
-  const walk = (node) => {
-    [...node.childNodes].forEach((n) => {
-      if (n.nodeType === 3) {
-        const frag = document.createDocumentFragment();
-        n.textContent.split(/(\s+)/).forEach((part) => {
-          if (!part.trim()) { frag.append(part); return; }
-          const w = document.createElement('span');
-          w.className = 'hw';
-          w.style.setProperty('--w', String(i++));
-          w.textContent = part;
-          frag.append(w);
-        });
-        n.replaceWith(frag);
-      } else if (n.nodeType === 1) walk(n);
-    });
-  };
-  walk(h);
-}
-
 function initTheme() {
   if (!root.dataset.theme) {
     const mq = window.matchMedia('(prefers-color-scheme: light)');
@@ -88,9 +63,8 @@ function initTheme() {
     sync();
     btn.addEventListener('click', () => {
       const next = currentTheme() === 'light' ? 'dark' : 'light';
-      root.dataset.theme = next;
-      store('kx-theme', next);
-      syncThemeColor(next);
+      const apply = () => { root.dataset.theme = next; store('kx-theme', next); syncThemeColor(next); };
+      if (document.startViewTransition && !reduceMotion) document.startViewTransition(apply); else apply();
       track('theme_toggle', { theme: next });
       document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(next === 'light')));
       if (window.Cal && window.Cal.ns && window.Cal.ns.kx) window.Cal.ns.kx('ui', { theme: next });
@@ -189,13 +163,24 @@ function initMobileMenu() {
 }
 
 function animateCount(el) {
-  if (!reduceMotion) el.classList.add('is-counted');
+  if (reduceMotion) return;
+  el.classList.add('is-counted');
+  const end = Number(el.dataset.count);
+  if (!Number.isFinite(end) || end <= 0) return;
+  const start = performance.now();
+  const frame = (now) => {
+    const k = Math.min(1, (now - start) / 700);
+    el.textContent = String(Math.round(end * (1 - Math.pow(1 - k, 3))));
+    if (k < 1) requestAnimationFrame(frame); else el.textContent = String(end);
+  };
+  el.textContent = '0';
+  requestAnimationFrame(frame);
 }
 
 function initReveal() {
   if (!reduceMotion) {
     const vh = innerHeight;
-    const late = [...document.querySelectorAll('main .section-head, main .faq, main .compare, main .tbl-wrap, main .answer-block, main .prose > h2, main .vs, main .split > .glass')]
+    const late = [...document.querySelectorAll('main .section-head, main .vx, main .faq, main .compare, main .tbl-wrap, main .answer-block, main .prose > h2, main .vs, main .split > .glass')]
       .filter((el) => !el.closest('.reveal,.reveal-group') && el.getBoundingClientRect().top > vh);
     late.forEach((el) => el.classList.add('reveal'));
   }
@@ -223,6 +208,50 @@ function initReveal() {
     });
   }, { rootMargin: '0px 0px 15% 0px', threshold: 0 });
   items.forEach((el) => io.observe(el));
+}
+
+function initTicks() {
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      const el = en.target;
+      const end = Number(el.textContent);
+      let n = 0;
+      const step = () => {
+        n += Math.max(1, Math.ceil(end / 8));
+        if (n >= end) { el.textContent = String(end).padStart(2, '0'); return; }
+        el.textContent = String(n).padStart(2, '0');
+        setTimeout(step, 45);
+      };
+      el.textContent = '00';
+      setTimeout(step, 60);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.sx-n').forEach((el) => { if (el.getBoundingClientRect().top > innerHeight * 0.9) io.observe(el); });
+}
+
+function initTyping() {
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      const el = en.target;
+      const full = el.textContent;
+      el.style.minHeight = el.offsetHeight + 'px';
+      el.textContent = '';
+      let i = 0;
+      const tick = () => {
+        i += 2;
+        el.textContent = full.slice(0, i);
+        if (i < full.length) setTimeout(tick, 18); else el.textContent = full;
+      };
+      setTimeout(tick, 120);
+    });
+  }, { threshold: 0.8 });
+  document.querySelectorAll('[data-type]').forEach((el) => io.observe(el));
 }
 
 function initPrefill() {
@@ -438,6 +467,7 @@ function initScroll() {
 }
 
 function initAnimVisibility() {
+  document.addEventListener('visibilitychange', () => root.classList.toggle('tab-hidden', document.hidden));
   const els = document.querySelectorAll('[data-anim]');
   if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('is-visible')); return; }
   const io = new IntersectionObserver((entries) => {
@@ -705,7 +735,6 @@ initPipeline();
 initFinder();
 initSlide();
 initModules();
-initHeadline();
 initThanks();
 const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
-[initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx].forEach((fn) => idle(() => fn()));
+[initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx, initTicks, initTyping].forEach((fn) => idle(() => fn()));

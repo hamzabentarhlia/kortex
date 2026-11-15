@@ -20,6 +20,7 @@ PREFIX = {"en": "", "fr": "/fr", "ar": "/ar"}
 LOCALE = {"en": "en_US", "fr": "fr_FR", "ar": "ar_MA"}
 LANG_NAME = {"en": "English", "fr": "Français", "ar": "العربية"}
 LANG_SHORT = {"en": "EN", "fr": "FR", "ar": "AR"}
+LANG_ENGLISH = {"en": "English", "fr": "French", "ar": "Arabic"}
 EMAIL = "contact@kortexlab.me"
 LINKEDIN = "https://www.linkedin.com/in/hamza-bentarhlia/"
 GA_ID = "G-4440VPDMPW"
@@ -105,6 +106,7 @@ UI = {
         "from-webinar": ("From a webinar", "Live sessions and recorded demos"),
         "footer_blurb": "GEO, SEO and content studio. One source becomes a month of content that AI answer engines can quote and search engines can rank.",
         "footer_place": "Based in Fès, Morocco. Working with clients worldwide.",
+        "stack_line": "Built in Fès. Runs on n8n, Whisper, Gemini, Odoo.",
         "col_product": "Product",
         "col_solutions": "Solutions",
         "col_resources": "Resources",
@@ -174,6 +176,7 @@ UI = {
         "from-webinar": ("À partir d'un webinaire", "Sessions live et démos enregistrées"),
         "footer_blurb": "Studio GEO, SEO et contenu. Une source devient un mois de contenus que les moteurs de réponse IA peuvent citer et que les moteurs de recherche peuvent classer.",
         "footer_place": "Basé à Fès, au Maroc. Clients dans le monde entier.",
+        "stack_line": "Construit à Fès. Fonctionne avec n8n, Whisper, Gemini, Odoo.",
         "col_product": "Offre",
         "col_solutions": "Solutions",
         "col_resources": "Ressources",
@@ -242,6 +245,7 @@ UI = {
         "from-webinar": ("انطلاقا من ندوة رقمية", "جلسات مباشرة وعروض مسجلة"),
         "footer_blurb": "استوديو GEO وSEO وصناعة المحتوى. مصدر واحد يتحول إلى شهر كامل من المحتوى تستطيع محركات الإجابة بالذكاء الاصطناعي الاستشهاد به ومحركات البحث ترتيبه.",
         "footer_place": "مقرنا في فاس، المغرب. نعمل مع عملاء حول العالم.",
+        "stack_line": "صُنع في فاس. يعمل على n8n وWhisper وGemini وOdoo.",
         "col_product": "الخدمة",
         "col_solutions": "الحلول",
         "col_resources": "الموارد",
@@ -353,6 +357,13 @@ def available(pid):
     return [l for l in LANGS if exists(l, pid)]
 
 
+ACTIVE_LANGS = [l for l in LANGS if l != "ar" or SITE.get("arabic")]
+
+
+def alternates(pid):
+    return [l for l in available(pid) if l in ACTIVE_LANGS]
+
+
 def asset_version(path):
     return hashlib.sha1(path.read_bytes()).hexdigest()[:8]
 
@@ -424,7 +435,7 @@ RESOURCE_GROUPS = [(None, ["resources", "blog", "glossary", "compare", "about"])
 
 def lang_links(lang, pid, mobile=False):
     out = []
-    for l in available(pid):
+    for l in alternates(pid):
         cur = ' aria-current="true"' if l == lang else ""
         if mobile:
             out.append(f'<a class="btn btn-ghost btn-sm" href="{url(l, pid)}" hreflang="{l}" lang="{l}"{cur}>{LANG_NAME[l]}</a>')
@@ -442,7 +453,7 @@ def header(lang, pid):
         dropdown(lang, "resources", t["resources"], RESOURCE_GROUPS, pid),
     ]
     langs = ""
-    if len(available(pid)) > 1:
+    if len(alternates(pid)) > 1:
         langs = (
             f'<div class="lang-switch"><button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-lang" data-menu-toggle>'
             f'<span class="visually-hidden">{t["language"]}: </span>{LANG_SHORT[lang]}{icon("chevron")}</button>'
@@ -518,7 +529,13 @@ def photo(lang, kind, eager=False):
     )
 
 
-def footer(lang):
+def footer_lang(lang, pid, t):
+    if len(alternates(pid)) < 2:
+        return ""
+    return f'<nav class="footer-lang" aria-label="{t["language"]}">{lang_links(lang, pid)}</nav>'
+
+
+def footer(lang, pid="home"):
     t = UI[lang]
 
     def col(title, entries):
@@ -542,8 +559,10 @@ def footer(lang):
 <p><a class="text-link" href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn</a></p></div>
 {"".join(cols)}
 </div>
-<div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
+<div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span>{footer_lang(lang, pid, t)}<nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
 </div>
+<div class="footer-mark reveal" aria-hidden="true"><svg viewBox="-12 0 1024 190" focusable="false"><text x="0" y="176" font-size="236" textLength="1000" lengthAdjust="spacingAndGlyphs">KORTEX</text></svg></div>
+<p class="footer-stack">{t["stack_line"]}</p>
 </footer>'''
 
 
@@ -1028,14 +1047,15 @@ def article_cta(lang, pid, body):
 AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide", "entity-seo-for-founders", "repurposing-mistakes-that-kill-authority", "geo-in-french-and-arabic"}
 
 
-def cta_band(lang):
+def cta_band(lang, invert=False):
     t = UI[lang]
     second = f'<a class="btn btn-ghost" href="{url(lang, "audit")}" data-track="band-audit">{t["audit_cta"]}</a>' if exists(lang, "audit") else (f'<a class="btn btn-ghost" href="{url(lang, "pricing")}" data-track="band-pricing">{t["see_pricing"]}</a>' if exists(lang, "pricing") else "")
-    return f'''<section class="cta-band" aria-labelledby="cta-band-title">
+    return f'''<section class="cta-band{" band-invert" if invert else ""}" aria-labelledby="cta-band-title">
 <div class="wrap">
 <span class="eyebrow">{t["cta_kicker"]}</span>
 <h2 id="cta-band-title">{t["cta_title"]}</h2>
 <p>{t["cta_text"]}</p>
+{ladder_short(lang)}
 <div class="hero-actions"><a class="btn btn-primary" href="{book_href(lang)}" {BOOK_ATTRS} data-track="band-book">{t["book"]}{icon("arrow", "flip")}</a>{second}</div>
 <p class="book-note">{t["book_note"]}</p>
 <p class="hero-note">{t["cta_terms"]}</p>
@@ -1319,6 +1339,140 @@ def post_nav(lang, pid):
 
 
 
+LADDER_TEXT = {
+    "en": {
+        "eyebrow": "The ladder", "title": "Three steps, each one credited toward the next", "lead": "Start where the risk is lowest. Each step answers a bigger question than the one before.",
+        "steps": [
+            ("01", "Free", "Strategy call", "30 minutes. We test 3 of your buyers' questions live in the AI engines and tell you what we see.", "Book the call", "book"),
+            ("02", "€490", "AI Citation Audit", "40 questions, four engines, a written report and a 90-day plan. Credited against your first month.", "See the audit", "audit"),
+            ("03", "From €2,500 a month", "Plans", "The system running monthly: GHOST, SWARM or TITAN, with a citation check in every plan.", "Compare the plans", "plans"),
+        ],
+        "short": ["Free strategy call: 3 questions tested live", "AI Citation Audit, €490: 40 questions and a report", "Plans: the system running monthly"],
+    },
+    "fr": {
+        "eyebrow": "L'échelle", "title": "Trois étapes, chacune déduite de la suivante", "lead": "Commencez là où le risque est le plus faible. Chaque étape répond à une question plus grande que la précédente.",
+        "steps": [
+            ("01", "Gratuit", "Appel stratégique", "30 minutes. Nous testons en direct 3 des questions de vos acheteurs dans les moteurs d'IA et vous disons ce que nous voyons.", "Réserver l'appel", "book"),
+            ("02", "490 €", "Audit de citations IA", "40 questions, quatre moteurs, un rapport écrit et un plan sur 90 jours. Déduit de votre premier mois.", "Voir l'audit", "audit"),
+            ("03", "À partir de 2 500 € par mois", "Offres", "Le système qui tourne chaque mois : GHOST, SWARM ou TITAN, avec un contrôle des citations dans chaque offre.", "Comparer les offres", "plans"),
+        ],
+        "short": ["Appel stratégique gratuit : 3 questions testées en direct", "Audit de citations IA, 490 € : 40 questions et un rapport", "Offres : le système qui tourne chaque mois"],
+    },
+}
+
+
+def ladder_block(lang):
+    code = lang if lang in LADDER_TEXT else "en"
+    t = LADDER_TEXT[code]
+    links = {"book": book_href(lang), "audit": url(lang, "audit") if exists(lang, "audit") else book_href(lang), "plans": url(lang, "pricing") + "#plans"}
+    cards = []
+    for n, price, name, text, cta, key in t["steps"]:
+        attrs = f' {BOOK_ATTRS}' if key == "book" else ""
+        cards.append(
+            f'<li class="ld-step"><span class="ld-n">{n}</span><span class="ld-price">{price}</span><h3>{name}</h3><p>{text}</p>'
+            f'<a class="ld-link" href="{links[key]}"{attrs} data-cta="ladder-{key}">{cta}{icon("arrow")}</a></li>'
+        )
+    return (
+        f'<section class="section band-invert ld-sec" data-ix="ladder" data-nav="{t["eyebrow"]}" aria-labelledby="ladder-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="ladder-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
+        f'<ol class="ld">{"".join(cards)}</ol></div></section>'
+    )
+
+
+def ladder_short(lang):
+    code = lang if lang in LADDER_TEXT else "en"
+    items = "".join(f"<li>{x}</li>" for x in LADDER_TEXT[code]["short"])
+    return f'<ol class="ld-short" aria-label="{LADDER_TEXT[code]["eyebrow"]}">{items}</ol>'
+
+
+def split_headline(body):
+    m = re.search(r'(<h1[^>]*class="display(?: [^"]*)?"[^>]*>)(.*?)(</h1>)', body, flags=re.S)
+    if not m or "display-sm" in m.group(1):
+        return body
+    inner = m.group(2)
+    parts = re.split(r"(<[^>]+>)", inner)
+    out, idx, depth_chip = [], 0, 0
+    for part in parts:
+        if part.startswith("<"):
+            if part.startswith("<span") and "chip-word" in part:
+                depth_chip += 1
+                out.append(part.replace('class="chip-word"', 'class="chip-word hw hw-chip"', 1))
+            elif part.startswith("</span") and depth_chip:
+                depth_chip -= 1
+                out.append(part)
+            else:
+                out.append(part)
+        elif depth_chip or not part.strip():
+            out.append(part)
+        else:
+            def word(w):
+                nonlocal idx
+                if not w.strip():
+                    return w
+                idx += 1
+                return f'<span class="hw" style="--w:{idx}">{w}</span>'
+            out.append("".join(word(w) for w in re.split(r"(\s+)", part)))
+    new = "".join(out)
+    new = new.replace("hw hw-chip", f"hw hw-chip\" style=\"--w:{idx + 3}", 1) if "hw hw-chip" in new else new
+    return body[: m.start(2)] + new + body[m.end(2):]
+
+
+def hiw_logs(body, lang, pid):
+    if pid != "how-it-works" or lang not in ("en", "fr"):
+        return body
+    logs = DEMO["sources"][0]["logs"][lang]
+    n = [0]
+
+    def one(m):
+        i = n[0]
+        n[0] += 1
+        if i >= len(logs):
+            return m.group(0)
+        return m.group(0) + f'<p class="hl-log" data-type>&gt; {html.escape(logs[i])}</p>'
+
+    return re.sub(r'(<section class="hl-station"[^>]*>.*?<div class="hl-copy">.*?<h3[^>]*>.*?</h3><p>.*?</p>)', one, body, flags=re.S)
+
+
+INVERT_SECTION = {
+    "home": "geo-title", "how-it-works": "never-title", "audit": "audit-price", "about": "story-title", "proof": "proof-method",
+    "checklist": "ck-how-title", "contact": "form-title", "solutions": "mix-title", "b2b": "b2b-example", "creators": "cr-example", "ecommerce": "ec-example",
+    "from-blog": "from-blog-assets", "from-youtube": "from-youtube-assets", "from-podcast": "from-podcast-assets", "from-webinar": "from-webinar-assets",
+    "pricing": "ladder-title", "security": "sec-receive", "resources": "res-start", "case-studies": "cs-1",
+}
+
+
+def anatomy(body, pid):
+    count = [0]
+    target = INVERT_SECTION.get(pid)
+    found = [False]
+
+    def one(m):
+        attrs, inner = m.group(1), m.group(2)
+        cls = re.search(r'class="([^"]*)"', attrs).group(1)
+        if "page-hero" in cls or "hero" in cls.split() or "cta-band" in cls:
+            return m.group(0)
+        label = re.search(r'aria-labelledby="([^"]*)"', attrs)
+        if target and label and label.group(1) == target and "band-invert" not in cls:
+            attrs = attrs.replace(f'class="{cls}"', f'class="{cls} band-invert"', 1)
+            found[0] = True
+        elif "band-invert" in cls:
+            found[0] = True
+        if '<span class="eyebrow">' in inner:
+            count[0] += 1
+            inner = inner.replace('<span class="eyebrow">', f'<span class="eyebrow"><span class="sx-n" aria-hidden="true">{count[0]:02d}</span>', 1)
+        return f"<section{attrs}>{inner}</section>"
+
+    out = re.sub(r"<section(\s[^>]*class=\"section[^>]*)>(.*?)</section>", one, body, flags=re.S)
+
+    def scroller(m):
+        cap = re.search(r"<caption[^>]*>(.*?)</caption>", m.group(2), flags=re.S)
+        label = "Table: " + html.escape(strip_tags(cap.group(1)), quote=True) if cap else "Table"
+        return f'<div class="{m.group(1)}" role="region" aria-label="{label}" tabindex="0">{m.group(2)}'
+
+    out = re.sub(r'<div class="((?:tbl|table)-wrap)">(<table.*?</table>)', scroller, out, flags=re.S)
+    return out, found[0]
+
+
 def resolve(body, lang):
     def block(m):
         pid = m.group(1)
@@ -1343,6 +1497,7 @@ def resolve(body, lang):
     body = body.replace("@@email", EMAIL)
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
+    body = body.replace("{{ladder}}", ladder_block(lang))
     body = body.replace("{{demo}}", demo_block(lang))
     body = body.replace("{{blogindex}}", blog_index(lang)).replace("{{glossindex}}", glossary_index(lang)).replace("{{mix}}", mix_block(lang))
     body = body.replace("{{stack}}", stack_block(lang)).replace("{{labnotes}}", labnotes_block(lang))
@@ -1480,6 +1635,9 @@ def og_image(lang, pid, meta):
     return own if (OUT / own.lstrip("/")).exists() else f"/assets/og/home-{lang}.jpg"
 
 
+COLLECTION_HUBS = {"blog", "glossary", "compare", "solutions", "teardowns", "resources", "case-studies"}
+
+
 def schema(lang, pid, meta, body):
     org_id = DOMAIN + "/#organization"
     person_id = DOMAIN + "/#founder"
@@ -1495,15 +1653,15 @@ def schema(lang, pid, meta, body):
             "alternateName": "KORTEX Lab",
             "email": EMAIL,
             "description": "KORTEX is a GEO, SEO and content creation studio. It turns one source, such as a blog post, YouTube video, podcast episode or webinar, into up to 30+ assets built to be cited by AI answer engines and ranked by search engines.",
-            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "sameAs": [LINKEDIN]},
-            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": EMAIL, "url": CAL_URL, "availableLanguage": ["English", "French", "Arabic"]},
+            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "jobTitle": "Founder", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "sameAs": [LINKEDIN]},
+            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": EMAIL, "url": CAL_URL, "availableLanguage": [LANG_ENGLISH[l] for l in ACTIVE_LANGS]},
             "address": {"@type": "PostalAddress", "addressLocality": "Fès", "addressCountry": "MA"},
             "areaServed": "Worldwide",
-            "knowsLanguage": ["en", "fr", "ar"],
+            "knowsLanguage": ACTIVE_LANGS,
             "sameAs": [LINKEDIN],
             "knowsAbout": ["Generative Engine Optimization", "Answer Engine Optimization", "Search Engine Optimization", "Content strategy", "AI citation tracking"],
         },
-        {"@type": "WebSite", "@id": DOMAIN + "/#website", "url": DOMAIN + "/", "name": "KORTEX", "inLanguage": ["en", "fr", "ar"], "publisher": {"@id": org_id}},
+        {"@type": "WebSite", "@id": DOMAIN + "/#website", "url": DOMAIN + "/", "name": "KORTEX", "inLanguage": ACTIVE_LANGS, "publisher": {"@id": org_id}},
         {
             "@type": "WebPage",
             "@id": page_url + "#webpage",
@@ -1516,6 +1674,12 @@ def schema(lang, pid, meta, body):
             "dateModified": meta.get("modified", BUILD_DATE),
         },
     ]
+    if pid in COLLECTION_HUBS:
+        items = [(c[0], c[1]) for c in children(lang, pid)] if pid in ("blog", "glossary", "compare", "teardowns") else []
+        coll = {"@type": "CollectionPage", "@id": page_url + "#collection", "url": page_url, "name": meta["title"], "description": meta["description"], "inLanguage": lang, "isPartOf": {"@id": DOMAIN + "/#website"}, "publisher": {"@id": org_id}}
+        if items:
+            coll["mainEntity"] = {"@type": "ItemList", "numberOfItems": len(items), "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": abs_url(lang, p), "name": strip_tags(m.get("h1", m["title"]))} for i, (p, m) in enumerate(items)]}
+        graph.append(coll)
     crumbs = [{"@type": "ListItem", "position": 1, "name": UI[lang]["home_crumb"], "item": abs_url(lang, "home")}]
     if "/" in pid and exists(lang, pid.split("/")[0]):
         hub = pid.split("/")[0]
@@ -1586,7 +1750,7 @@ def schema(lang, pid, meta, body):
             "description": meta["description"],
             "inLanguage": lang,
             "mainEntityOfPage": {"@id": page_url + "#webpage"},
-            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
+            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "jobTitle": "Founder", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
             "publisher": {"@id": org_id},
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
             "image": DOMAIN + og_image(lang, pid, meta),
@@ -1610,11 +1774,12 @@ def schema(lang, pid, meta, body):
 
 
 def head(lang, pid, meta, body, critical, css_v, js_v):
-    alts = [] if pid == "404" else available(pid)
+    alts = [] if pid == "404" else alternates(pid)
     hreflang = "".join(f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}">' for l in alts)
     if "en" in alts:
         hreflang += f'<link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}">'
-    robots = ('<meta name="robots" content="noindex, nofollow">' if pid == "login" else '<meta name="robots" content="noindex, follow">') if meta.get("noindex") else ""
+    hidden_ar = lang == "ar" and "ar" not in ACTIVE_LANGS
+    robots = ('<meta name="robots" content="noindex, nofollow">' if pid == "login" else '<meta name="robots" content="noindex, follow">') if (meta.get("noindex") or hidden_ar) else ""
     fonts = ["alexandria-arabic"] if lang == "ar" else ["archivo-display", "inter"]
     preload = "".join(f'<link rel="preload" href="/assets/fonts/{f}.woff2" as="font" type="font/woff2" crossorigin>' for f in fonts)
     og_alt = "".join(f'<meta property="og:locale:alternate" content="{LOCALE[l]}">' for l in alts if l != lang)
@@ -1645,7 +1810,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-<script>(function(d){{d.classList.add("js");try{{var t=localStorage.getItem("kx-theme");if(t==="light"||t==="dark")d.dataset.theme=t}}catch(e){{}}}})(document.documentElement)</script>
+<script>(function(d){{d.classList.add("js");try{{var t=localStorage.getItem("kx-theme");if(t==="light"||t==="dark")d.dataset.theme=t}}catch(e){{}}try{{if(sessionStorage.getItem("kx-in"))d.classList.add("no-entry");else sessionStorage.setItem("kx-in","1")}}catch(e){{}}}})(document.documentElement)</script>
 {preload}
 <style>{critical}</style>
 <link rel="preload" href="/assets/css/site.css?v={css_v}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -1826,8 +1991,11 @@ def render(lang, pid, critical, css_v, js_v):
     if pid == "blog":
         body = body + newsletter_block(lang, pid, "index")
     body = resolve(body, lang)
+    body, has_invert = anatomy(body, pid)
+    body = split_headline(body)
+    body = hiw_logs(body, lang, pid)
     direction = ' dir="rtl"' if lang == "ar" else ""
-    band = "" if meta.get("band") == "no" else cta_band(lang)
+    band = "" if meta.get("band") == "no" else cta_band(lang, invert=not has_invert)
     page = f'''<!doctype html>
 <html lang="{lang}"{direction}>
 <head>
@@ -1844,7 +2012,7 @@ def render(lang, pid, critical, css_v, js_v):
 </main>
 {book_bar(lang, pid)}
 {newsletter_slide(lang, pid) if pid.startswith("blog/") else ""}
-{footer(lang)}
+{footer(lang, pid)}
 {consent_banner(lang)}
 {ANALYTICS}
 </body>
@@ -1914,8 +2082,10 @@ def sitemap():
             meta, _ = parse_page(source_path(lang, pid))
             if meta.get("noindex") or pid == "404":
                 continue
-            alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in available(pid))
-            if "en" in available(pid):
+            if lang not in ACTIVE_LANGS:
+                continue
+            alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in alternates(pid))
+            if "en" in alternates(pid):
                 alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}"/>'
             rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified") or git_lastmod(source_path(lang, pid))}</lastmod>{alts}</url>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(rows) + "\n</urlset>\n"
@@ -1995,7 +2165,7 @@ def llms_txt():
         if items:
             lines += ["", f"## {label}"]
             lines += [f"- [{strip_tags(m.get('h1', m['title']))}]({abs_url('en', p)}): {m['description']}" for p, m, _ in items]
-    lines += ["", "## Other languages", f"- French: {DOMAIN}/fr/", f"- Arabic: {DOMAIN}/ar/", ""]
+    lines += ["", "## Other languages", f"- French: {DOMAIN}/fr/"] + ([f"- Arabic: {DOMAIN}/ar/"] if SITE.get("arabic") else []) + [""]
     return "\n".join(lines)
 
 
@@ -2006,8 +2176,8 @@ def robots_txt():
 
 
 def main():
-    critical = minify_css((SRC / "styles" / "tokens.css").read_text(encoding="utf-8") + (SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
-    site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8"))
+    critical = minify_css((SRC / "styles" / "tokens.css").read_text(encoding="utf-8") + (SRC / "styles" / "critical.css").read_text(encoding="utf-8") + (SRC / "styles" / "v2.css").read_text(encoding="utf-8"))
+    site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8") + (SRC / "styles" / "v2.css").read_text(encoding="utf-8"))
     for f in sorted((SRC / "styles" / "v").glob("*.css")):
         VCSS[f.stem] = minify_css(f.read_text(encoding="utf-8"))
     css_out = OUT / "assets" / "css" / "site.css"

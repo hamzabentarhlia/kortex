@@ -47,7 +47,7 @@ async function open(path, opts = {}) {
   const demo = page.locator('.demo');
   await demo.scrollIntoViewIfNeeded();
   await page.waitForTimeout(800);
-  check('demo: enhanced idle state with a Run button', (await demo.getAttribute('data-state')) === 'idle' && await page.locator('[data-demo-run]').isVisible());
+  check('demo: enhanced state with a Run button, autoplays once in view', ['idle', 'running', 'done'].includes(await demo.getAttribute('data-state')) && await page.locator('[data-demo-run]').isVisible());
   const chip = page.locator('input[name=demo-source]').first();
   await chip.focus();
   await page.keyboard.press('ArrowRight');
@@ -81,7 +81,7 @@ async function open(path, opts = {}) {
   check('demo reduced motion: final state at once', (await demo.getAttribute('data-state')) === 'done' && (await page.locator('.demo-cards li.is-dealt').count()) === 8);
   const frozen = await page.evaluate(() => new Promise((r) => { const c = document.querySelector('canvas.kx-field'); const a = c.toDataURL(); setTimeout(() => r(a === c.toDataURL()), 700); }));
   check('canvas reduced motion: frozen', frozen);
-  check('hero reduced motion: no split words', (await page.locator('.hero h1 .hw').count()) === 0);
+  check('hero reduced motion: headline words do not animate', (await page.evaluate(() => document.querySelector('.hero h1').getAnimations({ subtree: true }).length)) === 0);
   check('reduced motion: no console errors', errors.length === 0, errors.join(' | '));
   await ctx.close();
 }
