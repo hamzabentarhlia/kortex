@@ -20,6 +20,7 @@ PREFIX = {"en": "", "fr": "/fr", "ar": "/ar"}
 LOCALE = {"en": "en_US", "fr": "fr_FR", "ar": "ar_MA"}
 LANG_NAME = {"en": "English", "fr": "Français", "ar": "العربية"}
 LANG_SHORT = {"en": "EN", "fr": "FR", "ar": "AR"}
+LANG_ENGLISH = {"en": "English", "fr": "French", "ar": "Arabic"}
 EMAIL = "contact@kortexlab.me"
 LINKEDIN = "https://www.linkedin.com/in/hamza-bentarhlia/"
 GA_ID = "G-4440VPDMPW"
@@ -353,6 +354,13 @@ def available(pid):
     return [l for l in LANGS if exists(l, pid)]
 
 
+ACTIVE_LANGS = [l for l in LANGS if l != "ar" or SITE.get("arabic")]
+
+
+def alternates(pid):
+    return [l for l in available(pid) if l in ACTIVE_LANGS]
+
+
 def asset_version(path):
     return hashlib.sha1(path.read_bytes()).hexdigest()[:8]
 
@@ -424,7 +432,7 @@ RESOURCE_GROUPS = [(None, ["resources", "blog", "glossary", "compare", "about"])
 
 def lang_links(lang, pid, mobile=False):
     out = []
-    for l in available(pid):
+    for l in alternates(pid):
         cur = ' aria-current="true"' if l == lang else ""
         if mobile:
             out.append(f'<a class="btn btn-ghost btn-sm" href="{url(l, pid)}" hreflang="{l}" lang="{l}"{cur}>{LANG_NAME[l]}</a>')
@@ -442,7 +450,7 @@ def header(lang, pid):
         dropdown(lang, "resources", t["resources"], RESOURCE_GROUPS, pid),
     ]
     langs = ""
-    if len(available(pid)) > 1:
+    if len(alternates(pid)) > 1:
         langs = (
             f'<div class="lang-switch"><button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-lang" data-menu-toggle>'
             f'<span class="visually-hidden">{t["language"]}: </span>{LANG_SHORT[lang]}{icon("chevron")}</button>'
@@ -518,7 +526,13 @@ def photo(lang, kind, eager=False):
     )
 
 
-def footer(lang):
+def footer_lang(lang, pid, t):
+    if len(alternates(pid)) < 2:
+        return ""
+    return f'<nav class="footer-lang" aria-label="{t["language"]}">{lang_links(lang, pid)}</nav>'
+
+
+def footer(lang, pid="home"):
     t = UI[lang]
 
     def col(title, entries):
@@ -542,7 +556,7 @@ def footer(lang):
 <p><a class="text-link" href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn</a></p></div>
 {"".join(cols)}
 </div>
-<div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span><nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
+<div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span>{footer_lang(lang, pid, t)}<nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
 </div>
 </footer>'''
 
@@ -1036,6 +1050,7 @@ def cta_band(lang):
 <span class="eyebrow">{t["cta_kicker"]}</span>
 <h2 id="cta-band-title">{t["cta_title"]}</h2>
 <p>{t["cta_text"]}</p>
+{ladder_short(lang)}
 <div class="hero-actions"><a class="btn btn-primary" href="{book_href(lang)}" {BOOK_ATTRS} data-track="band-book">{t["book"]}{icon("arrow", "flip")}</a>{second}</div>
 <p class="book-note">{t["book_note"]}</p>
 <p class="hero-note">{t["cta_terms"]}</p>
@@ -1319,6 +1334,52 @@ def post_nav(lang, pid):
 
 
 
+LADDER_TEXT = {
+    "en": {
+        "eyebrow": "The ladder", "title": "Three steps, each one credited toward the next", "lead": "Start where the risk is lowest. Each step answers a bigger question than the one before.",
+        "steps": [
+            ("01", "Free", "Strategy call", "30 minutes. We test 3 of your buyers' questions live in the AI engines and tell you what we see.", "Book the call", "book"),
+            ("02", "€490", "AI Citation Audit", "40 questions, four engines, a written report and a 90-day plan. Credited against your first month.", "See the audit", "audit"),
+            ("03", "From €2,500 a month", "Plans", "The system running monthly: GHOST, SWARM or TITAN, with a citation check in every plan.", "Compare the plans", "plans"),
+        ],
+        "short": ["Free strategy call: 3 questions tested live", "AI Citation Audit, €490: 40 questions and a report", "Plans: the system running monthly"],
+    },
+    "fr": {
+        "eyebrow": "L'échelle", "title": "Trois étapes, chacune déduite de la suivante", "lead": "Commencez là où le risque est le plus faible. Chaque étape répond à une question plus grande que la précédente.",
+        "steps": [
+            ("01", "Gratuit", "Appel stratégique", "30 minutes. Nous testons en direct 3 des questions de vos acheteurs dans les moteurs d'IA et vous disons ce que nous voyons.", "Réserver l'appel", "book"),
+            ("02", "490 €", "Audit de citations IA", "40 questions, quatre moteurs, un rapport écrit et un plan sur 90 jours. Déduit de votre premier mois.", "Voir l'audit", "audit"),
+            ("03", "À partir de 2 500 € par mois", "Offres", "Le système qui tourne chaque mois : GHOST, SWARM ou TITAN, avec un contrôle des citations dans chaque offre.", "Comparer les offres", "plans"),
+        ],
+        "short": ["Appel stratégique gratuit : 3 questions testées en direct", "Audit de citations IA, 490 € : 40 questions et un rapport", "Offres : le système qui tourne chaque mois"],
+    },
+}
+
+
+def ladder_block(lang):
+    code = lang if lang in LADDER_TEXT else "en"
+    t = LADDER_TEXT[code]
+    links = {"book": book_href(lang), "audit": url(lang, "audit") if exists(lang, "audit") else book_href(lang), "plans": url(lang, "pricing") + "#plans"}
+    cards = []
+    for n, price, name, text, cta, key in t["steps"]:
+        attrs = f' {BOOK_ATTRS}' if key == "book" else ""
+        cards.append(
+            f'<li class="ld-step"><span class="ld-n">{n}</span><span class="ld-price">{price}</span><h3>{name}</h3><p>{text}</p>'
+            f'<a class="ld-link" href="{links[key]}"{attrs} data-cta="ladder-{key}">{cta}{icon("arrow")}</a></li>'
+        )
+    return (
+        f'<section class="section band-invert" data-ix="ladder" data-nav="{t["eyebrow"]}" aria-labelledby="ladder-title"><div class="wrap">'
+        f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="ladder-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
+        f'<ol class="ld">{"".join(cards)}</ol></div></section>'
+    )
+
+
+def ladder_short(lang):
+    code = lang if lang in LADDER_TEXT else "en"
+    items = "".join(f"<li>{x}</li>" for x in LADDER_TEXT[code]["short"])
+    return f'<ol class="ld-short" aria-label="{LADDER_TEXT[code]["eyebrow"]}">{items}</ol>'
+
+
 def resolve(body, lang):
     def block(m):
         pid = m.group(1)
@@ -1343,6 +1404,7 @@ def resolve(body, lang):
     body = body.replace("@@email", EMAIL)
     body = body.replace("{{audit_request}}", audit_request(lang))
     body = body.replace("{{newsletter}}", newsletter_block(lang, "inline", "inline"))
+    body = body.replace("{{ladder}}", ladder_block(lang))
     body = body.replace("{{demo}}", demo_block(lang))
     body = body.replace("{{blogindex}}", blog_index(lang)).replace("{{glossindex}}", glossary_index(lang)).replace("{{mix}}", mix_block(lang))
     body = body.replace("{{stack}}", stack_block(lang)).replace("{{labnotes}}", labnotes_block(lang))
@@ -1480,6 +1542,9 @@ def og_image(lang, pid, meta):
     return own if (OUT / own.lstrip("/")).exists() else f"/assets/og/home-{lang}.jpg"
 
 
+COLLECTION_HUBS = {"blog", "glossary", "compare", "solutions", "teardowns", "resources", "case-studies"}
+
+
 def schema(lang, pid, meta, body):
     org_id = DOMAIN + "/#organization"
     person_id = DOMAIN + "/#founder"
@@ -1495,15 +1560,15 @@ def schema(lang, pid, meta, body):
             "alternateName": "KORTEX Lab",
             "email": EMAIL,
             "description": "KORTEX is a GEO, SEO and content creation studio. It turns one source, such as a blog post, YouTube video, podcast episode or webinar, into up to 30+ assets built to be cited by AI answer engines and ranked by search engines.",
-            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "sameAs": [LINKEDIN]},
-            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": EMAIL, "url": CAL_URL, "availableLanguage": ["English", "French", "Arabic"]},
+            "founder": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "jobTitle": "Founder", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "sameAs": [LINKEDIN]},
+            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": EMAIL, "url": CAL_URL, "availableLanguage": [LANG_ENGLISH[l] for l in ACTIVE_LANGS]},
             "address": {"@type": "PostalAddress", "addressLocality": "Fès", "addressCountry": "MA"},
             "areaServed": "Worldwide",
-            "knowsLanguage": ["en", "fr", "ar"],
+            "knowsLanguage": ACTIVE_LANGS,
             "sameAs": [LINKEDIN],
             "knowsAbout": ["Generative Engine Optimization", "Answer Engine Optimization", "Search Engine Optimization", "Content strategy", "AI citation tracking"],
         },
-        {"@type": "WebSite", "@id": DOMAIN + "/#website", "url": DOMAIN + "/", "name": "KORTEX", "inLanguage": ["en", "fr", "ar"], "publisher": {"@id": org_id}},
+        {"@type": "WebSite", "@id": DOMAIN + "/#website", "url": DOMAIN + "/", "name": "KORTEX", "inLanguage": ACTIVE_LANGS, "publisher": {"@id": org_id}},
         {
             "@type": "WebPage",
             "@id": page_url + "#webpage",
@@ -1516,6 +1581,12 @@ def schema(lang, pid, meta, body):
             "dateModified": meta.get("modified", BUILD_DATE),
         },
     ]
+    if pid in COLLECTION_HUBS:
+        items = [(c[0], c[1]) for c in children(lang, pid)] if pid in ("blog", "glossary", "compare", "teardowns") else []
+        coll = {"@type": "CollectionPage", "@id": page_url + "#collection", "url": page_url, "name": meta["title"], "description": meta["description"], "inLanguage": lang, "isPartOf": {"@id": DOMAIN + "/#website"}, "publisher": {"@id": org_id}}
+        if items:
+            coll["mainEntity"] = {"@type": "ItemList", "numberOfItems": len(items), "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": abs_url(lang, p), "name": strip_tags(m.get("h1", m["title"]))} for i, (p, m) in enumerate(items)]}
+        graph.append(coll)
     crumbs = [{"@type": "ListItem", "position": 1, "name": UI[lang]["home_crumb"], "item": abs_url(lang, "home")}]
     if "/" in pid and exists(lang, pid.split("/")[0]):
         hub = pid.split("/")[0]
@@ -1586,7 +1657,7 @@ def schema(lang, pid, meta, body):
             "description": meta["description"],
             "inLanguage": lang,
             "mainEntityOfPage": {"@id": page_url + "#webpage"},
-            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
+            "author": {"@type": "Person", "@id": person_id, "name": "Hamza Bentarhlia", "jobTitle": "Founder", "image": DOMAIN + "/assets/img/founder-portrait-608.jpg", "url": abs_url(lang, "about") if exists(lang, "about") else DOMAIN + "/", "sameAs": [LINKEDIN]},
             "publisher": {"@id": org_id},
             **({"datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"])} if meta.get("date") else {}),
             "image": DOMAIN + og_image(lang, pid, meta),
@@ -1610,11 +1681,12 @@ def schema(lang, pid, meta, body):
 
 
 def head(lang, pid, meta, body, critical, css_v, js_v):
-    alts = [] if pid == "404" else available(pid)
+    alts = [] if pid == "404" else alternates(pid)
     hreflang = "".join(f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}">' for l in alts)
     if "en" in alts:
         hreflang += f'<link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}">'
-    robots = ('<meta name="robots" content="noindex, nofollow">' if pid == "login" else '<meta name="robots" content="noindex, follow">') if meta.get("noindex") else ""
+    hidden_ar = lang == "ar" and "ar" not in ACTIVE_LANGS
+    robots = ('<meta name="robots" content="noindex, nofollow">' if pid == "login" else '<meta name="robots" content="noindex, follow">') if (meta.get("noindex") or hidden_ar) else ""
     fonts = ["alexandria-arabic"] if lang == "ar" else ["archivo-display", "inter"]
     preload = "".join(f'<link rel="preload" href="/assets/fonts/{f}.woff2" as="font" type="font/woff2" crossorigin>' for f in fonts)
     og_alt = "".join(f'<meta property="og:locale:alternate" content="{LOCALE[l]}">' for l in alts if l != lang)
@@ -1844,7 +1916,7 @@ def render(lang, pid, critical, css_v, js_v):
 </main>
 {book_bar(lang, pid)}
 {newsletter_slide(lang, pid) if pid.startswith("blog/") else ""}
-{footer(lang)}
+{footer(lang, pid)}
 {consent_banner(lang)}
 {ANALYTICS}
 </body>
@@ -1914,8 +1986,10 @@ def sitemap():
             meta, _ = parse_page(source_path(lang, pid))
             if meta.get("noindex") or pid == "404":
                 continue
-            alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in available(pid))
-            if "en" in available(pid):
+            if lang not in ACTIVE_LANGS:
+                continue
+            alts = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{abs_url(l, pid)}"/>' for l in alternates(pid))
+            if "en" in alternates(pid):
                 alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{abs_url("en", pid)}"/>'
             rows.append(f'<url><loc>{abs_url(lang, pid)}</loc><lastmod>{meta.get("modified") or git_lastmod(source_path(lang, pid))}</lastmod>{alts}</url>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(rows) + "\n</urlset>\n"
@@ -1995,7 +2069,7 @@ def llms_txt():
         if items:
             lines += ["", f"## {label}"]
             lines += [f"- [{strip_tags(m.get('h1', m['title']))}]({abs_url('en', p)}): {m['description']}" for p, m, _ in items]
-    lines += ["", "## Other languages", f"- French: {DOMAIN}/fr/", f"- Arabic: {DOMAIN}/ar/", ""]
+    lines += ["", "## Other languages", f"- French: {DOMAIN}/fr/"] + ([f"- Arabic: {DOMAIN}/ar/"] if SITE.get("arabic") else []) + [""]
     return "\n".join(lines)
 
 

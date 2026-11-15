@@ -64,5 +64,11 @@ export function init(root) {
       }).catch(() => { hits = null; render(); });
     }, 120);
   });
+  input.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const first = root.querySelector('.bx-card:not([hidden])');
+    if (first) first.focus();
+  });
   render();
 }

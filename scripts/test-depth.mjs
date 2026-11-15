@@ -38,6 +38,10 @@ async function open(path, opts = {}) {
   await page.locator('#bx-q').fill('zzzzqq');
   await page.waitForTimeout(500);
   check('blog index: empty state message', await page.locator('.bx-none').isVisible());
+  await page.locator('#bx-q').fill('entity');
+  await page.waitForTimeout(500);
+  await page.keyboard.press('Enter');
+  check('blog index: Enter focuses the first result', await page.evaluate(() => document.activeElement && document.activeElement.classList.contains('bx-card')));
   check('blog index: no console errors', errors.length === 0, errors.join(' | '));
   await ctx.close();
 }
@@ -131,6 +135,7 @@ async function open(path, opts = {}) {
   await form.locator('button[type=submit]').click();
   await page.waitForTimeout(900);
   check('contact: valid form is sent', posted);
+  check('contact: inline success state names the next step', await page.locator('[data-form-status]').isVisible() && /checklist|liste de contrôle/i.test(await page.locator('[data-form-status]').textContent()) && !/thanks/.test(page.url()));
   check('contact: no console errors', errors.length === 0, errors.join(' | '));
   await ctx.close();
 }
