@@ -165,16 +165,27 @@ function initMobileMenu() {
 function animateCount(el) {
   if (reduceMotion) return;
   el.classList.add('is-counted');
-  const end = Number(el.dataset.count);
-  if (!Number.isFinite(end) || end <= 0) return;
-  const start = performance.now();
-  const frame = (now) => {
-    const k = Math.min(1, (now - start) / 700);
-    el.textContent = String(Math.round(end * (1 - Math.pow(1 - k, 3))));
-    if (k < 1) requestAnimationFrame(frame); else el.textContent = String(end);
-  };
-  el.textContent = '0';
-  requestAnimationFrame(frame);
+  const text = el.dataset.count;
+  if (!/^\d+$/.test(text)) return;
+  const odo = document.createElement('span');
+  odo.className = 'odo';
+  odo.setAttribute('aria-hidden', 'true');
+  [...text].forEach((ch, k) => {
+    const col = document.createElement('span');
+    col.className = 'odo-d';
+    col.style.setProperty('--n', ch);
+    col.style.setProperty('--k', String(k));
+    for (let d = 0; d <= 9; d++) { const cell = document.createElement('span'); cell.textContent = String(d); col.append(cell); }
+    odo.append(col);
+  });
+  const sr = document.createElement('span');
+  sr.className = 'odo-sr';
+  sr.textContent = text;
+  el.textContent = '';
+  el.append(sr, odo);
+  requestAnimationFrame(() => requestAnimationFrame(() => odo.classList.add('is-rolling')));
+  const fact = el.closest('.fact');
+  setTimeout(() => { if (fact) fact.classList.add('is-landed'); }, 900 + text.length * 90);
 }
 
 function initReveal() {
@@ -252,6 +263,20 @@ function initTyping() {
     });
   }, { threshold: 0.8 });
   document.querySelectorAll('[data-type]').forEach((el) => io.observe(el));
+}
+
+function initHeroDepth() {
+  if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const hero = document.querySelector('.hero-visual');
+  if (!hero || !hero.querySelector('.hp-col-a')) return;
+  window.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    const x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+    const y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+    hero.style.setProperty('--hx', x.toFixed(3));
+    hero.style.setProperty('--hy', y.toFixed(3));
+  }, { passive: true });
 }
 
 function initPrefill() {
@@ -599,12 +624,13 @@ function initPointerFx() {
     raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(loop) : 0;
   };
   window.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); }, { passive: true });
-  document.querySelectorAll('.glass.card,.tier,.audience,.glass.step,.list-card').forEach((c) => {
+  document.querySelectorAll('.glass.card,.tier,.audience,.glass.step,.list-card,.sd').forEach((c) => {
     c.classList.add('tilt');
     c.addEventListener('pointermove', (e) => {
       const r = c.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
       c.style.setProperty('--mx', `${px * 100}%`); c.style.setProperty('--my', `${py * 100}%`);
+      c.style.setProperty('--gx', `${e.clientX - r.left}px`); c.style.setProperty('--gy', `${e.clientY - r.top}px`);
       const max = c.classList.contains('tier') ? 4 : 3;
       c.style.transform = `perspective(900px) rotateX(${(0.5 - py) * max}deg) rotateY(${(px - 0.5) * max}deg)`;
     });
@@ -737,4 +763,4 @@ initSlide();
 initModules();
 initThanks();
 const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
-[initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx, initTicks, initTyping].forEach((fn) => idle(() => fn()));
+[initStory, initCalc, initCal, initTracking, initPlanView, initPointerFx, initTicks, initTyping, initHeroDepth].forEach((fn) => idle(() => fn()));
