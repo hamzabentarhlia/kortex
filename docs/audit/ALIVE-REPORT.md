@@ -108,7 +108,7 @@ Per template, in one line each:
 3. First real 40-question run for `/proof/`.
 4. Verify the citation-teaser entries, then set `citationTeaser: true`.
 5. Send a real contact-form submission and confirm receipt. The Pageclip endpoint cannot be reached from the build environment, so the live receipt is unverified. The action URL and the honeypot are in the markup.
-6. Confirm that Whisper and Gemini belong in the footer stack line. It follows your brief. Gemini appears elsewhere only as an engine we test, and Whisper appears nowhere else on the site.
+6. Confirm the footer stack line. It follows your brief and matches the blog post on the one-video authority system, which names Whisper for transcription and Gemini for first-pass drafting.
 
 ## 9. Deploy and rollback
 
