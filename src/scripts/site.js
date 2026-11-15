@@ -163,7 +163,18 @@ function initMobileMenu() {
 }
 
 function animateCount(el) {
-  if (!reduceMotion) el.classList.add('is-counted');
+  if (reduceMotion) return;
+  el.classList.add('is-counted');
+  const end = Number(el.dataset.count);
+  if (!Number.isFinite(end) || end <= 0) return;
+  const start = performance.now();
+  const frame = (now) => {
+    const k = Math.min(1, (now - start) / 700);
+    el.textContent = String(Math.round(end * (1 - Math.pow(1 - k, 3))));
+    if (k < 1) requestAnimationFrame(frame); else el.textContent = String(end);
+  };
+  el.textContent = '0';
+  requestAnimationFrame(frame);
 }
 
 function initReveal() {

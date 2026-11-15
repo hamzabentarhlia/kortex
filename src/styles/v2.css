@@ -155,3 +155,4 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opa
 @keyframes kx-live{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.55}}
 @media (prefers-reduced-motion:no-preference){.vx-chip::before,.pt-st-live::before{animation:kx-live 2.4s ease-in-out infinite}}
 .tab-hidden *,.tab-hidden *::before,.tab-hidden *::after{animation-play-state:paused!important}
+.prose .toc h2,.toc h2{font:500 11px/1.4 var(--ff-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px;color:var(--text-3)}

@@ -26,16 +26,16 @@ Every effect that ships. Easing `out` is `cubic-bezier(.22,1,.36,1)`, `ease` is 
 | Every page with an inverted band, including closing bands | Inverted band | Scroll position (CSS `view()`, where supported) | clip-path inset wipe from the bottom | linear, entry 0 to 60% | Removed |
 | All | Section rule | Scroll position (CSS `view()`, where supported) | transform scaleX, left to right (right to left in RTL) | linear, entry 0 to 45% | Removed |
 | All with section numbers | Mono section index | Enters viewport | text ticks from 00 to the number | about 400 ms, 45 ms steps, once | Removed |
-| Home | Fact counters | Enters viewport | text count to the number, tabular numerals | existing counter, once | Removed |
+| Home | Fact counters | Enters viewport | text counts from 0 to the number, tabular numerals, plus a pop (opacity, transform 6 px) | 700 ms, ease-out cubic, once | Final number at once |
 | All with card groups | Card stagger | Enters viewport | opacity, transform (10 px) | 380 ms, 40 ms stagger | Removed |
 | Proof | Changelog and log rows | Enters viewport | opacity, transform | 380 ms, 40 ms stagger | Removed |
 | Proof | Methodology number rings | Enters viewport | stroke-dashoffset | 900 ms, out, 120 ms stagger | Removed |
 | Articles, teardowns | Reading progress bar | Scroll | transform scaleX | scroll-linked | Removed |
 | Articles, teardowns | Contents rail indicator | Active heading changes | transform translateY | 360 ms, out | Instant |
-| How it works, about, pricing, proof, audit, checklist | Left section rail ticks | Active section changes | border colour, number colour | 180 ms | Instant |
-| Home | Section dots | Active section changes | opacity, transform | 180 ms | Instant |
+| How it works, about, pricing, proof, audit, checklist | Left section rail | Active section changes | border and number colour change, no movement | none | None |
+| Home | Section dots | Active section changes | dot transform scale, label opacity | 180 ms to 360 ms | Instant |
 | Blog posts | Newer and older tiles | Enters viewport | clip-path (cover reveal) | 700 ms, out | Removed |
-| Footer | KORTEX wordmark | Enters viewport | opacity, transform (8 px) | 380 ms, ease, once | Removed |
+| Footer | KORTEX wordmark | Enters viewport | opacity, transform (10 px) | 380 ms, ease, once | Removed |
 
 ## Pipeline
 
@@ -53,7 +53,7 @@ Every effect that ships. Easing `out` is `cubic-bezier(.22,1,.36,1)`, `ease` is 
 | Home, 404 | Field canvas nodes | Always, with pointer gravity within 170 px on a fine pointer | canvas pixels, redrawn with requestAnimationFrame | continuous, stops off screen and when the tab is hidden | One frozen frame |
 | All | Hero glow drift | Always | transform | 20 s, ease-in-out, alternate | Removed |
 | Home | Stack strip marquee | Always, pauses on hover | transform translateX | continuous | Static row of chips |
-| Home, how it works | Live status dots | Always | transform, opacity | 2.4 s, ease-in-out | Removed |
+| Hero and portal visuals | Live status dots | Always | transform, opacity | 2.4 s, ease-in-out | Removed |
 | All | Every animation | Tab hidden | `animation-play-state: paused` | - | - |
 
 ## Interaction
@@ -78,4 +78,4 @@ Every effect that ships. Easing `out` is `cubic-bezier(.22,1,.36,1)`, `ease` is 
 
 ## Not on transform, opacity or clip-path
 
-These are small, paint-only state changes, listed here so nothing is hidden: border and background colour on chip and button hover (180 ms), the canvas (pixels), and the text changes for counters, index ticks, typed log lines and calculator figures. None of them changes layout.
+These are small, paint-only state changes, listed here so nothing is hidden: border and background colour on chip and button hover (180 ms), the label width of the home section dots (a fixed element, no layout effect), the canvas (pixels), and the text changes for counters, index ticks, typed log lines and calculator figures. None of them changes layout.

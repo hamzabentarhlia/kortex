@@ -1466,7 +1466,7 @@ def anatomy(body, pid):
 
     def scroller(m):
         cap = re.search(r"<caption[^>]*>(.*?)</caption>", m.group(2), flags=re.S)
-        label = html.escape(strip_tags(cap.group(1)), quote=True) if cap else "Table"
+        label = "Table: " + html.escape(strip_tags(cap.group(1)), quote=True) if cap else "Table"
         return f'<div class="{m.group(1)}" role="region" aria-label="{label}" tabindex="0">{m.group(2)}'
 
     out = re.sub(r'<div class="((?:tbl|table)-wrap)">(<table.*?</table>)', scroller, out, flags=re.S)
