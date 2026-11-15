@@ -5,7 +5,7 @@ export function init(nav) {
   const secs = marked.length ? marked : indexed.slice(0, 10);
   if (secs.length < 3) return;
   const hero = document.querySelector('main > .hero');
-  const footer = document.querySelector('.site-footer');
+  const covers = [...document.querySelectorAll('.site-footer, .band-invert, .cta-band')];
   const list = document.createElement('ol');
   const items = secs.map((s, i) => {
     if (!s.id) s.id = 'sec-' + (i + 1);
@@ -19,6 +19,7 @@ export function init(nav) {
     const txt = document.createElement('span');
     const eb = s.querySelector('.eyebrow');
     txt.textContent = (s.dataset.nav || (eb ? eb.textContent.replace(/^\d+\s*\/?\s*/, '') : s.querySelector('h2').textContent)).trim();
+    a.title = txt.textContent;
     a.append(dot, n, txt);
     li.append(a);
     list.append(li);
@@ -31,10 +32,14 @@ export function init(nav) {
   });
   nav.append(list);
   let past = !hero;
-  let atEnd = false;
-  const sync = () => nav.classList.toggle('is-on', past && !atEnd);
+  const over = new Set();
+  const sync = () => nav.classList.toggle('is-on', past && over.size === 0);
   if (hero) new IntersectionObserver((es) => { past = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; sync(); }).observe(hero);
-  if (footer) new IntersectionObserver((es) => { atEnd = es[0].isIntersecting; sync(); }, { rootMargin: '0px 0px 0px 0px' }).observe(footer);
+  const cio = new IntersectionObserver((es) => {
+    es.forEach((en) => { if (en.isIntersecting) over.add(en.target); else over.delete(en.target); });
+    sync();
+  }, { rootMargin: '-46% 0px -46% 0px' });
+  covers.forEach((c) => cio.observe(c));
   sync();
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {

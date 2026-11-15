@@ -1433,6 +1433,50 @@ def hiw_logs(body, lang, pid):
     return re.sub(r'(<section class="hl-station"[^>]*>.*?<div class="hl-copy">.*?<h3[^>]*>.*?</h3><p>.*?</p>)', one, body, flags=re.S)
 
 
+def mark_wins(body):
+    def table(m):
+        tb = m.group(0)
+        heads = re.findall(r"<th[^>]*>(.*?)</th>", tb.split("<tbody", 1)[0], flags=re.S)
+        idx = next((i for i, h in enumerate(heads) if "kortex" in strip_tags(h).lower()), None)
+        feat = idx is None and 'class="is-featured"' in tb
+        if idx is None and not feat:
+            return tb
+        def row(r):
+            cells = re.findall(r"<td[^>]*>.*?</td>", r.group(0), flags=re.S)
+            if not feat and len(cells) != len(heads):
+                return r.group(0)
+            out = r.group(0)
+            for i, c in enumerate(cells):
+                hit = (i == idx) if not feat else 'is-featured' in c
+                if hit:
+                    new = re.sub(r'<td class="([^"]*)"', r'<td class="\1 win"', c, count=1) if 'class="' in c.split(">", 1)[0] else c.replace("<td", '<td class="win"', 1)
+                    out = out.replace(c, new, 1)
+            return out
+        head, _, rest = tb.partition("<tbody")
+        rest = re.sub(r"<tr>.*?</tr>", row, rest, flags=re.S)
+        return head + "<tbody" + rest
+    return re.sub(r"<table\b.*?</table>", table, body, flags=re.S)
+
+
+def highlight_headings(body):
+    def one(m):
+        text = m.group(2)
+        if "<" in text or " " not in text.strip():
+            return m.group(0)
+        head, _, last = text.rpartition(" ")
+        return f'{m.group(1)}{head} <span class="hl-mark">{last}</span></h2>'
+    return re.sub(r'(<div class="section-head[^"]*">.*?<h2 [^>]*>)([^<]*?)</h2>', one, body, flags=re.S)
+
+
+def draw_icons(body):
+    def block(m):
+        return re.sub(r"<(path|circle|rect|line|polyline|polygon)\b", r'<\1 pathLength="1"', m.group(0))
+    return re.sub(r'<div class="glass audience">.*?<div class="card-icon">.*?</div>', block, body, flags=re.S)
+
+
+FORCE_STACK = {"samples-title", "steps-title", "who-title", "how-title", "labnotes-title"}
+
+
 INVERT_SECTION = {
     "home": "geo-title", "how-it-works": "never-title", "audit": "audit-price", "about": "story-title", "proof": "proof-method",
     "checklist": "ck-how-title", "contact": "form-title", "solutions": "mix-title", "b2b": "b2b-example", "creators": "cr-example", "ecommerce": "ec-example",
@@ -1443,6 +1487,7 @@ INVERT_SECTION = {
 
 def anatomy(body, pid):
     count = [0]
+    split_n = [0]
     navmode = 'data-nav=' in body
     target = INVERT_SECTION.get(pid)
     found = [False]
@@ -1458,6 +1503,17 @@ def anatomy(body, pid):
             found[0] = True
         elif "band-invert" in cls:
             found[0] = True
+        sid_m = re.search(r'aria-labelledby="([^"]*)"', attrs)
+        if sid_m and sid_m.group(1) in FORCE_STACK and "data-layout=" not in attrs:
+            attrs += ' data-layout="stack"'
+        if "data-layout=" not in attrs and "section-head" in inner:
+            grid = re.search(r'class="[^"]*\b(?:grid(?:-[234])?|tiers|facts|labnotes|ld|bx-cat|gl-letter|reveal-group)\b', inner)
+            visual = re.search(r'class="(?:vx|demo|mix|calc2|tbl-wrap|table-wrap|answer-block|faq|finder|wrap split|glass answer-block|prose)\b|class="[^"]*\b(?:vx|split|faq)\b', inner)
+            if visual and not grid:
+                split_n[0] += 1
+                attrs += f' data-layout="split" data-flip="{split_n[0] % 2}"'
+            else:
+                attrs += ' data-layout="stack"'
         if '<span class="eyebrow">' in inner and (not navmode or 'data-nav=' in attrs):
             count[0] += 1
             inner = inner.replace('<span class="eyebrow">', f'<span class="eyebrow"><span class="sx-n" aria-hidden="true">{count[0]:02d}</span>', 1)
@@ -1994,6 +2050,10 @@ def render(lang, pid, critical, css_v, js_v):
     body = resolve(body, lang)
     body, has_invert = anatomy(body, pid)
     body = split_headline(body)
+    body = mark_wins(body)
+    body = highlight_headings(body)
+    body = draw_icons(body)
+    body = body.replace('<div class="sd-row">', '<div class="sd-row" data-module="rowdrag" tabindex="0" role="region" aria-label="Sample assets, scroll sideways">')
     body = hiw_logs(body, lang, pid)
     direction = ' dir="rtl"' if lang == "ar" else ""
     band = "" if meta.get("band") == "no" else cta_band(lang, invert=not has_invert)

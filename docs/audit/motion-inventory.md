@@ -79,3 +79,20 @@ Every effect that ships. Easing `out` is `cubic-bezier(.22,1,.36,1)`, `ease` is 
 ## Not on transform, opacity or clip-path
 
 These are small, paint-only state changes, listed here so nothing is hidden: border and background colour on chip and button hover (180 ms), the label width of the home section dots (a fixed element, no layout effect), the canvas (pixels), and the text changes for counters, index ticks, typed log lines and calculator figures. None of them changes layout.
+
+## Added in the layout fix
+
+| Page | Element | Trigger | Properties | Duration, easing | Reduced motion |
+|---|---|---|---|---|---|
+| All card grids | Card glow | Pointer over a card | soft ember radial glow follows the cursor, translate (transform only) and opacity | 300 ms fade, follows the pointer | Removed |
+| All card grids | Card entry stagger | Enters viewport | opacity, transform, 60 ms stagger (was 40 ms) | 380 ms, ease | Removed |
+| Home | Asset row ("What you actually receive") | Drag with the mouse, touch swipe, arrow keys | scrollLeft with inertia (rAF decay), scroll-snap; cards lift on grab (translate -6 px, shadow) | inertia decays at 0.94 per frame; lift 360 ms, out | Instant scroll, no inertia, no lift animation |
+| Home | Audience cards | Pointer move | tilt toward the pointer, 3 degrees (existing) | per pointer event | Removed |
+| Home | Audience icons | Enters viewport, first time | stroke-dashoffset draws each icon | 800 ms, out, 60 ms stagger | Drawn at once |
+| Home, resources, solutions | Card link underline | Hover on the card, not only the link | background-size draws the underline | 360 ms, out | Instant |
+| Every page with section heads | Highlighter on the last word of each section heading | Enters viewport, once | clip-path inset sweep behind the word | 500 ms, out, 240 ms delay | Static highlight |
+| Home | Fact counters | Enters viewport | odometer: each digit column rolls (transform translateY) | 900 ms, out, 90 ms per digit | Final number at once |
+| Home | Fact captions | After the last digit lands | opacity, transform (8 px) | 500 ms, out | Visible |
+| Comparison tables | Row hover | Hover | row background step; the winning cell turns ember text with a hairline stroke (no weight change, so no layout shift) | 180 ms | Instant |
+| Comparison tables | Winning-cell check | Table enters viewport | clip-path draws the check | 500 ms, out, 300 ms delay | Static check |
+| Home | Hero diagram depth (signature moment) | Pointer anywhere over the page while the hero is in view | the tabs, source column and asset column each translate by up to 4, 8 and 10 px against the pointer, a layered diagram that floats | 160 ms linear | Removed |
