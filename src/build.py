@@ -106,6 +106,7 @@ UI = {
         "from-webinar": ("From a webinar", "Live sessions and recorded demos"),
         "footer_blurb": "GEO, SEO and content studio. One source becomes a month of content that AI answer engines can quote and search engines can rank.",
         "footer_place": "Based in Fès, Morocco. Working with clients worldwide.",
+        "stack_line": "Built in Fès. Runs on n8n, Whisper, Gemini, Odoo.",
         "col_product": "Product",
         "col_solutions": "Solutions",
         "col_resources": "Resources",
@@ -175,6 +176,7 @@ UI = {
         "from-webinar": ("À partir d'un webinaire", "Sessions live et démos enregistrées"),
         "footer_blurb": "Studio GEO, SEO et contenu. Une source devient un mois de contenus que les moteurs de réponse IA peuvent citer et que les moteurs de recherche peuvent classer.",
         "footer_place": "Basé à Fès, au Maroc. Clients dans le monde entier.",
+        "stack_line": "Construit à Fès. Fonctionne avec n8n, Whisper, Gemini, Odoo.",
         "col_product": "Offre",
         "col_solutions": "Solutions",
         "col_resources": "Ressources",
@@ -243,6 +245,7 @@ UI = {
         "from-webinar": ("انطلاقا من ندوة رقمية", "جلسات مباشرة وعروض مسجلة"),
         "footer_blurb": "استوديو GEO وSEO وصناعة المحتوى. مصدر واحد يتحول إلى شهر كامل من المحتوى تستطيع محركات الإجابة بالذكاء الاصطناعي الاستشهاد به ومحركات البحث ترتيبه.",
         "footer_place": "مقرنا في فاس، المغرب. نعمل مع عملاء حول العالم.",
+        "stack_line": "صُنع في فاس. يعمل على n8n وWhisper وGemini وOdoo.",
         "col_product": "الخدمة",
         "col_solutions": "الحلول",
         "col_resources": "الموارد",
@@ -558,6 +561,8 @@ def footer(lang, pid="home"):
 </div>
 <div class="footer-bottom"><span>&copy; 2026 {t["rights"]}</span>{footer_lang(lang, pid, t)}<nav aria-label="Legal">{legal}<button type="button" class="link-btn" data-consent-open>{t["consent_settings"]}</button></nav></div>
 </div>
+<div class="footer-mark reveal" aria-hidden="true"><svg viewBox="-12 0 1024 190" focusable="false"><text x="0" y="176" font-size="236" textLength="1000" lengthAdjust="spacingAndGlyphs">KORTEX</text></svg></div>
+<p class="footer-stack">{t["stack_line"]}</p>
 </footer>'''
 
 
@@ -1042,10 +1047,10 @@ def article_cta(lang, pid, body):
 AUDIT_POSTS = {"llms-txt-what-to-do", "schema-markup-ai-engines-read", "measure-ai-citations", "get-cited-by-chatgpt-perplexity-gemini", "webinar-to-content-system", "content-audit-ai-retrieval", "answer-engine-visibility-guide", "entity-seo-for-founders", "repurposing-mistakes-that-kill-authority", "geo-in-french-and-arabic"}
 
 
-def cta_band(lang):
+def cta_band(lang, invert=False):
     t = UI[lang]
     second = f'<a class="btn btn-ghost" href="{url(lang, "audit")}" data-track="band-audit">{t["audit_cta"]}</a>' if exists(lang, "audit") else (f'<a class="btn btn-ghost" href="{url(lang, "pricing")}" data-track="band-pricing">{t["see_pricing"]}</a>' if exists(lang, "pricing") else "")
-    return f'''<section class="cta-band" aria-labelledby="cta-band-title">
+    return f'''<section class="cta-band{" band-invert" if invert else ""}" aria-labelledby="cta-band-title">
 <div class="wrap">
 <span class="eyebrow">{t["cta_kicker"]}</span>
 <h2 id="cta-band-title">{t["cta_title"]}</h2>
@@ -1368,7 +1373,7 @@ def ladder_block(lang):
             f'<a class="ld-link" href="{links[key]}"{attrs} data-cta="ladder-{key}">{cta}{icon("arrow")}</a></li>'
         )
     return (
-        f'<section class="section band-invert" data-ix="ladder" data-nav="{t["eyebrow"]}" aria-labelledby="ladder-title"><div class="wrap">'
+        f'<section class="section band-invert ld-sec" data-ix="ladder" data-nav="{t["eyebrow"]}" aria-labelledby="ladder-title"><div class="wrap">'
         f'<div class="section-head"><span class="eyebrow">{t["eyebrow"]}</span><h2 id="ladder-title">{t["title"]}</h2><p>{t["lead"]}</p></div>'
         f'<ol class="ld">{"".join(cards)}</ol></div></section>'
     )
@@ -1378,6 +1383,94 @@ def ladder_short(lang):
     code = lang if lang in LADDER_TEXT else "en"
     items = "".join(f"<li>{x}</li>" for x in LADDER_TEXT[code]["short"])
     return f'<ol class="ld-short" aria-label="{LADDER_TEXT[code]["eyebrow"]}">{items}</ol>'
+
+
+def split_headline(body):
+    m = re.search(r'(<h1[^>]*class="display(?: [^"]*)?"[^>]*>)(.*?)(</h1>)', body, flags=re.S)
+    if not m or "display-sm" in m.group(1):
+        return body
+    inner = m.group(2)
+    parts = re.split(r"(<[^>]+>)", inner)
+    out, idx, depth_chip = [], 0, 0
+    for part in parts:
+        if part.startswith("<"):
+            if part.startswith("<span") and "chip-word" in part:
+                depth_chip += 1
+                out.append(part.replace('class="chip-word"', 'class="chip-word hw hw-chip"', 1))
+            elif part.startswith("</span") and depth_chip:
+                depth_chip -= 1
+                out.append(part)
+            else:
+                out.append(part)
+        elif depth_chip or not part.strip():
+            out.append(part)
+        else:
+            def word(w):
+                nonlocal idx
+                if not w.strip():
+                    return w
+                idx += 1
+                return f'<span class="hw" style="--w:{idx}">{w}</span>'
+            out.append("".join(word(w) for w in re.split(r"(\s+)", part)))
+    new = "".join(out)
+    new = new.replace("hw hw-chip", f"hw hw-chip\" style=\"--w:{idx + 3}", 1) if "hw hw-chip" in new else new
+    return body[: m.start(2)] + new + body[m.end(2):]
+
+
+def hiw_logs(body, lang, pid):
+    if pid != "how-it-works" or lang not in ("en", "fr"):
+        return body
+    logs = DEMO["sources"][0]["logs"][lang]
+    n = [0]
+
+    def one(m):
+        i = n[0]
+        n[0] += 1
+        if i >= len(logs):
+            return m.group(0)
+        return m.group(0) + f'<p class="hl-log" data-type>&gt; {html.escape(logs[i])}</p>'
+
+    return re.sub(r'(<section class="hl-station"[^>]*>.*?<div class="hl-copy">.*?<h3[^>]*>.*?</h3><p>.*?</p>)', one, body, flags=re.S)
+
+
+INVERT_SECTION = {
+    "home": "geo-title", "how-it-works": "never-title", "audit": "audit-price", "about": "story-title", "proof": "proof-method",
+    "checklist": "ck-how-title", "contact": "form-title", "solutions": "mix-title", "b2b": "b2b-example", "creators": "cr-example", "ecommerce": "ec-example",
+    "from-blog": "from-blog-assets", "from-youtube": "from-youtube-assets", "from-podcast": "from-podcast-assets", "from-webinar": "from-webinar-assets",
+    "pricing": "ladder-title", "security": "sec-receive", "resources": "res-start", "case-studies": "cs-1",
+}
+
+
+def anatomy(body, pid):
+    count = [0]
+    target = INVERT_SECTION.get(pid)
+    found = [False]
+
+    def one(m):
+        attrs, inner = m.group(1), m.group(2)
+        cls = re.search(r'class="([^"]*)"', attrs).group(1)
+        if "page-hero" in cls or "hero" in cls.split() or "cta-band" in cls:
+            return m.group(0)
+        label = re.search(r'aria-labelledby="([^"]*)"', attrs)
+        if target and label and label.group(1) == target and "band-invert" not in cls:
+            attrs = attrs.replace(f'class="{cls}"', f'class="{cls} band-invert"', 1)
+            found[0] = True
+        elif "band-invert" in cls:
+            found[0] = True
+        if '<span class="eyebrow">' in inner:
+            count[0] += 1
+            inner = inner.replace('<span class="eyebrow">', f'<span class="eyebrow"><span class="sx-n" aria-hidden="true">{count[0]:02d}</span>', 1)
+        return f"<section{attrs}>{inner}</section>"
+
+    out = re.sub(r"<section(\s[^>]*class=\"section[^>]*)>(.*?)</section>", one, body, flags=re.S)
+
+    def scroller(m):
+        cap = re.search(r"<caption[^>]*>(.*?)</caption>", m.group(2), flags=re.S)
+        label = html.escape(strip_tags(cap.group(1)), quote=True) if cap else "Table"
+        return f'<div class="{m.group(1)}" role="region" aria-label="{label}" tabindex="0">{m.group(2)}'
+
+    out = re.sub(r'<div class="((?:tbl|table)-wrap)">(<table.*?</table>)', scroller, out, flags=re.S)
+    return out, found[0]
 
 
 def resolve(body, lang):
@@ -1717,7 +1810,7 @@ def head(lang, pid, meta, body, critical, css_v, js_v):
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
-<script>(function(d){{d.classList.add("js");try{{var t=localStorage.getItem("kx-theme");if(t==="light"||t==="dark")d.dataset.theme=t}}catch(e){{}}}})(document.documentElement)</script>
+<script>(function(d){{d.classList.add("js");try{{var t=localStorage.getItem("kx-theme");if(t==="light"||t==="dark")d.dataset.theme=t}}catch(e){{}}try{{if(sessionStorage.getItem("kx-in"))d.classList.add("no-entry");else sessionStorage.setItem("kx-in","1")}}catch(e){{}}}})(document.documentElement)</script>
 {preload}
 <style>{critical}</style>
 <link rel="preload" href="/assets/css/site.css?v={css_v}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -1898,8 +1991,11 @@ def render(lang, pid, critical, css_v, js_v):
     if pid == "blog":
         body = body + newsletter_block(lang, pid, "index")
     body = resolve(body, lang)
+    body, has_invert = anatomy(body, pid)
+    body = split_headline(body)
+    body = hiw_logs(body, lang, pid)
     direction = ' dir="rtl"' if lang == "ar" else ""
-    band = "" if meta.get("band") == "no" else cta_band(lang)
+    band = "" if meta.get("band") == "no" else cta_band(lang, invert=not has_invert)
     page = f'''<!doctype html>
 <html lang="{lang}"{direction}>
 <head>
@@ -2080,8 +2176,8 @@ def robots_txt():
 
 
 def main():
-    critical = minify_css((SRC / "styles" / "tokens.css").read_text(encoding="utf-8") + (SRC / "styles" / "critical.css").read_text(encoding="utf-8"))
-    site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8"))
+    critical = minify_css((SRC / "styles" / "tokens.css").read_text(encoding="utf-8") + (SRC / "styles" / "critical.css").read_text(encoding="utf-8") + (SRC / "styles" / "v2.css").read_text(encoding="utf-8"))
+    site_css = minify_css((SRC / "styles" / "site.css").read_text(encoding="utf-8") + (SRC / "styles" / "v2.css").read_text(encoding="utf-8"))
     for f in sorted((SRC / "styles" / "v").glob("*.css")):
         VCSS[f.stem] = minify_css(f.read_text(encoding="utf-8"))
     css_out = OUT / "assets" / "css" / "site.css"

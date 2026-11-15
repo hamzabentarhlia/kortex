@@ -433,7 +433,6 @@ main{overflow-x:clip}
 }
 @media (prefers-reduced-motion:reduce){.marquee-track>[aria-hidden=true]{display:none}}
 
-body{transition:background-color 240ms ease,color 240ms ease}
 @media (prefers-reduced-motion:reduce){body{transition:none}}
 .nl-block{display:grid;gap:18px 32px;align-items:center;padding:clamp(22px,4vw,34px);margin-top:44px}
 @media (min-width:900px){.nl-block{grid-template-columns:1.1fr 1fr}}
@@ -481,10 +480,6 @@ body{transition:background-color 240ms ease,color 240ms ease}
 :root[dir=rtl] .prose a,:root[dir=rtl] .text-link{background-position:100% 100%,100% 100%}
 .prose a:hover,.text-link:hover,.prose a:focus-visible,.text-link:focus-visible{background-size:100% 1px,100% 1px}
 .btn:active{scale:.98}
-.hw{display:inline-block;animation:hwin var(--dur-base) var(--ease-out) both;animation-delay:calc(var(--w,0)*45ms)}
-.chip-word .hw{animation-delay:calc(var(--w,0)*45ms + 240ms)}
-@keyframes hwin{from{opacity:.4;transform:translateY(.22em)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.hw{animation:none}}
 .faq details{interpolate-size:allow-keywords}
 .faq details::details-content{block-size:0;overflow:clip;transition:block-size var(--dur-base) var(--ease-out),content-visibility var(--dur-base) allow-discrete}
 .faq details[open]::details-content{block-size:auto}
